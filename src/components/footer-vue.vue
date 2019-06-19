@@ -210,19 +210,3 @@ export default Vue.extend({
   name: "footer-vue"
 });
 </script>
-
-<style scoped>
-.footer-vue {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 1030;
-  overflow-y: hidden;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 10px;
-}
-</style>
-
-

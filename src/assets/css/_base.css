@@ -4779,6 +4779,8 @@ body, html {
     letter-spacing: -0.032999674479166664em;
 }
 
+/* Components */
+
 .footer-logo {
     font-size: 15px;
     fill: #fff;
@@ -4794,4 +4796,25 @@ body, html {
 .initial {
     display: flex;
     min-height: 5vh;
+}
+
+.header-vue {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    overflow-y: hidden;
+}
+
+.footer-vue {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    overflow-y: hidden;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 10px;
 }

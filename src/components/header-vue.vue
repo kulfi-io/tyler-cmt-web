@@ -113,14 +113,5 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped>
-.header-vue {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1030;
-  overflow-y: hidden;
-}
-</style>
+
 
