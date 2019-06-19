@@ -3,13 +3,7 @@
     <div class="inner">
       <nav class="social" aria-label="Social">
         <a href="/" class="logo" title="tyler" style="float:left">
-          <svg
-            id="logo"
-            xmlns="http://www.w3.org/2000/svg"
-            width="150"
-            height="35"
-            viewBox="0 0 288.88 26.71"
-          >
+          <svg id="foot-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288.88 26.71">
             <title>tyler-logo</title>
             <text transform="translate(0 20.4)" class="logo">
               T
