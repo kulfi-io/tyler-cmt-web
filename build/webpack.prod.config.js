@@ -33,9 +33,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
     },
     optimization: {
-        // minimizer: [new uglifyJsPlugin({
-           
-        //   })],
+        minimizer: [new uglifyJsPlugin({
+        })],
         splitChunks: {
             chunks: 'async',
             minSize: 30000,

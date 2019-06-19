@@ -50,11 +50,13 @@ module.exports = {
                     resolve('src'),
                     resolve('test'),
                     resolve('node_modules/webpack-dev-server/client')
-                ]
+                ],
+                exclude: /node_modules/,
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
+                exclude: /node_modules/,
                 options: {
                     limit: 10000,
                     name: utils.assetsPath('img/[name].[hash:7].[ext]')
