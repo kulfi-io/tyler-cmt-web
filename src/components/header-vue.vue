@@ -98,9 +98,16 @@ export default Vue.extend({
     },
     displayLogo: function(activeNav: boolean) {
       const _logo = <HTMLAnchorElement>document.querySelector(".logo");
+      const _socialLinks = <HTMLUListElement>document.querySelector('.social-links');
+
       if (_logo) {
         if (activeNav) _logo.style.visibility = "hidden";
         else _logo.style.visibility = "visible";
+      }
+
+      if(_socialLinks) {
+        if(activeNav) _socialLinks.style.visibility = "hidden";
+        else _socialLinks.style.visibility = "visible";
       }
     }
   }
