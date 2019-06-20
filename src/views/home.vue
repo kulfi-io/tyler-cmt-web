@@ -6,7 +6,7 @@
         h3 Section 1
       div(class="section page")
         h3 Section 2
-      dic(class="section page")
+      div(class="section page")
     FooterVue
 </template>
 
