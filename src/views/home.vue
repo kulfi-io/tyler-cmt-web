@@ -1,20 +1,15 @@
-<template>
-  <div id="home">
-    <header-vue/>
-    <full-page :options="options" id="fullpage">
-      <div class="section page">
-        <h3></h3>
-      </div>
-      <div class="section page">
-        <h3>Section 2</h3>
-      </div>
-      <div class="section page">
-        <h3>Section 3</h3>
-      </div>
-    </full-page>
-    <footer-vue/>
-  </div>
+<template lang="pug">
+  div.home
+    HeaderVue
+    FullPage.fullpage( :options="options")
+      div(class="sections page")
+        h3 Section 1
+      div(class="section page")
+        h3 Section 2
+      dic(class="section page")
+    FooterVue
 </template>
+
 
 <script lang="ts">
 import Vue from "vue";
