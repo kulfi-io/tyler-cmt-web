@@ -1,7 +1,7 @@
 <template>
   <div class="header-vue">
     <header class="initial" data-mode="sticky">
-      <nav class="primary-navigation" data-theme="white" aria-label="Primary">
+      <nav class="primary-navigation" data-theme="grey" aria-label="Primary">
         <a
           href="/"
           class="logo"
@@ -101,8 +101,12 @@ export default Vue.extend({
       const _socialLinks = <HTMLUListElement>document.querySelector('.social-links');
 
       if (_logo) {
-        if (activeNav) _logo.style.visibility = "hidden";
-        else _logo.style.visibility = "visible";
+        
+        if(screen.width > 667) {
+          if (activeNav) _logo.style.visibility = "hidden";
+          else _logo.style.visibility = "visible";
+        } 
+        
       }
 
       if(_socialLinks) {
