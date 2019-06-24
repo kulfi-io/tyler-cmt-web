@@ -2,11 +2,12 @@
   div.home
     HeaderVue
     FullPage.fullpage( :options="options")
-      div(class="sections page")
-        h3 Section 1
-      div(class="section page")
+      div(class="section page intro")
+        intro-animation
+      div(class="section page about")
         h3 Section 2
-      div(class="section page")
+      div(class="section page services")
+        h3 Section 3
     FooterVue
 </template>
 
@@ -16,12 +17,14 @@ import Vue from "vue";
 import FullPage from "vue-fullpage.js/src/FullPage.vue";
 import HeaderVue from "../components/header-vue.vue";
 import FooterVue from "../components/footer-vue.vue";
+import IntroAnimation from "../components/intro-animation.vue";
 export default Vue.extend({
   name: "home",
   components: {
     HeaderVue,
     FullPage,
-    FooterVue
+    FooterVue,
+    IntroAnimation,
   },
   data() {
     return {
@@ -30,12 +33,30 @@ export default Vue.extend({
         scrollBar: false,
         menu: "#menu",
         navigation: true,
-        anchors: ["page1", "page2", "page3"],
-        sectionsColor: ["#ba4744", "#c0dfd9", "#6534ff"],
+        anchors: ["intro", "about", "services"],
+        sectionsColor: ["#1f0609", "#ba4744", "#d3f5f4"],
         licenseKey: "002D6FD2-0EC343D4-9403ACA4-CB7CDBFB"
       }
     };
+  },
+  mounted: function(){
+    this.aliignToTop();
+    // sectionsColor: ["#d3f5f4", "#ba4744", "#1f0609"],
+
+  },
+  methods: {
+     aliignToTop: function(){
+        const _intro = document.querySelector('.intro');
+        
+        if(_intro) {
+          const _cell = <HTMLDivElement>_intro.querySelector('.fp-tableCell');
+          if(_cell) {
+            _cell.classList.replace('fp-tableCell', 'intro-top')
+          }
+        }
+    },
   }
+  
 });
 </script>
 
