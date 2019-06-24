@@ -18,6 +18,7 @@ import FullPage from "vue-fullpage.js/src/FullPage.vue";
 import HeaderVue from "../components/header-vue.vue";
 import FooterVue from "../components/footer-vue.vue";
 import IntroAnimation from "../components/intro-animation.vue";
+
 export default Vue.extend({
   name: "home",
   components: {
