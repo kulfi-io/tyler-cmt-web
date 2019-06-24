@@ -32,6 +32,7 @@
 }
 
 @media(min-width:540px) {
+    
     form {
         padding-right: 15px;
         padding-left: 15px
@@ -250,6 +251,9 @@
 }
 
 @media(max-width:719px) {
+    #intro-svg {
+        margin-top: 5%;
+    }
     .banner .scroll-down {
         display: none
     }
@@ -531,6 +535,7 @@
 }
 
 @media(max-width:1139px) {
+    
     .primary-navigation .menu {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -597,6 +602,9 @@
 }
 
 @media(min-width:1140px) {
+    #intro-svg {
+        margin-top: 0;
+    }
     form {
         padding-right: 15px;
         padding-left: 15px
@@ -956,4 +964,10 @@
     /* .primary-navigation .pages a:after {
         bottom: 25px;
     } */
+}
+
+@media(max-height: 320px) {
+    .primary-navigation .menu {
+        padding: 28px 60px;
+    }
 }

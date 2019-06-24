@@ -106,7 +106,6 @@ export default Vue.extend({
           if (activeNav) _logo.style.visibility = "hidden";
           else _logo.style.visibility = "visible";
         } 
-        
       }
 
       if(_socialLinks) {

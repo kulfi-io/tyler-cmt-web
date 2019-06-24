@@ -34,7 +34,7 @@ export default Vue.extend({
         menu: "#menu",
         navigation: true,
         anchors: ["intro", "about", "services"],
-        sectionsColor: ["#1f0609", "#ba4744", "#d3f5f4"],
+        sectionsColor: ["#1f0609", "#1f0609", "#1f0609"],
         licenseKey: "002D6FD2-0EC343D4-9403ACA4-CB7CDBFB"
       }
     };

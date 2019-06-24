@@ -12,10 +12,10 @@
       xml:space="preserve"
     >
       <!-- underlines -->
-      <line id="underline1" class="underline first" x1="146" y1="176" x2="146" y2="176"></line>
+      <!-- <line id="underline1" class="underline first" x1="146" y1="176" x2="146" y2="176"></line>
       <line id="underline2" class="underline second" x1="146" y1="184" x2="146" y2="184"></line>
       <line id="underline3" class="underline third" x1="146" y1="192" x2="146" y2="192"></line>
-      <line id="underline4" class="underline fourth" x1="146" y1="200" x2="146" y2="200"></line>
+      <line id="underline4" class="underline fourth" x1="146" y1="200" x2="146" y2="200"></line> -->
 
       <!-- M -->
       <line id="m1" class="m-line" x1="131.6" y1="150" x2="131.6" y2="20"></line>
@@ -202,10 +202,10 @@ export default Vue.extend({
                 _timeLine.to(_spans.item(i), 0.3, {opacity: 1}, 1 + (_spans.length-1-i)*0.05);
             }
 
-            this.addUnderlineTimeline(_timeLine, <SVGLineElement>_underLines.item(0), 0.5, 704, 157, 410, 167, 0.2);
-            this.addUnderlineTimeline(_timeLine, <SVGLineElement>_underLines.item(1), 0.51, 710, 165, 410, 175, 0.3);
-            this.addUnderlineTimeline(_timeLine, <SVGLineElement>_underLines.item(2), 0.52, 718, 173, 410, 183, 0.4);
-            this.addUnderlineTimeline(_timeLine, <SVGLineElement>_underLines.item(3), 0.53, 726, 181, 410, 191, 0.5);
+            // this.addUnderlineTimeline(_timeLine, <SVGLineElement>_underLines.item(0), 0.5, 704, 157, 410, 167, 0.2);
+            // this.addUnderlineTimeline(_timeLine, <SVGLineElement>_underLines.item(1), 0.51, 710, 165, 410, 175, 0.3);
+            // this.addUnderlineTimeline(_timeLine, <SVGLineElement>_underLines.item(2), 0.52, 718, 173, 410, 183, 0.4);
+            // this.addUnderlineTimeline(_timeLine, <SVGLineElement>_underLines.item(3), 0.53, 726, 181, 410, 191, 0.5);
 
             return _timeLine;
         },

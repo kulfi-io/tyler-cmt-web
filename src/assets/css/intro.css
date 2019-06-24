@@ -11,7 +11,7 @@
 }
 
 #intro-svg {
-    margin-top: 15%;
+    margin-top: 10%;
     display: block;
     position: relative;
 }
@@ -111,6 +111,10 @@
 
 .health {
     fill: #0ba360;
+}
+
+.contentinfo {
+    color: #fff;
 }
 
 @media (min-width: 992px) {

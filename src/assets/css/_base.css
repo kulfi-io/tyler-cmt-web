@@ -1932,11 +1932,11 @@ main>article>.inner>:last-child {
 
 
 .primary-navigation[data-theme=grey] a.logo svg path, [data-mode=sticky].floating .primary-navigation[data-theme=black] a.logo svg path {
-    fill: #7da2a9
+    fill: #515769
 }
 
 .primary-navigation[data-theme=grey] .toggle svg g, [data-mode=sticky].floating .primary-navigation[data-theme=black] .toggle svg g {
-    stroke: #7da2a9
+    stroke: #515769
 }
 
 .primary-navigation[data-theme=grey] .menu a, [data-mode=sticky].floating .primary-navigation[data-theme=black] .menu a {
@@ -1952,8 +1952,8 @@ main>article>.inner>:last-child {
 }
 
 .primary-navigation[data-theme=grey] .btn-cta, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta {
-    border-color: #7da2a9;
-    color: #7da2a9;
+    border-color: #515769;
+    color: #515769;
     position: relative;
     background-color: transparent;
     overflow: hidden
@@ -1961,13 +1961,13 @@ main>article>.inner>:last-child {
 
 .primary-navigation[data-theme=grey] .btn-cta.hover, .primary-navigation[data-theme=white] .btn-cta:active, .primary-navigation[data-theme=white] .btn-cta:focus, .primary-navigation[data-theme=white] .btn-cta:hover, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta.hover, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta:active, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta:focus, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta:hover {
     color: #1e2122;
-    background-color: #7da2a9;
-    border-color: #7da2a9;
+    background-color: #515769;
+    border-color: #515769;
 }
 
 .primary-navigation[data-theme=grey] .btn-cta.disabled, .primary-navigation[data-theme=white] .btn-cta.disabled:active, .primary-navigation[data-theme=white] .btn-cta.disabled:focus, .primary-navigation[data-theme=white] .btn-cta.disabled:hover, .primary-navigation[data-theme=white] .btn-cta:disabled, .primary-navigation[data-theme=white] .btn-cta:disabled:active, .primary-navigation[data-theme=white] .btn-cta:disabled:focus, .primary-navigation[data-theme=white] .btn-cta:disabled:hover, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta.disabled, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta.disabled:active, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta.disabled:focus, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta.disabled:hover, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta:disabled, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta:disabled:active, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta:disabled:focus, [data-mode=sticky].floating .primary-navigation[data-theme=black] .btn-cta:disabled:hover {
     background: 0 0!important;
-    border-color: #7da2a9!important;
+    border-color: #515769!important;
     color: rgba(255, 255, 255, .7)!important
 }
 
@@ -1979,7 +1979,7 @@ main>article>.inner>:last-child {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #7da2a9;
+    background-color: #515769;
     -webkit-transform: translate3d(-100%, 0, 0);
     transform: translate3d(-100%, 0, 0)
 }
@@ -2802,7 +2802,8 @@ ul li {
 
 .social small {
     font-size: .5rem;
-    display: block
+    display: block;
+    color: #fff;
 }
 
 ul.social-links {
@@ -3224,7 +3225,7 @@ body, html {
 
 .logo {
     font-size: 24px;
-    fill: #7da2a9;/*#646c79*/
+    fill: #515769; /*#7da2a9;#646c79*/
     font-family: Montserrat-Medium, Montserrat;
     font-weight: 450;
     letter-spacing: -0.032999674479166664em;
@@ -3277,5 +3278,5 @@ body, html {
 }
 
 .social-links svg {
-    fill: #7da2a9;
+    fill: #515769;/*#7da2a9;*/
 }

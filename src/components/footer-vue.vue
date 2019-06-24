@@ -6,10 +6,7 @@
           <svg id="foot-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288.88 26.71">
             <title>tyler-logo</title>
             <text transform="translate(0 20.4)" class="logo">
-              T
-              <tspan x="13.3" y="0" style="letter-spacing:0.000020345052083333332em">yler Chambe</tspan>
-              <tspan x="168.86" y="0" style="letter-spacing:-0.006978352864583333em">r</tspan>
-              <tspan x="178.53" y="0" style="letter-spacing:-0.000020345052083333332em">lain, CMT</tspan>
+              <tspan x="13.3" y="0" style="letter-spacing:0.000020345052083333332em">415.275.0167</tspan>
             </text>
           </svg>
         </a>
