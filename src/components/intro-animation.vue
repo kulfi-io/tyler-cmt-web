@@ -122,23 +122,28 @@
         <tspan dy="-0.7">p</tspan>
         <tspan dy="-0.7">y</tspan>
         <tspan dy="-0.7">&nbsp;</tspan>
-        <tspan dy="-0.7">f</tspan>
-        <tspan dy="-0.7">o</tspan>
-        <tspan dy="-0.7">r</tspan>
+        <tspan dy="-0.7">t</tspan>
+        <tspan dy="-0.7">h</tspan>
+        <tspan dy="-0.7">a</tspan>
+        <tspan dy="-0.7">t</tspan>
         <tspan dy="-0.7">&nbsp;</tspan>
-        <tspan dy="-0.7">b</tspan>
-        <tspan dy="-0.7">e</tspan>
-        <tspan dy="-0.7">t</tspan>
-        <tspan dy="-0.7">t</tspan>
-        <tspan dy="-0.7">e</tspan>
-        <tspan dy="-0.7">r</tspan>
+        <tspan dy="-0.7" class="health">s</tspan>
+        <tspan dy="-0.7" class="health">o</tspan>
+        <tspan dy="-0.7" class="health">o</tspan>
+        <tspan dy="-0.7" class="health">t</tspan>
+        <tspan dy="-0.7" class="health">h</tspan>
+        <tspan dy="-0.7" class="health">e</tspan>
+        <tspan dy="-0.7" class="health">s</tspan>
+        <tspan dy="-0.7">&nbsp;</tspan>
+        <tspan dy="-0.7">a</tspan>
+        <tspan dy="-0.7">n</tspan>
+        <tspan dy="-0.7">d</tspan>
         <tspan dy="-0.7">&nbsp;</tspan>
         <tspan dy="-0.7" class="health">h</tspan>
         <tspan dy="-0.7" class="health">e</tspan>
         <tspan dy="-0.7" class="health">a</tspan>
         <tspan dy="-0.7" class="health">l</tspan>
-        <tspan dy="-0.7" class="health">t</tspan>
-        <tspan dy="-0.7" class="health">h</tspan>
+        <tspan dy="-0.7" class="health">s</tspan>
       </text>
     </svg>
   </div>

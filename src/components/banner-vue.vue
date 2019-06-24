@@ -2,12 +2,10 @@
   <main itemid="#home">
     <header class="banner initial" role="banner">
       <h2>
-        Providing soothing and healing massage
-        <br>
-        for everyone
+        Body work for better health
       </h2>
-      <p class="sub-main health">
-        Expert care coupled with excellent
+      <p class="sub-main">
+        Providing expert care coupled with excellent
         <a class="health" href="/service/">service</a> at a reasonable price.
       </p>
     </header>
@@ -39,7 +37,7 @@ h2 {
 }
 
 .sub-main {
-  color: #f7f7f7;
+  color: #515769;
   animation-duration: 8s;
   animation-name: fadeIn;
   animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);

@@ -1,3 +1,25 @@
+@media(max-width: 320px) and (max-width: 568px) {
+    .intro-container {
+        margin-top: 15%;
+    }
+
+    .banner {
+        height: calc(45vh - 115px);
+        margin-top: 75px;
+    }
+}
+
+@media(min-width: 374px) and (max-width: 736px) {
+    .intro-container {
+        margin-top: 15%;
+    }
+
+    .banner {
+        height: calc(50vh - 115px);
+        margin-top: 75px;
+    }
+}
+
 @media(max-width:539px) {
     form .field-group[data-for=submit] {
         display: -webkit-box;
@@ -621,6 +643,10 @@
     form .legend {
         padding-right: 15px;
         padding-left: 15px
+    }
+    .banner {
+        margin-top: 0;
+        height: calc(40vh - 55px);
     }
     body>footer .inner {
         margin-right: auto;
