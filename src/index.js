@@ -6,7 +6,7 @@ import animate from 'animate.css';
 import './assets/css/_base.css';
 import './assets/css/media.css';
 import 'fullpage.js/dist/fullpage.css';
-import 'fullpage.js/vendors/scrolloverflow';
+// import 'fullpage.js/vendors/scrolloverflow';
 import VueFullPage from 'vue-fullpage.js/dist/vue-fullpage';
 
 Vue.config.productionTip = false;

@@ -3,7 +3,8 @@
     HeaderVue
     FullPage.fullpage( :options="options")
       div(class="section page intro")
-        intro-animation
+        IntroAnimation
+        BannerVue
       div(class="section page about")
         h3 Section 2
       div(class="section page services")
@@ -18,7 +19,7 @@ import FullPage from "vue-fullpage.js/src/FullPage.vue";
 import HeaderVue from "../components/header-vue.vue";
 import FooterVue from "../components/footer-vue.vue";
 import IntroAnimation from "../components/intro-animation.vue";
-
+import BannerVue from '../components/banner-vue.vue';
 export default Vue.extend({
   name: "home",
   components: {
@@ -26,11 +27,12 @@ export default Vue.extend({
     FullPage,
     FooterVue,
     IntroAnimation,
+    BannerVue,
   },
   data() {
     return {
       options: {
-        scrollOverflow: true,
+        scrollOverflow: false,
         scrollBar: false,
         menu: "#menu",
         navigation: true,

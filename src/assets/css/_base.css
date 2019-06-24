@@ -3268,6 +3268,13 @@ body, html {
     padding-bottom: 10px;
 }
 
+.content-vue {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 10px;
+    color: #fff;
+}
+
 #head-logo {
     width: 400px;
     height: 35px;
@@ -3281,3 +3288,5 @@ body, html {
 .social-links svg {
     fill: #515769;/*#7da2a9;*/
 }
+
+
