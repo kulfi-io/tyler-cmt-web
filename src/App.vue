@@ -10,7 +10,8 @@
 import Vue from "vue";
 import Home from "./views/home.vue";
 export default Vue.extend({
-  name: "App"
+  name: "App",
+  
 });
 </script>
 

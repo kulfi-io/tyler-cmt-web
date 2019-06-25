@@ -2,7 +2,7 @@
   div.home
     HeaderVue
     FullPage.fullpage( :options="options")
-      div(class="section page intro")
+      div(class="section page swap-position")
         IntroAnimation
         BannerVue
       div(class="section page about")
@@ -43,18 +43,16 @@ export default Vue.extend({
     };
   },
   mounted: function(){
-    this.aliignToTop();
-    // sectionsColor: ["#d3f5f4", "#ba4744", "#1f0609"],
-
+    this.alignToTop();
   },
   methods: {
-     aliignToTop: function(){
-        const _intro = document.querySelector('.intro');
+     alignToTop: function(){
+        const _intro = document.querySelector('.swap-position');
         
         if(_intro) {
           const _cell = <HTMLDivElement>_intro.querySelector('.fp-tableCell');
           if(_cell) {
-            _cell.classList.replace('fp-tableCell', 'intro-top')
+            _cell.classList.replace('fp-tableCell', 'swap-position-top')
           }
         }
     },
