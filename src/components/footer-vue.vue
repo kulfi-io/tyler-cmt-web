@@ -179,7 +179,7 @@
         <small role="contentinfo">
           © 2019 Tyler Chamberlain, CMT.
           <br>All rights reserved.
-          <a class="contentinfo" href="/privacy-policy/">Privacy Policy</a>
+          <a class="contentinfo" href="/privacy/">Privacy Policy</a>
         </small>
       </nav>
     </div>
