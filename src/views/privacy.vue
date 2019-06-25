@@ -12,6 +12,7 @@ import PrivacyVue from "../components/privacy-vue.vue";
 import FullPage from "vue-fullpage.js/src/FullPage.vue";
 import HeaderVue from "../components/header-vue.vue";
 import FooterVue from '../components/footer-vue.vue';
+import Shared from '../shared';
 
 export default Vue.extend({
   name: "privacy",
@@ -35,20 +36,8 @@ export default Vue.extend({
     };
   },
   mounted: function() {
-    this.alignToTop();
-  },
-  methods: {
-    alignToTop: function() {
-      const _intro = document.querySelector(".swap-position");
-
-      if (_intro) {
-        const _cell = <HTMLDivElement>_intro.querySelector(".fp-tableCell");
-        if (_cell) {
-          _cell.classList.replace("fp-tableCell", "swap-position-top");
-        }
-      }
-    },
-    
+    const _target = <HTMLDivElement>document.querySelector('.swap-position');
+    Shared.methods.setCellPositionTop(_target);
   }
 });
 </script>

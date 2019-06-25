@@ -20,6 +20,10 @@ import HeaderVue from "../components/header-vue.vue";
 import FooterVue from "../components/footer-vue.vue";
 import IntroAnimation from "../components/intro-animation.vue";
 import BannerVue from '../components/banner-vue.vue';
+import Shared from '../shared';
+
+
+
 export default Vue.extend({
   name: "home",
   components: {
@@ -33,29 +37,18 @@ export default Vue.extend({
     return {
       options: {
         scrollOverflow: false,
-        scrollBar: false,
+        scrollBar: true,
         menu: "#menu",
         navigation: true,
         anchors: ["intro", "about", "services"],
-        sectionsColor: ["#1f0609", "#1f0609", "#1f0609"],
+        sectionsColor: ["#1f0609", "#b99256", "#7496c7"],
         licenseKey: "002D6FD2-0EC343D4-9403ACA4-CB7CDBFB"
       }
     };
   },
   mounted: function(){
-    this.alignToTop();
-  },
-  methods: {
-     alignToTop: function(){
-        const _intro = document.querySelector('.swap-position');
-        
-        if(_intro) {
-          const _cell = <HTMLDivElement>_intro.querySelector('.fp-tableCell');
-          if(_cell) {
-            _cell.classList.replace('fp-tableCell', 'swap-position-top')
-          }
-        }
-    },
+    const _target = <HTMLDivElement>document.querySelector('.swap-position');
+    Shared.methods.setCellPositionTop(_target);
   }
   
 });
