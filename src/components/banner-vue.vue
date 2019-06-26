@@ -1,5 +1,5 @@
 <template>
-  <main itemid="#home">
+  <main id="intro-banner">
     <header class="banner initial" role="banner">
       <h2>
         Body work for better health
