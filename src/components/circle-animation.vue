@@ -4,10 +4,10 @@
       id="circle-svg"
       data-name="label-svg"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="60 40 300 300"
+      viewBox="60 40 500 300"
     >
       <g class="circle-animation">
-        <g class="outer-object">
+        <!-- <g class="outer-object">
           <path
             class="outer-path-fill"
             d="M103.524,221.349c4.369,19.85,15.129,38.293,30.151,51.895l5.126-5.664
@@ -1040,7 +1040,7 @@
             class="outer-poly-fill"
             points="160.718,285.989 159.607,285.479 159.349,286.03 160.467,286.544      "
           ></polygon>
-        </g>
+        </g> -->
 
         <g class="inner-object">
           <path
