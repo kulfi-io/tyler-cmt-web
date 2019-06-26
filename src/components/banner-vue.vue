@@ -1,9 +1,9 @@
 <template>
   <main id="intro-banner">
     <header class="banner initial" role="banner">
-      <h2>
+      <h3>
         Body work for better health
-      </h2>
+      </h3>
       <p class="sub-main">
         Providing expert care coupled with excellent
         <a class="health" href="/service/">service</a> at a reasonable price.
@@ -26,7 +26,7 @@ main {
   margin-bottom: 0;
 }
 
-h2 {
+header {
   animation-duration: 5s;
   animation-name: fadeIn;
   animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
@@ -41,6 +41,7 @@ h2 {
   animation-duration: 8s;
   animation-name: fadeIn;
   animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+  font-family: "Sanchez";
 }
 
 @keyframes fadeIn {
