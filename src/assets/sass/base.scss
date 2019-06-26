@@ -1,3 +1,5 @@
+$vue-detail-header-color: #efefef;
+$vue-detail-header-bg-white: #fff;
 @-webkit-keyframes toast {
   from {
     -webkit-transform: translateY(100%);
@@ -4806,6 +4808,11 @@ ul.social-links {
   padding-right: 25px;
   padding-bottom: 10px;
 }
+.privacy, .about {
+  .header-vue {
+    background: $vue-detail-header-bg-white;
+  }
+}
 .privacy-vue {
   padding-left: 12%;
   padding-right: 10%;
@@ -4823,6 +4830,7 @@ ul.social-links {
       max-width: 66.6666666667%;
       margin-left: -3%;
       white-space: nowrap;
+      color: $vue-detail-header-color;
     }
   }
 }
@@ -4839,6 +4847,7 @@ ul.social-links {
       max-width: 66.6666666667%;
       margin-left: -2%;
       white-space: nowrap;
+      color: $vue-detail-header-color;
     }
     > article {
       line-height: 1.6666666667;
