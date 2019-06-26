@@ -149,8 +149,6 @@
   </div>
 </template>
 
-
-
 <script lang="ts">
 import Vue from 'vue';
 import '../assets/css/intro.css';
