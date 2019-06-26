@@ -1,13 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/home.vue';
-import Privacy from './views/Privacy.vue';
+import Privacy from './views/privacy.vue';
+import About from './views/about.vue';
 
 Vue.use(Router);
 
 let routes = [
     { path: '/', name: 'home', title: 'home', component: Home},
-    { path: '/privacy', name: 'privacy', title: 'privacy', component: Privacy}
+    { path: '/privacy', name: 'privacy', title: 'privacy', component: Privacy},
+    { path: '/about', name: 'about', title: 'about', component: About}
+
 ]
 
 export default new Router({
