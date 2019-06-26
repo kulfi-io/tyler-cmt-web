@@ -4813,6 +4813,13 @@ ul.social-links {
     background: $vue-detail-header-bg-white;
   }
 }
+
+.about {
+  .footer-vue {
+    position: relative;
+    z-index: 0;
+  }
+}
 .privacy-vue {
   padding-left: 12%;
   padding-right: 10%;

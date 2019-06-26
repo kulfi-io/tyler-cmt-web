@@ -2,7 +2,7 @@
     div.about
         HeaderVue
         AboutVue
-    //- FooterVue
+        FooterVue
 </template>
 
 <script lang="ts">

@@ -857,6 +857,17 @@
   }
 }
 @media (min-width: 1140px) {
+  .about-vue>main> {
+
+    header {
+      margin-left: 6%;
+    }
+
+    article>.primary {
+      padding-bottom: 3%;
+    }
+  }
+  
   .privacy-vue {
     padding-left: 18%;
     padding-right: 18%;
