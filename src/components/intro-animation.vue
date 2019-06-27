@@ -9,15 +9,7 @@
       y="0px"
       viewBox="20 -30 800 280"
       enable-background="new 0 0 800 280"
-      xml:space="preserve"
-    >
-    
-      <!-- underlines -->
-      <!-- <line id="underline1" class="underline first" x1="146" y1="176" x2="146" y2="176"></line>
-      <line id="underline2" class="underline second" x1="146" y1="184" x2="146" y2="184"></line>
-      <line id="underline3" class="underline third" x1="146" y1="192" x2="146" y2="192"></line>
-      <line id="underline4" class="underline fourth" x1="146" y1="200" x2="146" y2="200"></line> -->
-
+      xml:space="preserve">
       <!-- M -->
       <line id="m1" class="m-line" x1="131.6" y1="150" x2="131.6" y2="20"></line>
       <line id="m1d1" class="m1d dec blue" x1="150" y1="150" x2="150" y2="70"></line>
