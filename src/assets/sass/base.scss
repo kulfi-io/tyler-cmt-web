@@ -1,5 +1,7 @@
 $vue-detail-header-color: #efefef;
 $vue-detail-header-bg-white: #fff;
+$vue-detail-header-bg-grey: #C8C8C8;
+
 @-webkit-keyframes toast {
   from {
     -webkit-transform: translateY(100%);
@@ -22,6 +24,9 @@ $vue-detail-header-bg-white: #fff;
 }
 /* Components */
 /* #646c79; */
+html {
+  background: #C8C8C8;
+}
 body {
   margin: 0;
   font-family: Montserrat, sans-serif;
@@ -29,7 +34,7 @@ body {
   font-weight: 400;
   line-height: 1.6666666667;
   color: #1e2122;
-  background-color: #fff;
+  background: #C8C8C8;
   font-size: 1rem;
   line-height: 1.75;
   margin: 0;
@@ -660,7 +665,7 @@ dd {
   margin-bottom: 0.5rem;
   margin-left: 0;
 }
-blockquote {
+.blockquote {
   margin: 0 0 1rem;
   position: relative;
   font-family: "Sanchez", serif;
@@ -4808,9 +4813,15 @@ ul.social-links {
   padding-right: 25px;
   padding-bottom: 10px;
 }
+.collage-vue {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 10px;
+}
 .privacy, .about {
+  background: $vue-detail-header-bg-grey;
   .header-vue {
-    background: $vue-detail-header-bg-white;
+    background: $vue-detail-header-bg-grey;
   }
 }
 
@@ -4893,3 +4904,4 @@ ul.social-links {
     fill: #515769;
   }
 }
+
