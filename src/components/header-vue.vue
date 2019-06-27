@@ -61,19 +61,10 @@
               <a href="/">Home</a>
             </li>
             <li class>
-              <a href="/work/">Work</a>
-            </li>
-            <li class>
               <a href="/services/">Services</a>
             </li>
             <li class>
               <a href="/about/">About</a>
-            </li>
-            <li class>
-              <a href="/careers/">Careers</a>
-            </li>
-            <li>
-              <a href="/blog/" target="_blank">Blog</a>
             </li>
           </ul>
         </div>
