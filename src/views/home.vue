@@ -5,10 +5,10 @@
       div(class="section page swap-position")
         IntroAnimation
         BannerVue
-      div(class="section page about swap-position")
-        CircleAnimation(:title="'About'")
-      div(class="section page services")
-        h3 Section 3
+      div(class="section page about ")
+        About
+      //- div(class="section page services")
+      //-   h3 Section 3
     FooterVue
 </template>
 
@@ -20,7 +20,7 @@ import HeaderVue from '../components/header-vue.vue';
 import FooterVue from '../components/footer-vue.vue';
 import IntroAnimation from '../components/intro-animation.vue';
 import BannerVue from '../components/banner-vue.vue';
-import CircleAnimation from '../components/circle-animation.vue';
+import About from '../components/intro-about.vue';
 import Shared from '../shared';
 
 
@@ -32,7 +32,7 @@ export default Vue.extend({
     FooterVue,
     IntroAnimation,
     BannerVue,
-    CircleAnimation
+    About
   },
   data() {
     return {
@@ -42,7 +42,8 @@ export default Vue.extend({
         menu: "#menu",
         navigation: false,
         anchors: ["intro", "about", "services"],
-        sectionsColor: ["#1f0609", "#1f0609", "#7496c7"],
+        // sectionsColor: ["#1f0609", "#1f0609", "#7496c7"],
+        sectionsColor: ["#1f0609", "#C8C8C8", "#7496c7"],
         licenseKey: "002D6FD2-0EC343D4-9403ACA4-CB7CDBFB"
       }
     };
