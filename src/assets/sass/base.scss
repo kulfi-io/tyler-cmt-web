@@ -1,6 +1,7 @@
 $vue-detail-header-color: #efefef;
 $vue-detail-header-bg-white: #fff;
-$vue-detail-header-bg-grey: #C8C8C8;
+$vue-detail-header-bg-grey: #c8c8c8;
+$blockquote-color: #515769;
 
 @-webkit-keyframes toast {
   from {
@@ -22,10 +23,9 @@ $vue-detail-header-bg-grey: #C8C8C8;
     transform: translateY(0);
   }
 }
-/* Components */
-/* #646c79; */
+
 html {
-  background: #C8C8C8;
+  background: #c8c8c8;
 }
 body {
   margin: 0;
@@ -34,7 +34,7 @@ body {
   font-weight: 400;
   line-height: 1.6666666667;
   color: #1e2122;
-  background: #C8C8C8;
+  background: #c8c8c8;
   font-size: 1rem;
   line-height: 1.75;
   margin: 0;
@@ -4818,7 +4818,8 @@ ul.social-links {
   padding-right: 25px;
   padding-bottom: 10px;
 }
-.privacy, .about {
+.privacy,
+.about {
   background: $vue-detail-header-bg-grey;
   .header-vue {
     background: $vue-detail-header-bg-grey;
@@ -4905,3 +4906,30 @@ ul.social-links {
   }
 }
 
+.about-animation-vue {
+  padding-top: 10%;
+  padding-left: 12%;
+  padding-right: 10%;
+  padding-bottom: 5%;
+  animation-duration: 1s;
+  animation-name: fadeIn;
+  animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+
+  blockquote {
+    margin: 0.5rem 0 1rem;
+    position: relative;
+    font-family: "Sanchez", serif;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    font-style: italic;
+    color: $blockquote-color;
+  }
+
+  .detail {
+    text-decoration: none;
+    font-size: small;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    white-space: nowrap;
+  }
+}
