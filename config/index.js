@@ -31,7 +31,7 @@ module.exports = {
         productionSourceMap: true,
         devtool: '#source-map',
         productionGzip: false,
-        productionGzipExtentions: ['js', 'css'],
+        productionGzipExtentions: ['js', 'css', 'animations'],
         bundleAnalyzerReport: process.env.npm_config_report
     }
 }

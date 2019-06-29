@@ -9,7 +9,7 @@
 import Vue from "vue";
 import BodyData from "../assets/animations/intro-banner.json";
 import MassageData from "../assets/animations/massage.json";
-import AfterAnime from "../components/after-anime.vue";
+import AfterAnime from './after-anime.vue';
 export default Vue.extend({
   name: "banner-vue",
   components: {
