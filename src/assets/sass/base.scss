@@ -2,6 +2,7 @@ $vue-detail-header-color: #efefef;
 $vue-detail-header-bg-white: #fff;
 $vue-detail-header-bg-grey: #c8c8c8;
 $blockquote-color: #515769;
+$nav-logo-grey: #515769;
 
 @-webkit-keyframes toast {
   from {
@@ -672,6 +673,7 @@ dd {
   font-size: 2.4em;
   line-height: 1.5em;
   font-style: italic;
+  // color: $blockquote-color;
   &:before {
     content: "\201C";
     position: absolute;
@@ -3481,14 +3483,14 @@ a.cta.smooth-scroll {
   a.logo {
     svg {
       path {
-        fill: #515769;
+        fill: $nav-logo-grey;
       }
     }
   }
   .toggle {
     svg {
       g {
-        stroke: #515769;
+        stroke: $nav-logo-grey;
       }
     }
   }
@@ -3508,8 +3510,8 @@ a.cta.smooth-scroll {
     }
   }
   .btn-cta {
-    border-color: #515769;
-    color: #515769;
+    border-color: $nav-logo-grey;
+    color: $nav-logo-grey;
     position: relative;
     background-color: transparent;
     overflow: hidden;
@@ -3521,7 +3523,7 @@ a.cta.smooth-scroll {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #515769;
+      background-color: $nav-logo-grey;
       -webkit-transform: translate3d(-100%, 0, 0);
       transform: translate3d(-100%, 0, 0);
     }
@@ -3584,6 +3586,7 @@ a.cta.smooth-scroll {
     }
   }
 }
+
 [data-mode="sticky"].floating.hide {
   .primary-navigation {
     .menu {
@@ -4772,11 +4775,12 @@ ul.social-links {
 }
 .logo {
   font-size: 24px;
-  fill: #515769;
+  fill: $nav-logo-grey;
   font-family: Montserrat-Medium, Montserrat;
   font-weight: 450;
   letter-spacing: -0.032999674479166664em;
 }
+
 .footer-logo {
   font-size: 15px;
   fill: #fff;
@@ -4813,10 +4817,12 @@ ul.social-links {
   padding-right: 25px;
   padding-bottom: 10px;
 }
-.collage-vue {
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 10px;
+
+.home {
+  .intro-banner {
+    margin: auto;
+    display: block;
+  }
 }
 .privacy,
 .about {
@@ -4836,6 +4842,7 @@ ul.social-links {
   padding-left: 12%;
   padding-right: 10%;
   padding-bottom: 5%;
+  display: block;
   > main {
     > article {
       line-height: 1.6666666667;
@@ -4857,6 +4864,7 @@ ul.social-links {
   padding-left: 12%;
   padding-right: 10%;
   padding-bottom: 5%;
+  display: block;
   > main {
     > header {
       margin-top: 10%;
@@ -4886,12 +4894,6 @@ ul.social-links {
     }
   }
 }
-.content-vue {
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 10px;
-  color: #fff;
-}
 #head-logo {
   width: 400px;
   height: 35px;
@@ -4905,31 +4907,61 @@ ul.social-links {
     fill: #515769;
   }
 }
+.intro-about-vue {
+  margin: auto;
+  display: block;
+  // animation-duration: 1s;
+  // animation-name: fadeIn;
+  // animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
 
-.about-animation-vue {
-  padding-top: 10%;
-  padding-left: 12%;
-  padding-right: 10%;
-  padding-bottom: 5%;
-  animation-duration: 1s;
-  animation-name: fadeIn;
-  animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
-
-  blockquote {
-    margin: 0.5rem 0 1rem;
-    position: relative;
-    font-family: "Sanchez", serif;
-    font-size: 1.5em;
-    line-height: 1.5em;
-    font-style: italic;
-    color: $blockquote-color;
+  .banner {
+    margin: auto;
+    display: block;
+    background: url("../img/svg/about-banner.svg");
+    background-repeat: no-repeat;
+    width: 594px;
+    height: 135px;
+    animation-duration: 2s;
+    animation-name: fadeIn;
+    animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
   }
 
-  .detail {
-    text-decoration: none;
-    font-size: small;
-    font-family: sans-serif;
-    text-transform: capitalize;
-    white-space: nowrap;
+  .collage {
+    margin: auto;
+    display: block;
+    background: url("../img/svg/people-collage.svg");
+    background-repeat: no-repeat;
+    width: 594px;
+    height: 537px;
+  }
+
+  .quote {
+    margin: auto;
+    display: block;
+    width: 630px;
+
+    blockquote {
+      margin: auto;
+      display: block;
+      position: relative;
+      font-family: "Sanchez", serif;
+      font-size: 1.5em;
+      line-height: 1.5em;
+      font-style: italic;
+      color: $blockquote-color;
+    }
+
+    .detail {
+      text-decoration: none;
+      font-size: small;
+      font-family: sans-serif;
+      text-transform: capitalize;
+      white-space: nowrap;
+      color: #f6f6f6;
+
+      &:hover {
+        color: #ba4744;
+      }
+    }
   }
 }
