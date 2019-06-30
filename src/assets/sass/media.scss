@@ -996,6 +996,17 @@
     }
   }
 
+  .home {
+    .intro-banner {
+  
+      .masg-wrapper {
+        display: none;
+      }
+  
+    }
+  
+  }
+
   .intro-about-vue {
     .banner {
       width: 694px;
@@ -1501,6 +1512,13 @@
 
 // landscape
 @media (width: 568px) and (height: 320px) {
+  .home {
+    .intro-banner {
+      .masg-wrapper {
+        display: none;
+      }
+    }
+  }
   .about-vue > main > header {
     margin-left: -4%;
     margin-top: 11%;
@@ -1531,9 +1549,14 @@
   }
 }
 @media (orientation: landscape) and (max-height: 414px) {
-  .intro-container {
-    margin-top: 10%;
+  .home {
+    .intro-banner {
+      .masg-wrapper {
+        display: none;
+      }
+    }
   }
+
 
   // #intro-banner {
   //     display: none;
@@ -1549,9 +1572,13 @@
   }
 }
 @media (orientation: landscape) and (min-width: 812px) {
-  // #intro-svg {
-  //   margin-top: 5%;
-  // }
+  .home {
+    .intro-banner {
+      .masg-wrapper {
+        display: none;
+      }
+    }
+  }
   .intro-container {
     margin-top: 5%;
   }

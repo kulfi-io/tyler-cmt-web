@@ -1,7 +1,11 @@
 <template>
-  <main id="intro-banner">
-    <after-anime class="body-banner" :options="Massage" :loop="false" :autoplay="true"/>
-    <after-anime class="massage-banner" :options="Body" :loop="false" :autoplay="true"/>
+  <main class="intro-banner">
+    <div class="bb-wrapper">
+      <after-anime class="body-banner" :options="Massage" :loop="false" :autoplay="true"/>
+    </div>
+    <div class="masg-wrapper">
+      <after-anime class="massage-banner" :options="Body" :loop="false" :autoplay="true"/>
+    </div>
   </main>
 </template>
 
