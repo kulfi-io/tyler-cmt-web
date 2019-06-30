@@ -12,7 +12,6 @@ export default Vue.extend({
     height: String,
     width: String,
     autoplay: Boolean,
-    index: String,
     options: {
       type: Object,
       required: true
@@ -25,7 +24,6 @@ export default Vue.extend({
         height: this.height ? `${this.height}px` : "100%",
         overflow: "hidden",
         margin: "0 auto",
-        "z-index": this.index ? this.index.toString() : null
       }
     };
   },

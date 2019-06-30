@@ -1,7 +1,9 @@
 <template>
   <div class="intro-about-vue">
     <div class="banner"/>
-    <after-anime :options="People" :loop="false" :autoplay="true"/>
+    <div class="collage">
+      <after-anime :options="People" :loop="false" :autoplay="true"/>
+    </div>
     <div class="quote">
       <blockquote>
         Our anatomy is structured to work as a cohesive, singular being.
