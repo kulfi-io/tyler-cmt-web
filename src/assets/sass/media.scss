@@ -1253,232 +1253,395 @@ $default-font-color: #515769;
   }
 }
 
-@media (max-width: 667px) {
+// Portrait
+@media(orientation: portrait) and (max-height: 823px) {
   .header-vue {
     padding-left: 25px;
     padding-right: 25px;
+    #head-logo {
+      width: 200px;
+      height: 35px;
+    }
   }
-  #head-logo {
-    width: 200px;
-    height: 35px;
+
+  .footer-vue {
+
+    #foot-logo {
+      display: none;
+    }
   }
 }
-
-// Portrait
 @media (height: 568px) and (width: 320px) {
-  .intro-about-vue {
-    .quote {
-      width: 275px;
-
-      blockquote {
-        font-size: 1em;
+  .home {
+    .intro-about-vue {
+      .about-banner {
+        width: 95%;
       }
+      .quote {
+        width: 85%;
 
-      .detail {
-        font-size: 0.5em;
+        blockquote {
+          font-size: .875rem;
+        }
+
+        .detail {
+          font-size: 0.5em;
+        }
       }
     }
   }
-  .about-vue > main > header {
-    margin-left: -7%;
-    margin-top: 11%;
-  }
-  .about-vue > main > article > .primary > .image {
-    min-width: 55%;
+
+  .about {
+    .about-vue {
+      main {
+        header {
+          margin-left: -7%;
+          margin-top: 11%;
+        }
+
+        article {
+          font-size: 0.80rem;
+          .primary {
+            .image {
+              min-width: 55%;
+            }
+            .text {
+
+              .blockquote {
+                font-size: .955rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
-  .about-vue > main > article > .primary > .text > blockquote {
-    font-size: 1.09em;
+}
+
+@media (height: 667px) and (width: 375px) {
+  .home {
+    .intro-about-vue {
+      .about-banner {
+        width: 95%;
+      }
+
+      .quote {
+        width: 85%;
+  
+        blockquote {
+          font-size: 1.1em;
+        }
+  
+        .detail {
+          font-size: 0.5em;
+        }
+      }
+    }
   }
+  
+  .about {
+    .about-vue {
+      main {
+        header {
+          margin-left: -6%;
+          margin-top: 12%;
+        }
 
-  // #intro-svg {
-  //   margin-top: 15%;
-  // }
+        article {
+          font-size: 0.90rem;
+          .primary {
+            .image {
+              min-width: 60%;
+            }
+            .text {
 
-  .banner {
-    height: calc(45vh - 115px);
-    margin-top: 75px;
-  }
-
-  .privacy > .footer-vue {
-    position: relative;
-    z-index: 0;
+              .blockquote {
+                font-size: 1.08rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
-@media (max-height: 812px) and (width: 375px) {
-  .intro-about-vue {
-
-    .quote {
-      width: 300px;
-
-      blockquote {
-        font-size: 1.1em;
+@media (min-height: 812px) and (width: 375px) {
+  .home {
+    .intro-about-vue {
+      .about-banner {
+        width: 95%;
       }
 
-      .detail {
-        font-size: 0.5em;
+      .quote {
+        width: 85%;
+  
+        blockquote {
+          font-size: 1.1em;
+        }
+  
+        .detail {
+          font-size: 0.5em;
+        }
       }
     }
   }
+  
+  .about {
+    .about-vue {
+      main {
+        header {
+          margin-left: -6%;
+          margin-top: 12%;
+        }
 
-  .about-vue > main > header {
-    margin-left: -6%;
-    margin-top: 12%;
-  }
-  .about-vue > main > article > .primary > .image {
-    min-width: 55%;
-  }
+        article {
+          font-size: 0.90rem;
+          .primary {
+            .image {
+              min-width: 60%;
+            }
+            .text {
 
-  .about-vue > main > article > .primary > .text > blockquote {
-    font-size: 1.28em;
-  }
-
-  .banner {
-    height: calc(45vh - 115px);
-    margin-top: 75px;
-  }
-
-  .privacy > .footer-vue {
-    position: relative;
-    z-index: 0;
+              .blockquote {
+                font-size: 1.08rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
 @media (height: 731px) and (width: 411px) {
-  .intro-about-vue {
 
-    .quote {
-      width: 375px;
-
-      blockquote {
-        font-size: 1.1em;
+  .home {
+    .intro-about-vue {
+      .about-banner {
+        width: 95%;
       }
 
-      .detail {
-        font-size: 0.5em;
+      .quote {
+        width: 85%;
+  
+        blockquote {
+          font-size: 1.1em;
+        }
+  
+        .detail {
+          font-size: 0.5rem;
+        }
       }
     }
   }
-  .about-vue > main > header {
-    margin-left: -5%;
-    margin-top: 12%;
-  }
-  .about-vue > main > article > .primary > .image {
-    min-width: 55%;
-  }
 
-  .about-vue > main > article > .primary > .text > blockquote {
-    font-size: 1.4em;
-  }
+  .about {
+    .about-vue {
+      main {
+        header {
+          margin-left: -5%;
+          margin-top: 12%;
+        }
 
-  .banner {
-    height: calc(45vh - 115px);
-    margin-top: 75px;
-  }
+        article {
+          font-size: 0.90rem;
+          .primary {
+            .image {
+              min-width: 60%;
+            }
+            .text {
 
-  .privacy > .footer-vue {
-    position: relative;
-    z-index: 0;
+              .blockquote {
+                font-size: 1.18rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
+ 
 }
 
 @media (height: 736px) and (width: 414px) {
-  .intro-about-vue {
-  
-    .quote {
-      width: 375px;
-
-      blockquote {
-        font-size: 1.1em;
+  .home {
+    .intro-about-vue {
+      .about-banner {
+        width: 95%;
       }
+      .quote {
+        width: 375px;
 
-      .detail {
-        font-size: 0.5em;
+        blockquote {
+          font-size: 1.2rem;
+        }
+
+        .detail {
+          font-size: 0.5em;
+        }
       }
     }
   }
-  .about-vue > main > header {
-    margin-left: -5%;
-  }
-  .about-vue > main > article > .primary > .image {
-    min-width: 55%;
-  }
 
-  .about-vue > main > article > .primary > .text > blockquote {
-    font-size: 1.4em;
-  }
+  .about {
+    .about-vue {
+      main {
+        header {
+          margin-left: -5%;
+          margin-top: 11%;
+        }
 
-  .banner {
-    height: calc(45vh - 115px);
-    margin-top: 75px;
+        article {
+          font-size: 0.9rem;
+          .primary {
+            .image {
+              min-width: 55%;
+            }
+            .text {
+              font-size: 1.4em;
+              .blockquote {
+                font-size: 1.236rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
+  // .intro-about-vue {
+  
+  //   .quote {
+  //     width: 375px;
 
-  .privacy > .footer-vue {
-    position: relative;
-    z-index: 0;
-  }
+  //     blockquote {
+  //       font-size: 1.1em;
+  //     }
+
+  //     .detail {
+  //       font-size: 0.5em;
+  //     }
+  //   }
+  // }
+  // .about-vue > main > header {
+  //   margin-left: -5%;
+  // }
+  // .about-vue > main > article > .primary > .image {
+  //   min-width: 55%;
+  // }
+
+  // .about-vue > main > article > .primary > .text > blockquote {
+  //   font-size: 1.4em;
+  // }
+
+  // .banner {
+  //   height: calc(45vh - 115px);
+  //   margin-top: 75px;
+  // }
+
+  // .privacy > .footer-vue {
+  //   position: relative;
+  //   z-index: 0;
+  // }
 }
 
 @media (min-height: 823px) and (max-width: 411px) {
-  .intro-about-vue {
-   
-
-    .quote {
-      width: 375px;
-
-      blockquote {
-        font-size: 1.1em;
+  .home {
+    .intro-about-vue {
+      .about-banner {
+        width: 95%;
       }
 
-      .detail {
-        font-size: 0.5em;
+      .quote {
+        width: 85%;
+  
+        blockquote {
+          font-size: 1.1rem;
+        }
+  
+        .detail {
+          font-size: 0.5em;
+        }
       }
     }
   }
-  .about-vue > main > header {
-    margin-left: -5%;
-    margin-top: 12%;
-  }
-  .about-vue > main > article > .primary > .image {
-    min-width: 55%;
-  }
+  
+  .about {
+    .about-vue {
+      main {
+        header {
+          margin-left: -5%;
+          margin-top: 12%;
+        }
 
-  .about-vue > main > article > .primary > .text > blockquote {
-    font-size: 1.4em;
-  }
+        article {
+          font-size: 0.90rem;
+          .primary {
+            .image {
+              min-width: 60%;
+            }
+            .text {
 
-  .banner {
-    height: calc(45vh - 115px);
-    margin-top: 75px;
+              .blockquote {
+                font-size: 1.18rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
-
-  .privacy > .footer-vue {
-    position: relative;
-    z-index: 0;
-  }
+  
 }
 
-@media (orientation: portrait) and (max-height: 667px) {
-  .intro-about-vue {
-  
-
-    .quote {
-      width: 300px;
-
-      blockquote {
-        font-size: 1.1em;
+@media (min-height: 1024px) and (max-width: 768px) {
+  .home {
+    .intro-about-vue {
+      .about-banner {
+        width: 95%;
       }
 
-      .detail {
-        font-size: 0.5em;
+      .quote {
+        width: 85%;
+  
+        blockquote {
+          font-size: 1.1rem;
+        }
+  
+        .detail {
+          font-size: 0.5em;
+        }
       }
     }
   }
+  
+  .about {
+    .about-vue {
+      main {
+        header {
+          margin-left: -2%;
+          margin-top: 12%;
+        }
 
-  #foot-logo {
-    display: none;
+        article {
+          font-size: 0.90rem;
+          .primary {
+            .image {
+              min-width: 55%;
+            }
+            .text {
+
+              .blockquote {
+                font-size: 2.29rem;
+              }
+            }
+          }
+        }
+      }
+    }
   }
+  
 }
 
 @media (orientation: portrait) and (min-width: 720px) {
@@ -1666,12 +1829,16 @@ $default-font-color: #515769;
 @media (min-width: 731px) and (max-height: 414px) {
   .header-vue {
     padding-top: 10px;
+
+    #head-logo {
+      padding-top: 10px;
+    }
   }
-  #head-logo {
-    padding-top: 10px;
-  }
+ 
 }
 @media (max-width: 823px) and (max-height: 414px) {
+  
+  
   .privacy {
     > .footer-vue {
       position: relative;
