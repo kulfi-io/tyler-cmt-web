@@ -204,12 +204,3 @@ export default Vue.extend({
   name: "footer-vue"
 });
 </script>
-
-<style lang="scss" scoped>
-.primary {
-  display: flex;
-  .right {
-    flex: 1;
-  }
-}
-</style>
