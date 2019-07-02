@@ -1,7 +1,7 @@
 <template>
   <div class="intro-about-vue">
     <div class="about-banner">
-      <after-anime :options="About" :loop="false" autoplay="true"/>
+      <after-anime :options="About" :loop="false" :autoplay="true"/>
     </div>
     <div class="collage">
       <after-anime :options="People" :loop="false" :autoplay="true"/>
