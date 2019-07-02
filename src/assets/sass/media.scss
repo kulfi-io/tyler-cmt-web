@@ -1,3 +1,10 @@
+$vue-detail-header-color: #efefef;
+$vue-detail-header-bg-white: #fff;
+$vue-detail-header-bg-grey: #c8c8c8;
+$blockquote-color: #515769;
+$nav-logo-grey: #515769;
+$default-font-color: #515769;
+
 @media (min-width: 540px) {
   form {
     padding-right: 15px;
@@ -1002,28 +1009,72 @@
         display: none;
       }
     }
+
+    .intro-about-vue {
+      .about-banner {
+        width: 60%;
+      }
+  
+      .collage {
+        width: 62%;
+      }
+      .quote {
+        width: 50%
+      }
+    }
   }
 
-  .intro-about-vue {
-    .about-banner {
-      width: 60%;
+  .about, .privacy {
+    .about-vue {
+      padding-bottom: 4%;
+
+      main {
+        header {
+          margin-left: 5.5%;
+          white-space: nowrap;
+          color: $vue-detail-header-color;
+        }
+        article {
+          .primary {
+            padding-bottom: 1%;
+          }
+          .text {
+            .blockquote {
+              font-size: 3.4rem;
+            }
+          }
+        }
+      }
     }
 
-    .collage {
-      width: 62%;
+    .privacy-vue {
+      padding-bottom: 4%;
+
+      main {
+        header {
+          margin-left: 5.5%;
+          white-space: nowrap;
+          color: $vue-detail-header-color;
+        }
+        article {
+          .primary {
+            padding-bottom: 1%;
+          }
+          .text {
+            .blockquote {
+              font-size: 3.4rem;
+            }
+          }
+        }
+      }
     }
-    .quote {
-      width: 45%
+
+    .footer-vue {
+      position: fixed;
+      z-index: 0;
     }
   }
 
-  .about-vue > main > article > .primary {
-    padding-bottom: 1%;
-  }
-
-  .about-vue > main > article > .primary > .text > blockquote {
-    font-size: 4em;
-  }
 }
 @media (min-width: 1440px) {
   form {

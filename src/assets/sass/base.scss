@@ -667,24 +667,7 @@ dd {
   margin-bottom: 0.5rem;
   margin-left: 0;
 }
-.blockquote {
-  margin: 0 0 1rem;
-  position: relative;
-  font-family: serif;
-  font-size: 2.4em;
-  line-height: 1.5em;
-  font-style: italic;
-  color: $blockquote-color;
-  &:before {
-    content: "\201C";
-    position: absolute;
-    top: 0.25em;
-    left: -0.15em;
-    color: #efefef;
-    font-size: 5em;
-    z-index: -1;
-  }
-}
+
 [role="button"] {
   cursor: pointer;
   -ms-touch-action: manipulation;
@@ -2363,20 +2346,7 @@ form.initialized {
     transition: color 0.262s, font-weight 0.262s ease-out, transform 0.262s ease-out, -webkit-transform 0.262s ease-out;
   }
 }
-// @-moz-document {
-// 	url-prefix() {
-// 		img: -moz-loading { visibility: hidden;
-// 	}
-// }
-// } {
-// 	.img {
-// 		opacity: 0;
-// 		visibility: hidden;
-// 		position: relative;
-// 		display: inline-block;
-// 		overflow: hidden;
-// 	}
-// }
+
 .img {
   &:before {
     background: -webkit-gradient(
@@ -4782,13 +4752,7 @@ ul.social-links {
   letter-spacing: -0.032999674479166664em;
 }
 
-.footer-logo {
-  font-size: 15px;
-  fill: #fff;
-  font-family: Montserrat-Medium, Montserrat;
-  font-weight: 500;
-  letter-spacing: -0.032999674479166664em;
-}
+
 .initial {
   display: flex;
   min-height: 5vh;
@@ -4806,6 +4770,11 @@ ul.social-links {
   left: 0;
   z-index: 1030;
   overflow-y: hidden;
+
+  #head-logo {
+    width: 400px;
+    height: 35px;
+  }
 }
 .footer-vue {
   position: fixed;
@@ -4817,21 +4786,108 @@ ul.social-links {
   padding-left: 25px;
   padding-right: 25px;
   padding-bottom: 10px;
+
+  #foot-logo {
+    width: 150px;
+    height: 35px;
+  }
+
+  .social-links {
+    svg {
+      fill: #515769;
+    }
+  }
 }
 
+.home {
+  .intro-about-vue {
+    margin: auto;
+    display: block;
+  
+    .about-banner {
+      margin: auto;
+      display: block;
+      width: 93%;
+    }
+  
+  
+    .collage {
+      margin: auto;
+      display: block;
+    }
+  
+    .quote {
+      margin: auto;
+      display: block;
+      width: 85%;
+      // width: 630px;
+      animation-duration: 4s;
+      animation-name: fadeIn;
+      animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+  
+  
+      blockquote {
+        margin: auto;
+        display: block;
+        position: relative;
+        font-family: "Sanchez", serif;
+        font-size: 1.5em;
+        line-height: 1.5em;
+        font-style: italic;
+        color: $blockquote-color;
+      }
+  
+      .detail {
+        text-decoration: none;
+        font-size: small;
+        font-family: sans-serif;
+        text-transform: capitalize;
+        white-space: nowrap;
+        color: #f6f6f6;
+  
+        &:hover {
+          color: #ba4744;
+        }
+      }
+    }
+  }
 
-.privacy,
+}
 
-.about {
+.privacy, .about {
   background: $vue-detail-header-bg-grey;
   .header-vue {
     background: $vue-detail-header-bg-grey;
   }
 
-  .about-vue {
+  .privacy-vue {
     padding-left: 12%;
     padding-right: 10%;
     padding-bottom: 5%;
+    display: block;
+    color: $default-font-color;
+    > main {
+      > article {
+        line-height: 1.6666666667;
+        font-size: 0.875rem;
+      }
+      > header {
+        margin-top: 12%;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 66.6666666667%;
+        flex: 0 0 66.6666666667%;
+        max-width: 66.6666666667%;
+        margin-left: -3%;
+        white-space: nowrap;
+        color: $vue-detail-header-color;
+      }
+    }
+  }
+
+  .about-vue {
+    padding-left: 12%;
+    padding-right: 10%;
+    padding-bottom: 4%;
     display: block;
     color: $default-font-color;
 
@@ -4851,7 +4907,7 @@ ul.social-links {
         font-size: 0.875rem;
         .primary {
           display: flex;
-          padding-bottom: 5%;
+          padding-bottom: 4%;
           .image {
             min-width: 40%;
             padding-right: 5%;
@@ -4862,6 +4918,25 @@ ul.social-links {
           }
         }
       } 
+
+      .blockquote {
+        margin: 0 0 1rem;
+        position: relative;
+        font-family: serif;
+        font-size: 2.6em;
+        line-height: 1.5em;
+        font-style: italic;
+        color: $blockquote-color;
+        &:before {
+          content: "\201C";
+          position: absolute;
+          top: 0.25em;
+          left: -0.15em;
+          color: #efefef;
+          font-size: 5em;
+          z-index: -1;
+        }
+      }
     }
   }
 
@@ -4871,125 +4946,9 @@ ul.social-links {
   }
 }
 
-// .about-vue {
-//   padding-left: 12%;
-//   padding-right: 10%;
-//   padding-bottom: 5%;
-//   display: block;
-  
-//   > main {
-//     > header {
-//       margin-top: 10%;
-//       -webkit-box-flex: 0;
-//       -ms-flex: 0 0 66.6666666667%;
-//       flex: 0 0 66.6666666667%;
-//       max-width: 66.6666666667%;
-//       margin-left: -2%;
-//       white-space: nowrap;
-//       color: $vue-detail-header-color;
-//     }
-//     > article {
-//       line-height: 1.6666666667;
-//       font-size: 0.875rem;
-//       > .primary {
-//         display: flex;
-//         padding-bottom: 5%;
-//         > .image {
-//           min-width: 40%;
-//           padding-right: 5%;
-//           flex: 1;
-//           > img {
-//             box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-.privacy-vue {
-  padding-left: 12%;
-  padding-right: 10%;
-  padding-bottom: 5%;
-  display: block;
-  > main {
-    > article {
-      line-height: 1.6666666667;
-      font-size: 0.875rem;
-    }
-    > header {
-      margin-top: 12%;
-      -webkit-box-flex: 0;
-      -ms-flex: 0 0 66.6666666667%;
-      flex: 0 0 66.6666666667%;
-      max-width: 66.6666666667%;
-      margin-left: -3%;
-      white-space: nowrap;
-      color: $vue-detail-header-color;
-    }
-  }
-}
-
-#head-logo {
-  width: 400px;
-  height: 35px;
-}
-#foot-logo {
-  width: 150px;
-  height: 35px;
-}
-.social-links {
-  svg {
-    fill: #515769;
-  }
-}
-.intro-about-vue {
-  margin: auto;
-  display: block;
-
-  .about-banner {
-    margin: auto;
-    display: block;
-    width: 93%;
-  }
 
 
-  .collage {
-    margin: auto;
-    display: block;
-  }
-
-  .quote {
-    margin: auto;
-    display: block;
-    width: 85%;
-    // width: 630px;
-    animation-duration: 4s;
-    animation-name: fadeIn;
-    animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
 
 
-    blockquote {
-      margin: auto;
-      display: block;
-      position: relative;
-      font-family: "Sanchez", serif;
-      font-size: 1.5em;
-      line-height: 1.5em;
-      font-style: italic;
-      color: $blockquote-color;
-    }
 
-    .detail {
-      text-decoration: none;
-      font-size: small;
-      font-family: sans-serif;
-      text-transform: capitalize;
-      white-space: nowrap;
-      color: #f6f6f6;
 
-      &:hover {
-        color: #ba4744;
-      }
-    }
-  }
-}
