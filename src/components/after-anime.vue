@@ -1,5 +1,5 @@
 <template>
-  <div :style="style" ref="animevue"></div>
+  <div ref="animevue"></div>
 </template>
 
 <script lang="ts">
@@ -9,23 +9,11 @@ export default Vue.extend({
   name: "anime-vue",
   props: {
     loop: Boolean,
-    height: String,
-    width: String,
     autoplay: Boolean,
     options: {
       type: Object,
       required: true
     }
-  },
-  data: function() {
-    return {
-      style: {
-        width: this.width ? `${this.width}px` : "100%",
-        height: this.height ? `${this.height}px` : "100%",
-        // overflow: "hidden",
-        // margin: "0 auto",
-      }
-    };
   },
   mounted: function() {
     const _anime = lottie.loadAnimation({
