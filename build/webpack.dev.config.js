@@ -69,8 +69,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
                 ignore: ['.*']
             },
             {
-                from: path.resolve(__dirname, '../src/assets/img/collage-img'),
-                to: 'static/img/collage-img',
+                from: path.resolve(__dirname, '../src/assets/animations/images'),
+                to: 'static/animations/img',
                 ignore: ['.*']
             }
         ])
