@@ -998,27 +998,22 @@
 
   .home {
     .intro-banner {
-  
       .masg-wrapper {
         display: none;
       }
-  
     }
-  
   }
 
   .intro-about-vue {
-    .banner {
-      width: 694px;
-      height: 135px;
+    .about-banner {
+      width: 60%;
     }
 
     .collage {
-      width: 694px;
-      height: 627px;
+      width: 62%;
     }
     .quote {
-      width: 714px;
+      width: 45%
     }
   }
 
@@ -1221,15 +1216,6 @@
 // Portrait
 @media (height: 568px) and (width: 320px) {
   .intro-about-vue {
-    .banner {
-      width: 275px;
-      height: 100px;
-    }
-    .collage {
-      width: 275px;
-      height: 230px;
-    }
-
     .quote {
       width: 275px;
 
@@ -1271,14 +1257,6 @@
 
 @media (max-height: 812px) and (width: 375px) {
   .intro-about-vue {
-    .banner {
-      width: 300px;
-      height: 100px;
-    }
-    .collage {
-      width: 300px;
-      height: 255px;
-    }
 
     .quote {
       width: 300px;
@@ -1318,14 +1296,6 @@
 
 @media (height: 731px) and (width: 411px) {
   .intro-about-vue {
-    .banner {
-      width: 375px;
-      height: 100px;
-    }
-    .collage {
-      width: 375px;
-      height: 325px;
-    }
 
     .quote {
       width: 375px;
@@ -1364,15 +1334,7 @@
 
 @media (height: 736px) and (width: 414px) {
   .intro-about-vue {
-    .banner {
-      width: 375px;
-      height: 100px;
-    }
-    .collage {
-      width: 375px;
-      height: 325px;
-    }
-
+  
     .quote {
       width: 375px;
 
@@ -1409,14 +1371,7 @@
 
 @media (min-height: 823px) and (max-width: 411px) {
   .intro-about-vue {
-    .banner {
-      width: 375px;
-      height: 100px;
-    }
-    .collage {
-      width: 375px;
-      height: 325px;
-    }
+   
 
     .quote {
       width: 375px;
@@ -1455,14 +1410,7 @@
 
 @media (orientation: portrait) and (max-height: 667px) {
   .intro-about-vue {
-    .banner {
-      width: 300px;
-      height: 100px;
-    }
-    .collage {
-      width: 300px;
-      height: 255px;
-    }
+  
 
     .quote {
       width: 300px;
@@ -1531,9 +1479,17 @@
     font-size: 1.9em;
   }
 
-  // #intro-svg {
-  //   margin-top: 10%;
-  // }
+  
+  .intro-about-vue {
+    .collage {
+      width: 65%;
+    }
+
+    .quote {
+      width: 80%;
+    }
+  }
+
 }
 @media (width: 667px) and (max-height: 414px) {
   .about-vue > main > header {
@@ -1547,6 +1503,16 @@
   .about-vue > main > article > .primary > .text > blockquote {
     font-size: 2.2em;
   }
+
+  .intro-about-vue {
+    .collage {
+      width: 67%;
+    }
+
+    .quote {
+      width: 70%;
+    }
+  }
 }
 @media (orientation: landscape) and (max-height: 414px) {
   .home {
@@ -1557,10 +1523,40 @@
     }
   }
 
+  
 
-  // #intro-banner {
-  //     display: none;
-  // }
+  .footer-vue {
+    #foot-logo {
+      width: 120px;
+    }
+
+    ul.social-links li a svg {
+      width: 20px;
+    }
+
+    .social {
+      small {
+        display: none;
+      }
+    }
+  }
+
+  .intro-about-vue {
+    .about-banner {
+      display: none;
+    }
+
+    .quote {
+      .detail {
+        font-size: 0.5em;
+      }
+  
+      blockquote {
+        font-size: .975rem;
+      } 
+    }
+  }
+
 }
 @media (orientation: landscape) and (min-width: 720px) {
   .stat-grid {
@@ -1568,6 +1564,16 @@
       h2 {
         white-space: nowrap;
       }
+    }
+  }
+
+  .intro-about-vue {
+    .collage {
+      width: 73%;
+    }
+
+    .quote {
+      width: 65%;
     }
   }
 }
@@ -1579,13 +1585,22 @@
       }
     }
   }
-  .intro-container {
-    margin-top: 5%;
+
+  .intro-about-vue {
+    .collage {
+      width: 59%;
+    }
+
+    .quote {
+      width: 57%;
+    }
   }
-  .banner {
-    margin-top: 1%;
-    height: calc(25vh - 55px);
-  }
+
+
+  // .banner {
+  //   margin-top: 1%;
+  //   height: calc(25vh - 55px);
+  // }
 }
 @media (orientation: landscape) and (max-width: 719px) {
   #intro-svg {
@@ -1621,7 +1636,17 @@
   }
 }
 @media (height: 768px) and (width: 1024px) {
-  #intro-svg {
-    margin-top: 5%;
+
+  .intro-about-vue {
+    .about-banner {
+      display: none;
+    }
+    .collage {
+      width: 95%;
+    }
+
+    .quote {
+      width: 80%;
+    }
   }
 }

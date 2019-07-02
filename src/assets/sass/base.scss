@@ -3,6 +3,7 @@ $vue-detail-header-bg-white: #fff;
 $vue-detail-header-bg-grey: #c8c8c8;
 $blockquote-color: #515769;
 $nav-logo-grey: #515769;
+$default-font-color: #515769;
 
 @-webkit-keyframes toast {
   from {
@@ -669,11 +670,11 @@ dd {
 .blockquote {
   margin: 0 0 1rem;
   position: relative;
-  font-family: "Sanchez", serif;
+  font-family: serif;
   font-size: 2.4em;
   line-height: 1.5em;
   font-style: italic;
-  // color: $blockquote-color;
+  color: $blockquote-color;
   &:before {
     content: "\201C";
     position: absolute;
@@ -4827,48 +4828,84 @@ ul.social-links {
     background: $vue-detail-header-bg-grey;
   }
 
+  .about-vue {
+    padding-left: 12%;
+    padding-right: 10%;
+    padding-bottom: 5%;
+    display: block;
+    color: $default-font-color;
+
+    main {
+      header {
+        margin-top: 10%;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 66.6666666667%;
+        flex: 0 0 66.6666666667%;
+        max-width: 66.6666666667%;
+        margin-left: -2%;
+        white-space: nowrap;
+        color: $vue-detail-header-color;
+      }
+      article {
+        line-height: 1.6666666667;
+        font-size: 0.875rem;
+        .primary {
+          display: flex;
+          padding-bottom: 5%;
+          .image {
+            min-width: 40%;
+            padding-right: 5%;
+            flex: 1;
+            img {
+              box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+      } 
+    }
+  }
+
   .footer-vue {
     position: relative;
     z-index: 0;
   }
 }
 
-
-.about-vue {
-  padding-left: 12%;
-  padding-right: 10%;
-  padding-bottom: 5%;
-  display: block;
+// .about-vue {
+//   padding-left: 12%;
+//   padding-right: 10%;
+//   padding-bottom: 5%;
+//   display: block;
   
-  > main {
-    > header {
-      margin-top: 10%;
-      -webkit-box-flex: 0;
-      -ms-flex: 0 0 66.6666666667%;
-      flex: 0 0 66.6666666667%;
-      max-width: 66.6666666667%;
-      margin-left: -2%;
-      white-space: nowrap;
-      color: $vue-detail-header-color;
-    }
-    > article {
-      line-height: 1.6666666667;
-      font-size: 0.875rem;
-      > .primary {
-        display: flex;
-        padding-bottom: 5%;
-        > .image {
-          min-width: 40%;
-          padding-right: 5%;
-          flex: 1;
-          > img {
-            box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-          }
-        }
-      }
-    }
-  }
-}
+//   > main {
+//     > header {
+//       margin-top: 10%;
+//       -webkit-box-flex: 0;
+//       -ms-flex: 0 0 66.6666666667%;
+//       flex: 0 0 66.6666666667%;
+//       max-width: 66.6666666667%;
+//       margin-left: -2%;
+//       white-space: nowrap;
+//       color: $vue-detail-header-color;
+//     }
+//     > article {
+//       line-height: 1.6666666667;
+//       font-size: 0.875rem;
+//       > .primary {
+//         display: flex;
+//         padding-bottom: 5%;
+//         > .image {
+//           min-width: 40%;
+//           padding-right: 5%;
+//           flex: 1;
+//           > img {
+//             box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 .privacy-vue {
   padding-left: 12%;
   padding-right: 10%;
@@ -4908,21 +4945,13 @@ ul.social-links {
 .intro-about-vue {
   margin: auto;
   display: block;
-  // animation-duration: 1s;
-  // animation-name: fadeIn;
-  // animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
 
-  .banner {
+  .about-banner {
     margin: auto;
     display: block;
-    background: url("../img/svg/about-banner.svg");
-    background-repeat: no-repeat;
-    width: 594px;
-    height: 135px;
-    animation-duration: 2s;
-    animation-name: fadeIn;
-    animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+    width: 93%;
   }
+
 
   .collage {
     margin: auto;
@@ -4932,7 +4961,12 @@ ul.social-links {
   .quote {
     margin: auto;
     display: block;
-    width: 630px;
+    width: 85%;
+    // width: 630px;
+    animation-duration: 4s;
+    animation-name: fadeIn;
+    animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+
 
     blockquote {
       margin: auto;

@@ -1,6 +1,8 @@
 <template>
   <div class="intro-about-vue">
-    <div class="banner"/>
+    <div class="about-banner">
+      <after-anime :options="About" :loop="false" autoplay="true"/>
+    </div>
     <div class="collage">
       <after-anime :options="People" :loop="false" :autoplay="true"/>
     </div>
@@ -19,6 +21,7 @@
 <script lang="ts">
 import Vue from "vue";
 import PeopleData from '../assets/animations/collage.json';
+import AboutData from '../assets/animations/about-banner.json';
 import AfterAnime from './after-anime.vue';
 export default Vue.extend({
   name: "intro-about",
@@ -30,6 +33,9 @@ export default Vue.extend({
       People: {
         animationData: PeopleData
       },
+      About: {
+        animationData: AboutData
+      }
      
     };
   }
