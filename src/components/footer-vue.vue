@@ -185,8 +185,7 @@
               </li>-->
             </ul>
             <small role="contentinfo">
-              © 2019 Tyler Chamberlain, CMT.
-              All rights reserved.
+              © 2019 All rights reserved.
               <a
                 class="contentinfo"
                 href="/privacy/"
