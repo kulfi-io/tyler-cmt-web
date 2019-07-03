@@ -1291,6 +1291,29 @@ $default-font-color: #515769;
     }
   }
 
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -7%;
+        }
+
+        article {
+          .primary {
+            .image {
+              min-width: 55%;
+            }
+            .text {
+              .blockquote {
+                font-size: .955rem;
+              }
+            }
+          }
+        }
+      }
+    }
+   
+  }
   .about {
     .about-vue {
       main {
@@ -1315,6 +1338,10 @@ $default-font-color: #515769;
         }
       }
     }
+  }
+
+  .social {
+    text-align: center;
   }
 
 }
@@ -1367,6 +1394,18 @@ $default-font-color: #515769;
       }
     }
   }
+
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -6%;
+        }
+      }
+    }
+   
+  }
 }
 
 @media (min-height: 812px) and (width: 375px) {
@@ -1394,7 +1433,7 @@ $default-font-color: #515769;
     .about-vue {
       main {
         header {
-          margin-left: -6%;
+          margin-left: -5%;
           margin-top: 12%;
         }
 
@@ -1407,13 +1446,25 @@ $default-font-color: #515769;
             .text {
 
               .blockquote {
-                font-size: 1.08rem;
+                font-size: 1.069rem;
               }
             }
           }
         }
       }
     }
+  }
+
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -6%;
+        }
+      }
+    }
+   
   }
 }
 
@@ -1433,7 +1484,7 @@ $default-font-color: #515769;
         }
   
         .detail {
-          font-size: 0.5rem;
+          font-size: 0.8rem;
         }
       }
     }
@@ -1456,13 +1507,25 @@ $default-font-color: #515769;
             .text {
 
               .blockquote {
-                font-size: 1.18rem;
+                font-size: 1.15rem;
               }
             }
           }
         }
       }
     }
+  }
+
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -5.5%;
+        }
+      }
+    }
+   
   }
  
 }
@@ -1514,6 +1577,18 @@ $default-font-color: #515769;
       }
     }
   }
+
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -5%;
+        }
+      }
+    }
+   
+  }
   
 }
 
@@ -1532,7 +1607,7 @@ $default-font-color: #515769;
         }
   
         .detail {
-          font-size: 0.5em;
+          font-size: 0.6em;
         }
       }
     }
@@ -1563,10 +1638,22 @@ $default-font-color: #515769;
       }
     }
   }
+
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -5.5%;
+        }
+      }
+    }
+   
+  }
   
 }
 
-@media(min-height: 1024px) and (min-width: 768px) {
+@media(height: 1024px) and (width: 768px) {
 
   .header-vue {
     left: 10px;
@@ -1596,7 +1683,7 @@ $default-font-color: #515769;
     .about-vue {
       main {
         header {
-          margin-left: -5%;
+          margin-left: -2.5%;
           margin-top: 11%;
         }
 
@@ -1607,9 +1694,9 @@ $default-font-color: #515769;
               min-width: 55%;
             }
             .text {
-              font-size: 1.4em;
+              font-size: 1.4rem;
               .blockquote {
-                font-size: 1.236rem;
+                font-size: 2.293rem;
               }
 
               
@@ -1620,6 +1707,18 @@ $default-font-color: #515769;
     }
   }
 
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -3%;
+        }
+      }
+    }
+   
+  }
+
   .footer-vue {
     left: 10px;
     right: 10px;
@@ -1627,6 +1726,80 @@ $default-font-color: #515769;
   
 
 }
+
+@media(height: 1112px) and (width: 834px) {
+
+  .header-vue {
+    left: 10px;
+    right: 10px;
+  }
+
+  .home {
+    .intro-about-vue {
+      .about-banner {
+        width: 95%;
+      }
+      .quote {
+        width: 85%;
+
+        blockquote {
+          font-size: 2rem;
+        }
+
+        .detail {
+          font-size: 0.6em;
+        }
+      }
+    }
+  }
+
+  .about {
+    .about-vue {
+      main {
+        header {
+          margin-left: -2.5%;
+          margin-top: 11%;
+        }
+
+        article {
+          font-size: 0.9rem;
+          .primary {
+            .image {
+              min-width: 55%;
+            }
+            .text {
+              font-size: 1.4rem;
+              .blockquote {
+                font-size: 2.293rem;
+              }
+
+              
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -3%;
+        }
+      }
+    }
+
+    .footer-vue {
+      position: fixed;
+    }
+   
+  }
+
+}
+
+
 
 @media (orientation: portrait) and (min-width: 720px) {
   .side-by-side-slider {
@@ -1712,27 +1885,44 @@ $default-font-color: #515769;
   }
 
   .about {
-    main {
-      header {
-        margin-left: -4%;
-        margin-top: 11%;
-      }
-      article {
-        .primary {
-          .image {
-            min-width: 55%;
-          }
-          .text {
-            .blockquote {
-              font-size: 1.9rem;
+    .about-vue {
+      main {
+        header {
+          margin-left: -3%;
+          margin-top: 11%;
+        }
+        article {
+          .primary {
+            .image {
+              min-width: 55%;
             }
-            .detail {
-              font-size: .65rem;
+            .text {
+              .blockquote {
+                font-size: 1.67rem;
+              }
+              .detail {
+                font-size: .65rem;
+              }
             }
           }
         }
       }
+
     }
+   
+  }
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -4%;
+          margin-top: 11%;
+        }
+      }
+    }
+   
+  
   }
 
   .footer-vue {
@@ -1745,6 +1935,7 @@ $default-font-color: #515769;
   }
   
 }
+
 @media (width: 667px) and (height: 375px) {
   
   .header-vue {
@@ -1794,24 +1985,37 @@ $default-font-color: #515769;
   }
 
   .about {
-    main {
-      header {
-        margin-left: -4%;
-        margin-top: 11%;
+    .about-vue {
+      main {
+        header {
+          margin-left: -3%;
+          margin-top: 11%;
+        }
+        article {
+          .primary {
+            .image {
+              min-width: 55%;
+            }
+            .text {
+              .blockquote {
+                font-size: 1.95rem;
+              }
+              .detail {
+                font-size: 0.6rem;
+              }
+            }
+          }
+        }
       }
-      article {
-        .primary {
-          .image {
-            min-width: 70%;
-          }
-          .text {
-            .blockquote {
-              font-size: 1.9rem;
-            }
-            .detail {
-              font-size: 0.6rem;
-            }
-          }
+    }
+    
+  }
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -4%;
         }
       }
     }
@@ -1882,24 +2086,38 @@ $default-font-color: #515769;
   }
 
   .about {
-    main {
-      header {
-        margin-left: -4%;
-        margin-top: 11%;
+    .about-vue {
+      main {
+        header {
+          margin-left: -2.5%;
+          margin-top: 11%;
+        }
+        article {
+          .primary {
+            .image {
+              min-width: 55%;
+            }
+            .text {
+              .blockquote {
+                font-size: 2.18rem;
+              }
+              .detail {
+                font-size: 0.6rem;
+              }
+            }
+          }
+        }
       }
-      article {
-        .primary {
-          .image {
-            min-width: 70%;
-          }
-          .text {
-            .blockquote {
-              font-size: 1.9rem;
-            }
-            .detail {
-              font-size: 0.6rem;
-            }
-          }
+
+    }
+ 
+  }
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -3%;
         }
       }
     }
@@ -1970,27 +2188,31 @@ $default-font-color: #515769;
   }
 
   .about {
-    main {
-      header {
-        margin-left: -4%;
-        margin-top: 11%;
-      }
-      article {
-        .primary {
-          .image {
-            min-width: 70%;
-          }
-          .text {
-            .blockquote {
-              font-size: 1.9rem;
+    .about-vue {
+      main {
+        header {
+          margin-left: -2.5%;
+          margin-top: 11%;
+        }
+        article {
+          .primary {
+            .image {
+              min-width: 55%;
             }
-            .detail {
-              font-size: 0.6rem;
+            .text {
+              .blockquote {
+                font-size: 2.1rem;
+              }
+              .detail {
+                font-size: 0.6rem;
+              }
             }
           }
         }
       }
+
     }
+   
   }
 
   .footer-vue {
@@ -2058,24 +2280,37 @@ $default-font-color: #515769;
   }
 
   .about {
-    main {
-      header {
-        margin-left: -4%;
-        margin-top: 11%;
+    .about-vue {
+      main {
+        header {
+          margin-left: -2.5%;
+          margin-top: 11%;
+        }
+        article {
+          .primary {
+            .image {
+              min-width: 55%;
+            }
+            .text {
+              .blockquote {
+                font-size: 2.4rem;
+              }
+              .detail {
+                font-size: 0.6rem;
+              }
+            }
+          }
+        }
       }
-      article {
-        .primary {
-          .image {
-            min-width: 70%;
-          }
-          .text {
-            .blockquote {
-              font-size: 1.9rem;
-            }
-            .detail {
-              font-size: 0.6rem;
-            }
-          }
+    }
+  
+  }
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -3%;
         }
       }
     }
@@ -2130,11 +2365,11 @@ $default-font-color: #515769;
         width: 60%;
   
         blockquote {
-          font-size: 1rem;
+          font-size: 1.4rem;
         }
   
         .detail {
-          font-size: 0.7em;
+          font-size: 0.8em;
         }
       }
     }
@@ -2146,24 +2381,36 @@ $default-font-color: #515769;
   }
 
   .about {
-    main {
-      header {
-        margin-left: -4%;
-        margin-top: 11%;
+    .about-vue {
+      main {
+        header {
+          margin-left: -2.5%;
+          margin-top: 11%;
+        }
+        article {
+          .primary {
+            .image {
+              min-width: 55%;
+            }
+            .text {
+              .blockquote {
+                font-size: 2.3rem;
+              }
+              .detail {
+                font-size: 0.6rem;
+              }
+            }
+          }
+        }
       }
-      article {
-        .primary {
-          .image {
-            min-width: 70%;
-          }
-          .text {
-            .blockquote {
-              font-size: 1.9rem;
-            }
-            .detail {
-              font-size: 0.6rem;
-            }
-          }
+    }
+  }
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -2.6%;
         }
       }
     }
@@ -2181,7 +2428,7 @@ $default-font-color: #515769;
   
 }
 
-@media(min-width: 1024px) and (max-width: 1336px) and (min-height: 768px) {
+@media(width: 1024px)  and (height: 768px) {
 
   .header-vue {
     top: 5px;
@@ -2190,6 +2437,11 @@ $default-font-color: #515769;
   }
 
   .home {
+    .intro-banner {
+      .masg-wrapper {
+        display: none;
+      }
+    }
     .intro-about-vue {
       .about-banner {
         display: none;
@@ -2212,7 +2464,7 @@ $default-font-color: #515769;
     .about-vue {
       main {
         header {
-          margin-left: -5%;
+          margin-left: -2%;
           margin-top: 11%;
         }
 
@@ -2225,12 +2477,22 @@ $default-font-color: #515769;
             .text {
               font-size: 1.4em;
               .blockquote {
-                font-size: 1.236rem;
+                font-size: 2.5rem;
               }
 
               
             }
           }
+        }
+      }
+    }
+  }
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -2.4%;
         }
       }
     }
@@ -2243,3 +2505,82 @@ $default-font-color: #515769;
   
 
 } 
+
+@media(width: 1112px)  and (height: 834px) {
+
+  .header-vue {
+    top: 5px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .home {
+    .intro-banner {
+      .masg-wrapper {
+        display: none;
+      }
+    }
+    .intro-about-vue {
+      .about-banner {
+        display: none;
+      }
+      .quote {
+        width: 85%;
+
+        blockquote {
+          font-size: 2rem;
+        }
+
+        .detail {
+          font-size: 0.6em;
+        }
+      }
+    }
+  }
+
+  .about {
+    .about-vue {
+      main {
+        header {
+          margin-left: -1.8%;
+          margin-top: 11%;
+        }
+
+        article {
+          font-size: 0.9rem;
+          .primary {
+            .image {
+              min-width: 55%;
+            }
+            .text {
+              font-size: 1.4em;
+              .blockquote {
+                font-size: 2.5rem;
+              }
+
+              
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .privacy {
+    .privacy-vue {
+      main {
+        header {
+          margin-left: -2%;
+        }
+      }
+    }
+
+    .footer-vue {
+      position: fixed;
+    }
+
+  }
+  
+
+} 
+

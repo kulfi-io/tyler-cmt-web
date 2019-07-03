@@ -4752,7 +4752,6 @@ ul.social-links {
   letter-spacing: -0.032999674479166664em;
 }
 
-
 .initial {
   display: flex;
   min-height: 5vh;
@@ -4770,6 +4769,7 @@ ul.social-links {
   left: 25px;
   z-index: 1030;
   overflow-y: hidden;
+  
 
   #head-logo {
     width: 400px;
@@ -4821,7 +4821,6 @@ ul.social-links {
       margin: auto;
       display: block;
       width: 85%;
-      // width: 630px;
       animation-duration: 4s;
       animation-name: fadeIn;
       animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
@@ -4867,12 +4866,14 @@ ul.social-links {
     padding-bottom: 5%;
     display: block;
     color: $default-font-color;
-    > main {
-      > article {
+
+    main {
+      article {
         line-height: 1.6666666667;
         font-size: 0.875rem;
       }
-      > header {
+
+      header {
         margin-top: 12%;
         -webkit-box-flex: 0;
         -ms-flex: 0 0 66.6666666667%;
@@ -4881,8 +4882,21 @@ ul.social-links {
         margin-left: -3%;
         white-space: nowrap;
         color: $vue-detail-header-color;
+
       }
     }
+
+    .footer-vue {
+      position: relative;
+      left: 25px;
+      right: 25px;
+      z-index: 0;
+
+      .social small {
+        padding-right: 20px;
+      }
+    }
+
   }
 
   .about-vue {
@@ -4902,10 +4916,12 @@ ul.social-links {
         margin-left: -2%;
         white-space: nowrap;
         color: $vue-detail-header-color;
+        text-transform: capitalize;
       }
       article {
         line-height: 1.6666666667;
         font-size: 0.875rem;
+        bottom: 4%;
         .primary {
           display: flex;
           padding-bottom: 4%;
@@ -4943,8 +4959,19 @@ ul.social-links {
 
   .footer-vue {
     position: relative;
+    left: 0;
+    right: 0;
     z-index: 0;
+
+    .primary {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+   
+   
   }
+
+  
 }
 
 
