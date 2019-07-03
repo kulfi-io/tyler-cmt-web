@@ -4766,8 +4766,8 @@ ul.social-links {
 .header-vue {
   position: fixed;
   top: 0;
-  right: 0;
-  left: 0;
+  right: 25px;
+  left: 25px;
   z-index: 1030;
   overflow-y: hidden;
 
@@ -4778,14 +4778,11 @@ ul.social-links {
 }
 .footer-vue {
   position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  bottom: 10px;
+  right: 25px;
+  left: 25px;
   z-index: 1030;
   overflow-y: hidden;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 10px;
 
   #foot-logo {
     width: 150px;
@@ -4796,6 +4793,10 @@ ul.social-links {
     svg {
       fill: #515769;
     }
+  }
+
+  .social small {
+    padding-right: 10px;
   }
 }
 
