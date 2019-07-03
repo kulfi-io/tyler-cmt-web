@@ -23,6 +23,7 @@
   "homepage": "https://github.com/kulfi-io/tyler-cmt-web#readme",
   "dependencies": {
     "animate.css": "^3.7.2",
+    "bootstrap-vue": "^2.0.0-rc.25",
     "fullpage.js": "^3.0.5",
     "lottie-web": "^5.5.5",
     "normalize.css": "^8.0.1",
