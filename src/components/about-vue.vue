@@ -28,7 +28,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Shared from "../shared";
 
 export default Vue.extend({
   name: "about-vue"
