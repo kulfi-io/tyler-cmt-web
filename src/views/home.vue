@@ -19,7 +19,6 @@ import HeaderVue from "../components/header-vue.vue";
 import FooterVue from "../components/footer-vue.vue";
 import BannerVue from "../components/banner-vue.vue";
 import About from "../components/intro-about.vue";
-import Shared from "../shared";
 
 export default Vue.extend({
   name: "home",
@@ -46,7 +45,7 @@ export default Vue.extend({
   },
   mounted: function() {
     const _targets = document.querySelectorAll(".swap-position");
-    Shared.methods.setCellPositionTop(_targets);
+    // Shared.methods.setCellPositionTop(_targets);
   }
 });
 </script>
