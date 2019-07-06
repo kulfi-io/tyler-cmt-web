@@ -22,8 +22,12 @@
   },
   "homepage": "https://github.com/kulfi-io/tyler-cmt-web#readme",
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/vue-fontawesome": "^0.1.6",
     "animate.css": "^3.7.2",
-    "bootstrap-vue": "^2.0.0-rc.25",
+    "font-awesome": "^4.7.0",
     "fullpage.js": "^3.0.5",
     "lottie-web": "^5.5.5",
     "normalize.css": "^8.0.1",
