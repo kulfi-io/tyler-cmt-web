@@ -27,7 +27,7 @@ $text-muted: #6c757d !important;
 .account-vue {
   margin: auto;
   display: block;
- 
+
   .required-field {
     display: inline-block;
     vertical-align: middle;
@@ -132,7 +132,6 @@ $text-muted: #6c757d !important;
     border-bottom: 0.0525rem solid #ddd;
   }
 
-
   .form-group {
     display: block;
     margin-bottom: 1rem;
@@ -207,23 +206,19 @@ $text-muted: #6c757d !important;
   }
 
   .instructions {
-    
-    
     .split {
       display: flex;
-      
-      
+
       .split-right {
         padding: 0;
         padding-left: 1%;
         width: 50%;
       }
-  
+
       .split-left {
-        padding:0;
+        padding: 0;
         padding-right: 1%;
         width: 50%;
-
       }
     }
   }
@@ -243,7 +238,6 @@ $text-muted: #6c757d !important;
       padding-right: 1%;
       width: 50%;
     }
-
 
     .split-half-flush {
       padding: 2%;
@@ -313,19 +307,20 @@ $text-muted: #6c757d !important;
   position: relative;
   text-align: center;
 
-
   background: $default-background-color;
   width: 85%;
   margin-top: -65vh;
   min-height: calc(20vh - 115px);
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 
-  .login, .reset{
+  .login,
+  .reset {
     letter-spacing: 1rem;
   }
 
-  .forgot-password, .change-password {
-    letter-spacing: .775rem;
+  .forgot-password,
+  .change-password {
+    letter-spacing: 0.775rem;
   }
   .title {
     color: $default-white;
@@ -337,23 +332,19 @@ $text-muted: #6c757d !important;
       font-size: 1rem;
       color: $default-sub-text;
       color: $default-white;
-      letter-spacing: 0.30rem;
+      letter-spacing: 0.3rem;
       text-transform: none;
-  
-  
+
       a {
         color: $default-white;
         text-transform: uppercase;
-  
+
         &:hover {
           color: $default-hover-color;
         }
       }
     }
-
   }
-
-
 }
 
 .account-body {
@@ -365,8 +356,7 @@ $text-muted: #6c757d !important;
   margin-top: 5vh;
   min-height: calc(35vh - 115px);
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-  
-  
+
   .content {
     padding: 2%;
   }
