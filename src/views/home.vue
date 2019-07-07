@@ -6,8 +6,10 @@
         BannerVue
       div(class="section page about ")
         About
-      //- div(class="section page services")
-      //-   h3 Section 3
+      div(class="section page services")
+        h3 Services
+      div(class="section page contact")
+        h3 Contact
     FooterVue
 </template>
 

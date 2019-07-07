@@ -7,9 +7,10 @@
                   div.slide
                     AccountLogin
                   div.slide
-                    ChangePassword
-                  div.slide
                     ResetPassword
+                  div.slide
+                    ChangePassword
+                 
         FooterVue
 </template>
 
