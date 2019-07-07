@@ -6,8 +6,7 @@
         div.account-body
             form(id="account-form")
                 div.content
-                    div.form-group
-                        TokenVue
+                    TokenVue
                     div.form-group-login(class="split")
                         UsernameVue(class="split-half-left") 
                         PasswordVue( class="split-half-right" :readyToSubmit="readyToSubmit"

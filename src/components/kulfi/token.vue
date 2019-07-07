@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.kulfi-token
+    div.kulfi-token(class="form-group")
         label.control-label( for="token") token
             span.required-field
         input.form-control( type="text" ref="token" id="token" disabled)

@@ -3,14 +3,13 @@
         HeaderVue
         div.login-vue
             FullPage.fullpage( :options="options")
-                div.section(class="page login ")
+                div.section(class="page login")
                   div.slide
                     AccountLogin
                   div.slide
                     ResetPassword
                   div.slide
                     ChangePassword
-                 
         FooterVue
 </template>
 
@@ -37,9 +36,9 @@ export default Vue.extend({
       options: {
         scrollOverflow: false,
         scrollBar: false,
-        menu: "#menu",
         navigation: false,
-        controlArrows: false,
+        controlArrows: true,
+        slidesNavigation: true,
         anchors: ["login"],
         sectionsColor: ["#C8C8C8"],
         licenseKey: "002D6FD2-0EC343D4-9403ACA4-CB7CDBFB"

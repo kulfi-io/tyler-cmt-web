@@ -28,6 +28,43 @@ $text-muted: #6c757d !important;
   margin: auto;
   display: block;
 
+  .fp-slidesNav {
+    margin: auto;
+    display: block;
+    position: relative;
+    top: -10vh;
+    text-align: center;
+
+    ul li a span {
+      background: $default-input-border-color;
+    }
+  }
+
+  .fp-controlArrow.fp-prev
+  {
+    left: 15px;
+    width: 0;
+    opacity: .8;
+    border-width: 18.5px 14px 18.5px 0;
+    border-color: transparent $default-input-border-color transparent transparent;
+    
+    &:hover {
+      border-color: transparent $default-background-color transparent transparent;
+    }
+  }
+
+  .fp-controlArrow.fp-next {
+    right: 15px;
+    opacity: .8;
+    border-width: 18.5px 0 18.5px 14px;
+    border-color: transparent transparent transparent $default-input-border-color;
+
+    &:hover {
+      border-color: transparent transparent transparent $default-background-color;
+    }
+    
+  }
+
   .required-field {
     display: inline-block;
     vertical-align: middle;
@@ -126,10 +163,10 @@ $text-muted: #6c757d !important;
     box-shadow: none;
     border: none;
     border-radius: 0;
-    border-bottom-color: #ddd;
+    border-bottom-color: $default-input-border-color;
     border-bottom-style: none;
     border-bottom-width: thin;
-    border-bottom: 0.0525rem solid #ddd;
+    border-bottom: 0.0525rem solid $default-input-border-color;
   }
 
   .form-group {
@@ -306,10 +343,9 @@ $text-muted: #6c757d !important;
   display: block;
   position: relative;
   text-align: center;
-
   background: $default-background-color;
   width: 85%;
-  margin-top: -65vh;
+  margin-top: -63vh;
   min-height: calc(20vh - 115px);
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 
