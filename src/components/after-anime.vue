@@ -1,5 +1,5 @@
-<template>
-  <div ref="animevue"></div>
+<template lang="pug">
+  div( ref="animevue")
 </template>
 
 <script lang="ts">
