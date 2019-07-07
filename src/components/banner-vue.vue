@@ -1,13 +1,11 @@
-<template>
-  <main class="intro-banner">
-    <div class="bb-wrapper">
-      <after-anime class="body-banner" :options="Massage" :loop="false" :autoplay="true"/>
-    </div>
-    <div class="masg-wrapper">
-      <after-anime class="massage-banner" :options="Body" :loop="false" :autoplay="true"/>
-    </div>
-  </main>
+<template lang="pug">
+  main.intro-banner
+    div.bb-wrapper
+      AfterAnime.body-banner(:options="Massage" :loop="false" :autoplay="true")
+    div.masg-wrapper
+      AfterAnime.massage-banner(:options="Body" :loop="false" :autoplay="true")
 </template>
+
 
 <script lang="ts">
 import Vue from "vue";
