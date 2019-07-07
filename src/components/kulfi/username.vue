@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Library from '../../library/account';
-import {faUser} from '@fortawesome/fontawesome-free-solid';
+import { faUser } from '@fortawesome/fontawesome-free-solid';
 
 export default Vue.extend({
   name: "kulfi-username",
