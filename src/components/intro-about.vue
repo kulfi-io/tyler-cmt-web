@@ -6,7 +6,7 @@
         AfterAnime(:options="People" :loop="false" :autoplay="true")
       div.quote
         blockquote Our anatomy is structured to work as a cohesive, singular being.
-        a.detail(class="health") read more...
+        a.detail(class="health" href="about") read more...
 </template>
 
 <script lang="ts">
