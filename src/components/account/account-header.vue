@@ -1,7 +1,7 @@
 <template lang="pug">
     div.account-header
         div.title(v-if="title" :class="target")
-            H4  {{ title }}
+            div.heading {{ title }}
             p
                 a( v-if="href && hrefLabel" :href="href") {{ hrefLabel }}
                 span(v-if="subtext")  {{ subtext }}

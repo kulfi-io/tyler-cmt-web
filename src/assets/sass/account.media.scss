@@ -1,0 +1,285 @@
+@import "./account.variable.scss";
+
+// Portrait
+@media (orientation: portrait) and (max-height: 823px) {
+  .account-vue {
+    width: 90%;
+    margin-top: 13%;
+    min-height: calc(70vh - 115px);
+
+    .control-label {
+      padding: 0.525rem 0.875rem;
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+  }
+  .account {
+    width: 90%;
+    margin-top: 13%;
+    min-height: calc(70vh - 115px);
+  }
+  .info {
+    width: 85%;
+    margin-top: 2vh;
+    bottom: 10px;
+    margin-left: 10%;
+    font-size: 0.775rem;
+
+    .info-list {
+      padding: 0;
+      margin: 0;
+      max-height: 300px;
+    }
+  }
+  .account-header {
+    width: 85%;
+    margin-top: -63vh;
+    min-height: calc(20vh - 115px);
+
+    .login,
+    .reset {
+      letter-spacing: 0.875rem;
+    }
+
+    .forgot-password,
+    .change-password {
+      letter-spacing: 0.575rem;
+    }
+
+    .title {
+      font-weight: 600;
+
+      p {
+        padding-bottom: 2%;
+        font-size: 0.875rem;
+        letter-spacing: 0.1rem;
+      }
+    }
+  }
+  .account-body {
+    width: 85%;
+    margin-top: 5vh;
+    min-height: calc(35vh - 115px);
+  }
+  .account-footer {
+    width: 85%;
+    margin-top: 2vh;
+    min-height: calc(15vh - 115px);
+  }
+}
+@media (height: 568px) and (width: 320px) {
+   
+    .account-vue {
+        width: 97%;
+        margin-top: unset;
+        min-height: calc(70vh - 115px);
+
+        .fa-base {
+            display: none;
+        }
+
+        .fp-slidesNav {
+        top: -15vh;
+
+        ul li a span {
+            background: $default-input-border-color;
+        }
+        }
+
+        .fp-controlArrow.fp-prev {
+        left: 1px;
+        opacity: 1;
+        border-width: 14.5px 10px 14.5px 0;
+        }
+
+        .fp-controlArrow.fp-next {
+        right: 1px;
+        opacity: 1;
+        border-width: 14.5px 0 14.5px 10px;
+        }
+
+        .fp-slidesNav {
+        display: none;
+        }
+
+        .control-label {
+        padding: 0.05rem 0.75rem;
+        font-size: 0.75rem;
+        }
+
+        .form-control {
+            height: 2rem;
+        }
+
+        form input::placeholder {
+        text-transform: uppercase;
+        color: $default-control-label-color;
+        font-size: x-small;
+        }
+
+        .form-group {
+            margin-bottom: .5rem;
+        }
+
+        .split {
+        display: flex;
+        .split-half-right {
+            padding-top: 2%;
+            padding-bottom: 2%;
+            padding-left: 1%;
+            width: 50%;
+        }
+
+        .split-half-left {
+            padding-top: 2%;
+            padding-bottom: 2%;
+            padding-right: 1%;
+            width: 50%;
+        }
+
+        .split-half-flush {
+            font-size: 0.75rem;
+
+            a {
+            color: $default-control-label-color;
+            &:hover {
+                color: $default-hover-color;
+            }
+            }
+        }
+
+        .split-for-cb {
+            width: 13%;
+        }
+
+        .split-for-label {
+            width: 87%;
+        }
+        }
+    }
+    .account {
+        width: 95%;
+        margin-top: 13%;
+        min-height: calc(70vh - 115px);
+    }
+    .info {
+        width: 95%;
+        margin-top: -1vh;
+        bottom: 10px;
+        margin-left: 10%;
+        font-size: 0.65rem;
+
+        .info-list {
+        padding: 0;
+        margin: 0;
+        max-height: 300px;
+        }
+    }
+    .account-header {
+        width: 90%;
+        margin-top: -55vh;
+        min-height: calc(20vh - 115px);
+
+        .login,
+        .reset {
+            letter-spacing: 0.875rem;
+        }
+
+        .forgot-password,
+        .change-password {
+            letter-spacing: 0.575rem;
+        }
+
+        .title {
+        font-weight: 600;
+
+        .heading {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        p {
+            padding-bottom: 1%;
+            font-size: 0.775rem;
+            letter-spacing: 0.1rem;
+        }
+        }
+    }
+    .account-body {
+        width: 90%;
+        margin-top: 4vh;
+        min-height: calc(30vh - 115px);
+
+        .content {
+            padding: 2%;
+            padding-bottom: 1%;
+        }
+
+        .text-muted small {
+        min-width: 100%;
+        font-size: 0.5rem;
+        }
+  }
+  .account-footer {
+    width: 90%;
+    margin-top: 1vh;
+    min-height: calc(15vh - 115px);
+
+  }
+
+  .footer-vue {
+    ul.social-links li a {
+        padding-bottom: 2px;
+    }
+  }
+}
+
+@media (height: 667px) and (width: 375px) {
+}
+
+@media (min-height: 812px) and (width: 375px) {
+}
+
+@media (height: 731px) and (width: 411px) {
+}
+
+@media (height: 736px) and (width: 414px) {
+}
+
+@media (min-height: 823px) and (max-width: 411px) {
+}
+
+@media (height: 1024px) and (width: 768px) {
+}
+
+@media (height: 1112px) and (width: 834px) {
+}
+
+@media (orientation: portrait) and (min-width: 720px) {
+}
+
+// landscape
+@media (orientation: landscape) and (height: 320px) {
+}
+
+@media (width: 667px) and (height: 375px) {
+}
+
+@media (width: 731px) and (height: 411px) {
+}
+
+@media (width: 736px) and (height: 414px) {
+}
+
+@media (width: 812px) and (height: 375px) {
+}
+
+@media (width: 823px) and (height: 411px) {
+}
+
+@media (width: 1024px) and (height: 768px) {
+}
+
+@media (width: 1112px) and (height: 834px) {
+}

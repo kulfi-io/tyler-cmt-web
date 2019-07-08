@@ -1,8 +1,7 @@
 <template lang="pug">
     div.account-footer
         span.required-field * 
-        br
-        span.required-field - required
+        small  - required
 </template>
 
 <script lang="ts">
