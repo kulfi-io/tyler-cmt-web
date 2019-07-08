@@ -11,6 +11,12 @@
     top: -10vh;
     text-align: center;
 
+    ul {
+      li  {
+        margin-right: 40px;
+      }
+    }
+    
     ul li a span {
       background: $default-input-border-color;
     }
@@ -166,7 +172,6 @@
   }
 
   .control-label {
-    display: block;
     padding: 0.625rem 0.875rem;
     font-size: 0.975rem;
     font-weight: 400;
@@ -189,7 +194,7 @@
     color: $input-text-color;
   }
 
-  form input::placeholder {
+  form input[type="text"]::placeholder, form input[type="password"]::placeholder {
     text-transform: uppercase;
     color: $default-control-label-color;
     font-size: smaller;
@@ -279,6 +284,7 @@
       width: 92%;
     }
   }
+
 }
 
 .account {
@@ -286,8 +292,8 @@
   display: block;
   background: $background-dusk-gradient;
   width: 90%;
-  margin-top: 13%;
-  min-height: calc(70vh - 115px);
+  margin-top: unset;
+  min-height: calc(50vh - 115px);
 }
 
 .info {
@@ -321,7 +327,7 @@
   text-align: center;
   background: $default-background-color;
   width: 85%;
-  margin-top: -63vh;
+  margin-top: -43vh;
   min-height: calc(20vh - 115px);
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 
@@ -360,6 +366,7 @@
       a {
         color: $default-white;
         text-transform: uppercase;
+        letter-spacing: 0.3rem;
 
         &:hover {
           color: $default-hover-color;
@@ -381,6 +388,9 @@
 
   .content {
     padding: 2%;
+    .control-label {
+      display: none;
+    }
   }
   .text-muted {
     color: $text-muted;

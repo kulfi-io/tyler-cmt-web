@@ -11,7 +11,7 @@
                         UsernameVue(class="split-half-left") 
                         PasswordVue( class="split-half-right" :readyToSubmit="readyToSubmit"
                         :tag="'password'"
-                        :placeholder="'Pass'"
+                        :placeholder="'Password'"
                         :title="'Password is required'"
                         :label="'Password'")
                     div.split

@@ -15,11 +15,15 @@
                     small.form-text(class="form-text" id="pwd-length") At least 8 characters long (max of 15).
                 div.text-muted( class="split-right")
                     small.form-text(class="form-text" id="pwd-match") Password matches.
-            div.full    
-                div.text-muted
+            div.split   
+                div.text-muted( class="split-left")
                     small.form-text(class="form-text" id="pwd-upper") Contains at least 1 upper case.
+                div.text-muted( class="split-right")   
                     small.form-text(class="form-text" id="pwd-lower") Contains at least 1 lower case.
+            div.split
+                div.text-muted(class="split-left")    
                     small.form-text(class="form-text" id="pwd-number") Contains at least 1 number.
+                div.text-muted(class="split-right")
                     small.form-text(class="form-text" id="pwd-special") Contains at least 1 special [!@#$%] character.
 </template>
 

@@ -11,7 +11,7 @@
                     div.form-group
                         PasswordSet(:readyToSubmit="readyToSubmit"
                         :tag="'password'"
-                        :placeholder="'Pass'"
+                        :placeholder="'Password'"
                         :title="'Password is required'"
                         :label="'Password'")
                 div.form-group(class="submit")
