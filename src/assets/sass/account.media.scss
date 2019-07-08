@@ -380,7 +380,6 @@
   .account-footer {
     width: 90%;
   }
-
   .footer-vue {
     ul.social-links li a {
       padding-bottom: 2px;
@@ -389,15 +388,577 @@
 }
 
 @media (min-height: 812px) and (width: 375px) {
+  .account-vue {
+    width: 97%;
+    margin-top: unset;
+    min-height: calc(70vh - 115px);
+
+    .input-group-prepend {
+      display: none;
+    }
+
+    .fp-slidesNav {
+      top: -15vh;
+
+      ul li a span {
+        background: $default-input-border-color;
+      }
+    }
+
+    .fp-controlArrow.fp-prev {
+      left: 1px;
+      opacity: 1;
+      border-width: 14.5px 10px 14.5px 0;
+    }
+
+    .fp-controlArrow.fp-next {
+      right: 1px;
+      opacity: 1;
+      border-width: 14.5px 0 14.5px 10px;
+    }
+
+
+    form input::placeholder {
+      text-transform: uppercase;
+      color: $default-control-label-color;
+      font-size: x-small;
+    }
+
+    .form-group {
+      margin-bottom: 0.5rem;
+    }
+
+    .split {
+      display: flex;
+      .split-half-right {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        width: 50%;
+      }
+
+      .split-half-left {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-right: 1%;
+        width: 50%;
+      }
+
+      .split-half-flush {
+        font-size: 0.75rem;
+
+        a {
+          color: $default-control-label-color;
+          &:hover {
+            color: $default-hover-color;
+          }
+        }
+      }
+
+      .split-for-cb {
+        width: 13%;
+      }
+
+      .split-for-label {
+        width: 87%;
+      }
+    }
+  }
+  .account {
+    width: 95%;
+    margin-top: 13%;
+    min-height: calc(70vh - 115px);
+  }
+  .info {
+    width: 95%;
+    margin-top: -1vh;
+    bottom: 10px;
+    margin-left: 10%;
+    font-size: 0.65rem;
+
+    .info-list {
+      padding: 0;
+      margin: 0;
+      max-height: 300px;
+    }
+  }
+  .account-header {
+    width: 90%;
+    margin-top: -60vh;
+
+    .login,
+    .reset {
+      letter-spacing: 0.875rem;
+    }
+
+    .forgot-password,
+    .change-password {
+      letter-spacing: 0.575rem;
+    }
+
+    .title {
+      font-weight: 600;
+
+      .heading {
+        font-size: 1.5rem;
+        line-height: 1.2;
+      }
+
+      p {
+        padding-bottom: 1%;
+        font-size: 0.775rem;
+        letter-spacing: 0.1rem;
+      }
+    }
+  }
+  .account-body {
+    width: 90%;
+
+    .text-muted small {
+      min-width: 100%;
+      font-size: 0.5rem;
+    }
+  }
+  .account-footer {
+    width: 90%;
+  }
+  .footer-vue {
+    ul.social-links li a {
+      padding-bottom: 2px;
+    }
+  }
 }
 
 @media (height: 731px) and (width: 411px) {
+  .account-vue {
+    width: 97%;
+    margin-top: unset;
+    min-height: calc(70vh - 115px);
+
+    .input-group-prepend {
+      display: none;
+    }
+
+    .fp-slidesNav {
+      top: -15vh;
+
+      ul li a span {
+        background: $default-input-border-color;
+      }
+    }
+
+    .fp-controlArrow.fp-prev {
+      left: 1px;
+      opacity: 1;
+      border-width: 14.5px 10px 14.5px 0;
+    }
+
+    .fp-controlArrow.fp-next {
+      right: 1px;
+      opacity: 1;
+      border-width: 14.5px 0 14.5px 10px;
+    }
+
+    .fp-slidesNav {
+      display: none;
+    }
+
+    form input::placeholder {
+      text-transform: uppercase;
+      color: $default-control-label-color;
+      font-size: x-small;
+    }
+
+    .form-group {
+      margin-bottom: 0.5rem;
+    }
+
+    .split {
+      display: flex;
+      .split-half-right {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        width: 50%;
+      }
+
+      .split-half-left {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-right: 1%;
+        width: 50%;
+      }
+
+      .split-half-flush {
+        font-size: 0.75rem;
+
+        a {
+          color: $default-control-label-color;
+          &:hover {
+            color: $default-hover-color;
+          }
+        }
+      }
+
+      .split-for-cb {
+        width: 13%;
+      }
+
+      .split-for-label {
+        width: 87%;
+      }
+    }
+  }
+  .account {
+    width: 95%;
+    margin-top: 13%;
+    min-height: calc(70vh - 115px);
+  }
+  .info {
+    width: 95%;
+    margin-top: -1vh;
+    bottom: 10px;
+    margin-left: 10%;
+    font-size: 0.65rem;
+
+    .info-list {
+      padding: 0;
+      margin: 0;
+      max-height: 300px;
+    }
+  }
+  .account-header {
+    width: 90%;
+    margin-top: -58vh;
+
+    .login,
+    .reset {
+      letter-spacing: 0.875rem;
+    }
+
+    .forgot-password,
+    .change-password {
+      letter-spacing: 0.575rem;
+    }
+
+    .title {
+      font-weight: 600;
+
+      .heading {
+        font-size: 1.5rem;
+        line-height: 1.2;
+      }
+
+      p {
+        padding-bottom: 1%;
+        font-size: 0.775rem;
+        letter-spacing: 0.1rem;
+      }
+    }
+  }
+  .account-body {
+    width: 90%;
+
+    .text-muted small {
+      min-width: 100%;
+      font-size: 0.5rem;
+    }
+  }
+  .account-footer {
+    width: 90%;
+  }
+  .footer-vue {
+    ul.social-links li a {
+      padding-bottom: 2px;
+    }
+  }
 }
 
 @media (height: 736px) and (width: 414px) {
+  .account-vue {
+    width: 97%;
+    margin-top: unset;
+    min-height: calc(70vh - 115px);
+
+    .input-group-prepend {
+      display: none;
+    }
+
+    .fp-slidesNav {
+      top: -15vh;
+
+      ul li a span {
+        background: $default-input-border-color;
+      }
+    }
+
+    .fp-controlArrow.fp-prev {
+      left: 1px;
+      opacity: 1;
+      border-width: 14.5px 10px 14.5px 0;
+    }
+
+    .fp-controlArrow.fp-next {
+      right: 1px;
+      opacity: 1;
+      border-width: 14.5px 0 14.5px 10px;
+    }
+
+    .fp-slidesNav {
+      display: none;
+    }
+
+    form input::placeholder {
+      text-transform: uppercase;
+      color: $default-control-label-color;
+      font-size: x-small;
+    }
+
+    .form-group {
+      margin-bottom: 0.5rem;
+    }
+
+    .split {
+      display: flex;
+      .split-half-right {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        width: 50%;
+      }
+
+      .split-half-left {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-right: 1%;
+        width: 50%;
+      }
+
+      .split-half-flush {
+        font-size: 0.75rem;
+
+        a {
+          color: $default-control-label-color;
+          &:hover {
+            color: $default-hover-color;
+          }
+        }
+      }
+
+      .split-for-cb {
+        width: 13%;
+      }
+
+      .split-for-label {
+        width: 87%;
+      }
+    }
+  }
+  .account {
+    width: 95%;
+    margin-top: 13%;
+    min-height: calc(70vh - 115px);
+  }
+  .info {
+    width: 95%;
+    margin-top: -1vh;
+    bottom: 10px;
+    margin-left: 10%;
+    font-size: 0.65rem;
+
+    .info-list {
+      padding: 0;
+      margin: 0;
+      max-height: 300px;
+    }
+  }
+  .account-header {
+    width: 90%;
+    margin-top: -59vh;
+
+    .login,
+    .reset {
+      letter-spacing: 0.875rem;
+    }
+
+    .forgot-password,
+    .change-password {
+      letter-spacing: 0.575rem;
+    }
+
+    .title {
+      font-weight: 600;
+
+      .heading {
+        font-size: 1.5rem;
+        line-height: 1.2;
+      }
+
+      p {
+        padding-bottom: 1%;
+        font-size: 0.775rem;
+        letter-spacing: 0.1rem;
+      }
+    }
+  }
+  .account-body {
+    width: 90%;
+
+    .text-muted small {
+      min-width: 100%;
+      font-size: 0.5rem;
+    }
+  }
+  .account-footer {
+    width: 90%;
+  }
+  .footer-vue {
+    ul.social-links li a {
+      padding-bottom: 2px;
+    }
+  }
 }
 
 @media (min-height: 823px) and (max-width: 411px) {
+  .account-vue {
+    width: 97%;
+    margin-top: unset;
+    min-height: calc(70vh - 115px);
+
+    .input-group-prepend {
+      display: none;
+    }
+
+    .fp-slidesNav {
+      top: -15vh;
+
+      ul li a span {
+        background: $default-input-border-color;
+      }
+    }
+
+    .fp-controlArrow.fp-prev {
+      left: 1px;
+      opacity: 1;
+      border-width: 14.5px 10px 14.5px 0;
+    }
+
+    .fp-controlArrow.fp-next {
+      right: 1px;
+      opacity: 1;
+      border-width: 14.5px 0 14.5px 10px;
+    }
+
+
+    form input::placeholder {
+      text-transform: uppercase;
+      color: $default-control-label-color;
+      font-size: x-small;
+    }
+
+    .form-group {
+      margin-bottom: 0.5rem;
+    }
+
+    .split {
+      display: flex;
+      .split-half-right {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        width: 50%;
+      }
+
+      .split-half-left {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-right: 1%;
+        width: 50%;
+      }
+
+      .split-half-flush {
+        font-size: 0.75rem;
+
+        a {
+          color: $default-control-label-color;
+          &:hover {
+            color: $default-hover-color;
+          }
+        }
+      }
+
+      .split-for-cb {
+        width: 13%;
+      }
+
+      .split-for-label {
+        width: 87%;
+      }
+    }
+  }
+  .account {
+    width: 95%;
+    margin-top: 13%;
+    min-height: calc(70vh - 115px);
+  }
+  .info {
+    width: 95%;
+    margin-top: -1vh;
+    bottom: 10px;
+    margin-left: 10%;
+    font-size: 0.65rem;
+
+    .info-list {
+      padding: 0;
+      margin: 0;
+      max-height: 300px;
+    }
+  }
+  .account-header {
+    width: 90%;
+    margin-top: -60vh;
+
+    .login,
+    .reset {
+      letter-spacing: 0.875rem;
+    }
+
+    .forgot-password,
+    .change-password {
+      letter-spacing: 0.575rem;
+    }
+
+    .title {
+      font-weight: 600;
+
+      .heading {
+        font-size: 1.5rem;
+        line-height: 1.2;
+      }
+
+      p {
+        padding-bottom: 1%;
+        font-size: 0.775rem;
+        letter-spacing: 0.1rem;
+      }
+    }
+  }
+  .account-body {
+    width: 90%;
+
+    .text-muted small {
+      min-width: 100%;
+      font-size: 0.5rem;
+    }
+  }
+  .account-footer {
+    width: 90%;
+  }
+  .footer-vue {
+    ul.social-links li a {
+      padding-bottom: 2px;
+    }
+  }
 }
 
 @media (height: 1024px) and (width: 768px) {
