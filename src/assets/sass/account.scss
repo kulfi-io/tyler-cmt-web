@@ -49,10 +49,10 @@
 
   .required-field {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
     font-size: 0.875rem;
     color: $default-required-color;
-    text-indent: 1.5em;
+    // text-indent: 1.5em;
   }
 
   .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
@@ -275,13 +275,13 @@
     .split-for-cb {
       margin: auto;
       display: block;
-      width: 8%;
+      width: 6%;
     }
 
     .split-for-label {
       margin: auto;
       display: block;
-      width: 92%;
+      width: 94%;
     }
   }
 

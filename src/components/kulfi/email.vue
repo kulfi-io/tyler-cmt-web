@@ -7,7 +7,7 @@
             ref="email" title="Email is required" 
             placeholder="email" required pattern="[\S-]+@([\S-]+\.)+[\S-]+")
             div.input-group-prepend
-                span.input-group-text(class="left")
+                span.input-group-text(class="left required-field") *
                     font-awesome-icon.fa( class="fa-base" :icon="iconEnvelope")
 </template>
 

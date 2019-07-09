@@ -8,7 +8,7 @@
       required 
       pattern="[a-zA-Z0-9-_]{5,15}\w+")
       div.input-group-prepend
-        span.input-group-text( class="left")
+        span.input-group-text( class="left required-field") *
           font-awesome-icon.fa( class="fa-base" :icon="iconUser")
 </template>
 
