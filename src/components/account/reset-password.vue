@@ -5,7 +5,7 @@
         :href="'login'" :hrefLabel="'login'" :subtext="'to account'")
         InfoVue
         div.account-body
-            form(id="account-form")
+            form(id="reset-password-form")
                 div.content
                     div.form-group
                         EmailVue

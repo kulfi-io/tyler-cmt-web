@@ -4,7 +4,7 @@
         AccountHeader(:target="'change-password'" :title="'Change Password'" )
         InfoVue
         div.account-body
-            form(id="account-form")
+            form(id="change-password-form")
                 div.content
                     div.form-group
                         EmailVue

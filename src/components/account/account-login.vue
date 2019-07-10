@@ -1,10 +1,10 @@
 <template lang="pug">
-    div.acount-login
+    div.account-login
         div.account
-        AccountHeader(:target="'login'" :title="'login'" :href="'register'" :hrefLabel="'register'" :subtext="'account'")
+        AccountHeader(:target="'register'" :title="'login'" :href="'register'" :hrefLabel="'register'" :subtext="'account'")
         InfoVue
         div.account-body
-            form(id="account-form")
+            form(id="login-form")
                 div.content
                     TokenVue
                     div.form-group-login(class="split")

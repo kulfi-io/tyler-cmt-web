@@ -11,7 +11,7 @@
       :ref="tag" :title="title" :placeholder="placeholder" 
       required pattern="[a-zA-Z0-9!@#$%]{8,15}")
       div.input-group-prepend
-        span.input-group-text(class="left required-field") *
+        span.input-group-text(class="required-field") *
           font-awesome-icon.fa( class="fa-pwd fa-base" :icon="iconLock" aria-hidden="true")
 </template>
 

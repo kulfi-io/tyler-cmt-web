@@ -27,6 +27,8 @@ $default-font-color: #515769;
 }
 
 html {
+  margin: 0 auto;
+  display: block;
   background: #c8c8c8;
 }
 body {
@@ -449,21 +451,7 @@ textarea {
     outline: 1px dotted ButtonText;
   }
 }
-html {
-  [type="button"] {
-    -webkit-appearance: button;
-  }
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -ms-overflow-style: scrollbar;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -ms-overflow-style: scrollbar;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-}
+
 [type="button"] {
   &::-moz-focus-inner {
     border-style: none;

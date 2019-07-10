@@ -31,7 +31,7 @@ export default Vue.extend({
         ChangePassword,
         ResetPassword,
     },
-    data() {
+    data:  ()=>{
     return {
       options: {
         scrollOverflow: false,

@@ -899,13 +899,11 @@
  
 }
 
-
-
 // landscape
 @media (orientation: landscape) and (height: 320px) {
   .account-vue {
-    width: 97%;
-
+    width: 100%;
+    
     .input-group-prepend {
       .fa-base {
         font-size: 12px;
@@ -1017,6 +1015,34 @@
         padding-bottom: 1px;
       }
     }
+
+    .register-vue {
+
+      .account {
+        margin-top: 15vh;
+      }
+
+      .account-header {
+        width: 90%;
+        margin-top: -37vh;
+      }
+
+      .fullpage {
+        .footer-vue {
+          bottom: unset;
+          position: relative;
+          z-index: 0;
+          padding-right: 2%;
+        }
+
+      }
+    }
+
+    .header-vue {
+      background: $fullpage-cover-color;
+      top:unset;
+      padding-top: 4px;
+    }
   }
   .account {
     width: 95%;
@@ -1092,7 +1118,7 @@
 
 @media (width: 667px) and (height: 375px) {
   .account-vue {
-    width: 97%;
+    width: 100%;
 
     .input-group-prepend {
       .fa-base {
@@ -1204,6 +1230,35 @@
         padding-bottom: 1px;
       }
     }
+
+    .register-vue {
+
+      .account {
+        margin-top: 18vh;
+      }
+
+      .account-header {
+        width: 90%;
+        margin-top: -44vh;
+      }
+
+      .fullpage {
+        .footer-vue {
+          bottom: unset;
+          position: relative;
+          z-index: 0;
+          padding-right: 2%;
+        }
+
+      }
+    }
+
+    .header-vue {
+      background: $fullpage-cover-color;
+      top:unset;
+      padding-top: 4px;
+    }
+
   }
   .account {
     width: 95%;
@@ -1279,7 +1334,7 @@
 
 @media (width: 731px) and (height: 411px) {
   .account-vue {
-    width: 97%;
+    width: 100%;
 
     .input-group-prepend {
       .fa-base {
@@ -1390,6 +1445,34 @@
       ul.social-links li a {
         padding-bottom: 1px;
       }
+    }
+
+    .register-vue {
+
+      .account {
+        margin-top: 15vh;
+      }
+
+      .account-header {
+        width: 90%;
+        margin-top: -47vh;
+      }
+
+      .fullpage {
+        .footer-vue {
+          bottom: unset;
+          position: relative;
+          z-index: 0;
+          padding-right: 2%;
+        }
+
+      }
+    }
+
+    .header-vue {
+      background: $fullpage-cover-color;
+      top:unset;
+      padding-top: 4px;
     }
   }
   .account {
@@ -1466,7 +1549,7 @@
 
 @media (width: 736px) and (height: 414px) {
   .account-vue {
-    width: 97%;
+    width: 100%;
 
     .input-group-prepend {
       .fa-base {
@@ -1572,6 +1655,34 @@
         padding-bottom: 1px;
       }
     }
+
+    .register-vue {
+
+      .account {
+        margin-top: 15vh;
+      }
+
+      .account-header {
+        width: 90%;
+        margin-top: -47vh;
+      }
+
+      .fullpage {
+        .footer-vue {
+          bottom: unset;
+          position: relative;
+          z-index: 0;
+          padding-right: 2%;
+        }
+
+      }
+    }
+
+    .header-vue {
+      background: $fullpage-cover-color;
+      top:unset;
+      padding-top: 4px;
+    }
   }
   .account {
     width: 95%;
@@ -1645,7 +1756,7 @@
 
 @media (width: 812px) and (height: 375px) {
   .account-vue {
-    width: 97%;
+    width: 100%;
 
     .input-group-prepend {
       .fa-base {
@@ -1756,6 +1867,34 @@
       ul.social-links li a {
         padding-bottom: 1px;
       }
+    }
+
+    .register-vue {
+
+      .account {
+        margin-top: 16vh;
+      }
+
+      .account-header {
+        width: 90%;
+        margin-top: -45vh;
+      }
+
+      .fullpage {
+        .footer-vue {
+          bottom: unset;
+          position: relative;
+          z-index: 0;
+          padding-right: 2%;
+        }
+
+      }
+    }
+
+    .header-vue {
+      background: $fullpage-cover-color;
+      top:unset;
+      padding-top: 4px;
     }
   }
   .account {
@@ -1832,7 +1971,7 @@
 
 @media (width: 823px) and (height: 411px) {
   .account-vue {
-    width: 97%;
+    width: 100%;
 
     .input-group-prepend {
       .fa-base {
@@ -1943,6 +2082,34 @@
       ul.social-links li a {
         padding-bottom: 1px;
       }
+    }
+
+    .register-vue {
+
+      .account {
+        margin-top: 16vh;
+      }
+
+      .account-header {
+        width: 90%;
+        margin-top: -45vh;
+      }
+
+      .fullpage {
+        .footer-vue {
+          bottom: unset;
+          position: relative;
+          z-index: 0;
+          padding-right: 2%;
+        }
+
+      }
+    }
+
+    .header-vue {
+      background: $fullpage-cover-color;
+      top:unset;
+      padding-top: 4px;
     }
   }
   .account {
