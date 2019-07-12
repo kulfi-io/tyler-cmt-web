@@ -61,7 +61,7 @@ export class Schedule {
         }
     }
 
-    public weekView = (week: HTMLButtonElement, month: HTMLButtonElement): {} | undefined => {
+    public weekView = (week: HTMLButtonElement, month: HTMLButtonElement): void => {
         if (this.calendar) {
             this.calendar.changeView('timeGridWeek');
             this.calendar.getDate();
@@ -69,35 +69,19 @@ export class Schedule {
             week.classList.toggle('active');
             month.classList.toggle('active');
             
-            return this.dateRange();
         }
     }
-    public monthView = (month: HTMLButtonElement, week: HTMLButtonElement): {} | undefined => {
+    public monthView = (month: HTMLButtonElement, week: HTMLButtonElement): void => {
         if (this.calendar) {
             this.calendar.changeView('dayGridMonth');
             this.calendar.getDate();
 
             week.classList.toggle('active');
             month.classList.toggle('active');
-
-            return this.dateRange();
         }
     }
 
-    private dateRange = (): {} | undefined => {
-        if (this.calendar) {
-            var _view = this.calendar.view;
-            var _start = _view.activeStart;
-            var _end = _view.activeEnd;
-
-            var _range = {
-                start: _start,
-                end: _end
-            };
-
-            return _range;
-        }
-    }
+   
 
    
         
