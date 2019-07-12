@@ -4,7 +4,7 @@
         div.schedule-appointment-vue
             FullPage.fullpage( :options="options")
                 div.section(class="page schedule-appointment")
-                    ScheduleAppointmenVue
+                  ScheduleAppointmenVue
         FooterVue
 </template>
 
@@ -26,7 +26,7 @@ export default Vue.extend({
   data: () => {
     return {
       options: {
-        scrollOverflow: true,
+        scrollOverflow: false,
         scrollBar: false,
         navigation: false,
         controlArrows: true,

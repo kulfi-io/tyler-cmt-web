@@ -104,17 +104,29 @@
       display: none;
     }
 
-    @import './calendar.scss';
+    @import "./calendar.scss";
 
     .fc-past {
       background: $calendar-disable-color;
     }
 
     .fc-slats {
-      opacity: .5;
+      opacity: 0.5;
+    }
+
+    .fc-day-grid-container {
+      max-height: 59vh;
+      .fc-day-grid {
+        .fc-row {
+          max-height: calc(59vh / 6);
+        }
+      }
+    }
+
+    .fc-time-grid-container {
+      max-height: 59vh;
     }
   }
-  
 
   .text-muted {
     color: $text-muted;
@@ -146,3 +158,5 @@
     text-indent: 1.5em;
   }
 }
+
+@import "../sass/schedule.media.scss";

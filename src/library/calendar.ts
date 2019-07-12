@@ -8,7 +8,6 @@ import '../assets/sass/schedule.scss';
 import '@fullcalendar/daygrid/main.min.css';
 import '@fullcalendar/timegrid/main.min.css';
 import '@fullcalendar/core/main.min.js';
-// import '@fullcalendar/daygrid/main.min.js';
 
 export class Schedule {
     private calendar?: Calendar;
@@ -70,7 +69,6 @@ export class Schedule {
             week.classList.toggle('active');
             month.classList.toggle('active');
             
-            this.addPastStyleWeekView();
             return this.dateRange();
         }
     }
@@ -101,30 +99,7 @@ export class Schedule {
         }
     }
 
-    private addPastStyleWeekView = (): void  => {
-       if(this.calendar) {
-            if(this.calendar.state.viewType === 'timeGridWeek') {
-                console.debug(this.calendar.state.viewType)
-                const _theads = document.querySelectorAll(
-                    '.fc-timeGrid-view th');
-                const _days = document.querySelectorAll(
-                    '.fc-timeGrid-view tbody .fc-time-grid table tbody .fc-day');
-
-                if(_theads && _days) {
-                    console.debug('theads', _theads.length)
-                    console.debug('days', _days)
-                    for( let i=0; i < _theads.length; i++) {
-                        if(_theads[i].classList.contains('fc-past')) {
-                            const _day = _days.item(i);
-                            if(!_day.classList.contains('fc-past')) {
-                                console.debug('day', _day.classList);
-                            }
-                        }
-                    }
-                }
-            }
-       }
-    } 
+   
         
 }
 
