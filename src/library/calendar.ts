@@ -80,11 +80,6 @@ export class Schedule {
             month.classList.toggle('active');
         }
     }
-
-   
-
-   
-        
 }
 
 export default new Schedule();
