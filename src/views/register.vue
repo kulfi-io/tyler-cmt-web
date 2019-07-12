@@ -37,3 +37,12 @@ export default Vue.extend({
 });
 </script>
 
+<style scoped>
+.register-vue {
+  animation-duration: 1s;
+  animation-name: fadeIn;
+  animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+}
+</style>
+
+
