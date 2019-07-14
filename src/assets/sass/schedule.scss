@@ -100,32 +100,101 @@
 
   .content {
     padding: 2%;
+    margin: auto;
+    display: block;
+    position: relative;
     .control-label {
       display: none;
     }
 
     @import "./calendar.scss";
 
-    .fc-past {
-      background: $calendar-disable-color;
-    }
 
-    .fc-slats {
-      opacity: 0.5;
-    }
+    .fc-timeGridWeek-view, .fc-timeGrid-view {
+      .fc-scroller, .fc-time-grid-container {
+        height: inherit;
+        background-color: transparent;
+        .fc-time-grid .fc-slats td {
+          background-color: transparent;
+        }
+        .fc-time-grid {
+          height: inherit;
+          background-color: transparent;
+          .fc-slats, .fc-bg {
+            max-height: inherit;
+            height: inherit;
+            background-color: inherit;
+            table {
+              background-color: inherit;
+            }
+          }
 
-    .fc-day-grid-container {
-      max-height: 59vh;
-      .fc-day-grid {
-        .fc-row {
-          max-height: calc(59vh / 6);
+          .fc-content-skeleton {
+            height: 59vh;
+            max-height: 59vh;
+            background-color: inherit;
+           
+            table {
+              height: inherit;
+              background-color: inherit;
+              tbody {
+                tr {
+                  .fc-axis {
+                    height: 0;
+                  }
+                  td {
+                    .fc-content-col {
+                      height: 59vh;
+                    }
+                  }
+                }
+
+                
+              }
+            }
+          }
         }
       }
     }
 
-    .fc-time-grid-container {
-      max-height: 59vh;
+
+
+    .fc-past {
+      background: $calendar-disable-color;
     }
+
+    .fc-divider {
+      display: none;
+    }
+
+    
+
+
+    .fc-dayGridMonth-view {
+
+      .fc-day-grid-container {
+        max-height: 59vh;
+        .fc-day-grid {
+          .fc-row {
+            max-height: calc(59vh / 6);
+          }
+        }
+      }
+
+    }
+  
+
+    
+
+    .fc-time-grid-container {
+      height: inherit;
+      max-height: 59vh;
+
+      .fc-time-grid {
+        height: inherit;
+      }
+    }
+
   }
 
   .text-muted {

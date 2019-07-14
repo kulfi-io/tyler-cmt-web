@@ -28,6 +28,7 @@ import ScheduleHeader from './schedule-header.vue';
 import ScheduleFooter from './schedule-footer.vue';
 import CalendarVue from '../kulfi/calendar.vue';
 import Schedule from '../../library/calendar';
+import User from '../../library/user';
 
 export default Vue.extend({
     name: 'schedule-appointment',
@@ -44,7 +45,8 @@ export default Vue.extend({
         const week = <HTMLButtonElement>this.$refs.week;
         const month = <HTMLButtonElement>this.$refs.month;
 
-        Schedule.init(calendar);
+        const _user = new User('1', 'Lucy', 'Dog');
+        Schedule.init(calendar, _user);
         previous.addEventListener('click', (e: Event) => {
             Schedule.previous(heading)
         });
