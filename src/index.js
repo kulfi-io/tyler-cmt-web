@@ -3,7 +3,6 @@ import App from './App.vue';
 import router from './routes';
 import 'normalize.css';
 import './assets/sass/base.scss';
-import './assets/sass/media.scss';
 import 'fullpage.js/dist/fullpage.css';
 import 'fullpage.js/vendors/scrolloverflow';
 import animate from 'animate.css';

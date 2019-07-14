@@ -29,6 +29,7 @@ export class Schedule {
             });
 
             this.calendar.render();
+            this.resizeScroller();
         }
     }
 
@@ -50,7 +51,6 @@ export class Schedule {
             new Event('Event 5', new Date("2019-07-12 15:00:00"), 60, user, _notes, 'Fifth Event', '4'),
             new Event('Event 6', new Date('2019-07-12 17:00:00'), 60, user, _notes, 'Sixth Event', '5'),
             new Event('Event 8', new Date('2019-07-12 18:00:00'), 60, user, _notes, 'Eighth Event', '6')
-
         ]
 
         const _inputs = [
@@ -62,22 +62,24 @@ export class Schedule {
         ]
 
         this.eventInputs = _inputs;
-        console.debug(this.eventInputs);
 
         return this.eventInputs;
     }
 
-    public title = (): string => {
-        const _date = new Date();
-        return `${this.monthNames[_date.getMonth()]}, ${_date.getFullYear()}`;
+    public title = (date?: Date): string => {
+
+        date = date ? date : new Date();
+        if(screen.width <= 411) {
+            return `${this.monthNames[date.getMonth()].substr(0,3)}, ${date.getFullYear()}`;
+        } 
+        return `${this.monthNames[date.getMonth()]}, ${date.getFullYear()}`;
     }
 
     private setTitle = () => {
         if (this.heading) {
             if (this.calendar) {
                 const _date = this.calendar.getDate();
-                const _title = `${this.monthNames[_date.getMonth()]}, ${_date.getFullYear()}`;
-                this.heading.innerText = _title;
+                this.heading.innerText = this.title(_date);
             }
         }
     }
@@ -113,7 +115,7 @@ export class Schedule {
         }
     }
 
-    private reposition = () => {
+    private resizeScroller = () => {
         const _scrollerList = document.querySelectorAll('.fc-scroller'); 
         if(_scrollerList) {
             _scrollerList.forEach((item: Element) => {
@@ -121,7 +123,12 @@ export class Schedule {
                 _scroller.style.height = 'inherit';
             });
         }
-        this.resizeContent();
+    }
+
+    private reposition = () => {
+        
+        this.resizeScroller();
+        this.resizeWeekViewContent();
         this.positionMeetings()
     }
 
@@ -186,7 +193,7 @@ export class Schedule {
 
     }
 
-    private resizeContent = () => {
+    private resizeWeekViewContent = () => {
        
         const _events = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
         if(_events) {
@@ -221,6 +228,8 @@ export class Schedule {
 
             week.classList.toggle('active');
             month.classList.toggle('active');
+
+            this.resizeScroller();
         }
     }
 }

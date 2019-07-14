@@ -749,7 +749,341 @@
   }
  
 }
+
+@media (height: 568px) and (width: 320px) {
+  .schedule-vue {
+    width: 97%;
+
+
+    .split {
+      display: flex;
+      .split-half-right {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        width: 50%;
+      }
+
+      .split-half-left {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-right: 1%;
+        width: 50%;
+      }
+
+      .split-half-flush {
+        font-size: 0.75rem;
+
+        a {
+          color: $default-control-label-color;
+          &:hover {
+            color: $default-hover-color;
+          }
+        }
+      }
+
+      .split-for-cb {
+        width: 13%;
+      }
+
+      .split-for-label {
+        width: 87%;
+      }
+    }
+
+    .footer-vue {
+      margin: auto;
+      .social small {
+        padding-right: unset;
+      }
+    }
+  }
+
+  .schedule {
+    width: 95%;
+  }
+
+  .schedule-header {
+    width: 90%;
+    margin-top: -35vh;
+    min-height: calc(20vh - 115px);
+
+    .schedule-navigation {
+      display: flex;
+      padding: 1%;
+      .navigation {
+        width: 30%;
+      }
+      .title {
+        .heading {
+          font-size: 1.7rem;
+          line-height: 1.2;
+        }
+  
+        p {
+          padding-bottom: 2%;
+          font-size: 1rem;
+          color: $default-sub-text;
+          color: $default-white;
+          letter-spacing: 0.3rem;
+          text-transform: none;
+  
+          a {
+            color: $default-white;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+  
+            &:hover {
+              color: $default-hover-color;
+            }
+          }
+        }
+      }
+      .view {
+        width: 30%;
+      }
+
+      .split {
+        display: block;
+        .split-half-right {
+          padding-top: 2%;
+          width: 100%;
+        }
+  
+        .split-half-left {
+          padding-top: 2%;
+          width: 100%;
+        }
+  
+        .split-half-flush {
+          font-size: 0.75rem;
+  
+          a {
+            color: $default-control-label-color;
+            &:hover {
+              color: $default-hover-color;
+            }
+          }
+        }
+  
+      }
+  
+      .form-control {
+        height: 2rem;
+        font-size: .75rem;
+      }
+    }
+  }
+
+  .schedule-body {
+    width: 90%;
+    min-height: calc(30vh - 115px);
+
+    .content {
+      .fc-dayGridMonth-view {
+        .fc-content-skeleton {
+          font-size: .675rem;
+        }
+      }
+
+    }
+    
+  }
+
+  .schedule-footer {
+    width: 90%;
+    margin-top: 1vh;
+    min-height: calc(15vh - 115px);
+  }
+}
 */
+
+
+
+@media(orientation: portrait) and (max-width: 414px) {
+  .schedule-vue {
+    width: 97%;
+
+    .split {
+      display: flex;
+      .split-half-right {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        width: 50%;
+      }
+
+      .split-half-left {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-right: 1%;
+        width: 50%;
+      }
+
+      .split-half-flush {
+        font-size: 0.75rem;
+
+        a {
+          color: $default-control-label-color;
+          &:hover {
+            color: $default-hover-color;
+          }
+        }
+      }
+
+      .split-for-cb {
+        width: 13%;
+      }
+
+      .split-for-label {
+        width: 87%;
+      }
+    }
+
+    .footer-vue {
+      margin: auto;
+      .social small {
+        padding-right: unset;
+      }
+    }
+  }
+
+  .schedule {
+    width: 95%;
+  }
+
+  .schedule-header {
+    width: 90%;
+    margin-top: -35vh;
+
+    .schedule-navigation {
+      display: flex;
+      padding: 1%;
+      .navigation {
+        width: 30%;
+      }
+      .title {
+        .heading {
+          font-size: 1.7rem;
+          line-height: 1.2;
+        }
+  
+        p {          
+          a {
+            color: $default-white;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+  
+            &:hover {
+              color: $default-hover-color;
+            }
+          }
+        }
+      }
+      .view {
+        width: 30%;
+      }
+
+      .split {
+        display: block;
+        .split-half-right {
+          padding-top: 2%;
+          width: 100%;
+        }
+  
+        .split-half-left {
+          padding-top: 2%;
+          width: 100%;
+        }
+  
+        .split-half-flush {
+          font-size: 0.75rem;
+  
+          a {
+            color: $default-control-label-color;
+            &:hover {
+              color: $default-hover-color;
+            }
+          }
+        }
+  
+      }
+  
+      .form-control {
+        height: 2rem;
+        font-size: .75rem;
+      }
+    }
+  }
+
+  .schedule-body {
+    width: 90%;
+    min-height: calc(30vh - 115px);
+
+    .content {
+      .fc-dayGridMonth-view {
+        .fc-content-skeleton {
+          font-size: .675rem;
+        }
+      }
+
+    }
+    
+  }
+
+  .schedule-footer {
+    width: 90%;
+    margin-top: 1vh;
+    min-height: calc(15vh - 115px);
+  }
+}
+@media(height: 667px) and (width: 375px){
+  .schedule-header {
+    margin-top: -37vh;
+
+  }
+}
+
+@media(height: 731px) and (width: 411px){
+  .schedule-header {
+    margin-top: -40vh;
+  }
+}
+
+@media(height: 736px) and (width: 414px){
+  .schedule-header {
+    margin-top: -40vh;
+
+    .schedule-navigation {
+
+      .navigation {
+        width: 20%;
+      }
+      .title {
+        width: 60%;
+  
+        
+      }
+      .view {
+        width: 20%;
+      }
+    }
+    
+  }
+}
+
+@media(height: 812px) and (width: 375px){
+  .schedule-header {
+    margin-top: -41vh;
+  }
+}
+@media(height: 823px) and (width: 411px){
+  .schedule-header {
+    margin-top: -41vh;
+  }
+}
+
+
 // Landscape
 @media (min-width: 1340px) {
     
