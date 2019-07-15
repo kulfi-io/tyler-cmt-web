@@ -167,9 +167,6 @@
       display: none;
     }
 
-    
-
-
     .fc-dayGridMonth-view {
 
       .fc-day-grid-container {
@@ -180,12 +177,8 @@
           }
         }
       }
-
     }
   
-
-    
-
     .fc-time-grid-container {
       height: inherit;
       max-height: 59vh;
@@ -194,7 +187,6 @@
         height: inherit;
       }
     }
-
   }
 
   .text-muted {
@@ -213,7 +205,7 @@
 
 .schedule-footer {
   margin: auto;
-  display: block;
+  display: none;
   position: relative;
   width: 85%;
   margin-top: 2vh;
