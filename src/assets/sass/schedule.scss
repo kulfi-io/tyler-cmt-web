@@ -76,6 +76,7 @@
       background-color: $default-background-color;
       border-bottom: none;
       text-transform: uppercase;
+      text-align: center;
 
       &:hover,
       &:focus,
@@ -168,7 +169,6 @@
     }
 
     .fc-dayGridMonth-view {
-
       .fc-day-grid-container {
         max-height: 59vh;
         .fc-day-grid {

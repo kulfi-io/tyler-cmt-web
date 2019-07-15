@@ -186,10 +186,188 @@
 
 
 // Landscape
-@media(orientation: landscape) {
-  
+@media(orientation: landscape) and (max-height: 414px){
+  .schedule-vue {
+    width: 100%;
+   
+    .split {
+      .split-half-right {
+        padding: 0;
+      }
+    
+      .split-half-left {
+        padding: 0
+      }
+    }
+
+    
+  }
+
+  .schedule {
+    width: 97%;
+    margin-top: 15vh;
+    min-height: calc(70vh - 115px);
+  }
+
+  .schedule-header {
+    width: 93%;
+    margin-top: -40vh;
+    min-height: calc(20vh - 115px);
+
+    .schedule-navigation {
+      display: flex;
+      .navigation {
+        width: 30%;
+      }
+      .title {
+        width: 40%;
+        vertical-align: middle;
+        .heading {
+          font-size: 1.2rem;
+          line-height: 1.3rem;
+        }
+      }
+      .view {
+        width: 30%;
+      }
+
+      button {
+        height: 65%;
+        line-height: 1rem;
+        text-align: center;
+      }
+    }
+
+  }
+
+  .schedule-body {
+    width: 93%;
+    margin-top: unset;
+    min-height: calc(35vh - 115px);
+
+    .content {
+      padding: 2% 0 2% 0;
+      .fc-dayGridMonth-view {
+        table {
+          thead {
+            padding: 0 .375% 0 .375%;
+          }
+        }
+        .fc-content-skeleton {
+          font-size: .675rem;
+        }
+      }
+
+      .fc-timeGridWeek {
+        table {
+          thead {
+            padding: 0 .375% 0 .375%;
+          }
+        }
+      }
+
+    }
+
+  }
 }
-@media (min-width: 1340px) {
+
+@media (height: 320px) and (width: 568px) {
+  
+  .schedule-vue {
+    .footer-vue {
+      display: none;
+    }
+  }
+ 
+}
+
+@media (height: 375px) and (width: 667px) {
+  .schedule-vue {
+    .footer-vue {
+      display: none;
+    }
+  }
+  .schedule {
+    width: 97%;
+    margin-top: 10vh;
+    min-height: calc(70vh - 115px);
+  }
+
+  .schedule-header {
+    width: 93%;
+    margin-top: -45vh;
+    min-height: calc(20vh - 115px);
+
+
+  }
+}
+
+@media (height: 414px) and (width: 736px) {
+  .schedule {
+    width: 97%;
+    margin-top: 5vh;
+    min-height: calc(70vh - 115px);
+  }
+
+  .schedule-header {
+    width: 93%;
+    margin-top: -47vh;
+    min-height: calc(20vh - 115px);
+  }
+}
+
+@media (height: 375px) and (width: 812px) {
+  .schedule-vue {
+    .footer-vue {
+      display: none;
+    }
+  }
+  .schedule {
+    width: 97%;
+    margin-top: 10vh;
+    min-height: calc(70vh - 115px);
+  }
+
+  .schedule-header {
+    width: 93%;
+    margin-top: -45vh;
+    min-height: calc(20vh - 115px);
+
+
+  }
+}
+
+@media (height: 411px) and (width: 731px) {
+
+  .schedule {
+    width: 97%;
+    margin-top: 5vh;
+    min-height: calc(70vh - 115px);
+  }
+
+  .schedule-header {
+    width: 93%;
+    margin-top: -47vh;
+    min-height: calc(20vh - 115px);
+  }
+}
+
+@media (height: 411px) and (width: 823px) {
+
+  .schedule {
+    width: 97%;
+    margin-top: 5vh;
+    min-height: calc(70vh - 115px);
+  }
+
+  .schedule-header {
+    width: 93%;
+    margin-top: -47vh;
+    min-height: calc(20vh - 115px);
+  }
+}
+
+@media (min-width: 1024px) {
     
     .schedule {
         margin-top: 8vh;
