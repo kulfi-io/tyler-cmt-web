@@ -15,9 +15,11 @@ export class Schedule {
     private heading?: HTMLDivElement;
     private monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     private eventInputs?: EventInput[];
+    private portraitMediaScreen:boolean = false;
 
     public init = (target: HTMLDivElement, user: User): void => {
         if (target) {
+            this.portraitMediaScreen = screen.width <= 414;
             this.calendar = new Calendar(target, {
                 plugins: [DayGrid, TimeGrid, Interaction],
                 header: false,
@@ -41,16 +43,16 @@ export class Schedule {
             new Note('note', 'back 2', 'my back is tight 2', '3', '3'),
             new Note('note', 'back 2', 'my back is tight 2', '3', '3'),
             new Note('note', 'back 4', 'my back is tight 4', '4', '4'),
-
         ]
+        
         const _today = new Date('2019');
         const _events: Event[] = [
-            new Event('Event 1', new Date("2019-07-12 10:00:00"), 60, user, _notes, 'First Event', '1'),
-            new Event('Event 3', new Date('2019-07-12 12:00:00'), 60, user, _notes, 'Third Event', '2'),
-            new Event('Event 4', new Date('2019-07-12 13:00:00'), 60, user, _notes, 'Fouth Event', '3'),
-            new Event('Event 5', new Date("2019-07-12 15:00:00"), 60, user, _notes, 'Fifth Event', '4'),
-            new Event('Event 6', new Date('2019-07-12 17:00:00'), 60, user, _notes, 'Sixth Event', '5'),
-            new Event('Event 8', new Date('2019-07-12 18:00:00'), 60, user, _notes, 'Eighth Event', '6')
+            new Event('Event 1', new Date("2019-07-13 10:00:00"), 60, user, _notes, 'First Event', '1'),
+            new Event('Event 3', new Date('2019-07-13 12:00:00'), 60, user, _notes, 'Third Event', '2'),
+            new Event('Event 4', new Date('2019-07-13 13:00:00'), 60, user, _notes, 'Fouth Event', '3'),
+            new Event('Event 5', new Date("2019-07-13 15:00:00"), 60, user, _notes, 'Fifth Event', '4'),
+            new Event('Event 6', new Date('2019-07-13 17:00:00'), 60, user, _notes, 'Sixth Event', '5'),
+            new Event('Event 8', new Date('2019-07-13 18:00:00'), 60, user, _notes, 'Eighth Event', '6')
         ]
 
         const _inputs = [
@@ -134,6 +136,9 @@ export class Schedule {
 
     private positionMeetings = () => {
         const _startPosition = 10
+        const _startLocation = 41;
+        const _mediaStartLocation = 44;
+        const _activeLocation = this.portraitMediaScreen ? _mediaStartLocation : _startLocation;
         let _lastStartPosition = _startPosition;
         let _lastInterval = 0;
 
@@ -154,7 +159,7 @@ export class Schedule {
                         let _endTime = parseInt(_dataFullArray[1].replace('AM', '').replace('PM', ''));
 
                         _event.removeAttribute('style');
-                        let _style = `top: 41px; z-index: 1`;
+                        let _style = `top: ${_activeLocation}px; z-index: 1`;
 
                         let _interval = 0
                         if(_dataFullArray[0].indexOf('PM') >=0) {
@@ -173,7 +178,7 @@ export class Schedule {
                                 }
                             }
                                 
-                            _style = `top: ${_interval * 41.5}px; z-index: 1`;
+                            _style = `top: ${_interval * _activeLocation}px; z-index: 1`;
                         }
 
                         console.debug('start:', _startTime, ' lastPosition:', _lastStartPosition);
@@ -194,6 +199,9 @@ export class Schedule {
     }
 
     private resizeWeekViewContent = () => {
+        const _height = 37;
+        const _mediaHeight = 41;
+        const _activeHeight = this.portraitMediaScreen ? _mediaHeight : _height;
        
         const _events = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
         if(_events) {
@@ -210,9 +218,9 @@ export class Schedule {
                         if(parseInt(_duration[0]) === 12) {
                             _length = (parseInt(_duration[1]) + 12) - parseInt(_duration[0]); 
                         }
-                        
+
                         if(_duration[1].indexOf(':00') >= 0) {
-                            _content.style.height =  `${_length * 37}px`;
+                            _content.style.height =  `${_length * _activeHeight}px`;
                         } else {
                             _content.style.height = `${_length * 30}px`;
                         }
