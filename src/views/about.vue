@@ -7,9 +7,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import AboutVue from '../components/about-vue.vue';
-import HeaderVue from '../components/header-vue.vue';
-import FooterVue from '../components/footer-vue.vue';
+import AboutVue from '../components/about.vue';
+import HeaderVue from '../components/header.vue';
+import FooterVue from '../components/footer.vue';
 export default Vue.extend({
     name: 'about',
     components: {

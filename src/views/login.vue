@@ -16,8 +16,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import AccountLogin from '../components/account/account-login.vue';
-import HeaderVue from '../components/header-vue.vue';
-import FooterVue from '../components/footer-vue.vue';
+import HeaderVue from '../components/header.vue';
+import FooterVue from '../components/footer.vue';
 import FullPage from 'vue-fullpage.js/src/FullPage.vue';
 import ChangePassword from '../components/account/change-password.vue';
 import ResetPassword from '../components/account/reset-password.vue';

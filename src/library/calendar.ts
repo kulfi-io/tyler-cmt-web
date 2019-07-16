@@ -15,10 +15,8 @@ export class Schedule {
     private heading?: HTMLDivElement;
     private monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     private eventInputs?: EventInput[];
-    private portraitMediaScreen:boolean = false;
     private lineHeight = 1.5;
-    private LineHeightPxEquivalent = 12.775;
-
+    private lineHeightPxEquivalent = 12.775;
 
     public refresh = (user: User): void => {
         if(this.calendar) {
@@ -27,6 +25,7 @@ export class Schedule {
             const _calendar = this.calendar;
             this.calendar.destroy();
             this.setCalendarConfig(_calendar.el, user);
+            
             if(this.calendar) {
                 this.calendar.state = _calendar.state;
                 this.calendar.changeView(_calendar.state.viewType);
@@ -50,7 +49,6 @@ export class Schedule {
 
     public init = (target: HTMLDivElement, user: User): void => {
         if (target) {
-            this.portraitMediaScreen = screen.width <= 414;
             this.setCalendarConfig(target, user);
             if(this.calendar) {
                 this.calendar.render();
@@ -224,8 +222,8 @@ export class Schedule {
 
     private resizeWeekViewContent = () => {
 
-        const _halfHeight = this.LineHeightPxEquivalent * this.lineHeight;
-        const _hourHeight = this.LineHeightPxEquivalent * (this.lineHeight * 2);
+        const _halfHeight = this.lineHeightPxEquivalent * this.lineHeight;
+        const _hourHeight = this.lineHeightPxEquivalent * (this.lineHeight * 2);
        
         const _events = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
         if(_events) {

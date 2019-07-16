@@ -1,0 +1,385 @@
+@import "./account.variable.scss";
+
+@media (orientation: portrait) and (max-width: 414px) {
+
+  .home {
+    .intro-collage-vue {
+      .collage-image {
+        width: 95%;
+      }
+      .quote {
+        width: 90%;
+
+        blockquote {
+          font-size: 0.875rem;
+        }
+
+        .detail {
+          font-size: 0.7em;
+        }
+      }
+    }
+  }
+}
+
+@media (height: 667px) and (width: 375px) {
+  .home {
+    .intro-collage-vue {
+      .quote {
+        width: 95%;
+
+        blockquote {
+          font-size: 1.1em;
+        }
+      }
+    }
+  }
+}
+
+@media (height: 731px) and (width: 411px) {
+  .home {
+    .intro-collage-vue {
+      .quote {
+        width: 90%;
+
+        blockquote {
+          font-size: 1.1em;
+        }
+
+        .detail {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media (height: 736px) and (width: 414px) {
+  .home {
+    .intro-collage-vue {
+      .about-banner {
+        width: 95%;
+      }
+      .quote {
+        width: 95%;
+
+        blockquote {
+          font-size: 1.2rem;
+        }
+
+        .detail {
+          font-size: 0.6em;
+        }
+      }
+    }
+  }
+}
+
+@media (height: 812px) and (width: 375px) {
+  .home {
+    .intro-collage-vue {
+      .quote {
+        width: 95%;
+
+        blockquote {
+          font-size: 1.1em;
+        }
+
+        .detail {
+          font-size: 0.7em;
+        }
+      }
+    }
+  }
+}
+
+@media (height: 823px) and (width: 411px) {
+  .home {
+    .intro-collage-vue {
+      .quote {
+        width: 90%;
+
+        blockquote {
+          font-size: 1.1rem;
+        }
+
+        .detail {
+          font-size: 0.7em;
+        }
+      }
+    }
+  }
+}
+
+// Landscape
+@media (orientation: landscape) and (max-height: 414px) {
+  
+  .home {
+    .intro-splash-vue {
+      .top-wrapper {
+        max-height: 90%;
+      }
+      .bottom-wrapper {
+        display: none;
+      }
+    }
+
+    .intro-collage-vue {
+      .people-text {
+        display: none;
+      }
+
+      .collage-image {
+        width: 70%;
+      }
+
+      .quote {
+        width: 83%;
+
+        blockquote {
+          font-size: 0.975rem;
+        }
+
+        .detail {
+          font-size: 0.6em;
+        }
+      }
+    }
+
+    .footer-vue {
+      right: 10px;
+      left: 10px;
+      bottom: 1px;
+
+      .social small{
+        display: none;
+      }
+    }
+
+  }
+  // .home {
+  //   .intro-banner {
+  //     .masg-wrapper {
+  //       display: none;
+  //     }
+  //   }
+
+  //   .intro-about-vue {
+  //     .about-banner {
+  //       display: none;
+  //     }
+
+  //     .collage {
+  //       width: 64%;
+  //     }
+
+  //     .quote {
+  //       width: 83%;
+
+  //       blockquote {
+  //         font-size: 0.975rem;
+  //       }
+
+  //       .detail {
+  //         font-size: 0.6em;
+  //       }
+  //     }
+  //   }
+
+  //   .footer-vue {
+  //     right: 10px;
+  //     left: 10px;
+  //     bottom: 3px;
+
+  //     .social small {
+  //       display: none;
+  //     }
+  //   }
+  // }
+}
+
+@media (width: 667px) and (height: 375px) {
+  .home {
+    .intro-collage-vue {
+      .collage {
+        width: 75%;
+      }
+
+      .quote {
+        width: 75%;
+
+        blockquote {
+          font-size: 1rem;
+        }
+
+        .detail {
+          font-size: 0.7em;
+        }
+      }
+    }
+
+    #footer-vue {
+      right: 5px;
+      left: 5px;
+    }
+  }
+}
+
+@media (width: 731px) and (height: 411px) {
+  .home {
+    .intro-collage-vue {
+      .collage {
+        width: 70%;
+      }
+
+      .quote {
+        width: 70%;
+
+        blockquote {
+          font-size: 1rem;
+        }
+
+        .detail {
+          font-size: 0.7em;
+        }
+      }
+    }
+
+    #footer-vue {
+      right: 5px;
+      left: 5px;
+    }
+  }
+}
+
+@media (width: 736px) and (height: 414px) {
+  .home {
+    .intro-collage-vue {
+      .collage-image {
+        width: 70%;
+      }
+
+      .quote {
+        width: 70%;
+
+        blockquote {
+          font-size: 1.1rem;
+        }
+
+        .detail {
+          font-size: 0.7em;
+        }
+      }
+    }
+
+    #footer-vue {
+      right: 5px;
+      left: 5px;
+    }
+  }
+}
+
+@media (width: 812px) and (height: 375px) {
+
+  .home {
+    .intro-collage-vue {
+      .collage-image {
+        width: 62%;
+      }
+
+      .quote {
+        width: 60%;
+
+        blockquote {
+          font-size: 1rem;
+        }
+
+        .detail {
+          font-size: 0.7em;
+        }
+      }
+    }
+
+    #footer-vue {
+      right: 5px;
+      left: 5px;
+    }
+  }
+  // .home {
+  //   .intro-about-vue {
+        
+  //       .collage {
+  //           width: 60%;
+  //       }
+
+  //       .quote {
+  //           width: 65%;
+
+  //           blockquote {
+  //           font-size: 1rem;
+  //           }
+
+  //           .detail {
+  //           font-size: 0.7em;
+  //           }
+  //       }
+  //   }
+
+  //   #footer-vue {
+  //       right: 5px;
+  //       left: 5px;
+  //   }
+  // }
+
+  //   .home {
+  //     .intro-about-vue {
+  //       .collage {
+  //         width: 60%;
+  //       }
+
+  //       .quote {
+  //         width: 60%;
+
+  //         blockquote {
+  //           font-size: 1rem;
+  //         }
+
+  //         .detail {
+  //           font-size: 0.7em;
+  //         }
+  //       }
+  //     }
+
+  //     #footer-vue {
+  //       right: 5px;
+  //       left: 5px;
+  //     }
+  //   }
+}
+
+@media (width: 823px) and (height: 411px) {
+  .home {
+    .intro-collage-vue {
+      .collage-image {
+        width: 65%;
+      }
+
+      .quote {
+        width: 75%;
+
+        blockquote {
+          font-size: 1.2rem;
+        }
+
+        .detail {
+          font-size: 0.7em;
+        }
+      }
+    }
+
+    #footer-vue {
+      right: 5px;
+      left: 5px;
+    }
+  }
+}

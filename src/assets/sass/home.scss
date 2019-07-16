@@ -1,0 +1,135 @@
+@import "./account.variable.scss";
+
+.home {
+  margin: auto;
+  display: block;
+
+    .intro-splash-vue {
+      .top-wrapper {
+        margin: auto;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .bottom-wrapper {
+        margin: auto;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .intro-collage-vue {
+      margin: auto;
+      display: block;
+
+      .people-text {
+        margin: auto;
+        display: block;
+        width: 97%;
+        height: 100%;
+      }
+
+      .collage-image {
+        margin: auto;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .quote {
+        margin: auto;
+        display: block;
+        width: 96%;
+        animation-duration: 4s;
+        animation-name: fadeIn;
+        animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+  
+        blockquote {
+          margin: auto;
+          display: block;
+          position: relative;
+          font-family: "Sanchez", serif;
+          font-size: 1.5em;
+          line-height: 1.5em;
+          font-style: italic;
+          color: $blockquote-color;
+        }
+  
+        .detail {
+          text-decoration: none;
+          font-size: small;
+          font-family: sans-serif;
+          text-transform: capitalize;
+          white-space: nowrap;
+          color: $default-read-more;
+  
+          &:hover {
+            color: $default-hover-color;
+          }
+        }
+      }
+    }
+
+
+  /*
+  .intro-about-vue {
+    margin: auto;
+    display: block;
+    height: inherit;
+
+    .intro-banner {
+      margin: auto;
+      display: block;
+      height: inherit;
+    }
+
+    .about-banner {
+      margin: auto;
+      display: block;
+      height: inherit;
+      width: 93%;
+    }
+
+    .collage {
+      margin: auto;
+      display: block;
+    }
+
+    .quote {
+      margin: auto;
+      display: block;
+      width: 85%;
+      animation-duration: 4s;
+      animation-name: fadeIn;
+      animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+
+      blockquote {
+        margin: auto;
+        display: block;
+        position: relative;
+        font-family: "Sanchez", serif;
+        font-size: 1.5em;
+        line-height: 1.5em;
+        font-style: italic;
+        color: $blockquote-color;
+      }
+
+      .detail {
+        text-decoration: none;
+        font-size: small;
+        font-family: sans-serif;
+        text-transform: capitalize;
+        white-space: nowrap;
+        color: #f6f6f6;
+
+        &:hover {
+          color: #ba4744;
+        }
+      }
+    }
+  }
+  */
+}
+
+@import "./home.media.scss";

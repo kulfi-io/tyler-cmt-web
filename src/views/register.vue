@@ -10,8 +10,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import HeaderVue from '../components/header-vue.vue';
-import FooterVue from '../components/footer-vue.vue';
+import HeaderVue from '../components/header.vue';
+import FooterVue from '../components/footer.vue';
 import FullPage from 'vue-fullpage.js/src/FullPage.vue';
 import AccountRegister from '../components/account/account-register.vue';
 export default Vue.extend({

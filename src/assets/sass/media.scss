@@ -1272,24 +1272,24 @@ $default-font-color: #515769;
   }
 }
 @media (height: 568px) and (width: 320px) {
-  .home {
-    .intro-about-vue {
-      .about-banner {
-        width: 95%;
-      }
-      .quote {
-        width: 90%;
+  // .home {
+  //   .intro-about-vue {
+  //     .about-banner {
+  //       width: 95%;
+  //     }
+  //     .quote {
+  //       width: 90%;
 
-        blockquote {
-          font-size: .875rem;
-        }
+  //       blockquote {
+  //         font-size: .875rem;
+  //       }
 
-        .detail {
-          font-size: 0.7em;
-        }
-      }
-    }
-  }
+  //       .detail {
+  //         font-size: 0.7em;
+  //       }
+  //     }
+  //   }
+  // }
 
   .privacy {
     .privacy-vue {
@@ -1348,27 +1348,6 @@ $default-font-color: #515769;
 
 @media (height: 667px) and (width: 375px) {
   
-  
-  .home {
-    .intro-about-vue {
-      .about-banner {
-        width: 95%;
-      }
-
-      .quote {
-        width: 85%;
-  
-        blockquote {
-          font-size: 1.1em;
-        }
-  
-        .detail {
-          font-size: 0.7em;
-        }
-      }
-    }
-  }
-  
   .about {
     .about-vue {
       main {
@@ -1409,25 +1388,7 @@ $default-font-color: #515769;
 }
 
 @media (min-height: 812px) and (width: 375px) {
-  .home {
-    .intro-about-vue {
-      .about-banner {
-        width: 95%;
-      }
-
-      .quote {
-        width: 85%;
   
-        blockquote {
-          font-size: 1.1em;
-        }
-  
-        .detail {
-          font-size: 0.5em;
-        }
-      }
-    }
-  }
   
   .about {
     .about-vue {
@@ -1470,25 +1431,7 @@ $default-font-color: #515769;
 
 @media (height: 731px) and (width: 411px) {
 
-  .home {
-    .intro-about-vue {
-      .about-banner {
-        width: 95%;
-      }
-
-      .quote {
-        width: 85%;
   
-        blockquote {
-          font-size: 1.1em;
-        }
-  
-        .detail {
-          font-size: 0.8rem;
-        }
-      }
-    }
-  }
 
   .about {
     .about-vue {
@@ -1531,25 +1474,7 @@ $default-font-color: #515769;
 }
 
 @media (height: 736px) and (width: 414px) {
-  .home {
-    .intro-about-vue {
-      .about-banner {
-        width: 95%;
-      }
-      .quote {
-        width: 85%;
-
-        blockquote {
-          font-size: 1.2rem;
-        }
-
-        .detail {
-          font-size: 0.6em;
-        }
-      }
-    }
-  }
-
+ 
   .about {
     .about-vue {
       main {
@@ -1593,25 +1518,7 @@ $default-font-color: #515769;
 }
 
 @media (min-height: 823px) and (max-width: 411px) {
-  .home {
-    .intro-about-vue {
-      .about-banner {
-        width: 95%;
-      }
-
-      .quote {
-        width: 85%;
-  
-        blockquote {
-          font-size: 1.1rem;
-        }
-  
-        .detail {
-          font-size: 0.6em;
-        }
-      }
-    }
-  }
+ 
   
   .about {
     .about-vue {
@@ -1660,24 +1567,24 @@ $default-font-color: #515769;
     right: 10px;
   }
 
-  .home {
-    .intro-about-vue {
-      .about-banner {
-        width: 95%;
-      }
-      .quote {
-        width: 85%;
+  // .home {
+  //   .intro-about-vue {
+  //     .about-banner {
+  //       width: 95%;
+  //     }
+  //     .quote {
+  //       width: 85%;
 
-        blockquote {
-          font-size: 2rem;
-        }
+  //       blockquote {
+  //         font-size: 2rem;
+  //       }
 
-        .detail {
-          font-size: 0.6em;
-        }
-      }
-    }
-  }
+  //       .detail {
+  //         font-size: 0.6em;
+  //       }
+  //     }
+  //   }
+  // }
 
   .about {
     .about-vue {
@@ -1734,24 +1641,24 @@ $default-font-color: #515769;
     right: 10px;
   }
 
-  .home {
-    .intro-about-vue {
-      .about-banner {
-        width: 95%;
-      }
-      .quote {
-        width: 85%;
+  // .home {
+  //   .intro-about-vue {
+  //     .about-banner {
+  //       width: 95%;
+  //     }
+  //     .quote {
+  //       width: 85%;
 
-        blockquote {
-          font-size: 2rem;
-        }
+  //       blockquote {
+  //         font-size: 2rem;
+  //       }
 
-        .detail {
-          font-size: 0.6em;
-        }
-      }
-    }
-  }
+  //       .detail {
+  //         font-size: 0.6em;
+  //       }
+  //     }
+  //   }
+  // }
 
   .about {
     .about-vue {
@@ -1842,45 +1749,7 @@ $default-font-color: #515769;
     }
   }
 
-  .home {
-    .intro-banner {
-      .masg-wrapper {
-        display: none;
-      }
-    }
 
-    .intro-about-vue {
-      .about-banner {
-        display: none;
-      }
-
-      .collage {
-        width: 64%;
-      }
-
-      .quote {
-        width: 83%;
-  
-        blockquote {
-          font-size: .975rem;
-        }
-  
-        .detail {
-          font-size: 0.6em;
-        }
-      }
-    }
-
-    .footer-vue {
-      right: 10px;
-      left: 10px;
-      bottom: 3px;
-
-      .social small{
-        display: none;
-      }
-    }
-  }
 
   .about {
     .about-vue {
@@ -1947,40 +1816,7 @@ $default-font-color: #515769;
     }
   }
 
-  .home {
-    .intro-banner {
-      .masg-wrapper {
-        display: none;
-      }
-    }
-
-    .intro-about-vue {
-      .about-banner {
-        display: none;
-      }
-
-      .collage {
-        width: 70%;
-      }
-
-      .quote {
-        width: 75%;
   
-        blockquote {
-          font-size: 1rem;
-        }
-  
-        .detail {
-          font-size: 0.7em;
-        }
-      }
-    }
-
-    #footer-vue {
-      right: 5px;
-      left: 5px;
-    }
-  }
 
   .about {
     .about-vue {
@@ -2048,40 +1884,7 @@ $default-font-color: #515769;
     }
   }
 
-  .home {
-    .intro-banner {
-      .masg-wrapper {
-        display: none;
-      }
-    }
-
-    .intro-about-vue {
-      .about-banner {
-        display: none;
-      }
-
-      .collage {
-        width: 70%;
-      }
-
-      .quote {
-        width: 70%;
   
-        blockquote {
-          font-size: 1rem;
-        }
-  
-        .detail {
-          font-size: 0.7em;
-        }
-      }
-    }
-
-    #footer-vue {
-      right: 5px;
-      left: 5px;
-    }
-  }
 
   .about {
     .about-vue {
@@ -2150,40 +1953,7 @@ $default-font-color: #515769;
     }
   }
 
-  .home {
-    .intro-banner {
-      .masg-wrapper {
-        display: none;
-      }
-    }
-
-    .intro-about-vue {
-      .about-banner {
-        display: none;
-      }
-
-      .collage {
-        width: 70%;
-      }
-
-      .quote {
-        width: 70%;
-  
-        blockquote {
-          font-size: 1rem;
-        }
-  
-        .detail {
-          font-size: 0.7em;
-        }
-      }
-    }
-
-    #footer-vue {
-      right: 5px;
-      left: 5px;
-    }
-  }
+ 
 
   .about {
     .about-vue {
@@ -2242,40 +2012,7 @@ $default-font-color: #515769;
     }
   }
 
-  .home {
-    .intro-banner {
-      .masg-wrapper {
-        display: none;
-      }
-    }
-
-    .intro-about-vue {
-      .about-banner {
-        display: none;
-      }
-
-      .collage {
-        width: 60%;
-      }
-
-      .quote {
-        width: 60%;
   
-        blockquote {
-          font-size: 1rem;
-        }
-  
-        .detail {
-          font-size: 0.7em;
-        }
-      }
-    }
-
-    #footer-vue {
-      right: 5px;
-      left: 5px;
-    }
-  }
 
   .about {
     .about-vue {
@@ -2343,40 +2080,7 @@ $default-font-color: #515769;
     }
   }
 
-  .home {
-    .intro-banner {
-      .masg-wrapper {
-        display: none;
-      }
-    }
-
-    .intro-about-vue {
-      .about-banner {
-        display: none;
-      }
-
-      .collage {
-        width: 67%;
-      }
-
-      .quote {
-        width: 60%;
   
-        blockquote {
-          font-size: 1.4rem;
-        }
-  
-        .detail {
-          font-size: 0.8em;
-        }
-      }
-    }
-
-    #footer-vue {
-      right: 5px;
-      left: 5px;
-    }
-  }
 
   .about {
     .about-vue {

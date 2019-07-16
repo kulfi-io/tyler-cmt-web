@@ -1,21 +1,21 @@
 <template lang="pug">
     div.privacy
       HeaderVue
-      PrivacyVue
+      Privacy
       FooterVue
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import PrivacyVue from '../components/privacy-vue.vue';
-import HeaderVue from '../components/header-vue.vue';
-import FooterVue from '../components/footer-vue.vue';
+import Privacy from '../components/privacy.vue';
+import HeaderVue from '../components/header.vue';
+import FooterVue from '../components/footer.vue';
 
 export default Vue.extend({
   name: 'privacy',
   components: {
     HeaderVue,
-    PrivacyVue,
+    Privacy,
     FooterVue
   }
 });
