@@ -31,7 +31,7 @@
             <g
               fill="none"
               fill-rule="evenodd"
-              stroke="#1E2122"
+              stroke="#515769"
               stroke-linecap="square"
               stroke-width="2"
               transform="translate(1)"

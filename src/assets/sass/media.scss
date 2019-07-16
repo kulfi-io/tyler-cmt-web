@@ -290,20 +290,20 @@ $default-font-color: #515769;
     padding-left: 15px;
   }
 }
-@media (min-width: 720px) and (max-width: 1139px) {
-  .primary-navigation {
-    a.logo {
-      position: absolute;
-      -webkit-box-ordinal-group: 2;
-      -ms-flex-order: 1;
-      order: 1;
-      left: 50%;
-      top: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
-  }
-}
+// @media (min-width: 720px) and (max-width: 1139px) {
+//   // .primary-navigation {
+//   //   a.logo {
+//   //     position: absolute;
+//   //     -webkit-box-ordinal-group: 2;
+//   //     -ms-flex-order: 1;
+//   //     order: 1;
+//   //     left: 50%;
+//   //     top: 50%;
+//   //     -webkit-transform: translate(-50%, -50%);
+//   //     transform: translate(-50%, -50%);
+//   //   }
+//   // }
+// }
 @media (min-width: 720px) and (max-width: 1139px) and (orientation: portrait) {
   .side-by-side-slider {
     .slide {
@@ -1003,26 +1003,26 @@ $default-font-color: #515769;
     }
   }
 
-  .home {
-    .intro-banner {
-      .masg-wrapper {
-        display: none;
-      }
-    }
+  // .home {
+  //   .intro-banner {
+  //     .masg-wrapper {
+  //       display: none;
+  //     }
+  //   }
 
-    .intro-about-vue {
-      .about-banner {
-        width: 60%;
-      }
+  //   .intro-about-vue {
+  //     .about-banner {
+  //       width: 60%;
+  //     }
   
-      .collage {
-        width: 62%;
-      }
-      .quote {
-        width: 50%
-      }
-    }
-  }
+  //     .collage {
+  //       width: 62%;
+  //     }
+  //     .quote {
+  //       width: 50%
+  //     }
+  //   }
+  // }
 
   .about, .privacy {
     .about-vue {
