@@ -16,22 +16,46 @@ export class Schedule {
     private monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     private eventInputs?: EventInput[];
     private portraitMediaScreen:boolean = false;
+    private lineHeight = 1.5;
+    private LineHeightPxEquivalent = 12.775;
+
+
+    public refresh = (user: User): void => {
+        if(this.calendar) {
+            console.debug('refresh');
+
+            const _calendar = this.calendar;
+            this.calendar.destroy();
+            this.setCalendarConfig(_calendar.el, user);
+            if(this.calendar) {
+                this.calendar.state = _calendar.state;
+                this.calendar.changeView(_calendar.state.viewType);
+                this.calendar.render();
+                this.resizeScroller();
+            }
+        }
+    }
+
+    private setCalendarConfig(target: HTMLElement, user: User) {
+        this.calendar = new Calendar(target, {
+            plugins: [DayGrid, TimeGrid, Interaction],
+            header: false,
+            minTime: '09:00',
+            maxTime: '24:00',
+            allDaySlot: false,
+            selectable: true,
+            events: this.events(user),
+        });
+    }
 
     public init = (target: HTMLDivElement, user: User): void => {
         if (target) {
             this.portraitMediaScreen = screen.width <= 414;
-            this.calendar = new Calendar(target, {
-                plugins: [DayGrid, TimeGrid, Interaction],
-                header: false,
-                minTime: '09:00',
-                maxTime: '24:00',
-                allDaySlot: false,
-                selectable: true,
-                events: this.events(user),
-            });
-
-            this.calendar.render();
-            this.resizeScroller();
+            this.setCalendarConfig(target, user);
+            if(this.calendar) {
+                this.calendar.render();
+                this.resizeScroller();
+            }
         }
     }
 
@@ -137,8 +161,9 @@ export class Schedule {
     private positionMeetings = () => {
         const _startPosition = 10
         const _startLocation = 41;
-        const _mediaStartLocation = 44;
-        const _activeLocation = this.portraitMediaScreen ? _mediaStartLocation : _startLocation;
+        // const _mediaStartLocation = 44;
+        // const _activeLocation = this.portraitMediaScreen ? _mediaStartLocation : _startLocation;
+        const _activeLocation = 41;
         let _lastStartPosition = _startPosition;
         let _lastInterval = 0;
 
@@ -181,9 +206,9 @@ export class Schedule {
                             _style = `top: ${_interval * _activeLocation}px; z-index: 1`;
                         }
 
-                        console.debug('start:', _startTime, ' lastPosition:', _lastStartPosition);
-                        console.debug('interval:', _interval, ' lastInterval:', _lastInterval);
-                        console.debug(' ------------------------- ');
+                        // console.debug('start:', _startTime, ' lastPosition:', _lastStartPosition);
+                        // console.debug('interval:', _interval, ' lastInterval:', _lastInterval);
+                        // console.debug(' ------------------------- ');
 
                         _event.setAttribute('style', _style);
                         _lastStartPosition = _startTime
@@ -195,13 +220,12 @@ export class Schedule {
                 }
             });
         }
-
     }
 
     private resizeWeekViewContent = () => {
-        const _height = 37;
-        const _mediaHeight = 41;
-        const _activeHeight = this.portraitMediaScreen ? _mediaHeight : _height;
+
+        const _halfHeight = this.LineHeightPxEquivalent * this.lineHeight;
+        const _hourHeight = this.LineHeightPxEquivalent * (this.lineHeight * 2);
        
         const _events = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
         if(_events) {
@@ -216,19 +240,20 @@ export class Schedule {
                         let _length = parseInt(_duration[1]) - parseInt(_duration[0]); 
                         
                         if(parseInt(_duration[0]) === 12) {
-                            _length = (parseInt(_duration[1]) + 12) - parseInt(_duration[0]); 
+                            _length = (parseInt(_duration[1]) + 12) - parseInt(_duration[0]) ; 
                         }
 
                         if(_duration[1].indexOf(':00') >= 0) {
-                            _content.style.height =  `${_length * _activeHeight}px`;
+                            _content.style.height =  `${_length * _hourHeight}px`;
                         } else {
-                            _content.style.height = `${_length * 30}px`;
+                            _content.style.height = `${_length * _halfHeight}px`;
                         }
                     }
                 }
             });
         }
     }
+    
     public monthView = (month: HTMLButtonElement, week: HTMLButtonElement): void => {
         if (this.calendar) {
             this.calendar.changeView('dayGridMonth');

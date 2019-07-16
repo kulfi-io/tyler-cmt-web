@@ -1,10 +1,12 @@
 @import "./account.variable.scss";
 
+
 .schedule-vue {
   margin: auto;
   display: block;
 
   @import "./account.helper.scss";
+
 }
 
 .schedule {
@@ -24,7 +26,7 @@
   background: $default-background-color;
   width: 85%;
   margin-top: -43vh;
-  min-height: calc(20vh - 115px);
+  min-height: calc(10vh - 115px);
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 
   .schedule-navigation {
@@ -201,6 +203,11 @@
       min-width: 100%;
     }
   }
+
+  animation-duration: 1s;
+  animation-name: fadeIn;
+  animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+
 }
 
 .schedule-footer {

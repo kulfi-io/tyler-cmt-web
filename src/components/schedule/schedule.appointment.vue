@@ -59,6 +59,10 @@ export default Vue.extend({
         month.addEventListener('click', (e: Event) => {
             Schedule.monthView(month, week);
         });
+
+        window.addEventListener('resize', (e: Event) => {
+            Schedule.refresh(_user);
+        });
     },
     methods: {
         title: function(): string {

@@ -1,8 +1,11 @@
 @import './account.variable.scss';
 
 @media(orientation: portrait) and (max-width: 414px) {
+
+  
   .schedule-vue {
     width: 97%;
+    line-height: 1.5;
 
     .split {
       display: flex;
@@ -46,6 +49,7 @@
         padding-right: unset;
       }
     }
+    
   }
 
   .schedule {
@@ -137,11 +141,13 @@
     min-height: calc(15vh - 115px);
   }
 }
+
 @media(height: 667px) and (width: 375px){
   .schedule-header {
     margin-top: -37vh;
 
   }
+
 }
 
 @media(height: 731px) and (width: 411px){
@@ -187,8 +193,10 @@
 
 // Landscape
 @media(orientation: landscape) and (max-height: 414px){
+  
   .schedule-vue {
     width: 100%;
+    line-height: 1.5;
    
     .split {
       .split-half-right {
@@ -200,7 +208,10 @@
       }
     }
 
-    
+    .footer-vue {
+      bottom: -8px;
+    }
+
   }
 
   .schedule {
@@ -223,8 +234,7 @@
         width: 40%;
         vertical-align: middle;
         .heading {
-          font-size: 1.2rem;
-          line-height: 1.3rem;
+          font-size: 1.4rem;
         }
       }
       .view {
@@ -232,8 +242,7 @@
       }
 
       button {
-        height: 65%;
-        line-height: 1rem;
+        // line-height: 1.3rem;
         text-align: center;
       }
     }
@@ -246,7 +255,7 @@
     min-height: calc(35vh - 115px);
 
     .content {
-      padding: 2% 0 2% 0;
+      padding: 1%;
       .fc-dayGridMonth-view {
         table {
           thead {
@@ -368,9 +377,25 @@
 }
 
 @media (min-width: 1024px) {
-    
-    .schedule {
-        margin-top: 8vh;
-        min-height: calc(50vh - 115px);
+  
+
+  .schedule {
+      margin-top: 8vh;
+      min-height: calc(50vh - 115px);
+  }
+
+  .schedule-header {
+    .schedule-navigation {
+      .title {
+        .heading {
+          font-size: 2.5rem;
+          line-height: 3rem;
+        }
+      }
+
+      button {
+        height: 100%;
+      }
     }
+  }
 }
