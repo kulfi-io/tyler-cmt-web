@@ -132,17 +132,22 @@
   border-bottom: 1px solid $default-input-border-color;
 }
 
+form textarea {
+  min-height: 100px;
+}
+
 form input[type="text"]:hover,
 form input[type="password"]:hover,
 form input[type="text"]:focus,
-form input[type="password"]:focus {
+form input[type="password"]:focus, textarea:hover, textarea:focus {
   border-bottom: 1px solid $input-hover-border-color;
   box-shadow: none;
   color: $input-text-color;
 }
 
 form input[type="text"]::placeholder,
-form input[type="password"]::placeholder {
+form input[type="password"]::placeholder,
+textarea::placeholder {
   text-transform: uppercase;
   color: $default-control-label-color;
   font-size: smaller;

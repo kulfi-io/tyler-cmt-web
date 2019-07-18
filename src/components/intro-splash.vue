@@ -1,31 +1,21 @@
 <template lang="pug">
   main.intro-splash-vue
     div.top-wrapper
-      AfterAnime.top-banner(:options="Top" :loop="false" :autoplay="true")
+      AfterAnime.top-banner(:animation="animations[0]")
     div.bottom-wrapper
-      AfterAnime.bottom-banner(:options="Bottom" :loop="false" :autoplay="true")
+      AfterAnime.bottom-banner(:animation="animations[1]")
+
 </template>
 
 
 <script lang="ts">
 import Vue from "vue";
-import BottomData from "../assets/animations/intro-banner.json";
-import TopData from "../assets/animations/splash-top.json";
-import AfterAnime from './after-anime.vue';
+import AfterAnime from '../components/after-anime.vue';
 export default Vue.extend({
   name: "spash-vue",
   components: {
     AfterAnime,
   },
-  data: function() {
-    return {
-      Bottom: {
-        animationData: BottomData
-      },
-      Top: {
-        animationData: TopData
-      }
-    };
-  }
+  props: ['animations']
 });
 </script>

@@ -4,104 +4,51 @@
   margin: auto;
   display: block;
 
-    .intro-splash-vue {
-      .top-wrapper {
-        margin: auto;
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-      .bottom-wrapper {
-        margin: auto;
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-    }
+  @import "./account.helper.scss";
 
-    .intro-collage-vue {
+  .control-label {
+    display: none;
+  }
+
+  .intro-splash-vue {
+    .top-wrapper {
       margin: auto;
       display: block;
-      max-width: 97%;
-
-      .people-text {
-        margin: auto;
-        display: block;
-        width: 97%;
-        height: 100%;
-      }
-
-      .collage-image {
-        margin: auto;
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-
-      .quote {
-        margin: auto;
-        display: block;
-        width: 96%;
-        text-align: center;
-        animation-duration: 4s;
-        animation-name: fadeIn;
-        animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
-  
-        blockquote {
-          margin: auto;
-          display: block;
-          position: relative;
-          font-family: "Sanchez", serif;
-          font-size: 1.5em;
-          line-height: 1.5em;
-          font-style: italic;
-          color: $blockquote-color;
-        }
-  
-        .detail {
-          text-decoration: none;
-          font-size: small;
-          font-family: sans-serif;
-          text-transform: capitalize;
-          white-space: nowrap;
-          color: $default-read-more;
-  
-          &:hover {
-            color: $default-hover-color;
-          }
-        }
-      }
+      width: 100%;
+      height: 100%;
     }
+    .bottom-wrapper {
+      margin: auto;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
 
-
-  /*
-  .intro-about-vue {
+  .intro-collage-vue {
     margin: auto;
     display: block;
-    height: inherit;
+    max-width: 97%;
 
-    .intro-banner {
+    .people-text {
       margin: auto;
       display: block;
-      height: inherit;
+      width: 97%;
+      height: 100%;
     }
 
-    .about-banner {
+    .collage-image {
       margin: auto;
       display: block;
-      height: inherit;
-      width: 93%;
-    }
-
-    .collage {
-      margin: auto;
-      display: block;
+      width: 100%;
+      height: 100%;
     }
 
     .quote {
       margin: auto;
       display: block;
-      width: 85%;
+      width: 96%;
+      text-align: center;
       animation-duration: 4s;
       animation-name: fadeIn;
       animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
@@ -123,15 +70,82 @@
         font-family: sans-serif;
         text-transform: capitalize;
         white-space: nowrap;
-        color: #f6f6f6;
+        color: $default-read-more;
 
         &:hover {
-          color: #ba4744;
+          color: $default-hover-color;
         }
       }
     }
   }
-  */
+
+  .contact-vue {
+    margin: auto;
+    display: block;
+    .content {
+      margin: auto;
+      display: block;
+      width: 95%;
+
+      .heading {
+        color: $input-text-color;
+        text-indent: 1.5em;
+        margin-bottom: 4vh;
+        letter-spacing: .05em;
+      }
+
+      input[type="text"], textarea {
+        background: transparent;
+      }
+
+      input[type="text"]::placeholder,
+      textarea::placeholder {
+        color: $default-white;
+      }
+
+      .submit {
+        padding-left: unset;
+        padding-right: unset;
+      
+        button[type="submit"] {
+          color: $default-white;
+          background-color: $nav-logo-grey;
+        }
+      }
+
+      .fa {
+        font-size: 12px;
+      }
+
+      .fa-base {
+        color: $nav-logo-grey;
+      }
+
+
+      .other-info {
+        margin: auto;
+        display: block;
+        text-indent: 1em;
+        line-height: 2;
+        color: $input-text-color;
+        font-weight: 400;
+        section {
+          
+          margin-left: 4%;
+          .title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: .1em;
+          }
+
+          p {
+            letter-spacing: .04em;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
 }
 
 @import "./home.media.scss";
