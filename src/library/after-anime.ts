@@ -3,8 +3,8 @@ import lottie,{ AnimationItem }  from "lottie-web";
 export class AfterAnime {
     private target?: HTMLElement;
     public animationItem?: AnimationItem
-    private loop: boolean ;
-    private autoPlay: boolean ;
+    private loop: boolean;
+    private autoPlay: boolean;
     private data: Object;
     public name: string;
     

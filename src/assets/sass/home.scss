@@ -4,6 +4,10 @@
   margin: auto;
   display: block;
 
+  .hide-element {
+    display: none;
+  }
+
   @import "./account.helper.scss";
 
   .control-label {
@@ -82,14 +86,22 @@
   .contact-vue {
     margin: auto;
     display: block;
+    max-width: 97%;
+    
+
+    
     .content {
       margin: auto;
       display: block;
       width: 95%;
 
+      .contact-banner {
+        margin: auto;
+        display: block;
+      }
+
       .heading {
-        color: $input-text-color;
-        text-indent: 1.5em;
+        color: $default-white;
         margin-bottom: 4vh;
         letter-spacing: .05em;
       }
@@ -100,7 +112,7 @@
 
       input[type="text"]::placeholder,
       textarea::placeholder {
-        color: $default-white;
+        color: $default-sub-text; // $default-white;
       }
 
       .submit {
@@ -133,7 +145,7 @@
           
           margin-left: 4%;
           .title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 500;
             letter-spacing: .1em;
           }

@@ -23,14 +23,11 @@ import FooterVue from "../components/footer.vue";
 import Splash from "../components/intro-splash.vue";
 import Collage from "../components/intro-collage.vue";
 import Contact from '../components/intro-contact.vue';
-import AfterAnime from '../library/after-anime';
 import Home from '../library/home';
 import '../assets/sass/home.scss';
 
 const _home = new Home(['splash', 'collage', 'contact']
   , ['#C8C8C8', '#C8C8C8', '#C8C8C8'])
-
-
 
 export default Vue.extend({
   name: "home",
@@ -53,8 +50,6 @@ export default Vue.extend({
     };
   },
   mounted: function() {
-
-
     const _targets = document.querySelectorAll(".swap-position");
     // Shared.methods.setCellPositionTop(_targets);
   },

@@ -3,7 +3,8 @@
 @media (orientation: portrait) and (max-width: 414px) {
 
   .home {
-    .intro-collage-vue {
+    .intro-collage-vue
+     {
       .collage-image {
         width: 95%;
       }
@@ -18,16 +19,192 @@
         }
       }
     }
+
+    .contact-vue {
+      width: 95%;
+
+      .content {
+        .split {
+          display: block;
+          .split-half-right {
+            width: 100%;
+          }
+        
+          .split-half-left {
+            width: 100%;
+          }
+        }
+
+        .heading {
+          text-indent: 1em;
+          margin-bottom: 2vh;
+        }
+        
+        .other-info {
+          text-indent: 1em;
+          line-height: .5;
+
+          section {
+            
+            margin-left: 4%;
+            .title {
+              font-size: 1rem;
+              font-weight: 500;
+              letter-spacing: .1em;
+            }
+  
+            p {
+              letter-spacing: .04em;
+              font-size: .875rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media(height: 568px) and (width: 320px) {
+  .home {
+
+    .contact-vue {
+
+      .content {
+
+        form textarea {
+          min-height: 60px;
+        }
+
+        .form-control {
+          height: 1.775rem;
+        }
+
+        .heading {
+          margin-bottom: .575vh;
+        }
+
+        .other-info {
+          line-height: .5;
+          font-weight: 400;
+          section {
+            
+            margin-left: 4%;
+            padding-top: 1%;
+            
+            .title {
+              font-size: .875rem;
+              letter-spacing: .1em;
+            }
+  
+            p {
+              letter-spacing: .04em;
+              font-size: .675rem;
+            }
+          }
+        }
+
+      }
+
+      // .content {
+      //   overflow-y: visible;
+      //   .split {
+      //     display: block;
+      //     .split-half-right {
+      //       width: 100%;
+      //     }
+        
+      //     .split-half-left {
+      //       width: 100%;
+      //     }
+      //   }
+
+      //   .heading {
+      //     text-indent: 1em;
+      //     margin-bottom: 2vh;
+      //   }
+        
+      //   .other-info {
+      //     margin: auto;
+      //     display: block;
+      //     text-indent: 1em;
+      //     line-height: .5;
+      //     color: $input-text-color;
+      //     font-weight: 400;
+      //     section {
+            
+      //       margin-left: 4%;
+      //       .title {
+      //         font-size: 1rem;
+      //         font-weight: 500;
+      //         letter-spacing: .1em;
+      //       }
+  
+      //       p {
+      //         letter-spacing: .04em;
+      //         font-size: .875rem;
+      //       }
+      //     }
+      //   }
+      // }
+    }
   }
 }
 
 @media (height: 667px) and (width: 375px) {
+  .footer-vue {
+    line-height: 1;
+  }
   .home {
     .intro-collage-vue {
       .quote {
 
         blockquote {
           font-size: 1.1em;
+        }
+      }
+    }
+
+    .contact-vue {
+      width: 95%;
+
+      .content {
+        .split {
+          padding-bottom: 1%;
+          display: block;
+          .split-half-right {
+            width: 100%;
+            
+          }
+        
+          .split-half-left {
+            width: 100%;
+          }
+        }
+
+        .heading {
+          text-indent: 1em;
+          margin-bottom: 1vh;
+        }
+        
+        .other-info {
+          margin: auto;
+          display: block;
+          text-indent: 1em;
+          line-height: .5;
+          color: $input-text-color;
+          font-weight: 400;
+          section {
+            
+            .title {
+              font-size: 1rem;
+              font-weight: 500;
+              letter-spacing: .1em;
+            }
+  
+            p {
+              letter-spacing: .04em;
+              font-size: .875rem;
+            }
+          }
         }
       }
     }
@@ -146,6 +323,63 @@
       }
     }
 
+    .contact-vue {
+      width: 97%;
+
+      .content {
+
+        form textarea {
+          min-height: 60px;
+        }
+
+        .form-control {
+          height: 1.775rem;
+          
+        }
+
+        button {
+          padding: .25%;
+        }
+
+        .heading {
+          text-indent: 1em;
+          margin-bottom: 2vh;
+        }
+
+        .landscape {
+          .heading {
+            text-indent: .2em;
+          }
+        }
+
+        
+        .other-info {
+          text-indent: 1em;
+          line-height: .5;
+          
+          section {
+            
+            margin-left: -3%;
+           
+            .title {
+              font-size: 1rem;
+              font-weight: 500;
+              letter-spacing: 1em;
+            }
+            
+            .landscape-contact {
+              color: $default-white;
+            }
+
+            p {
+              letter-spacing: .08em;
+              font-size: .775rem;
+            }
+          }
+        }
+      }
+    }
+
     .footer-vue {
       right: 10px;
       left: 10px;
@@ -176,6 +410,14 @@
       }
     }
 
+    .content-vue {
+      .content {
+        .landscape-contact {
+          letter-spacing: .145em;
+        }
+      }
+    }
+
     #footer-vue {
       right: 5px;
       left: 5px;
@@ -199,6 +441,20 @@
       }
     }
 
+    .contact-vue {
+      .content {
+        .other-info {
+          section {
+            margin-left: -2%;
+            p {
+              letter-spacing: .13em;
+            }
+          }
+          
+        }
+      }
+    }
+
     #footer-vue {
       right: 5px;
       left: 5px;
@@ -215,8 +471,19 @@
           font-size: 1.1rem;
         }
 
-        .detail {
-          font-size: 0.7em;
+      
+      }
+    }
+
+    .contact-vue {
+      .content {
+        .other-info {
+          section {
+            p {
+              letter-spacing: .14em;
+            }
+          }
+          
         }
       }
     }
@@ -245,6 +512,20 @@
       }
     }
 
+    .contact-vue {
+      .content {
+        .other-info {
+          section {
+            margin-left: -2%;
+            p {
+              letter-spacing: .2em;
+            }
+          }
+          
+        }
+      }
+    }
+
     .footer-vue {
       left:30px;
       #footer-vue {
@@ -253,6 +534,8 @@
       }
     }
   }
+
+ 
 }
 
 @media (width: 823px) and (height: 411px) {
@@ -266,6 +549,20 @@
 
         .detail {
           font-size: 0.7em;
+        }
+      }
+    }
+
+    .contact-vue {
+      .content {
+        .other-info {
+          section {
+            margin-left: -2%;
+            p {
+              letter-spacing: .22em;
+            }
+          }
+          
         }
       }
     }
