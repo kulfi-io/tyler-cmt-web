@@ -2,9 +2,9 @@
   div.home
     HeaderVue
     FullPage.fullpage( :options="options")
-      div(class="section page splash")
+      div(class="section page home")
         Splash(:animations="[splashTop, splashBottom]")
-      div(class="section page collage")
+      div(class="section page vision")
         Collage(:animations="[collageTop, collageBottom]")
       div(class="section page contact")
         Contact
@@ -26,7 +26,7 @@ import Contact from '../components/intro-contact.vue';
 import Home from '../library/home';
 import '../assets/sass/home.scss';
 
-const _home = new Home(['splash', 'collage', 'contact']
+const _home = new Home(['home', 'vision', 'contact']
   , ['#C8C8C8', '#C8C8C8', '#C8C8C8'])
 
 export default Vue.extend({

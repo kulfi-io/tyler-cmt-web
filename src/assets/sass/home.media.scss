@@ -283,7 +283,6 @@
 }
 
 
-
 // Landscape
 @media (orientation: landscape) and (max-height: 414px) {
   
@@ -394,6 +393,24 @@
 
 }
 
+@media(width: 568px) and (height: 320px) {
+  .home {
+    .contact-vue {
+      .content {
+        .heading {
+          font-size: small;
+        }
+        .other-info {
+          section {
+            p {
+              font-size: .65rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 @media (width: 667px) and (height: 375px) {
   .home {
     .intro-collage-vue {
@@ -665,47 +682,76 @@
   }
 }
 
-// @media(width: 1113px) {
-//   .home {
+@media(min-width: 1113px)  {
+  .home {
 
-//     .intro-splash-vue {
-//       line-height: 1.5;
-//       .top-wrapper {
-//         max-height: 45vh;
-//         min-width: 100%;
-//       }
+    .intro-splash-vue {
+      line-height: 1.5;
+      .top-wrapper {
+        max-height: 45vh;
+        min-width: 100%;
+        .top-banner {
+          margin: auto;
+          display: block;
+          width: 90%;
+        }
+      }
 
-//       .bottom-wrapper {
-//         max-height: 55vh;
-//         min-width: 100%;
-//       }
-//     }
+      .bottom-wrapper {
+        max-height: 55vh;
+        min-width: 100%;
+        .bottom-banner {
+          margin: auto;
+          display: block;
+          width: 90%;
+        }
+      }
+    }
 
-//     .intro-collage-vue {
-//       .people-text {
-//         height: 25vh;
-//       }
+    .intro-collage-vue {
+      .people-text {
+        height: 25vh;
+      }
 
-//       .collage-image {
-//         max-width: 103vh;
-//       }
+      .collage-image {
+        max-width: 103vh;
+      }
 
-//       .quote {
-//         width: 90%;
+      .quote {
+        width: 90%;
 
-//         blockquote {
-//           font-size: 1.6rem;
-//         }
+        blockquote {
+          font-size: 1.6rem;
+        }
 
-//         .detail {
-//           font-size: 0.5em;
-//         }
-//       }
-//     }
+        .detail {
+          font-size: 0.5em;
+        }
+      }
+    }
 
-//     #footer-vue {
-//       right: 5px;
-//       left: 5px;
-//     }
-//   }
-// }
+    .contact-vue {
+      .content {
+
+        .contact-banner {
+          margin: auto;
+          display: block;
+  
+          .salutation {
+            margin: auto;
+            display: block;
+            width: 150vh;
+          }
+        }
+  
+        .note-vue {
+          margin: auto;
+          display: block;
+          width: 150vh;
+  
+        }
+      }
+    }
+  }
+}
+

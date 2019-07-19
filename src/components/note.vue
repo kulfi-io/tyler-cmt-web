@@ -39,7 +39,7 @@
                                 p San Francisco, CA 94109
                                 p 415.275.0167
         div.landscape(ref="landscape" class="hide-element")
-            form(id="note-form-lansscape")
+            form(id="note-form-landscape")
                 div.heading
                     span send us a note!
                 div.form-group(class="split")

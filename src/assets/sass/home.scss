@@ -95,10 +95,7 @@
       display: block;
       width: 95%;
 
-      .contact-banner {
-        margin: auto;
-        display: block;
-      }
+      
 
       .heading {
         color: $default-white;
@@ -158,6 +155,7 @@
       }
     }
   }
+  
 }
 
 @import "./home.media.scss";
