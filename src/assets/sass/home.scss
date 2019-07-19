@@ -14,7 +14,7 @@
     display: none;
   }
 
-  .intro-splash-vue {
+  .intro-home-vue {
     .top-wrapper {
       margin: auto;
       display: block;
@@ -29,7 +29,7 @@
     }
   }
 
-  .intro-collage-vue {
+  .intro-vision-vue {
     margin: auto;
     display: block;
     max-width: 97%;
@@ -83,19 +83,116 @@
     }
   }
 
-  .contact-vue {
+  .intro-login-vue {
     margin: auto;
     display: block;
     max-width: 97%;
-    
 
+    .split {
+
+      .split-login{
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 1%;
+        width: 60%;
+      }
+
+      .split-for-cb {
+        width: 10%;
+      }
     
+      .split-for-label {
+        width: 80%;
+        color: $default-white;
+      }
+    }
+
     .content {
       margin: auto;
       display: block;
       width: 95%;
 
+      .login-banner {
+        margin: auto;
+        display: block;
+
+        .salutation {
+          margin: auto;
+          display: block;
+          width: 40vh;
+          margin-bottom: 10vh;
+        }
+      }
+
+      .heading {
+        color: $default-white;
+        margin-bottom: 4vh;
+        letter-spacing: .05em;
+      }
+
+      input[type="text"], input[type="password"] {
+        background: transparent;
+      }
+
+      input[type="text"]::placeholder
+      , input[type="password"]::placeholder
+      , textarea::placeholder {
+        color: $default-sub-text; // $default-white;
+      }
+
+      .submit {
+        padding-left: unset;
+        padding-right: unset;
       
+        button[type="submit"] {
+          color: $default-white;
+          background-color: $nav-logo-grey;
+        }
+      }
+
+      .fa {
+        font-size: 12px;
+      }
+
+      .fa-base {
+        color: $nav-logo-grey;
+      }
+
+
+      .other-info {
+        margin: auto;
+        display: block;
+        text-indent: 1em;
+        line-height: 2;
+        color: $input-text-color;
+        font-weight: 400;
+        section {
+          
+          margin-left: 4%;
+          .title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: .1em;
+          }
+
+          p {
+            letter-spacing: .04em;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .contact-vue {
+    margin: auto;
+    display: block;
+    max-width: 97%;
+    
+    .content {
+      margin: auto;
+      display: block;
+      width: 95%;
 
       .heading {
         color: $default-white;
@@ -155,7 +252,7 @@
       }
     }
   }
-  
+
 }
 
 @import "./home.media.scss";

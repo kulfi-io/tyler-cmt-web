@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.intro-collage-vue
+    div.intro-vision-vue
       AfterAnime.people-text(:animation="animations[0]")
       AfterAnime.collage-image(:animation="animations[1]")
       div.quote

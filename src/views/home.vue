@@ -6,6 +6,8 @@
         IntroHome(:animations="[homeTop, homeBottom]")
       div(class="section page vision")
         IntroVision(:animations="[visionTop, visionBottom]")
+      div(class="section page login")
+        IntroLogin
       div(class="section page contact")
         IntroContact
       //-   h3 Services
@@ -22,12 +24,13 @@ import HeaderVue from "../components/header.vue";
 import FooterVue from "../components/footer.vue";
 import IntroHome from "../components/intro-home.vue";
 import IntroVision from "../components/intro-vision.vue";
+import IntroLogin from '../components/intro-login.vue';
 import IntroContact from '../components/intro-contact.vue';
 import Home from '../library/home';
 import '../assets/sass/home.scss';
 
-const _home = new Home(['home', 'vision', 'contact']
-  , ['#C8C8C8', '#C8C8C8', '#C8C8C8'])
+const _home = new Home(['home', 'vision', 'login', 'contact']
+  , ['#C8C8C8', '#C8C8C8', '#C8C8C8', '#C8C8C8]'])
 
 export default Vue.extend({
   name: "home",
@@ -37,6 +40,7 @@ export default Vue.extend({
     FooterVue,
     IntroHome,
     IntroVision,
+    IntroLogin,
     IntroContact
   },
   data() {

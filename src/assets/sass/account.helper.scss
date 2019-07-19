@@ -175,6 +175,7 @@ textarea::placeholder {
     border-right: 1px solid $default-input-border-color;
   }
 }
+
 .split {
   display: flex;
   .split-half-right {
@@ -191,13 +192,36 @@ textarea::placeholder {
     width: 50%;
   }
 
-  .split-third-start {
-    width: 33%;
+  .parallel {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    width: 100%
   }
-  .split-third-middle {
-    width: 33%;
+
+  .split-flex-1 {
+    padding-top: 1.95vh;
+    flex: 1;
   }
-  .split-third-last {
+
+  .split-third {
+    width: 33%;
+    padding-right: 1%;
+  }
+
+  .split-60{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 1%;
+    width: 60%;
+  }
+
+  .split-40{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    width: 40%
+  }
+
+  .split-third-end {
     width: 33%;
   }
 
@@ -207,6 +231,7 @@ textarea::placeholder {
     width: 50%;
     color: $default-control-label-color;
     font-size: 0.875rem;
+    height: 0.875rem;
 
     a {
       color: $default-control-label-color;

@@ -1,5 +1,5 @@
 <template lang="pug">
-  main.intro-splash-vue
+  main.intro-home-vue
     div.top-wrapper
       AfterAnime.top-banner(:animation="animations[0]")
     div.bottom-wrapper

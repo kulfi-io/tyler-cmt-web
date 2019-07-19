@@ -43,18 +43,18 @@
                 div.heading
                     span send us a note!
                 div.form-group(class="split")
-                    div.split-third-start
+                    div.split-third
                         Email( :readyToSubmit="readyToSubmit"
                         :tag="'email'"
                         :placeholder="'email'"
                         :title="'email is required'"
                         :label="'email'")
-                    div.split-third-middle
+                    div.split-third
                         Name(:readyToSubmit="readyToSubmit"
                         :tag="'first'"
                         :placeholder="'firstname'"
                         :title="'firstname is required'")
-                    div.split-third-last
+                    div.split-third-end
                         Name(:readyToSubmit="readyToSubmit"
                         :tag="'last'"
                         :placeholder="'lastname'"
