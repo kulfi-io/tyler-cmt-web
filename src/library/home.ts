@@ -9,11 +9,10 @@ export default class Home {
     private fullpageScrollOverflow: boolean;
     private fullpageScrollBar: boolean;
     private fullpageMenu: string;
-    private fullpageAnchors: string[];
     private fullpageSectionsColor: string[];
     public animations: AfterAnime[];
     public options: Object;
-
+    public fullpageAnchors: string[];
 
     constructor(anchors: string[], sectionsColor:string[], overflow: boolean=false, scrollBar: boolean=false, menu: string='#menu') {
         this.fullpageLicenseKey = '002D6FD2-0EC343D4-9403ACA4-CB7CDBFB';
@@ -73,10 +72,10 @@ export default class Home {
     private initAnimations = (): AfterAnime[]  => {
 
         const _animations: AfterAnime[] = [];
-        _animations.push(this.createAnimation('splash-top', SplashTopData));
-        _animations.push(this.createAnimation('splash-bottom', SplashBottomData));
-        _animations.push(this.createAnimation('collage-top', CollageHeadingData));
-        _animations.push(this.createAnimation('collage-bottom', CollageImageData));
+        _animations.push(this.createAnimation('home-top', SplashTopData));
+        _animations.push(this.createAnimation('home-bottom', SplashBottomData));
+        _animations.push(this.createAnimation('vision-top', CollageHeadingData));
+        _animations.push(this.createAnimation('vision-bottom', CollageImageData));
 
         return _animations;
     }

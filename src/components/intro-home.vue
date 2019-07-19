@@ -4,9 +4,7 @@
       AfterAnime.top-banner(:animation="animations[0]")
     div.bottom-wrapper
       AfterAnime.bottom-banner(:animation="animations[1]")
-
 </template>
-
 
 <script lang="ts">
 import Vue from "vue";

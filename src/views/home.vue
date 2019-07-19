@@ -3,11 +3,11 @@
     HeaderVue
     FullPage.fullpage( :options="options")
       div(class="section page home")
-        Splash(:animations="[splashTop, splashBottom]")
+        IntroHome(:animations="[homeTop, homeBottom]")
       div(class="section page vision")
-        Collage(:animations="[collageTop, collageBottom]")
+        IntroVision(:animations="[visionTop, visionBottom]")
       div(class="section page contact")
-        Contact
+        IntroContact
       //-   h3 Services
       //- div(class="section page contact")
       //-   h3 Contact
@@ -20,9 +20,9 @@ import Vue from "vue";
 import FullPage from "vue-fullpage.js/src/FullPage.vue";
 import HeaderVue from "../components/header.vue";
 import FooterVue from "../components/footer.vue";
-import Splash from "../components/intro-splash.vue";
-import Collage from "../components/intro-collage.vue";
-import Contact from '../components/intro-contact.vue';
+import IntroHome from "../components/intro-home.vue";
+import IntroVision from "../components/intro-vision.vue";
+import IntroContact from '../components/intro-contact.vue';
 import Home from '../library/home';
 import '../assets/sass/home.scss';
 
@@ -35,17 +35,17 @@ export default Vue.extend({
     HeaderVue,
     FullPage,
     FooterVue,
-    Splash,
-    Collage,
-    Contact
+    IntroHome,
+    IntroVision,
+    IntroContact
   },
   data() {
     return {
       options: _home.options,
-      splashTop:  _home.findAnimation('splash-top'),
-      splashBottom: _home.findAnimation('splash-bottom'),
-      collageTop: _home.findAnimation('collage-top'),
-      collageBottom: _home.findAnimation('collage-bottom'),
+      homeTop:  _home.findAnimation(`${_home.fullpageAnchors[0]}-top`),
+      homeBottom: _home.findAnimation(`${_home.fullpageAnchors[0]}-bottom`),
+      visionTop: _home.findAnimation(`${_home.fullpageAnchors[1]}-top`),
+      visionBottom: _home.findAnimation(`${_home.fullpageAnchors[1]}-bottom`),
 
     };
   },
