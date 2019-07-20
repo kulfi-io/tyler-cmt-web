@@ -8,6 +8,8 @@
         IntroVision(:animations="[visionTop, visionBottom]")
       div(class="section page login")
         IntroLogin
+      div(class="section page register")
+        IntroRegister
       div(class="section page contact")
         IntroContact
       //-   h3 Services
@@ -26,11 +28,12 @@ import IntroHome from "../components/intro-home.vue";
 import IntroVision from "../components/intro-vision.vue";
 import IntroLogin from '../components/intro-login.vue';
 import IntroContact from '../components/intro-contact.vue';
+import IntroRegister from '../components/intro-register.vue';
 import Home from '../library/home';
 import '../assets/sass/home.scss';
 
-const _home = new Home(['home', 'vision', 'login', 'contact']
-  , ['#C8C8C8', '#C8C8C8', '#C8C8C8', '#C8C8C8]'])
+const _home = new Home(['home', 'vision', 'login', 'register', 'contact']
+  , ['#C8C8C8', '#C8C8C8', '#C8C8C8', '#C8C8C8', '#C8C8C8]'])
 
 export default Vue.extend({
   name: "home",
@@ -41,6 +44,7 @@ export default Vue.extend({
     IntroHome,
     IntroVision,
     IntroLogin,
+    IntroRegister,
     IntroContact
   },
   data() {

@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.contact-vue
+    div.intro-contact-vue
         div.content 
             div.contact-banner
                 img.salutation( src="../assets/img/hear.png")
