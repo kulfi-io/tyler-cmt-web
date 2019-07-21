@@ -3,7 +3,7 @@
       AfterAnime.people-text(:animation="animations[0]")
       AfterAnime.collage-image(:animation="animations[1]")
       div.quote
-        blockquote Our anatomy is structured to work as a cohesive, singular being.         
+        blockquote.media-standard Our anatomy is structured to work as a cohesive, singular being.         
           a.detail(class="health" href="about") read more...
 </template>
 

@@ -19,7 +19,7 @@
                             :tag="'first'"
                             :placeholder="'firstname'"
                             :title="'firstname is required'")
-                            Name(class="split-half-left" :readyToSubmit="readyToSubmit"
+                            Name(class="split-half-right" :readyToSubmit="readyToSubmit"
                             :tag="'last'"
                             :placeholder="'lastname'"
                             :title="'lastname is required'")

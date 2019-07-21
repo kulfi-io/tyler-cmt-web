@@ -33,6 +33,7 @@
         {
           width: 100%;
           padding-left: unset;
+          padding-right: unset;
           
         }
 
@@ -77,6 +78,7 @@
           color: $default-white;
           margin-bottom: 3vh;
           letter-spacing:  .375vh;
+          font-size: small;
         }
   
         input[type="text"], input[type="password"] {
@@ -137,7 +139,6 @@
     .intro-register-vue {
       max-width: 100%;
 
-
       .content {
 
         .hidden-left {
@@ -158,6 +159,7 @@
 
         .heading {
           margin-bottom: .375vh;
+          font-size: small;
         }
 
         .register-banner {
@@ -221,7 +223,6 @@
       font-size: .875rem;
     }
 
-   
     .intro-register-vue {
       .content {
        
@@ -494,24 +495,34 @@
 
     .intro-vision-vue {
       .people-text {
-        height: 22vh;
-        width: 118vh;
+        height: 18vh;
       }
 
       .collage-image {
-        width: 90vh;
+        width: 75vh;
       }
 
       .quote {
         width: 85%;
         blockquote {
-          font-size: 0.975rem;
+          font-size: 0.85rem;
         }
 
         .detail {
           font-size: 0.6em;
         }
       }
+    }
+
+    .intro-login-vue {
+      max-width: 100%;
+
+      .content {
+        .heading {
+          font-size: small;
+        }
+      }
+      
     }
 
     .intro-contact-vue {
@@ -587,6 +598,85 @@
 
 @media(width: 568px) and (height: 320px) {
   .home {
+    .form-control {
+      height: 1.775rem;
+      padding: .25%;
+      font-size: .875rem;
+    }
+
+    .form-group {
+      margin-bottom: .5rem;
+    }
+
+    .intro-vision-vue {
+      .quote {
+        .display-standard {
+          display: none;
+        }
+
+        .display-small {
+          display: block;
+        }
+      }
+    }
+
+    .intro-register-vue {
+      max-width: 100%;
+      .split {
+        padding: .05vh;
+      }
+
+      .form-group {
+        margin-bottom: .3rem;
+      }
+      .submit {
+        padding-top: 1vh;
+      }
+
+      .text-muted {
+        .form-text {
+          font-size: x-small;
+        }
+      }
+
+      .instructions {
+        
+        .split {
+          padding: .1vh;
+
+          .split-right {
+            padding: 0;
+            padding-left: 1vh;
+            width: 50%;
+          }
+    
+          .split-left {
+            padding: 0;
+            padding-right: 1vh;
+            width: 50%;
+          }
+        }
+      }
+
+      .content {
+        width: 100%;
+        .heading {
+          font-size: small;
+          text-align: center;
+        }
+        .register-banner {
+          .salutation {
+            margin-bottom: 2vh;
+            width: 60vh;
+
+          }
+        }
+
+        
+      }
+
+    }
+
     .intro-contact-vue {
       .content {
         .heading {

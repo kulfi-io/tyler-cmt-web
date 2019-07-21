@@ -1,8 +1,8 @@
 import AfterAnime from './after-anime';
 import SplashBottomData from  '../assets/animations/intro-banner.json';  //"../assets/animations/intro-banner.json";
 import SplashTopData from "../assets/animations/splash-top.json";
-import CollageImageData from '../assets/animations/collage.json';
-import CollageHeadingData from '../assets/animations/about-banner.json';
+import CollageImageData from '../assets/animations/collage-1.json';
+import CollageHeadingData from '../assets/animations/healing.json';
 
 export default class Home {
     private fullpageLicenseKey: string;

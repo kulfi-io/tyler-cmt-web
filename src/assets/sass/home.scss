@@ -69,6 +69,10 @@
         color: $blockquote-color;
       }
 
+      .media-small {
+        display: none;
+      }
+
       .detail {
         text-decoration: none;
         font-size: small;
@@ -215,13 +219,13 @@
   
         .split-right {
           padding: 0;
-          padding-left: 1%;
+          padding-left: .2vh;
           width: 50%;
         }
   
         .split-left {
           padding: 0;
-          padding-right: 1%;
+          padding-right: .2vh;
           width: 50%;
         }
       }
@@ -244,6 +248,15 @@
       margin: auto;
       display: block;
       width: 95%;
+
+      
+
+      input[type="text"]::placeholder
+      , input[type="password"]::placeholder
+      , textarea::placeholder {
+        color: $default-sub-text; // $default-white;
+        font-size: x-small;
+      }
 
       .register-banner {
         margin: auto;

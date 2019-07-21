@@ -108,7 +108,7 @@
 }
 
 .submit {
-  padding: 3vh .4vh 1vh .4vh;
+  padding: 2vh .4vh .5vh .4vh;
 
   button[type="submit"] {
     color: $default-white;
@@ -179,12 +179,13 @@ textarea::placeholder {
   padding: .4vh .2vh .4vh .2vh;
   .split-half-right {
     padding: inherit;
-    padding-right: 0;
+    // padding-right: 0;
     width: 50%;
   }
 
   .split-half-left {
     padding: inherit;
+    padding-right: 2vh;
     padding-left: 0;
     width: 50%;
   }
