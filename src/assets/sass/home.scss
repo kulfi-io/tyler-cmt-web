@@ -18,34 +18,35 @@
     .top-wrapper {
       margin: auto;
       display: block;
-      width: 100%;
-      height: 100%;
+      max-width: 100vw;
+      max-height: 100vh;
     }
     .bottom-wrapper {
       margin: auto;
       display: block;
-      width: 100%;
-      height: 100%;
+      max-width: 100vw;
+      max-height: 100vh;
     }
   }
 
   .intro-vision-vue {
     margin: auto;
     display: block;
-    max-width: 97%;
+    max-width: 97vw;
+    max-height: 97vh;
 
     .people-text {
       margin: auto;
       display: block;
-      width: 97%;
-      height: 100%;
+      // width: 97%;
+      // height: 100%;
     }
 
     .collage-image {
       margin: auto;
       display: block;
-      width: 100%;
-      height: 100%;
+      // width: 100%;
+      // height: 100%;
     }
 
     .quote {

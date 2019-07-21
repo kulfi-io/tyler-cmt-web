@@ -7,13 +7,10 @@
 
     .intro-vision-vue
     {
-      .collage-image {
-        width: 95%;
-      }
       .quote {
 
         blockquote {
-          font-size: 0.875rem;
+          font-size: 0.775rem;
         }
 
         .detail {
@@ -287,7 +284,7 @@
       .quote {
 
         blockquote {
-          font-size: 1.1em;
+          font-size: .9em;
         }
       }
     }
@@ -363,7 +360,7 @@
       .quote {
 
         blockquote {
-          font-size: 1.1em;
+          font-size: 1em;
         }
 
         .detail {
@@ -377,17 +374,15 @@
 @media (height: 736px) and (width: 414px) {
   .home {
     .intro-vision-vue {
-      .about-banner {
-        width: 95%;
-      }
+
       .quote {
 
         blockquote {
-          font-size: 1.2rem;
+          font-size: 1rem;
         }
 
         .detail {
-          font-size: 0.6em;
+          font-size: 0.7em;
         }
       }
     }
@@ -400,7 +395,7 @@
       .quote {
 
         blockquote {
-          font-size: 1.1em;
+          font-size: 1em;
         }
 
         .detail {
@@ -478,7 +473,7 @@
 
 // Landscape
 @media (orientation: landscape) and (max-height: 414px) {
-  
+  $vision-wrapper-width: 85vw; 
   .home {
 
     .intro-home-vue {
@@ -494,22 +489,22 @@
     }
 
     .intro-vision-vue {
+      max-width: $vision-wrapper-width;
       .people-text {
-        height: 18vh;
+        max-width: 60vw;
       }
 
       .collage-image {
-        width: 75vh;
+        max-width: 45vw;
       }
 
       .quote {
-        width: 85%;
         blockquote {
-          font-size: 0.85rem;
+          font-size: 0.8rem;
         }
 
         .detail {
-          font-size: 0.6em;
+          font-size: 0.8em;
         }
       }
     }
@@ -609,13 +604,21 @@
     }
 
     .intro-vision-vue {
+      .people-text {
+        max-width: 70vw;
+      }
+
+      .collage-image {
+        max-width: 40vw;
+      }
+
       .quote {
-        .display-standard {
-          display: none;
+        blockquote {
+          font-size: 0.75rem;
         }
 
-        .display-small {
-          display: block;
+        .detail {
+          font-size: .8em;
         }
       }
     }
@@ -693,21 +696,22 @@
     }
   }
 }
+
 @media (width: 667px) and (height: 375px) {
   .home {
-    .intro-vision-vue {
+    // .intro-vision-vue {
 
-      .quote {
+    //   .quote {
 
-        blockquote {
-          font-size: 1rem;
-        }
+    //     blockquote {
+    //       font-size: 1rem;
+    //     }
 
-        .detail {
-          font-size: 0.7em;
-        }
-      }
-    }
+    //     .detail {
+    //       font-size: 0.7em;
+    //     }
+    //   }
+    // }
 
     .content-vue {
       .content {
@@ -731,11 +735,11 @@
       .quote {
 
         blockquote {
-          font-size: 1rem;
+          font-size: .9rem;
         }
 
         .detail {
-          font-size: 0.7em;
+          font-size: 0.65em;
         }
       }
     }
@@ -767,12 +771,14 @@
 
       .quote {
         blockquote {
-          font-size: 1.1rem;
+          font-size: .9rem;
         }
-
-      
       }
     }
+
+      
+    //   }
+    // }
 
     .intro-contact-vue {
       .content {
@@ -799,16 +805,21 @@
   .home {
     .intro-vision-vue {
 
+      .people-text {
+        max-width: 52vw;
+      }
+
+      .collage-image {
+        max-width: 35vw;
+      }
+
       .quote {
-
         blockquote {
-          font-size: 1rem;
-        }
-
-        .detail {
-          font-size: 0.7em;
+          font-size: 0.9rem;
         }
       }
+     
+
     }
 
     .intro-contact-vue {
@@ -841,15 +852,20 @@
   .home {
     .intro-vision-vue {
 
+      .people-text {
+        max-width: 55vw;
+      }
+
+      .collage-image {
+        max-width: 40vw;
+      }
+
       .quote {
         blockquote {
-          font-size: 1.2rem;
-        }
-
-        .detail {
-          font-size: 0.7em;
+          font-size: .9rem; 
         }
       }
+
     }
 
     .intro-contact-vue {
@@ -892,20 +908,16 @@
     }
 
     .intro-vision-vue {
+
       .people-text {
-        max-width: 90%;
-        max-height: 25vh;
+        max-width: 70vw;
       }
 
       .collage-image {
-        max-width: 103vh;
+        max-width: 65vw;
       }
 
       .quote {
-
-        blockquote {
-          font-size: 1.5rem;
-        }
 
         .detail {
           font-size: 0.6em;
@@ -941,23 +953,19 @@
     }
 
     .intro-vision-vue {
+
       .people-text {
-        height: 25vh;
+        max-width: 70vw;
       }
 
       .collage-image {
-        max-width: 103vh;
+        max-width: 65vw;
       }
 
       .quote {
-        width: 90%;
-
-        blockquote {
-          font-size: 1.6rem;
-        }
 
         .detail {
-          font-size: 0.5em;
+          font-size: 0.6em;
         }
       }
     }
@@ -991,23 +999,19 @@
     }
 
     .intro-vision-vue {
+
       .people-text {
-        height: 25vh;
+        max-width: 53vw;
       }
 
       .collage-image {
-        max-width: 103vh;
+        max-width: 53vw;
       }
 
       .quote {
-        width: 90%;
-
-        blockquote {
-          font-size: 1.6rem;
-        }
 
         .detail {
-          font-size: 0.5em;
+          font-size: 0.6em;
         }
       }
     }
