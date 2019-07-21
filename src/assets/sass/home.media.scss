@@ -511,7 +511,16 @@
 
     .intro-login-vue {
       max-width: 100%;
+      
+      .split {
+        .split-for-cb {
+          line-height: .5;
+        }
 
+        .split-for-label {
+          font-size: smaller;
+        }
+      }
       .content {
         .heading {
           font-size: small;
