@@ -47,7 +47,7 @@
   position: relative;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  width: 1%;
+  width: .2vh;
   margin-bottom: 0;
 }
 
@@ -108,9 +108,7 @@
 }
 
 .submit {
-  padding-left: 2%;
-  padding-right: 2%;
-  padding-top: 2%;
+  padding: 3vh .4vh 1vh .4vh;
 
   button[type="submit"] {
     color: $default-white;
@@ -178,47 +176,41 @@ textarea::placeholder {
 
 .split {
   display: flex;
+  padding: .4vh .2vh .4vh .2vh;
   .split-half-right {
-    padding-top: 2%;
-    padding-bottom: 2%;
-    padding-left: 1%;
-    padding-right: 1%;
+    padding: inherit;
+    padding-right: 0;
     width: 50%;
   }
 
   .split-half-left {
-    padding-top: 2%;
-    padding-bottom: 2%;
-    padding-right: 1%;
+    padding: inherit;
+    padding-left: 0;
     width: 50%;
   }
 
   .parallel {
-    padding-top: 2%;
-    padding-bottom: 2%;
+    padding: inherit;
     width: 100%
   }
 
   .split-flex-1 {
-    padding-top: 1.95vh;
+    padding-top: .4vh;
     flex: 1;
   }
 
   .split-third {
     width: 33%;
-    padding-right: 1%;
+    padding-right: .2vh;
   }
 
   .split-60{
-    padding-top: 2%;
-    padding-bottom: 2%;
-    padding-left: 1%;
+    padding: .4vh 0 .4vh .2vh;
     width: 60%;
   }
 
   .split-40{
-    padding-top: 2%;
-    padding-bottom: 2%;
+    padding: .4vh 0 .4vh 0;
     width: 40%
   }
 
@@ -227,8 +219,7 @@ textarea::placeholder {
   }
 
   .split-half-flush {
-    padding: 2%;
-    padding-top: 0;
+    padding: .4vh 0 .4vh 0;
     width: 50%;
     color: $default-control-label-color;
     font-size: 0.875rem;

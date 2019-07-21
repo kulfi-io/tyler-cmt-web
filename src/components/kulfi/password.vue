@@ -3,8 +3,8 @@
     label.control-label( :for="tag") {{ label }}
       span.required-field *
     div.input-group
-      div.input-group-prepend
-        span.input-group-text( class="input-icon-btn" :id="`toggle-${tag}`"
+      div.input-group-prepend(class="hidden-left")
+        span.input-group-text( class="input-icon-btn " :id="`toggle-${tag}`"
         :data-target="tag" data-display="hidden")
           font-awesome-icon.fa( id="fa-pwd-eye" class="fa-eye fa-base" :icon="iconEye" aria-hidden="true")
       input.form-control(type="password" :id="tag" 

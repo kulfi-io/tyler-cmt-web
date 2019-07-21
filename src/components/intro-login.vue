@@ -17,7 +17,7 @@
                                 :placeholder="'Password'"
                                 :title="'Password is required'"
                                 :label="'Password'")
-                        div-split
+                        div.split
                             div.split-half-flush(class="split custom-control-input")
                                 div.split-for-cb
                                     input.rememeber(type="checkbox" ref="remember")
@@ -36,11 +36,11 @@
                                 :placeholder="'email'"
                                 :title="'email is required'"
                                 :label="'email'")
-                        div-split
+                        div.split
                             div.split-half-flush(class="split custom-control-input")
                             div.split-flex-1
                         div.form-group(class="submit")
-                            button.form-control(type="submit" ref="submit") Send password reset email
+                            button.form-control(type="submit" ref="submit") Send reset email
 </template>
 
 <script lang="ts">
