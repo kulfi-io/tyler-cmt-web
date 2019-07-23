@@ -3,6 +3,7 @@ import SplashBottomData from  '../assets/animations/intro-banner.json';  //"../a
 import SplashTopData from "../assets/animations/splash-top.json";
 import CollageImageData from '../assets/animations/collage-1.json';
 import CollageHeadingData from '../assets/animations/healing.json';
+import CookieManager from '../library/cookieManager';
 
 export default class Home {
     private fullpageLicenseKey: string;
