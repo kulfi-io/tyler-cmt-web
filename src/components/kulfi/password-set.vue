@@ -2,40 +2,144 @@
     div.kulfi-password-set
         div.split
             div.split-half-left
-                PasswordVue(:tag="tag" :title="title" 
+                Password(:tag="tag" :title="title" 
                 :label="label" :placeholder="placeholder"
-                :readyToSubmit="readyToSubmit")     
+                :account="account" :set="true")     
             div.split-half-right
-                PasswordVue(:tag="`verify-${tag}`" :title="title"
+                Password(  :tag="`verify-${tag}`" :title="title"
                 :label="'verify'" :placeholder="placeholder"
-                :readyToSubmit="readyToSubmit")
+                :account="account" :set="true")
         div.instructions
             div.split
                 div.text-muted( class="split-left")
-                    small.form-text(class="form-text" id="pwd-length") At least 8 characters long (max of 15).
+                    small.form-text(ref="pwdLength" class="form-text text-muted" id="pwd-length") At least 8 characters long (max of 15).
                 div.text-muted( class="split-right")
-                    small.form-text(class="form-text" id="pwd-match") Password matches.
+                    small.form-text(ref="pwdMatch" class="form-text text-muted" id="pwd-match") Password matches.
             div.split   
                 div.text-muted( class="split-left")
-                    small.form-text(class="form-text" id="pwd-upper") Contains at least 1 upper case.
+                    small.form-text(ref="pwdUpper" class="form-text text-muted" id="pwd-upper") Contains at least 1 upper case.
                 div.text-muted( class="split-right")   
-                    small.form-text(class="form-text" id="pwd-lower") Contains at least 1 lower case.
+                    small.form-text(ref="pwdLower" class="form-text text-muted" id="pwd-lower") Contains at least 1 lower case.
             div.split
                 div.text-muted(class="split-left")    
-                    small.form-text(class="form-text" id="pwd-number") Contains at least 1 number.
+                    small.form-text(ref="pwdNumber" class="form-text text-muted" id="pwd-number") Contains at least 1 number.
                 div.text-muted(class="split-right")
-                    small.form-text(class="form-text" id="pwd-special") Contains at least 1 special [!@#$%] character.
+                    small.form-text(ref="pwdSpecial" class="form-text text-muted" id="pwd-special") Contains at least 1 special [!@#$%] character.
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import Library from '../../library/account';
-import PasswordVue from '../kulfi/password.vue';
+import { validKeyPair } from '../../library/account';
+import Password from '../kulfi/password.vue';
+
 export default Vue.extend({
     name: 'kulfi-password-set',
-    props: ["tag", "title", "placeholder", "readyToSubmit", "label"],
+    props: ["tag", "title", "placeholder", "label"],
     components: {
-        PasswordVue,
+        Password,
+    },
+    computed: {
+        account: function()  {
+            return this.$parent.$data.account;
+        }
+    },
+    mounted: function() {
+        const _self = this;
+        const _pwd = <HTMLInputElement>this.$el.querySelector(`#${this.tag}`);
+        const _verify = <HTMLInputElement>this.$el.querySelector(`#verify-${this.tag}`);
+            
+        _pwd.addEventListener('keyup', (e: Event) => {
+            _self.validatePassword(_pwd, _verify);
+        });
+
+        _pwd.addEventListener('focus', (e: Event) => {
+            _self.resetValidation();
+            _self.validatePassword(_pwd, _verify);
+        });
+
+        _verify.addEventListener('keyup', (e: Event) => {
+            _self.validatePassword(_verify, _pwd);
+        });
+
+        _verify.addEventListener('focus', (e: Event) => {
+            _self.resetValidation();
+            _self.validatePassword(_verify, _pwd);
+        });
+
+    },
+    methods: {
+        setMatched: function(label:string, matched: boolean, target: Element): void {
+            const _library = this.$parent.$data.account;
+            matched ? _library.passed(target) : _library.muted(target);
+            const _pair: validKeyPair = {
+                name: label,
+                value: matched
+            }
+
+            _library.setValidationResult(_pair);
+
+        },
+        resetValidation: function() {
+            const _library = this.$parent.$data.account;
+            _library.pwdCriteriaMatched = [];
+        
+            var _length = <Element>this.$refs.pwdLength; 
+            var _upper = <Element>this.$refs.pwdUpper;
+            var _lower = <Element>this.$refs.pwdLower; 
+            var _number = <Element>this.$refs.pwdNumber;
+            var _special = <Element>this.$refs.pwdSpecial; 
+            var _match = <Element>this.$refs.pwdMatch;
+
+            _library.muted(_length);
+            _library.muted(_upper);
+            _library.muted(_lower);
+            _library.muted(_number);
+            _library.muted(_special);
+        },
+        validatePassword: function(source: HTMLInputElement, target: HTMLInputElement): boolean {
+            const _library = this.$parent.$data.account
+            const _parent = <Element>source.closest('main');
+            var _length = <Element>this.$refs.pwdLength; 
+            var _upper = <Element>this.$refs.pwdUpper;
+            var _lower = <Element>this.$refs.pwdLower; 
+            var _number = <Element>this.$refs.pwdNumber;
+            var _special = <Element>this.$refs.pwdSpecial; 
+            var _match = <Element>this.$refs.pwdMatch;
+            var _passFa = _parent.querySelectorAll('.fa-pwd');
+            
+            var _sourceValue = source.value;
+            var _targetValue = target.value;
+
+            if (!_sourceValue.length || _sourceValue.length > 15) return false;
+
+            this.setMatched('length',_sourceValue.length >= 8, _length);
+            this.setMatched('lower', _library.validateLowerAlpha(_sourceValue), _lower);
+            this.setMatched('upper', _library.validateUpperAlpha(_sourceValue), _upper);
+            this.setMatched('digit', _library.validateDigit(_sourceValue), _number);
+            this.setMatched('special', _library.validateSpecial(_sourceValue), _special);
+            this.setMatched('match', _library.validateMatched(_sourceValue, _targetValue), _match)
+
+            const _criteria: validKeyPair[] = _library.pwdCriteriaMatched;
+            const _failed = _criteria.filter(x => !x.value);
+            
+            const _sourceMatched = /[a-zA-Z0-9!@#$%]{8,15}/.test(_sourceValue);
+            const _targetMatched = /[a-zA-Z0-9!@#$%]{8,15}/.test(_targetValue);
+            
+            _library.matched = _sourceMatched && _targetMatched && _failed.length == 0;
+            _library.matched ? _library.passed(_passFa.item(0)) : _library.muted(_passFa.item(0));
+            _library.matched ? _library.passed(_passFa.item(1)) : _library.muted(_passFa.item(1));
+
+
+            const _pair: validKeyPair = {
+                name: 'password-set',
+                value: _library.matched
+            }
+
+            _library.validateComplete(_pair);
+            
+            return _library.matched
+        },
     }
 });
 </script>
+

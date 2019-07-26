@@ -71,6 +71,14 @@
         width: 50%;
       }
     }
+
+    .passed {
+        color: $default-passed-color;
+    }
+  
+    .failed {
+        color: $default-failed-color;
+    }
   }
 }
 

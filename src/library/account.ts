@@ -1,5 +1,134 @@
-export class Account {
-    public matched?: boolean 
+import { faLock, faEye, faEyeSlash, IconDefinition, faUser, faEnvelope, faCheck } from "@fortawesome/fontawesome-free-solid";
+
+export interface validKeyPair {
+    name: string;
+    value: boolean;
+}
+
+export class ReadyToSubmit {
+    public validated: validKeyPair[];
+    public submitter?: Element;
+    public max: number;
+
+    constructor(submitter?: Element, max: number = 1) {
+        this.validated = [];
+        this.submitter = submitter;
+        this.max = max;
+
+    
+    }
+
+    public muted = (): void => {
+        if(this.submitter) {
+            var _classes = this.submitter.classList;
+            var _passed = _classes.contains("bg-passed");
+            var _muted = _classes.contains("bg-muted");
+
+            if(_passed)
+                _classes.remove('bg-passed');
+                        
+            if(!_muted) 
+                _classes.add('bg-muted');
+             
+        }
+    }
+
+    public passed = (): void => {
+        if(this.submitter) {
+            var _classes = this.submitter.classList;
+            var _passed =  _classes.contains("bg-passed");
+            var _muted = _classes.contains("bg-muted");
+
+            if(!_passed)
+                _classes.add('bg-passed');
+                        
+            if(_muted) 
+                _classes.remove('bg-muted');
+             
+        }
+    }
+}
+
+export default class Account {
+    public matched?: boolean
+    public pwdCriteriaMatched: validKeyPair[];
+    private readyToSubmit:ReadyToSubmit;
+
+    constructor(submitter?: Element, max: number=1) {
+        this.pwdCriteriaMatched=[];
+        this.readyToSubmit = new ReadyToSubmit(submitter, max);
+    }
+
+    public validateComplete = (pair: validKeyPair) => {
+        if(pair) {
+            if(this.readyToSubmit.validated.length) {
+                const _index = this.readyToSubmit.validated.findIndex(x => x.name === pair.name);
+                if(_index >= 0) {
+                    this.readyToSubmit.validated[_index] = pair;
+                } else {
+                    this.readyToSubmit.validated.push(pair);
+                }
+            } else {
+                this.readyToSubmit.validated.push(pair);
+            }
+
+            if(this.readyToSubmit.submitter && this.readyToSubmit.validated.length == this.readyToSubmit.max) {
+                const _failed = this.readyToSubmit.validated.filter(x => !x.value);
+                console.debug('failed', _failed);
+                _failed.length == 0 ? this.readyToSubmit.passed() : this.readyToSubmit.muted();
+            }
+    
+        }
+    }
+    public displayPassword = (elm: SVGElement) => {
+       
+        const _iconParent = <HTMLSpanElement>elm.parentNode;
+        const _iconPrepend = <HTMLDivElement>_iconParent.parentNode;
+        const _parent= <HTMLDivElement>_iconPrepend.parentNode
+        const _pwd= <HTMLInputElement>_parent.querySelector('input');
+
+        const _path = <SVGPathElement>elm.querySelector('path');
+        if(_path) {
+            
+            let _display: string | boolean | null =   _iconParent.getAttribute('data-display');
+            _display = _display !== null  && _display === "true" ? false : true
+            
+            const _icon = this.displayEyeIcon(_display);
+
+            _iconParent.setAttribute('data-display', _display.toString())
+            
+            if(!_display) {
+                _pwd.setAttribute('type', 'password');
+            } else {
+                _pwd.setAttribute('type', 'text');
+            }
+            _path.setAttribute('d', _icon.icon[4]);
+        }
+        
+    }
+
+    public displayEyeIcon = (display: boolean = false): IconDefinition => {
+        if(!display)
+            return faEye;
+        else
+            return faEyeSlash;
+    }
+
+    public displayUserIcon = (): IconDefinition => {
+        return faUser;
+    }
+
+    public displayLockIcon = (): IconDefinition => {
+        return faLock;
+    }
+
+    public displayEnvelopIcon = (): IconDefinition => {
+        return faEnvelope;
+    }
+
+    public displayCheckIcon = (): IconDefinition => {
+        return faCheck;
+    }
 
     private getLowerAlpha = (criteria: string): string => {
         var _result = criteria.replace(/[A-Z0-9!@#$%]/g, "");
@@ -45,103 +174,53 @@ export class Account {
         return _result;
     }
 
-    public showPassword = (elm: HTMLButtonElement): void  => {
-        var _targetName = elm.getAttribute("data-target");
-        var _faItem = elm.querySelector(".fa-eye");
-        if (_targetName) {
-            var _target = <HTMLInputElement>document.getElementById(_targetName);
-            if (_target) {
-                _target.setAttribute("type", "text");
-                if (_faItem) {
-                    var _classes = _faItem.className.match(/\S+/g) || [];
-                    var _item = _classes.indexOf("fa-eye");
-                    if (_item >= 0) {
-                        _classes.splice(_item, 1);
-                        _classes.push("fa-eye-slash");
+    public validateMatched = (source: string, target: string): boolean => {
+        return source === target;
+    }
 
-                        _faItem.className = _classes.join(" ");
-                    }
-                }
-            }
+    public muted = (elm: Element): void => {
+        if(elm) {
+            var _classes = elm.classList;
+            var _passed = _classes.contains("passed");
+            var _muted = _classes.contains("text-muted");
+
+            if(_passed)
+                _classes.remove('passed');
+                        
+            if(!_muted) 
+                _classes.add('text-muted');
+             
         }
     }
 
-    public hidePassword =  (elm: HTMLButtonElement): void  => {
-        var _targetName = elm.getAttribute("data-target");
-        var _faItem = elm.querySelector(".fa-eye-slash");
-        if (_targetName) {
-            var _target = <HTMLInputElement>document.getElementById(_targetName);
-            if (_target) {
-                _target.setAttribute("type", "password");
-                if (_faItem) {
-                    var _classes = _faItem.className.match(/\S+/g) || [];
-                    var _item = _classes.indexOf("fa-eye-slash");
-                    if (_item >= 0) {
-                        _classes.splice(_item, 1);
-                        _classes.push("fa-eye");
-
-                        _faItem.className = _classes.join(" ");
-                    }
-                }
-            }
-        }
-    }
-
-    public togglePwdDisplay = (elm: HTMLButtonElement): void => {
-        var _visibleState = elm.getAttribute("data-display");
-        if (_visibleState) {
-            if (_visibleState === "hidden") {
-                this.showPassword(elm);
-                elm.setAttribute("data-display", "display");
+    public setValidationResult = (result: validKeyPair) => {
+        if(this.pwdCriteriaMatched.length) {
+            const _index = this.pwdCriteriaMatched.findIndex(x => x.name === result.name);
+            if(_index >= 0) {
+                this.pwdCriteriaMatched[_index] = result;
             } else {
-                this.hidePassword(elm);
-                elm.setAttribute("data-display", "hidden");
+                this.pwdCriteriaMatched.push(result);
             }
+            
+        } else {
+            this.pwdCriteriaMatched.push(result);
         }
     }
 
-    public passed = (elm: HTMLElement | null): void => {
-        if (elm) {
-            var _classes = elm.className.match(/\S+/g) || [];
-            var _passed = _classes.indexOf("passed");
-            var _mutedIcon = _classes.indexOf("fa-base");
-            if (_passed < 0) {
-                _classes.push("passed");
+    public passed = (elm: Element): void => {
+        if(elm) {
 
-                if (_mutedIcon >= 0) {
-                    _classes.splice(_mutedIcon, 1);
-                }
+            var _classes = elm.classList;
+            var _passed =  _classes.contains("passed");
+            var _muted = _classes.contains("text-muted");
 
-                elm.className = _classes.join(" ");
-            }
+            if(!_passed)
+                _classes.add('passed');
+                        
+            if(_muted) 
+                _classes.remove('text-muted');
+             
         }
     }
-
-    public muted = (elm: HTMLElement | null): void => {
-        if (elm) {
-            var _classes = elm.className.match(/\S+/g) || [];
-            var _muted = _classes.indexOf("text-muted");
-            var _mutedIcon = _classes.indexOf("fa-base");
-            var _passed = _classes.indexOf("passed");
-            if (_passed >= 0) {
-                _classes.splice(_passed, 1);
-
-                if (_muted < 0 && !_mutedIcon) {
-                    _classes.push("text-muted");
-                }
-
-                if (_mutedIcon < 0) {
-                    _classes.push("fa-base");
-                }
-
-                elm.className = _classes.join(" ");
-            }
-        }
-    }
-
-
-
-
 }
 
-export default new Account();

@@ -7,28 +7,31 @@
                         div.heading
                             span send us a note!
                         div.form-group
-                            Email( :readyToSubmit="readyToSubmit"
-                                :tag="'email'"
+                            Email( 
+                                :tag="'note-email'"
                                 :placeholder="'email'"
                                 :title="'email is required'"
-                                :label="'email'")
+                                :label="'email'" :account="account")
                         div.form-group
-                            Name(:readyToSubmit="readyToSubmit"
-                                :tag="'first'"
+                            Name(
+                                :tag="'note-first'"
                                 :placeholder="'firstname'"
-                                :title="'firstname is required'")
+                                :title="'firstname is required'"
+                                :account="account" :set="false")
                         div.form-group
-                            Name(:readyToSubmit="readyToSubmit"
-                                :tag="'last'"
+                            Name(
+                                :tag="'note-last'"
                                 :placeholder="'lastname'"
-                                :title="'lastname is required'")
+                                :title="'lastname is required'"
+                                :account="account" :set="false")
                         div.form-group
-                            Area(:readyToSubmit="readyToSubmit"
-                                :tag="'Note'"
+                            Area(
+                                :tag="'note'"
                                 :placeholder="'Note'"
-                                :title="'Note is required'" :required="true")
+                                :title="'Note is required'" :required="true"
+                                :account="account")
                         div.form-group(class="submit")
-                            button.form-control(type="submit" ref="submit") Send
+                            button.form-control(class="submitter bg-muted" type="submit" id="send-note") Send
                     div.split-half-right
                         div.heading
                             span call us!
@@ -44,26 +47,29 @@
                     span send us a note!
                 div.form-group(class="split")
                     div.split-third
-                        Email( :readyToSubmit="readyToSubmit"
-                        :tag="'email'"
+                        Email( 
+                        :tag="'note-land-email'"
                         :placeholder="'email'"
                         :title="'email is required'"
-                        :label="'email'")
+                        :label="'email'" :account="account" )
                     div.split-third
-                        Name(:readyToSubmit="readyToSubmit"
-                        :tag="'first'"
+                        Name(
+                        :tag="'note-land-first'"
                         :placeholder="'firstname'"
-                        :title="'firstname is required'")
+                        :title="'firstname is required'"
+                        :account="account")
                     div.split-third-end
-                        Name(:readyToSubmit="readyToSubmit"
-                        :tag="'last'"
+                        Name(
+                        :tag="'note-land-last'"
                         :placeholder="'lastname'"
-                        :title="'lastname is required'")
+                        :title="'lastname is required'"
+                        :account="account")
                 div.form-group
-                        Area(:readyToSubmit="readyToSubmit"
-                        :tag="'Note'"
+                        Area(
+                        :tag="'land-note'"
                         :placeholder="'Note'"
-                        :title="'Note is required'" :required="true")
+                        :title="'Note is required'" :required="true"
+                        :account="account")
                 div.form-group(class="submit")
                     button.form-control(type="submit" ref="submit") Send
                 div.heading   
@@ -77,6 +83,8 @@ import Vue from 'vue';
 import Email from '../components/kulfi/email.vue';
 import Name from '../components/kulfi/name.vue';
 import Area from '../components/kulfi/large-text-area.vue';
+import Library from '../library/account';
+
 export default Vue.extend({
     name: 'note',
     components: {
@@ -84,7 +92,21 @@ export default Vue.extend({
         Name,
         Area,
     },
-    mounted: function(){
+    computed: {
+        initAccount: function() {
+            const _submitter = <Element>document.querySelector('#send-note');
+            const _account =  new Library(_submitter, 4);
+            this.$data.account = _account;
+        }
+    },
+    data: function() {
+        return {
+            account: new Library()
+        }
+    },
+    mounted: function() {
+
+        this.initAccount;
 
         this.displayBasedOnOrientation();
         
@@ -94,6 +116,9 @@ export default Vue.extend({
     }, 
     methods: {
 
+        validate: () => {
+            console.log('validate');
+        },
         displayBasedOnOrientation: function() {
 
             console.debug('resize');

@@ -13,9 +13,9 @@ let routes = [
     { path: '/', name: 'home', title: 'home', component: Home},
     { path: '/privacy', name: 'privacy', title: 'privacy', component: Privacy},
     { path: '/about', name: 'about', title: 'about', component: About},
-    { path: '/login', name: 'login', title: 'login', component: Login},
-    { path: '/register', name: 'register', title: 'register', component: Register},
-    { path: '/schedule', name: 'schedule', title: 'schedule', component: Schedule}
+    // { path: '/login', name: 'login', title: 'login', component: Login},
+    // { path: '/register', name: 'register', title: 'register', component: Register},
+    // { path: '/schedule', name: 'schedule', title: 'schedule', component: Schedule}
 
 ]
 

@@ -5,36 +5,60 @@
     div.input-group
       div.input-group-prepend(class="hidden-left")
         span.input-group-text( class="input-icon-btn " :id="`toggle-${tag}`"
-        :data-target="tag" data-display="hidden")
-          font-awesome-icon.fa( id="fa-pwd-eye" class="fa-eye fa-base" :icon="iconEye" aria-hidden="true")
-      input.form-control(type="password" :id="tag" 
-      :ref="tag" :title="title" :placeholder="placeholder" 
+        :data-target="tag" data-display="false")
+          font-awesome-icon.fa( ref="eye" id="fa-pwd-eye" class="fa-base" :icon="iconEye")
+      input.form-control( type="password" :id="tag"  :data-is-set="set"
+        :title="title" :placeholder="placeholder" 
       required pattern="[a-zA-Z0-9!@#$%]{8,15}")
       div.input-group-prepend
         span.input-group-text(class="required-field") *
-          font-awesome-icon.fa( class="fa-pwd fa-base" :icon="iconLock" aria-hidden="true")
+          font-awesome-icon.fa( class="fa-pwd text-muted" :icon="iconLock" aria-hidden="true")
 </template>
 
 
 <script lang="ts">
 import Vue from "vue";
-import Library from "../../library/account";
-import { faLock, faEye } from "@fortawesome/fontawesome-free-solid";
+import { IconDefinition } from '@fortawesome/fontawesome-free-solid';
+import { validKeyPair } from '@/library/account';
 
 export default Vue.extend({
   name: "kulfi-password",
-  props: ["tag", "title", "placeholder", "readyToSubmit", "label"],
+  props: ["tag", "title", "placeholder", "label", "account", "set"],
   computed: {
-    iconLock: function() {
-      return faLock;
-    },
-    iconEye: function() {
-      return faEye;
-    }
+      iconLock: function(): IconDefinition {
+        return this.account.displayLockIcon();
+      },
+      iconEye: function(): IconDefinition {
+        return this.account.displayEyeIcon();
+      }
+  },
+  mounted: function(){
+    const _self = this;
+    const _library = this.account;
+    const _eye = <HTMLElement>this.$refs.eye;
+    const _pwd = <HTMLInputElement>this.$el.querySelector(`#${this.tag}`);
+    
+    _eye.addEventListener('click', (e: Event) => {
+      _library.displayPassword(<SVGElement>e.currentTarget)
+    });
+
+    _pwd.addEventListener('keypress',(e: Event) => {
+      var _return = _self.allowValidPwdCharacters(e as KeyboardEvent);
+      if(!_return) {
+        e.preventDefault();
+      }
+    });
+
+    _pwd.addEventListener('keyup', (e: Event) => {
+      const _isPartOfSet = _pwd.getAttribute('data-is-set');
+      if(!_isPartOfSet) {
+        _self.validatePassword(_pwd);
+      }
+    });
+    
   },
   methods: {
     allowValidPwdCharacters: function(event: KeyboardEvent): boolean {
-      this.$parent.$data.matched = false;
       let _return = true;
 
       if (
@@ -49,40 +73,26 @@ export default Vue.extend({
 
       return _return;
     },
-    setMatched: function(matched: boolean, target: HTMLElement): void {
-      const _matched = this.$parent.$data.matched;
-      matched ? Library.passed(target) : Library.muted(target);
+    validatePassword: function(elm: HTMLInputElement) {
+      const _val = elm.value;
+      let _parent = elm.parentNode;
 
-      if (_matched == null || _matched) {
-        this.$parent.$data.matched = matched;
+      if(_parent) {
+        _parent = <Element>_parent.parentNode;
+        var _passFa = _parent.querySelector('.fa-pwd');
+        this.account.matched =  /[a-zA-Z0-9!@#$%]{8,15}/.test(_val);
+        this.account.matched ? this.account.passed(_passFa) : this.account.muted(_passFa);
       }
-    },
-    validatePassword: function(elm: HTMLInputElement): boolean {
-      var _length = <HTMLElement>document.getElementById("pwd-length");
-      var _upper = <HTMLElement>document.getElementById("pwd-upper");
-      var _lower = <HTMLElement>document.getElementById("pwd-lower");
-      var _number = <HTMLElement>document.getElementById("pwd-number");
-      var _special = <HTMLElement>document.getElementById("pwd-special");
 
-      var _passFa = document.getElementById("fa-pwd");
+      const _pair: validKeyPair = {
+        name: elm.id,
+        value: this.account.matched
+      }
 
-      var _value = elm.value;
-      if (_value.length > 15) return false;
-
-      this.setMatched(_value.length >= 8, _length);
-      this.setMatched(Library.validateLowerAlpha(_value), _lower);
-      this.setMatched(Library.validateUpperAlpha(_value), _upper);
-      this.setMatched(Library.validateDigit(_value), _number);
-      this.setMatched(Library.validateSpecial(_value), _special);
-
-      this.readyToSubmit();
-
-      this.$parent.$data.matched
-        ? Library.passed(_passFa)
-        : Library.muted(_passFa);
-
-      return this.$parent.$data.matched;
+       this.account.validateComplete(_pair);
     }
+
+    
   }
 });
 </script>

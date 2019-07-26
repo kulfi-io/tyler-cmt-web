@@ -9,42 +9,44 @@
       pattern="[a-zA-Z0-9-_]{5,15}\w+")
       div.input-group-prepend
         span.input-group-text( class="required-field") *
-          font-awesome-icon.fa( class="fa-base" :icon="iconUser")
+          font-awesome-icon.fa-user( class="fa text-muted" :icon="iconUser")
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Library from '../../library/account';
-import { faUser } from '@fortawesome/fontawesome-free-solid';
+import { ReadyToSubmit, validKeyPair } from '../../library/account';
+import { IconDefinition } from '@fortawesome/fontawesome-free-solid';
+
 
 export default Vue.extend({
   name: "kulfi-username",
-  props: ["readyToSubmit"],
+  props: ['account'],
   computed: {
-    iconUser: function(){
-      return faUser;
+    iconUser: function(): IconDefinition {
+      return this.account.displayUserIcon();
     }
   },
   mounted: function() {
     var _self = this;
-    var _username = this.$el.querySelector("#username");
+    const _username = <HTMLInputElement>this.$refs.username;
+    
+    _username.addEventListener("keypress", function(e: Event) {
+      const _target = <HTMLInputElement>e.currentTarget;
+      if(_target.value.length >= 15) e.preventDefault();
 
-    if (_username) {
-      _username.addEventListener("keyup", function(e: Event) {
-        _self.validateUsername(e.currentTarget as HTMLInputElement);
-      });
+      var _return = _self.validateInput(e as KeyboardEvent);
+      if (!_return) {
+        e.preventDefault();
+      }
+    });
 
-      _username.addEventListener("keypress", function(e: Event) {
-        var _return = _self.validateInput(e as KeyboardEvent);
-        if (!_return) {
-          e.preventDefault();
-        }
-      });
-    }
+    _username.addEventListener("keyup", function(e: Event) {
+      _self.validateUsername(e.currentTarget as HTMLInputElement);
+    });
+    
   },
   methods: {
     validateInput: function(e: KeyboardEvent): boolean {
-      this.$parent.$data.matched = false;
       let _return = true;
 
       if (
@@ -52,25 +54,30 @@ export default Vue.extend({
         !(e.which >= 97 && e.which <= 122) &&
         !(e.which >= 48 && e.which <= 57) &&
         !(e.which == 45) &&
-        !(e.which == 95)
+        !(e.which == 95) 
       ) {
         _return = false;
       }
 
       return _return;
     },
-    validateUsername: function(elm: HTMLInputElement): boolean {
-      var _userFa = document.getElementById("fa-user");
-      var _value = elm.value;
-      if (_value.length > 15) return false;
+    validateUsername: function(elm: HTMLInputElement) {
+      const _library = this.account;
+      const _parent = <Element>elm.closest('main');
+      const _userFa = <Element>_parent.querySelector('.fa-user');
+      const _value = elm.value;
+      
+      _library.matched = /[a-zA-Z0-9-_]{5,15}\w+/.test(_value);
+      _library.matched ? _library.passed(_userFa) : _library.muted(_userFa);
 
-      this.$parent.$data.matched = _value.length >= 5;
-      this.$parent.$data.matched
-        ? Library.passed(_userFa)
-        : Library.muted(_userFa);
+      const _pair: validKeyPair = {
+        name: 'username',
+        value: _library.matched
+      }
 
-      this.readyToSubmit();
-      return this.$parent.$data.matched;
+      _library.validateComplete(_pair);
+
+
     }
   }
 });

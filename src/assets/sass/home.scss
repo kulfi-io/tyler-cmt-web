@@ -4,6 +4,14 @@
   margin: auto;
   display: block;
 
+  .passed {
+      color: $default-passed-color;
+  }
+
+  .failed {
+      color: $default-failed-color;
+  }
+
   .hide-element {
     display: none;
   }
@@ -113,6 +121,20 @@
       }
     }
 
+    .text-muted {
+      color: $text-muted;
+  
+      .form-text {
+        display: block;
+        margin-top: 0.25rem;
+      }
+  
+      small {
+        min-width: 100%;
+      }
+    }
+
+
     .content {
       margin: auto;
       display: block;
@@ -144,6 +166,8 @@
       , input[type="password"]::placeholder
       , textarea::placeholder {
         color: $default-sub-text; // $default-white;
+        font-size: x-small;
+
       }
 
       .submit {
@@ -152,8 +176,11 @@
       
         button[type="submit"] {
           color: $default-white;
-          background-color: $nav-logo-grey;
         }
+      }
+
+      .bg-muted {
+        background: $text-muted;
       }
 
       .fa {
@@ -230,6 +257,7 @@
           width: 50%;
         }
       }
+      
     }
 
     .text-muted {
@@ -250,7 +278,7 @@
       display: block;
       width: 95%;
 
-      
+  
 
       input[type="text"]::placeholder
       , input[type="password"]::placeholder
@@ -293,9 +321,18 @@
       
         button[type="submit"] {
           color: $default-white;
-          background-color: $nav-logo-grey;
         }
       }
+
+      .bg-muted {
+        background: $text-muted;
+      }
+
+
+      .bg-passed {
+          background: $default-passed-color;
+      }
+  
 
       .fa {
         font-size: 12px;
@@ -335,11 +372,58 @@
     margin: auto;
     display: block;
     max-width: 97%;
+
+    .text-muted {
+      color: $text-muted;
+  
+      .form-text {
+        display: block;
+        margin-top: 0.25rem;
+      }
+  
+      small {
+        min-width: 100%;
+      }
+    }
     
     .content {
       margin: auto;
       display: block;
       width: 95%;
+
+      
+      input[type="text"]::placeholder
+      , input[type="password"]::placeholder
+      , textarea::placeholder {
+        color: $default-sub-text; // $default-white;
+        font-size: x-small;
+      }
+
+
+      .text-area {
+        color: $default-sub-text;
+        background: transparent;
+        min-height: 150px;
+        max-height: 200px;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+       
+        &:focus, &:hover {
+          border-bottom: 1px solid $input-hover-border-color;
+          box-shadow: none;
+          color: $input-text-color; 
+          outline: none;
+        }
+
+        &:empty:not(:focus):before {
+          content:attr(data-text);
+          color: $default-sub-text; // $default-white;
+          font-size: x-small;
+          text-transform: uppercase;
+          letter-spacing: .4em;
+        }
+      }
 
       .heading {
         color: $default-white;
@@ -362,8 +446,11 @@
       
         button[type="submit"] {
           color: $default-white;
-          background-color: $nav-logo-grey;
         }
+      }
+
+      .bg-muted {
+        background: $text-muted;
       }
 
       .fa {

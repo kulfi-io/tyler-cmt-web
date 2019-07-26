@@ -149,6 +149,7 @@ textarea::placeholder {
   text-transform: uppercase;
   color: $default-control-label-color;
   font-size: smaller;
+  letter-spacing: .3em;
 }
 
 .input-group-text {

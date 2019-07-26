@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.intro-contact-vue
+    main.intro-contact-vue
         div.content 
             div.contact-banner
                 img.salutation( src="../assets/img/hear.png")
@@ -10,10 +10,12 @@
 
 import Vue from 'vue';
 import Note from './note.vue';
+
 export default Vue.extend({
     name: 'contact',
     components: {
         Note,
-    }
+    },
+    
 });
 </script>

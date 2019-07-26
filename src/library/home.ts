@@ -3,6 +3,7 @@ import SplashBottomData from  '../assets/animations/intro-banner.json';  //"../a
 import SplashTopData from "../assets/animations/splash-top.json";
 import CollageImageData from '../assets/animations/collage-1.json';
 import CollageHeadingData from '../assets/animations/healing.json';
+import Config from '../config/config.json';
 import CookieManager from '../library/cookieManager';
 
 export default class Home {
@@ -11,12 +12,14 @@ export default class Home {
     private fullpageScrollBar: boolean;
     private fullpageMenu: string;
     private fullpageSectionsColor: string[];
+    private fullPageConfig: { "key": string; };
     public animations: AfterAnime[];
     public options: Object;
     public fullpageAnchors: string[];
 
     constructor(anchors: string[], sectionsColor:string[], overflow: boolean=false, scrollBar: boolean=false, menu: string='#menu') {
-        this.fullpageLicenseKey = '002D6FD2-0EC343D4-9403ACA4-CB7CDBFB';
+        this.fullPageConfig = Config.fullpage;
+        this.fullpageLicenseKey = this.fullPageConfig.key;
         this.fullpageScrollOverflow = overflow;
         this.fullpageScrollBar = scrollBar;
         this.fullpageMenu = menu;
@@ -24,6 +27,7 @@ export default class Home {
         this.fullpageSectionsColor = sectionsColor;
         this.options = this.initOptions();
         this.animations = this.initAnimations();
+
     }
 
     private initOptions = (): Object => {
@@ -64,9 +68,7 @@ export default class Home {
                         anime.animationItem.goToAndStop(2, true);
                     }
                 });
-
             }
-            
         }
     }
 

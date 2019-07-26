@@ -489,16 +489,16 @@ progress {
   display: inline-block;
   vertical-align: baseline;
 }
-[type="checkbox"] {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-}
-[type="radio"] {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-}
+// [type="checkbox"] {
+//   -webkit-box-sizing: border-box;
+//   box-sizing: border-box;
+//   padding: 0;
+// }
+// [type="radio"] {
+//   -webkit-box-sizing: border-box;
+//   box-sizing: border-box;
+//   padding: 0;
+// }
 [type="number"] {
   &::-webkit-inner-spin-button {
     height: auto;
@@ -689,11 +689,13 @@ input[type="checkbox"] {
   &:disabled {
     cursor: not-allowed;
   }
+  background: #005276;
 }
 input[type="radio"] {
   &:disabled {
     cursor: not-allowed;
   }
+  background: #005276;
 }
 input[type="date"] {
   -webkit-appearance: listbox;

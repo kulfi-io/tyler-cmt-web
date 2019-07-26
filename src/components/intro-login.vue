@@ -10,13 +10,14 @@
                             span login
                         div.split
                             div.split-half-left
-                                Username
+                                Username(:account="login")
                             div.split-half-right
-                                Password(:readyToSubmit="readyToSubmit"
+                                Password(
                                 :tag="'password'"
                                 :placeholder="'Password'"
                                 :title="'Password is required'"
-                                :label="'Password'")
+                                :label="'Password'"
+                                :account="login" :set="false")
                         div.split
                             div.split-half-flush(class="split custom-control-input")
                                 div.split-for-cb
@@ -24,23 +25,24 @@
                                 div.split-for-label Remember me
                             div.split-half-flush
                         div.form-group(class="submit")
-                            button.form-control(type="submit" ref="submit") Login
+                            button.form-control(class="submitter bg-muted" type="submit" id="login-account") Login
                 div.reset-vue(class='split-flex-1')
                     form(id="reset-password-form")
                         div.heading
                             span reset password
                         div.split
                             div.parallel
-                                Email( :readyToSubmit="readyToSubmit"
+                                Email( 
                                 :tag="'email'"
                                 :placeholder="'email'"
                                 :title="'email is required'"
-                                :label="'email'")
+                                :label="'email'"
+                                :account="reset")
                         div.split
                             div.split-half-flush(class="split custom-control-input")
                             div.split-flex-1
                         div.form-group(class="submit")
-                            button.form-control(type="submit" ref="submit") Send reset email
+                            button.form-control(class="submitter bg-muted" type="submit" id="reset-account") Send reset email
 </template>
 
 <script lang="ts">
@@ -48,12 +50,37 @@ import Vue from 'vue';
 import Username from './kulfi/username.vue';
 import Password from './kulfi/password.vue';
 import Email from './kulfi/email.vue';
+import Library from '../library/account';
+
 export default Vue.extend({
     name: 'intro-login',
     components: {
         Username,
         Password,
         Email
-    }
+    },  
+    computed: {
+        initLoginAccount: function() {
+            const _submitter = <Element>document.querySelector('#login-account');
+            const _account =  new Library(_submitter, 2);
+            this.$data.login = _account;
+        },
+        initResetAccount: function() {
+            const _submitter = <Element>document.querySelector('#reset-account');
+            const _account =  new Library(_submitter);
+            this.$data.reset = _account;
+        }
+
+    },
+    mounted: function(){
+        this.initLoginAccount;
+        this.initResetAccount;
+    },
+    data: function() {
+        return {
+            login: new Library(),
+            reset: new Library()
+        }
+    },
 });
 </script>
