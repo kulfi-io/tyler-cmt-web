@@ -1,24 +1,25 @@
 <template lang="pug">
     div.kulfi.name
-        label.control-label( :for="`${tag}-name`") {{tag}}-name
+        label.control-label( :for="`${tag}`") {{tag}}
             span.required-field *
         div.input-group
             input.form-control(type="text" pattern="[A-Za-z]{3,25}" required 
             :placeholder="placeholder" :title="title" 
-            :id="`${tag}-name`" :data-is-set="set")
+            :id="`${tag}`" :data-is-set="set"
+            :data-relation="relative" :data-key="validKey")
             div.input-group-prepend
                 span.input-group-text(class="required-field") *
-                    font-awesome-icon.fa-name( :class="`fa-${tag} fa text-muted`" :icon="iconCheck")
+                    font-awesome-icon.fa-name( :class="`fa-${tag} fa text-muted`" :icon="iconCheck" )
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { validKeyPair } from '../../library/account';
+import { validKey } from '../../library/account';
 import { IconDefinition } from '@fortawesome/fontawesome-free-solid';
 
 export default Vue.extend({
     name: 'kulfi-name',
-    props: ["tag", "title", "placeholder", "account", "set"],
+    props: ["tag", "title", "placeholder", "account", "set", "relative", "validKey" ],
     computed: {
         iconCheck: function(): IconDefinition {
             return this.account.displayCheckIcon();
@@ -26,7 +27,7 @@ export default Vue.extend({
     },
     mounted: function(){
         const _self = this;
-        const _name = <HTMLInputElement>document.querySelector(`#${this.tag}-name`);
+        const _name = <HTMLInputElement>document.querySelector(`#${this.tag}`);
         
 
         _name.addEventListener("keypress", function(e: Event) {
@@ -43,7 +44,6 @@ export default Vue.extend({
 
         _name.addEventListener("keyup", function(e: Event) {
             const _isPartOfSet = _name.getAttribute('data-is-set');
-            console.debug('set', _isPartOfSet);
             if(!_isPartOfSet) {
                 _self.validateName(e.currentTarget as HTMLInputElement);
             }
@@ -64,16 +64,18 @@ export default Vue.extend({
         },
         validateName: function(elm: HTMLInputElement) {
             const _library = this.account;
-
+            const _relative = elm.getAttribute('data-relation');
+            const _validKey = elm.getAttribute('data-key');
             const _parent = <Element>elm.closest('main');
-            var _nameFa = <Element>_parent.querySelector(`.fa-${this.tag}`);
-            var _value = elm.value;
+            const _nameFa = <Element>_parent.querySelector(`.fa-${this.tag}`);
+            const _value = elm.value;
 
             _library.matched = /[A-Za-z]{3,25}/.test(_value);
             _library.matched? _library.passed(_nameFa) : _library.muted(_nameFa);
 
-            const _pair: validKeyPair = {
-                name: elm.id,
+            const _pair: validKey = {
+                name: _validKey ? _validKey :elm.id,
+                relative: _relative ? _relative : '',
                 value: _library.matched,
             }
 

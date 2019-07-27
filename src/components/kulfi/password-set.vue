@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { validKeyPair } from '../../library/account';
+import { validKey } from '../../library/account';
 import Password from '../kulfi/password.vue';
 
 export default Vue.extend({
@@ -71,12 +71,13 @@ export default Vue.extend({
         setMatched: function(label:string, matched: boolean, target: Element): void {
             const _library = this.$parent.$data.account;
             matched ? _library.passed(target) : _library.muted(target);
-            const _pair: validKeyPair = {
+            const _key: validKey = {
                 name: label,
+                relative: '',
                 value: matched
             }
 
-            _library.setValidationResult(_pair);
+            _library.setValidationResult(_key);
 
         },
         resetValidation: function() {
@@ -119,7 +120,7 @@ export default Vue.extend({
             this.setMatched('special', _library.validateSpecial(_sourceValue), _special);
             this.setMatched('match', _library.validateMatched(_sourceValue, _targetValue), _match)
 
-            const _criteria: validKeyPair[] = _library.pwdCriteriaMatched;
+            const _criteria: validKey[] = _library.pwdCriteriaMatched;
             const _failed = _criteria.filter(x => !x.value);
             
             const _sourceMatched = /[a-zA-Z0-9!@#$%]{8,15}/.test(_sourceValue);
@@ -130,12 +131,13 @@ export default Vue.extend({
             _library.matched ? _library.passed(_passFa.item(1)) : _library.muted(_passFa.item(1));
 
 
-            const _pair: validKeyPair = {
+            const _key: validKey= {
                 name: 'password-set',
+                relative: '',
                 value: _library.matched
             }
 
-            _library.validateComplete(_pair);
+            _library.validateComplete(_key);
             
             return _library.matched
         },

@@ -1,12 +1,13 @@
 import { faLock, faEye, faEyeSlash, IconDefinition, faUser, faEnvelope, faCheck } from "@fortawesome/fontawesome-free-solid";
 
-export interface validKeyPair {
+export interface validKey {
     name: string;
+    relative: string,
     value: boolean;
 }
 
 export class ReadyToSubmit {
-    public validated: validKeyPair[];
+    public validated: validKey[];
     public submitter?: Element;
     public max: number;
 
@@ -14,8 +15,6 @@ export class ReadyToSubmit {
         this.validated = [];
         this.submitter = submitter;
         this.max = max;
-
-    
     }
 
     public muted = (): void => {
@@ -51,33 +50,65 @@ export class ReadyToSubmit {
 
 export default class Account {
     public matched?: boolean
-    public pwdCriteriaMatched: validKeyPair[];
-    private readyToSubmit:ReadyToSubmit;
+    public pwdCriteriaMatched: validKey[];
+    public readyToSubmit:ReadyToSubmit;
 
     constructor(submitter?: Element, max: number=1) {
         this.pwdCriteriaMatched=[];
         this.readyToSubmit = new ReadyToSubmit(submitter, max);
     }
 
-    public validateComplete = (pair: validKeyPair) => {
-        if(pair) {
+    public matchSiblingState = (elms: Element[]) => {
+        if(elms.length) {
+            const _passed = this.readyToSubmit.validated.filter(x => x.value);
+            const _failed = this.readyToSubmit.validated.filter(x => !x.value);
+            
+            _passed.forEach((key: Object) => {
+                const _key = <validKey>key;
+                const _target = elms.find(x => x.classList.value.indexOf(_key.relative) > 0);
+                if(_target)
+                    this.passed(_target)
+                
+            });
+
+            _failed.forEach((key: Object) => {
+                const _key = <validKey>key;
+                
+                const _target = elms.find(x => x.classList.value.indexOf(_key.relative) > 0);
+                if(_target)
+                    this.muted(_target)
+            });
+
+            if(this.readyToSubmit.submitter && _failed.length == 0) {
+                
+                if(this.readyToSubmit.validated.length == this.readyToSubmit.max)
+                    this.readyToSubmit.passed();
+
+            } else {
+                this.readyToSubmit.muted();
+            }
+        }
+    }
+
+    public validateComplete = (key: validKey) => {
+    
+        if(key) {
             if(this.readyToSubmit.validated.length) {
-                const _index = this.readyToSubmit.validated.findIndex(x => x.name === pair.name);
+                const _index = this.readyToSubmit.validated.findIndex(x => x.name === key.name);
                 if(_index >= 0) {
-                    this.readyToSubmit.validated[_index] = pair;
+                    this.readyToSubmit.validated[_index] = key;
                 } else {
-                    this.readyToSubmit.validated.push(pair);
+                    this.readyToSubmit.validated.push(key);
                 }
             } else {
-                this.readyToSubmit.validated.push(pair);
+                this.readyToSubmit.validated.push(key);
             }
 
             if(this.readyToSubmit.submitter && this.readyToSubmit.validated.length == this.readyToSubmit.max) {
                 const _failed = this.readyToSubmit.validated.filter(x => !x.value);
-                console.debug('failed', _failed);
                 _failed.length == 0 ? this.readyToSubmit.passed() : this.readyToSubmit.muted();
             }
-    
+
         }
     }
     public displayPassword = (elm: SVGElement) => {
@@ -193,7 +224,7 @@ export default class Account {
         }
     }
 
-    public setValidationResult = (result: validKeyPair) => {
+    public setValidationResult = (result: validKey) => {
         if(this.pwdCriteriaMatched.length) {
             const _index = this.pwdCriteriaMatched.findIndex(x => x.name === result.name);
             if(_index >= 0) {

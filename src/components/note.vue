@@ -11,25 +11,29 @@
                                 :tag="'note-email'"
                                 :placeholder="'email'"
                                 :title="'email is required'"
-                                :label="'email'" :account="account")
+                                :label="'email'" :account="account"
+                                :relative="'note-land-email'" :validKey="'email'")
                         div.form-group
                             Name(
                                 :tag="'note-first'"
                                 :placeholder="'firstname'"
                                 :title="'firstname is required'"
-                                :account="account" :set="false")
+                                :account="account" :set="false"
+                                :relative="'note-land-first'" :validKey="'first'")
                         div.form-group
                             Name(
                                 :tag="'note-last'"
                                 :placeholder="'lastname'"
                                 :title="'lastname is required'"
-                                :account="account" :set="false")
+                                :account="account" :set="false"
+                                :relative="'note-land-last'" :validKey="'last'")
                         div.form-group
                             Area(
                                 :tag="'note'"
                                 :placeholder="'Note'"
                                 :title="'Note is required'" :required="true"
-                                :account="account")
+                                :account="account"
+                                :relative="'land-note'" :validKey="'note'")
                         div.form-group(class="submit")
                             button.form-control(class="submitter bg-muted" type="submit" id="send-note") Send
                     div.split-half-right
@@ -51,27 +55,31 @@
                         :tag="'note-land-email'"
                         :placeholder="'email'"
                         :title="'email is required'"
-                        :label="'email'" :account="account" )
+                        :label="'email'" :account="account" 
+                        :relative="'note-email'" :validKey="'email'")
                     div.split-third
                         Name(
                         :tag="'note-land-first'"
                         :placeholder="'firstname'"
                         :title="'firstname is required'"
-                        :account="account")
+                        :account="account"
+                        :relative="'note-first'" :validKey="'first'")
                     div.split-third-end
                         Name(
                         :tag="'note-land-last'"
                         :placeholder="'lastname'"
                         :title="'lastname is required'"
-                        :account="account")
+                        :account="account"
+                        :relative="'note-last'" :validKey="'last'")
                 div.form-group
                         Area(
                         :tag="'land-note'"
                         :placeholder="'Note'"
                         :title="'Note is required'" :required="true"
-                        :account="account")
+                        :account="account" 
+                        :relative="'note'" :validKey="'note'")
                 div.form-group(class="submit")
-                    button.form-control(type="submit" ref="submit") Send
+                    button.form-control(class="submitter bg-muted" type="submit" id="land-send-note") Send
                 div.heading   
                     div.other-info
                         section
@@ -110,7 +118,7 @@ export default Vue.extend({
 
         this.displayBasedOnOrientation();
         
-        window.addEventListener("resize", (e: Event) => {
+        window.addEventListener("resize", () => {
             this.displayBasedOnOrientation();
         })
     }, 
@@ -119,35 +127,105 @@ export default Vue.extend({
         validate: () => {
             console.log('validate');
         },
+
+        matchPortView: function() {
+            const _faElements: Element[]= [];
+
+            const _email = <HTMLInputElement>document.querySelector('#note-land-email');
+            const _emailFa = <HTMLElement>document.querySelector(`.fa-${_email.id}`);
+            const _sourceEmail = <HTMLInputElement>document.querySelector(`#${_email.getAttribute('data-relation')}`);
+
+            const _first = <HTMLInputElement>document.querySelector('#note-land-first');
+            const _firstFa = <HTMLElement>document.querySelector(`.fa-${_first.id}`);
+            const _sourceFirst = <HTMLInputElement>document.querySelector(`#${_first.getAttribute('data-relation')}`);
+
+            const _last = <HTMLInputElement>document.querySelector('#note-land-last');
+            const _lastFa = <HTMLElement>document.querySelector(`.fa-${_last.id}`);
+            const _sourceLast = <HTMLInputElement>document.querySelector(`#${_last.getAttribute('data-relation')}`);
+
+            const _note = <HTMLDivElement>document.querySelector('#land-note');
+            const _noteFa = <HTMLElement>document.querySelector(`.fa-${_note.id}`);
+            const _sourceNote = <HTMLDivElement>document.querySelector(`#${_note.getAttribute('data-relation')}`);
+            
+            _email.value = _sourceEmail.value;
+            _first.value = _sourceFirst.value;
+            _last.value = _sourceLast.value;
+            _note.innerText = _sourceNote.innerText;
+
+            _faElements.push(_emailFa);
+            _faElements.push(_firstFa);
+            _faElements.push(_lastFa);
+            _faElements.push(_noteFa);
+
+            this.account.matchSiblingState(_faElements);
+        },
+
+        matchLandView: function() {
+            const _faElements: Element[]= [];
+
+            const _email = <HTMLInputElement>document.querySelector('#note-email');
+            const _emailFa = <HTMLElement>document.querySelector(`.fa-${_email.id}`);
+            const _sourceEmail = <HTMLInputElement>document.querySelector(`#${_email.getAttribute('data-relation')}`);
+
+            const _first = <HTMLInputElement>document.querySelector('#note-first');
+            const _firstFa = <HTMLElement>document.querySelector(`.fa-${_first.id}`);
+            const _sourceFirst = <HTMLInputElement>document.querySelector(`#${_first.getAttribute('data-relation')}`);
+
+            const _last = <HTMLInputElement>document.querySelector('#note-last');
+            const _lastFa = <HTMLElement>document.querySelector(`.fa-${_last.id}`);
+            const _sourceLast = <HTMLInputElement>document.querySelector(`#${_last.getAttribute('data-relation')}`);
+
+            const _note = <HTMLDivElement>document.querySelector('#note');
+            const _noteFa = <HTMLElement>document.querySelector(`.fa-${_note.id}`);
+            const _sourceNote = <HTMLDivElement>document.querySelector(`#${_note.getAttribute('data-relation')}`);
+            
+            _email.value = _sourceEmail.value;
+            _first.value = _sourceFirst.value;
+            _last.value = _sourceLast.value;
+            _note.innerText = _sourceNote.innerText;
+
+            _faElements.push(_emailFa);
+            _faElements.push(_firstFa);
+            _faElements.push(_lastFa);
+            _faElements.push(_noteFa);
+
+
+            this.account.matchSiblingState(_faElements);
+        },
+
         displayBasedOnOrientation: function() {
 
-            console.debug('resize');
-            const _portrait = <HTMLDivElement>this.$refs.portrait;
-            const _landscape = <HTMLDivElement>this.$refs.landscape;
+            const _portrait = <HTMLDivElement>this.$refs.portrait
+            const _landscape = <HTMLDivElement>this.$refs.landscape
             const _portraitClassList = _portrait.classList;
             const _landscapeClassList = _landscape.classList;
 
+
             if(window.screen.height <= 414) {
-                console.debug(window.screen.height)
-                
                 if(!_portraitClassList.contains('hide-element')) {
+                    
                     _portrait.classList.add('hide-element');
-                    console.debug('portrait', _portrait.className);
                     _landscape.classList.remove('hide-element');
-                    console.debug('landscape', _landscape.className);
+                    
+                    const _submitter = <Element>document.querySelector('#land-send-note');
+                    this.account.readyToSubmit.submitter= _submitter;
+                    this.matchPortView();
 
                 }
 
             }
             else {
                 if(!_landscapeClassList.contains('hide-element')) {
+                    
                     _landscape.classList.add('hide-element');
                     _portrait.classList.remove('hide-element');
-                }
-               
+                    
+                    const _submitter = <Element>document.querySelector('#send-note');
+                    this.account.readyToSubmit.submitter = _submitter;
+                    this.matchLandView();
 
+                }
             }
-            
         }
     }
 });

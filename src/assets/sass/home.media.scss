@@ -5,6 +5,10 @@
 
   .home {
 
+    .form-group {
+      margin-bottom: .65rem;
+    }
+    
     .intro-vision-vue
     {
       .quote {
@@ -54,18 +58,16 @@
       .content {
         margin: auto;
         display: block;
-        width: 95%;
+        width: 97%;
 
         .hidden-left {
           display: none;
         }
 
-
-  
         .login-banner {
   
           .salutation {
-            width: 40vh;
+            width: 30vh;
             margin-bottom: 3vh;
             max-height: $salutation-height; 
           }
@@ -80,12 +82,14 @@
   
         input[type="text"], input[type="password"] {
           background: transparent;
+          font-size: small;
         }
   
         input[type="text"]::placeholder
         , input[type="password"]::placeholder
         , textarea::placeholder {
           color: $default-sub-text; // $default-white;
+          font-size:  xx-small;
         }
   
         .submit {
@@ -94,18 +98,11 @@
         
           button[type="submit"] {
             color: $default-white;
-            background-color: $nav-logo-grey;
           }
         }
 
-        
-  
         .fa {
-          font-size: 12px;
-        }
-  
-        .fa-base {
-          color: $nav-logo-grey;
+          font-size: 10px;
         }
   
         .other-info {
@@ -149,6 +146,18 @@
             line-height: 1.4;
           }
         }
+
+        input[type="text"], input[type="password"] {
+          background: transparent;
+          font-size: small;
+        }
+  
+        input[type="text"]::placeholder
+        , input[type="password"]::placeholder
+        , textarea::placeholder {
+          color: $default-sub-text; // $default-white;
+          font-size:  xx-small;
+        }
     
         button {
           padding: .25%;
@@ -159,6 +168,10 @@
           font-size: small;
         }
 
+        .instructions {
+          font-size: xx-small;
+        }
+
         .register-banner {
           .salutation {
             width: 50vh;
@@ -166,13 +179,19 @@
             max-height: $salutation-height;
           }
         }
+
+        .fa {
+          font-size: 10px;
+        }
       }
     }
 
     .intro-contact-vue {
-      width: 95%;
+      width: 97%;
 
       .content {
+        width: 97%;
+
         .split {
           display: block;
           .split-half-right {
@@ -184,9 +203,30 @@
           }
         }
 
+        input[type="text"], input[type="password"] {
+          background: transparent;
+          font-size: small;
+        }
+  
+        input[type="text"]::placeholder
+        , input[type="password"]::placeholder
+        {
+          color: $default-sub-text; // $default-white;
+          font-size:  xx-small;
+        }
+
+        .text-area {
+          font-size: small;
+        }
+
         .heading {
           text-indent: 1em;
           margin-bottom: 2vh;
+          font-size: small;
+        }
+
+        .fa {
+          font-size: 10px;
         }
         
         .other-info {
@@ -218,6 +258,10 @@
       height: 1.775rem;
       padding: .25%;
       font-size: .875rem;
+    }
+
+    .intro-login-vue {
+      max-width: 97%;
     }
 
     .intro-register-vue {
@@ -280,6 +324,7 @@
     line-height: 1;
   }
   .home {
+
     .intro-vision-vue {
       .quote {
 
@@ -291,12 +336,7 @@
 
     .intro-register-vue {
 
-     
       .content {
-
-       
-  
-
         .register-banner {
           .salutation {
             width: 50vh;
@@ -391,6 +431,8 @@
 
 @media (height: 812px) and (width: 375px) {
   .home {
+    
+
     .intro-vision-vue {
       .quote {
 
@@ -481,7 +523,6 @@
       font-size: .875rem;
     }
 
-
     .intro-home-vue {
       .top-wrapper {
         width: 135vh;
@@ -497,11 +538,13 @@
     .intro-vision-vue {
       max-width: $vision-wrapper-width;
       .people-text {
-        max-width: 60vw;
+        // max-width: 60vw;
+        display: none;
       }
 
       .collage-image {
-        max-width: 45vw;
+        // max-width: 45vw;
+        max-width: 60vw;
       }
 
       .quote {
@@ -516,7 +559,6 @@
     }
 
     .intro-login-vue {
-      max-width: 100%;
 
       .split {
         .split-for-cb {
@@ -528,22 +570,42 @@
         }
       }
       .content {
+        width: 100%;
         .heading {
           font-size: small;
         }
+
+
+        input[type="text"], input[type="password"] {
+          background: transparent;
+          font-size: small;
+        }
+  
+        input[type="text"]::placeholder
+        , input[type="password"]::placeholder
+        , textarea::placeholder {
+          color: $default-sub-text; // $default-white;
+          font-size:  xx-small;
+        }
+
+        button[type="submit"] {
+          font-size: small;
+        }
+
+        .fa {
+          font-size: 10px;
+        }
+  
       }
       
     }
 
     .intro-register-vue {
-      max-width: 100%;
       .split {
         padding: .05vh;
       }
 
-      .form-group {
-        margin-bottom: .3rem;
-      }
+     
       .submit {
         padding-top: 1vh;
       }
@@ -581,10 +643,30 @@
         }
         .register-banner {
           .salutation {
-            margin-bottom: 2vh;
+            margin-bottom: 1vh;
             width: 60vh;
 
           }
+        }
+
+        .fa {
+          font-size: 10px;
+        }
+
+        input[type="text"], input[type="password"] {
+          background: transparent;
+          font-size: small;
+        }
+  
+        input[type="text"]::placeholder
+        , input[type="password"]::placeholder
+        , textarea::placeholder {
+          color: $default-sub-text; // $default-white;
+          font-size:  xx-small;
+        }
+
+        button[type="submit"] {
+          font-size: small;
         }
 
         
@@ -593,18 +675,15 @@
     }
 
     .intro-contact-vue {
-      width: 97%;
-
+      .split {
+        padding: .05vh;
+      }
       .content {
-
-        form textarea {
-          min-height: 60px;
+        height: 80vh;
+        form {
+          padding: .5vh 0 .5vh 0;
         }
 
-        .form-control {
-          height: 1.775rem;
-          
-        }
 
         button {
           padding: .25%;
@@ -613,6 +692,7 @@
         .heading {
           text-indent: 1em;
           margin-bottom: 2vh;
+          font-size: small;
         }
 
         .landscape {
@@ -621,6 +701,27 @@
           }
         }
 
+        input[type="text"], input[type="password"] {
+          background: transparent;
+          font-size: small;
+        }
+  
+        input[type="text"]::placeholder
+        , input[type="password"]::placeholder
+        {
+          color: $default-sub-text; // $default-white;
+          font-size:  xx-small;
+        }
+
+
+        button[type="submit"] {
+          font-size: small;
+        }
+
+        .text-area {
+          font-size: small;
+          min-height: 20vh;
+        }
         
         .other-info {
           text-indent: 1em;
@@ -628,7 +729,7 @@
           
           section {
             
-            margin-left: -3%;
+            margin-left: -2.5vh;
            
             .title {
               font-size: 1rem;
@@ -637,6 +738,8 @@
             }
             
             .landscape-contact {
+              margin: auto;
+              display: block;
               color: $default-white;
             }
 
@@ -672,17 +775,18 @@
     }
 
     .form-group {
-      margin-bottom: .5rem;
+      margin-bottom: .75rem;
     }
 
+   
     .intro-vision-vue {
-      .people-text {
-        max-width: 70vw;
-      }
+      // .people-text {
+      //   max-width: 70vw;
+      // }
 
-      .collage-image {
-        max-width: 40vw;
-      }
+      // .collage-image {
+      //   max-width: vw;
+      // }
 
       .quote {
         blockquote {
@@ -695,8 +799,19 @@
       }
     }
 
+    .intro-register-vue {
+      max-width: 97%;
+
+      .form-group {
+        margin-bottom: .3rem;
+      }
+
+    }
+
     .intro-contact-vue {
       .content {
+
+        
         .heading {
           font-size: small;
         }
@@ -714,24 +829,17 @@
 
 @media (width: 667px) and (height: 375px) {
   .home {
-    // .intro-vision-vue {
+    .intro-register-vue {
 
-    //   .quote {
+      .form-control {
+        height: 1.6rem;
+      }
 
-    //     blockquote {
-    //       font-size: 1rem;
-    //     }
-
-    //     .detail {
-    //       font-size: 0.7em;
-    //     }
-    //   }
-    // }
-
-    .content-vue {
-      .content {
-        .landscape-contact {
-          letter-spacing: .145em;
+      .content-vue {
+        .content {
+          .landscape-contact {
+            letter-spacing: .145em;
+          }
         }
       }
     }
@@ -818,14 +926,20 @@
 @media (width: 812px) and (height: 375px) {
 
   .home {
+    .form-group {
+      margin-bottom: .2rem;
+    }
+
     .intro-vision-vue {
 
       .people-text {
         max-width: 52vw;
+        display: none;
       }
 
       .collage-image {
-        max-width: 35vw;
+        // max-width: 35vw;
+        max-width: 49vw;
       }
 
       .quote {
@@ -837,11 +951,15 @@
 
     }
 
+  
     .intro-contact-vue {
       .content {
         .other-info {
           section {
-            margin-left: -2%;
+            .landscape-contact {
+              margin-top: 2vh;
+            }
+            
             p {
               letter-spacing: .2em;
             }
@@ -868,11 +986,13 @@
     .intro-vision-vue {
 
       .people-text {
-        max-width: 55vw;
+        // max-width: 55vw;
+        display: none;
       }
 
       .collage-image {
-        max-width: 40vw;
+        // max-width: 40vw;
+        max-width: 54vw;
       }
 
       .quote {
@@ -887,7 +1007,6 @@
       .content {
         .other-info {
           section {
-            margin-left: -2%;
             p {
               letter-spacing: .22em;
             }

@@ -4,19 +4,20 @@
             span.required-field(v-if="required") *
         div.input-group
             div.text-area(class="form-control" contenteditable="true"
-            :id="`${tag}`" data-text="Note"
-            )
+            :id="`${tag}`" data-text="Note" 
+            :data-relation="relative" :data-key="validKey")
             div.input-group-prepend
                 span.input-group-text(v-if="required" class="required-field") *
-                    font-awesome-icon.fa( class="text-muted" :icon="iconCheck")
+                    font-awesome-icon.fa( :class="`text-muted fa-${tag}`" :icon="iconCheck" )
 </template>
 <script lang="ts">
 import Vue from 'vue';
 import { IconDefinition } from '@fortawesome/fontawesome-free-solid';
+import { validKey } from '@/library/account';
 
 export default Vue.extend({
     name: 'kulfi-name',
-    props: ["tag", "title", "placeholder",  "required", "account"],
+    props: ["tag", "required", "account", "relative", "validKey"],
     computed: {
         iconCheck: function(): IconDefinition {
             return this.account.displayCheckIcon();
@@ -24,27 +25,44 @@ export default Vue.extend({
     },
     mounted: function(){
         const _self = this;
-        const _name = <HTMLInputElement>document.querySelector(`#${this.tag}-name`);
+        const _note = <HTMLDivElement>document.querySelector(`#${this.tag}`);
         
+        _note.addEventListener("keypress", function(e: Event) {
+            if(_note.innerText.length > 300) {
+                e.preventDefault();
+            }
+        });
 
-        // _name.addEventListener("keypress", function(e: Event) {
-        //     var _elm = <HTMLInputElement>_name;
+        _note.addEventListener("keyup", function(e: Event) {
+            _self.validateNote(e.currentTarget as HTMLInputElement);
+        });
+    },
+    methods: {
+        validateNote: function(elm: HTMLDivElement) {
+            const _library = this.account;
+            const _relative = elm.getAttribute('data-relation');
+            const _validKey = elm.getAttribute('data-key');
+            const _noteFa = <Element>document.querySelector(`.fa-${this.tag}`);
+            const _relatedNoteFa = <Element>document.querySelector(`.fa-${_relative}`);
+            
+            _library.matched = elm.innerText.length >= 15
+            
+            if(_library.matched) {
+                _library.passed(_noteFa);
+                _library.passed(_relatedNoteFa);
+            } else {
+                _library.muted(_noteFa);
+                _library.muted(_relatedNoteFa);
+            }
 
-        //     if(_elm.value.length > 300) {
-        //         e.preventDefault();
-        //     }
-        //     var _return = _self.validateInput(e as KeyboardEvent);
-        //     if (!_return) {
-        //         e.preventDefault();
-        //     }
-        // });
+            const _key: validKey = {
+                name: _validKey ? _validKey : elm.id,
+                relative: _relative ? _relative : '',
+                value: _library.matched,
+            }
 
-        // _name.addEventListener("keyup", function(e: Event) {
-        //     const _isPartOfSet = _name.getAttribute('data-is-set');
-        //     if(!_isPartOfSet) {
-        //         _self.validateName(e.currentTarget as HTMLInputElement);
-        //     }
-        // });
+            _library.validateComplete(_key);
+        }
     }
 });
 </script>

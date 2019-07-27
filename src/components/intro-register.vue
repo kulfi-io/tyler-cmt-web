@@ -14,7 +14,7 @@
                             :placeholder="'email'"
                             :title="'email is required'"
                             :label="'email'"
-                            :account="account")
+                            :account="account" :validKey="'email'")
                         div.form-group
                             NameSet
                         div.form-group

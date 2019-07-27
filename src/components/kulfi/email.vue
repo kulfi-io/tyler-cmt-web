@@ -5,20 +5,21 @@
         div.input-group(role="group")
             input.form-control( type="text" :id="tag" 
             ref="email" title="Email is required" 
-            placeholder="email" required pattern="[\S-]+@([\S-]+\.)+[\S-]+")
+            placeholder="email" required pattern="[\S-]+@([\S-]+\.)+[\S-]+"
+            :data-relation="relative" :data-key="validKey")
             div.input-group-prepend
                 span.input-group-text(class="required-field") *
-                    font-awesome-icon.fa-email( class="fa text-muted" :icon="iconEnvelope")
+                    font-awesome-icon.fa( :class="`fa-${tag} text-muted`" :icon="iconEnvelope" )
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { validKeyPair } from '../../library/account';
+import { validKey } from '../../library/account';
 import { IconDefinition } from '@fortawesome/fontawesome-free-solid';
 
 export default Vue.extend({
     name: 'kulfi-email',
-    props: ['tag', 'account'],
+    props: ['tag', 'account', "relative", "validKey"],
     computed: {
         iconEnvelope: function(): IconDefinition {
             return this.account.displayEnvelopIcon();
@@ -32,12 +33,12 @@ export default Vue.extend({
             _self.validateEmail(e.currentTarget as HTMLInputElement);
         });
 
-        _email.addEventListener("keypress", function(e: Event) {
-            var _return = _self.validateInput(e as KeyboardEvent);
-            if (!_return) {
-                e.preventDefault();
-            }
-        });
+        // _email.addEventListener("keypress", function(e: Event) {
+        //     var _return = _self.validateInput(e as KeyboardEvent);
+        //     if (!_return) {
+        //         e.preventDefault();
+        //     }
+        // });
 
     },
     methods: {
@@ -58,21 +59,32 @@ export default Vue.extend({
         },
         validateEmail: function(elm: HTMLInputElement) {
             const _library = this.account;
+            const _relative = elm.getAttribute('data-relation');
+            const _validKey = elm.getAttribute('data-key');
             const _parent = <Element>elm.closest('main');
-            const _emailFa = <Element>_parent.querySelector(".fa-email");
+            const _emailFa = <Element>_parent.querySelector(`.fa-${this.tag}`);
+            const _relatedEmailFa = <Element>_parent.querySelector(`.fa-${_relative}`);
             const _value = elm.value;
-            const _pattern = elm.getAttribute('pattern');
 
+            _library.matched =/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+                .test(_value);
+            // _library.matched ? _library.passed(_emailFa) : _library.muted(_emailFa);
 
-            _library.matched = /[\S-]+@([\S-]+\.)+[\S-]+/.test(_value);
-            _library.matched ? _library.passed(_emailFa) : _library.muted(_emailFa);
+            if(_library.matched) {
+                _library.passed(_emailFa);
+                _library.passed(_relatedEmailFa);
+            } else {
+                 _library.muted(_emailFa);
+                _library.muted(_relatedEmailFa);
+            }
 
-            const _pair: validKeyPair = {
-                name: `${this.tag}`,
+            const _key: validKey = {
+                name: _validKey ? _validKey : elm.id,
+                relative: _relative ? _relative : '',
                 value: _library.matched
             }
 
-            _library.validateComplete(_pair);
+            _library.validateComplete(_key);
 
             
         }

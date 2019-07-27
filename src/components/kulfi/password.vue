@@ -19,7 +19,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { IconDefinition } from '@fortawesome/fontawesome-free-solid';
-import { validKeyPair } from '@/library/account';
+import { validKey } from '@/library/account';
 
 export default Vue.extend({
   name: "kulfi-password",
@@ -84,12 +84,13 @@ export default Vue.extend({
         this.account.matched ? this.account.passed(_passFa) : this.account.muted(_passFa);
       }
 
-      const _pair: validKeyPair = {
+      const _key: validKey = {
         name: elm.id,
+        relative: '',
         value: this.account.matched
       }
 
-       this.account.validateComplete(_pair);
+       this.account.validateComplete(_key);
     }
 
     

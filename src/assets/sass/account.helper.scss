@@ -137,7 +137,7 @@ form textarea {
 form input[type="text"]:hover,
 form input[type="password"]:hover,
 form input[type="text"]:focus,
-form input[type="password"]:focus, textarea:hover, textarea:focus {
+form input[type="password"]:focus {
   border-bottom: 1px solid $input-hover-border-color;
   box-shadow: none;
   color: $input-text-color;
@@ -202,22 +202,22 @@ textarea::placeholder {
   }
 
   .split-third {
-    width: 33%;
-    padding-right: .2vh;
+    width: 33vw;
+    padding: .2vh .8vw .2vh .2vw;
   }
 
   .split-60{
-    padding: .4vh 0 .4vh .2vh;
-    width: 60%;
+    padding: .4vw 0 .4vw .2vh;
+    width: 60vw;
   }
 
   .split-40{
     padding: .4vh 0 .4vh 0;
-    width: 40%
+    width: 40vw
   }
 
   .split-third-end {
-    width: 33%;
+    width: 33vw;
   }
 
   .split-half-flush {

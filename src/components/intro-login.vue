@@ -37,7 +37,7 @@
                                 :placeholder="'email'"
                                 :title="'email is required'"
                                 :label="'email'"
-                                :account="reset")
+                                :account="reset" :validKey="'email'")
                         div.split
                             div.split-half-flush(class="split custom-control-input")
                             div.split-flex-1

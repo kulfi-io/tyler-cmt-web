@@ -134,6 +134,15 @@
       }
     }
 
+    .bg-muted {
+      background: $text-muted;
+    }
+
+
+    .bg-passed {
+        background: $default-passed-color;
+    }
+
 
     .content {
       margin: auto;
@@ -179,9 +188,7 @@
         }
       }
 
-      .bg-muted {
-        background: $text-muted;
-      }
+     
 
       .fa {
         font-size: 12px;
@@ -277,8 +284,6 @@
       margin: auto;
       display: block;
       width: 95%;
-
-  
 
       input[type="text"]::placeholder
       , input[type="password"]::placeholder
@@ -385,7 +390,7 @@
         min-width: 100%;
       }
     }
-    
+
     .content {
       margin: auto;
       display: block;
@@ -394,7 +399,7 @@
       
       input[type="text"]::placeholder
       , input[type="password"]::placeholder
-      , textarea::placeholder {
+      {
         color: $default-sub-text; // $default-white;
         font-size: x-small;
       }
@@ -403,7 +408,7 @@
       .text-area {
         color: $default-sub-text;
         background: transparent;
-        min-height: 150px;
+        min-height: 100px;
         max-height: 200px;
         overflow-y: auto;
         overflow-x: hidden;
@@ -416,7 +421,7 @@
           outline: none;
         }
 
-        &:empty:not(:focus):before {
+        &:empty:before {
           content:attr(data-text);
           color: $default-sub-text; // $default-white;
           font-size: x-small;
@@ -435,8 +440,8 @@
         background: transparent;
       }
 
-      input[type="text"]::placeholder,
-      textarea::placeholder {
+      input[type="text"]::placeholder
+      {
         color: $default-sub-text; // $default-white;
       }
 
@@ -452,15 +457,14 @@
       .bg-muted {
         background: $text-muted;
       }
+  
+      .bg-passed {
+          background: $default-passed-color;
+      }
 
       .fa {
         font-size: 12px;
       }
-
-      .fa-base {
-        color: $nav-logo-grey;
-      }
-
 
       .other-info {
         margin: auto;

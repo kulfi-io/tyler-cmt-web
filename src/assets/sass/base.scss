@@ -686,12 +686,14 @@ th {
   text-align: left;
 }
 input[type="checkbox"] {
+  color: red;
   &:disabled {
     cursor: not-allowed;
   }
   background: #005276;
 }
 input[type="radio"] {
+  color: red;
   &:disabled {
     cursor: not-allowed;
   }

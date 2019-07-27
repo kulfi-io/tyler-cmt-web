@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { ReadyToSubmit, validKeyPair } from '../../library/account';
+import { ReadyToSubmit, validKey } from '../../library/account';
 import { IconDefinition } from '@fortawesome/fontawesome-free-solid';
 
 
@@ -70,12 +70,13 @@ export default Vue.extend({
       _library.matched = /[a-zA-Z0-9-_]{5,15}\w+/.test(_value);
       _library.matched ? _library.passed(_userFa) : _library.muted(_userFa);
 
-      const _pair: validKeyPair = {
-        name: 'username',
+      const _key: validKey = {
+        name: elm.id,
+        relative: '',
         value: _library.matched
       }
 
-      _library.validateComplete(_pair);
+      _library.validateComplete(_key);
 
 
     }
