@@ -57,10 +57,7 @@ export default Vue.extend({
 
     };
   },
-  mounted: function() {
-    const _targets = document.querySelectorAll(".swap-position");
-    // Shared.methods.setCellPositionTop(_targets);
-  },
+ 
   
 });
 </script>

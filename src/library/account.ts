@@ -1,4 +1,8 @@
 import { faLock, faEye, faEyeSlash, IconDefinition, faUser, faEnvelope, faCheck } from "@fortawesome/fontawesome-free-solid";
+import { User } from '../models/account';
+import { MailerUser } from '../models/mailer';
+import AccountService  from '../microservices/account';
+import MailerService from '../microservices/mailer';
 
 export interface validKey {
     name: string;
@@ -46,6 +50,7 @@ export class ReadyToSubmit {
              
         }
     }
+ 
 }
 
 export default class Account {
@@ -56,6 +61,83 @@ export default class Account {
     constructor(submitter?: Element, max: number=1) {
         this.pwdCriteriaMatched=[];
         this.readyToSubmit = new ReadyToSubmit(submitter, max);
+    }
+
+    public register = () => {
+        const _failed = this.readyToSubmit.validated.filter(x => !x.value);
+
+        if(_failed.length == 0 
+            && this.readyToSubmit.validated.length == this.readyToSubmit.max) {
+
+            const _submitter = <HTMLButtonElement>this.readyToSubmit.submitter;
+            const _form = <HTMLFormElement>_submitter.closest('form');
+            const _username = <HTMLInputElement>_form.querySelector('#username');
+            const _email = <HTMLInputElement>_form.querySelector('#register-email');
+            const _first = <HTMLInputElement>_form.querySelector('#firstname');
+            const _last = <HTMLInputElement>_form.querySelector('#lastname');
+            const _pwd = <HTMLInputElement>_form.querySelector('#password');
+            const _verify = <HTMLInputElement>_form.querySelector('#verify-password');
+            const _icons = _form.querySelectorAll('.fa');
+            const _criteriaPassed = _form.querySelectorAll('.instructions .passed');
+
+            const _user = new User();
+            _user.username = _username.value;
+            _user.email = _email.value;
+            _user.firstname = _first.value;
+            _user.lastname = _last.value;
+            _user.password = _pwd.value;
+            _user.type = 'basic';
+
+            const _notify = () => {
+                if(_submitter.textContent !== 'Register') {
+                    const _reset = () => {
+                        _submitter.textContent = 'Register';
+                        this.readyToSubmit.muted;
+                    }
+                    setTimeout(_reset, 2000);
+                }
+            }
+
+            AccountService.register(_user)
+            .then((result) => {
+
+                _submitter.textContent = result.status 
+                    ? `${result.statusText} ${result.data.message.username}.`
+                    : 'Register';
+                    
+                MailerService.register(<MailerUser>result.data.message)
+                .then((result) => {
+
+                    this.readyToSubmit.validated = [];
+                    _username.value = '';
+                    _email.value = '';
+                    _first.value = '';
+                    _last.value = '';
+                    _pwd.value = '';
+                    _verify.value = '';
+                    this.readyToSubmit.muted();
+                    _icons.forEach((item: Element) => {
+                        this.muted(item);
+                    });
+        
+                    _criteriaPassed.forEach((item: Element) => {
+                        this.muted(item);
+                    })
+                    
+                    _submitter.textContent += `Please check your email.`
+                    _notify();
+                })
+                .catch((err) => {
+                    _submitter.textContent = err.response.data.message;
+                    _notify();
+                });
+            })
+            .catch((err) => {
+                _submitter.textContent = err.response.data.message;
+                _notify();
+            });
+        }
+
     }
 
     public matchSiblingState = (elms: Element[]) => {

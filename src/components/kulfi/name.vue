@@ -3,7 +3,7 @@
         label.control-label( :for="`${tag}`") {{tag}}
             span.required-field *
         div.input-group
-            input.form-control(type="text" pattern="[A-Za-z]{3,25}" required 
+            input.form-control(type="text"  required 
             :placeholder="placeholder" :title="title" 
             :id="`${tag}`" :data-is-set="set"
             :data-relation="relative" :data-key="validKey")

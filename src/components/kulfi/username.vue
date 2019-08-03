@@ -5,8 +5,7 @@
     div.input-group( role="group")
       input.form-control(type="text" id="username" ref="username" 
       title="username is required" placeholder="username" 
-      required 
-      pattern="[a-zA-Z0-9-_]{5,15}\w+")
+      required) 
       div.input-group-prepend
         span.input-group-text( class="required-field") *
           font-awesome-icon.fa-user( class="fa text-muted" :icon="iconUser")

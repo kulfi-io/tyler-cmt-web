@@ -14,10 +14,14 @@ const Shared = {
             }
 
         },
-       
-
-
-
+        converToTargetType<T>(item: Object) : T {
+            return <T>item;
+        },
+        getElement<T>(target: string) : T {
+            const _item = <Element>document.querySelector(target);
+            return this.converToTargetType<T>(_item);
+        },
+      
     }
 }
 

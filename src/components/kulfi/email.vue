@@ -5,7 +5,7 @@
         div.input-group(role="group")
             input.form-control( type="text" :id="tag" 
             ref="email" title="Email is required" 
-            placeholder="email" required pattern="[\S-]+@([\S-]+\.)+[\S-]+"
+            placeholder="email" required 
             :data-relation="relative" :data-key="validKey")
             div.input-group-prepend
                 span.input-group-text(class="required-field") *

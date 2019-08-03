@@ -164,8 +164,10 @@
         }
 
         .heading {
-          margin-bottom: .375vh;
           font-size: small;
+          margin: auto;
+          display: block;
+          text-align: center;
         }
 
         .instructions {
@@ -269,8 +271,14 @@
        
         .submit {
           padding-top: 1vh;
+          button[type="submit"] {
+            font-size: .7rem;
+          }
         }
-        
+
+        .heading {
+          font-size: .75rem;
+        }
       }
     }
     
@@ -644,7 +652,7 @@
         .register-banner {
           .salutation {
             margin-bottom: 1vh;
-            width: 60vh;
+            width: 38vw;
 
           }
         }

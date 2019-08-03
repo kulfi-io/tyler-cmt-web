@@ -9,7 +9,7 @@
           font-awesome-icon.fa( ref="eye" id="fa-pwd-eye" class="fa-base" :icon="iconEye")
       input.form-control( type="password" :id="tag"  :data-is-set="set"
         :title="title" :placeholder="placeholder" 
-      required pattern="[a-zA-Z0-9!@#$%]{8,15}")
+      required )
       div.input-group-prepend
         span.input-group-text(class="required-field") *
           font-awesome-icon.fa( class="fa-pwd text-muted" :icon="iconLock" aria-hidden="true")
