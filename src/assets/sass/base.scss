@@ -1095,9 +1095,6 @@ form {
       &::-webkit-input-placeholder {
         color: rgba(30, 33, 34, 0.15);
       }
-      &::-ms-input-placeholder {
-        color: rgba(30, 33, 34, 0.15);
-      }
       &::placeholder {
         color: rgba(30, 33, 34, 0.15);
       }
@@ -1129,9 +1126,6 @@ form {
     .ss-selected-option.empty {
       &:focus {
         &::-webkit-input-placeholder {
-          color: rgba(30, 33, 34, 0.15);
-        }
-        &::-ms-input-placeholder {
           color: rgba(30, 33, 34, 0.15);
         }
         &::placeholder {
@@ -1239,9 +1233,6 @@ form {
     &::-webkit-input-placeholder {
       color: rgba(30, 33, 34, 0.15);
     }
-    &::-ms-input-placeholder {
-      color: rgba(30, 33, 34, 0.15);
-    }
     &::placeholder {
       color: rgba(30, 33, 34, 0.15);
     }
@@ -1285,9 +1276,6 @@ form {
       box-shadow: 0 1px 0 0 #1e2122;
     }
     &::-webkit-input-placeholder {
-      color: rgba(30, 33, 34, 0.15);
-    }
-    &::-ms-input-placeholder {
       color: rgba(30, 33, 34, 0.15);
     }
     &::placeholder {
@@ -1346,9 +1334,6 @@ form {
       color: rgba(30, 33, 34, 0.15);
       color: rgba(30, 33, 34, 0.15);
     }
-    &::-ms-input-placeholder {
-      color: rgba(30, 33, 34, 0.15);
-    }
     &::placeholder {
       color: rgba(30, 33, 34, 0.15);
     }
@@ -1393,9 +1378,6 @@ form {
       box-shadow: 0 1px 0 0 #1e2122;
     }
     &::-webkit-input-placeholder {
-      color: rgba(30, 33, 34, 0.15);
-    }
-    &::-ms-input-placeholder {
       color: rgba(30, 33, 34, 0.15);
     }
     &::placeholder {
@@ -1447,9 +1429,6 @@ form {
       color: rgba(30, 33, 34, 0.15);
       color: rgba(30, 33, 34, 0.15);
     }
-    &::-ms-input-placeholder {
-      color: rgba(30, 33, 34, 0.15);
-    }
     &::placeholder {
       color: rgba(30, 33, 34, 0.15);
     }
@@ -1457,9 +1436,6 @@ form {
   input[type="email"].empty {
     &:focus {
       &::-webkit-input-placeholder {
-        color: rgba(30, 33, 34, 0.15);
-      }
-      &::-ms-input-placeholder {
         color: rgba(30, 33, 34, 0.15);
       }
       &::placeholder {
@@ -1470,9 +1446,6 @@ form {
   input[type="text"].empty {
     &:focus {
       &::-webkit-input-placeholder {
-        color: rgba(30, 33, 34, 0.15);
-      }
-      &::-ms-input-placeholder {
         color: rgba(30, 33, 34, 0.15);
       }
       &::placeholder {
@@ -1490,9 +1463,6 @@ form {
         color: rgba(30, 33, 34, 0.15);
         color: rgba(30, 33, 34, 0.15);
       }
-      &::-ms-input-placeholder {
-        color: rgba(30, 33, 34, 0.15);
-      }
       &::placeholder {
         color: rgba(30, 33, 34, 0.15);
       }
@@ -1502,9 +1472,6 @@ form {
   textarea.empty {
     &:focus {
       &::-webkit-input-placeholder {
-        color: rgba(30, 33, 34, 0.15);
-      }
-      &::-ms-input-placeholder {
         color: rgba(30, 33, 34, 0.15);
       }
       &::placeholder {
@@ -1644,9 +1611,6 @@ form {
       &::-webkit-input-placeholder {
         color: transparent;
       }
-      &::-ms-input-placeholder {
-        color: transparent;
-      }
       &::placeholder {
         color: transparent;
       }
@@ -1656,18 +1620,12 @@ form {
     &::-webkit-input-placeholder {
       color: transparent;
     }
-    &::-ms-input-placeholder {
-      color: transparent;
-    }
     &::placeholder {
       color: transparent;
     }
   }
   label + input[type="text"] {
     &::-webkit-input-placeholder {
-      color: transparent;
-    }
-    &::-ms-input-placeholder {
       color: transparent;
     }
     &::placeholder {
@@ -1683,18 +1641,12 @@ form {
       color: transparent;
       color: transparent;
     }
-    &::-ms-input-placeholder {
-      color: transparent;
-    }
     &::placeholder {
       color: transparent;
     }
   }
   label + textarea {
     &::-webkit-input-placeholder {
-      color: transparent;
-    }
-    &::-ms-input-placeholder {
       color: transparent;
     }
     &::placeholder {

@@ -186,7 +186,7 @@ textarea::placeholder {
 
   .split-half-left {
     padding: inherit;
-    padding-right: 2vh;
+    padding-right: 3vw;
     padding-left: 0;
     width: 50%;
   }
@@ -244,6 +244,7 @@ textarea::placeholder {
   .split-for-label {
     margin: auto;
     display: block;
+    font-size: small;
     width: 94%;
   }
 }

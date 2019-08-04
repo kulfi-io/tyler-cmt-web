@@ -26,6 +26,12 @@
     .intro-login-vue {
       max-width: 97%;
   
+      .checkbox label {
+        top: 5px;
+        left: 4px;
+
+      }
+
       .split {
         display: block;
 
@@ -49,7 +55,7 @@
           .split-for-label {
             width: 90%;
             color: $default-white;
-            font-size: small;
+            font-size: .7rem;
           }
         }
        
@@ -571,10 +577,17 @@
       .split {
         .split-for-cb {
           line-height: .5;
+          width: 20%;
         }
 
         .split-for-label {
           font-size: smaller;
+          margin-top: 2.5px;
+        }
+
+
+        .split-flex-1 {
+          padding-top: .7vh;
         }
       }
       .content {
@@ -837,6 +850,13 @@
 
 @media (width: 667px) and (height: 375px) {
   .home {
+    // .intro-login-vue {
+    //   .split {
+    //     .split-flex-1 {
+    //       padding-top: .7vh;
+    //     }
+    //   }
+    // }
     .intro-register-vue {
 
       .form-control {

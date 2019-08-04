@@ -20,8 +20,9 @@
                                 :account="login" :set="false")
                         div.split
                             div.split-half-flush(class="split custom-control-input")
-                                div.split-for-cb
-                                    input.rememeber(type="checkbox" ref="remember")
+                                div.split-for-cb(class="checkbox")
+                                    input(type="checkbox" value="None" class="kulfi-cb" id="kulfi-cb" ref="remember")
+                                    label(for="kulfi-cb")
                                 div.split-for-label Remember me
                             div.split-half-flush
                         div.form-group(class="submit")

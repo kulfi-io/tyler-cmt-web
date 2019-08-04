@@ -1,8 +1,10 @@
 @import "./account.variable.scss";
+@import "../sass/checkbox.scss";
 
 .home {
   margin: auto;
   display: block;
+
 
   .passed {
       color: $default-passed-color;
@@ -116,8 +118,9 @@
       }
     
       .split-for-label {
-        width: 80%;
         color: $default-white;
+        margin-top: 1.5px;
+        
       }
     }
 

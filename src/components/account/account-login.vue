@@ -29,6 +29,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import '../../assets/sass/account.scss';
+import '../../assets/sass/checkbox.scss';
 import InfoVue from '../kulfi/info.vue';
 import TokenVue from '../kulfi/token.vue';
 import UsernameVue from '../kulfi/username.vue';
