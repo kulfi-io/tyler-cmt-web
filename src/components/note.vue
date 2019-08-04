@@ -102,9 +102,15 @@ export default Vue.extend({
     },
     computed: {
         initAccount: function() {
-            const _submitter = <Element>document.querySelector('#send-note');
-            const _account =  new Library(_submitter, 4);
+            const _portSubmitter = <Element>document.querySelector('#send-note');
+            const _landSubmitter = <Element>document.querySelector('#land-send-note');
+
+            const _account =  new Library(_portSubmitter, 4);
             this.$data.account = _account;
+
+            _portSubmitter.addEventListener('click', this.account.sendNote);
+            _landSubmitter.addEventListener('click', this.account.sendNote);
+
         }
     },
     data: function() {
@@ -121,6 +127,7 @@ export default Vue.extend({
         window.addEventListener("resize", () => {
             this.displayBasedOnOrientation();
         })
+
     }, 
     methods: {
 

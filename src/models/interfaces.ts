@@ -4,7 +4,7 @@ export interface IMicroService {
     baseEndpoint: string;
     port: number;
     token: string;
-    endpoints: IEndpoint[]
+    endpoints: IEndpoint[];
 }
 
 export interface IEndpoint {
@@ -16,12 +16,12 @@ export interface IUser {
     userId?: string;
     email?: string;
     username?: string;
-    token?: string
+    token?: string;
 }
 
 export interface INote {
     email?: string;
     firstname?: string;
     lastname?: string;
-    note?: string
+    content?: string;
 }

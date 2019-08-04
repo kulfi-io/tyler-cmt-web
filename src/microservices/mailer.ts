@@ -20,20 +20,20 @@ export class MailerService extends BaseService{
         return Axios.post(this.mailerRegisterEndpoint, data, {headers: this.header});
     }
 
-    // note(data: Note): AxiosPromise {
+    sendNote(data: INote): AxiosPromise {
         
-    //     if(data.email && data.firstname && data.lastname
-    //         && data.note) {
+        if(data.email && data.firstname && data.lastname
+            && data.content) {
             
-    //         data.email = this.encrypt(data.email);
-    //         data.firstname = this.encrypt(data.firstname);
-    //         data.lastname = this.encrypt(data.lastname);
-    //         data.note = this.encrypt(data.note);
+            data.email = this.encrypt(data.email);
+            data.firstname = this.encrypt(data.firstname);
+            data.lastname = this.encrypt(data.lastname);
+            data.content = this.encrypt(data.content);
 
-    //     }
+        }
 
-    //     return Axios.post(this.mailerNoteEndpoint, data, {headers: this.header});
-    // }
+        return Axios.post(this.mailerNoteEndpoint, data, {headers: this.header});
+    }
 
 }
 

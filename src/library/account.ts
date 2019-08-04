@@ -1,6 +1,6 @@
 import { faLock, faEye, faEyeSlash, IconDefinition, faUser, faEnvelope, faCheck } from "@fortawesome/fontawesome-free-solid";
 import { User } from '../models/account';
-import { MailerUser } from '../models/mailer';
+import { MailerUser, Note } from '../models/mailer';
 import AccountService  from '../microservices/account';
 import MailerService from '../microservices/mailer';
 
@@ -63,13 +63,89 @@ export default class Account {
         this.readyToSubmit = new ReadyToSubmit(submitter, max);
     }
 
-    public register = () => {
+    private notifySubmitter = (submitter: Element, originalValue: string) => {
+        if(submitter.textContent !== originalValue) {
+            const _reset = () => {
+                submitter.textContent = originalValue;
+                this.readyToSubmit.muted;
+            }
+            setTimeout(_reset, 2000);
+        }
+    }
+
+
+    public sendNote = (e: Event) => {
+        const _failed = this.readyToSubmit.validated.filter(x => !x.value);
+        
+        if(_failed.length == 0 
+            && this.readyToSubmit.validated.length == this.readyToSubmit.max) {
+            
+            const _submitter = <HTMLButtonElement>e.currentTarget;
+            const _form = <HTMLFormElement>_submitter.closest('form');
+            const _icons = _form.querySelectorAll('.fa');
+            const _submitterTextContent = <string>_submitter.textContent;
+            let _email:HTMLInputElement;
+            let _first:HTMLInputElement;
+            let _last:HTMLInputElement;
+            let _content: HTMLDivElement;
+
+            const setElements = ()  => {
+                
+                if(_form.id.indexOf('portrait') >= 0) {
+                    _email = <HTMLInputElement>_form.querySelector('#note-email');
+                    _first = <HTMLInputElement>_form.querySelector('#note-first');
+                    _last = <HTMLInputElement>_form.querySelector('#note-last');
+                    _content = <HTMLDivElement>_form.querySelector('#note');
+                } else {
+                    _email = <HTMLInputElement>_form.querySelector('#note-land-email');
+                    _first = <HTMLInputElement>_form.querySelector('#note-land-first');
+                    _last = <HTMLInputElement>_form.querySelector('#note-land-last');
+                    _content = <HTMLDivElement>_form.querySelector('#land-note');
+                }
+
+                const _data = new Note();
+                _data.email = _email.value;
+                _data.firstname = _first.value;
+                _data.lastname = _last.value;
+                _data.content = _content.innerText;
+
+                MailerService.sendNote(_data)
+                .then((result) => {
+                    this.readyToSubmit.validated = [];
+                    _email.value = '';
+                    _first.value = '';
+                    _last.value = '';
+                    this.readyToSubmit.muted();
+
+                    _icons.forEach((item: Element) => {
+                        this.muted(item);
+                    });
+
+                    _submitter.textContent = result.status 
+                        ? `${result.statusText} ${result.data.message}.`
+                        : _submitterTextContent;
+
+                    this.notifySubmitter(_submitter, _submitterTextContent)
+        
+                })
+                .catch((err) => {
+                    _submitter.textContent = err.response.data.message;
+                    this.notifySubmitter(_submitter, _submitterTextContent);
+                });
+            }
+
+            setElements();
+        }
+    }
+
+    public register = (e: Event) => {
         const _failed = this.readyToSubmit.validated.filter(x => !x.value);
 
         if(_failed.length == 0 
             && this.readyToSubmit.validated.length == this.readyToSubmit.max) {
 
-            const _submitter = <HTMLButtonElement>this.readyToSubmit.submitter;
+            const _submitter = <HTMLButtonElement>e.currentTarget;
+            const _submitterTextContent = <string>_submitter.textContent;
             const _form = <HTMLFormElement>_submitter.closest('form');
             const _username = <HTMLInputElement>_form.querySelector('#username');
             const _email = <HTMLInputElement>_form.querySelector('#register-email');
@@ -88,22 +164,12 @@ export default class Account {
             _user.password = _pwd.value;
             _user.type = 'basic';
 
-            const _notify = () => {
-                if(_submitter.textContent !== 'Register') {
-                    const _reset = () => {
-                        _submitter.textContent = 'Register';
-                        this.readyToSubmit.muted;
-                    }
-                    setTimeout(_reset, 2000);
-                }
-            }
-
             AccountService.register(_user)
             .then((result) => {
 
                 _submitter.textContent = result.status 
                     ? `${result.statusText} ${result.data.message.username}.`
-                    : 'Register';
+                    : _submitterTextContent;
                     
                 MailerService.register(<MailerUser>result.data.message)
                 .then((result) => {
@@ -124,20 +190,19 @@ export default class Account {
                         this.muted(item);
                     })
                     
-                    _submitter.textContent += `Please check your email.`
-                    _notify();
+                    _submitter.textContent += `Please check your email.`;
+                    this.notifySubmitter(_submitter, _submitterTextContent);
                 })
                 .catch((err) => {
                     _submitter.textContent = err.response.data.message;
-                    _notify();
+                    this.notifySubmitter(_submitter, _submitterTextContent);
                 });
             })
             .catch((err) => {
                 _submitter.textContent = err.response.data.message;
-                _notify();
+                this.notifySubmitter(_submitter, _submitterTextContent);
             });
         }
-
     }
 
     public matchSiblingState = (elms: Element[]) => {

@@ -44,9 +44,7 @@ export default Vue.extend({
             const _account =  new Library(_submitter, 5);
             this.$data.account = _account;
             
-            _submitter.addEventListener('click', (e: Event) => {
-                this.account.register();
-            });
+            _submitter.addEventListener('click', this.account.register);
         }
 
     },
