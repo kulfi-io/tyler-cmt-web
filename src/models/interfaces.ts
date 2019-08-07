@@ -25,3 +25,29 @@ export interface INote {
     lastname?: string;
     content?: string;
 }
+
+export interface ICookie {
+    secret: string;
+    expiration: IExpiration;
+}
+
+export interface IExpiration {
+    duration: IDuration[];
+    selected: string;
+}
+
+export interface IDuration {
+    name: string;
+    value: string;
+}
+
+export interface IEncryptedData {
+    iv: Buffer;
+    data: string;
+    tag: Buffer;
+}
+
+export interface IEncryptedLogin {
+    username: IEncryptedData;
+    password: IEncryptedData;
+}

@@ -41,20 +41,21 @@ export default Vue.extend({
     computed: {
         initAccount: function() {
             const _submitter = <Element>document.querySelector('#register-account');
-            const _account =  new Library(_submitter, 5);
-            this.$data.account = _account;
+                 const _account =  <Library>this.$data.account;
+                _account.readyToSubmit.submitter = _submitter;
+                _account.readyToSubmit.max = 5;
+                this.$data.account = _account;
             
-            _submitter.addEventListener('click', this.account.register);
+            _submitter.addEventListener('click', this.$data.account.register);
         }
 
     },
     mounted: function(){
         this.initAccount;
-
     },
     data: function() {
         return {
-            account: new Library()
+            account: new Library(),
         }
     },
     components: {

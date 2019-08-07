@@ -1,20 +1,20 @@
 import Cookie from '../library/cookie';
 import * as TinyCookie from 'tiny-cookie';
 
-export  class CookieManager {
+export class CookieManager {
     private cookie?: Cookie;
     
     public setCookie = (name: string, value: Object) => {
         this.cookie = new Cookie(name, value);
 
         if(TinyCookie.isCookieEnabled) {
-            const _value = this.cookie.getCookieValue();
+            const _value = this.cookie.cookieValue
 
             if(_value) {
                 
                 TinyCookie.setCookie(this.cookie.name
                     , _value.toString()
-                    , {expires: this.cookie.expires});
+                    , {expires: this.cookie.expires.value});
             }
         }
     }
@@ -30,7 +30,7 @@ export  class CookieManager {
     public getValue = () => {
         let _value;
         if(this.cookie) {
-            _value = this.cookie.decryptedValue();
+            _value = this.cookie.decryptedValue;
         }
         return _value;
     }
@@ -38,14 +38,11 @@ export  class CookieManager {
 
     public isValidCookie = (name: string): boolean => {
         const _cookie = TinyCookie.getCookie(name);
-        console.debug('valid-cookie', _cookie);
         if(_cookie)
             return true;
         
         return false;
     }
-
-    
 
     public deleteCookie = (name: string) => {
         TinyCookie.remove(name);
@@ -55,8 +52,8 @@ export  class CookieManager {
 
         if(this.cookie) {
             TinyCookie.setCookie(this.cookie.name
-                , this.cookie.getCookieValue().toString()
-                , {expires: this.cookie.expires});
+                , this.cookie.cookieValue.toString()
+                , {expires: this.cookie.expires.value});
         }
     }
 

@@ -1,7 +1,7 @@
 import Config from '../config/config.json';
-import Crypto from 'crypto-js';
+import crypto from 'crypto';
 import { ENV } from '../models/model-enums';
-import { IEndpoint, IMicroService } from '../models/interfaces';
+import { IEndpoint, IMicroService, IEncryptedLogin, IEncryptedData } from '../models/interfaces';
 
 export default class BaseService {
     protected header: { "Accept": string; "Content-Type": string; "enctype": string; "x_access_token": string; };
@@ -19,8 +19,17 @@ export default class BaseService {
     protected mailerNoteEndpoint: string;
     protected mailerRegisterEndpoint: string;
     protected mailerResetEndpoint: string;
+    private algorithm: string;
+    private hashType: string;
+    private hash: crypto.Hmac;
+    private key: Buffer;
+    private iv: Buffer;
 
     constructor() {
+
+        this.hashType = 'sha512';
+        this.algorithm = 'aes-256-gcm';
+        
         this.isProd = process.env.NODE_ENV === ENV.PROD;
         this.account = <IMicroService>Config.microservices.find(x => x.name === 'account');
         this.mailer = <IMicroService>Config.microservices.find(x => x.name === 'mailer');
@@ -46,17 +55,29 @@ export default class BaseService {
         this.mailerRegisterEndpoint = `${this.mailerBaseUrl}/${_mailerRegister.endpoint}`;
         this.mailerResetEndpoint = `${this.mailerBaseUrl}/${_mailerReset.endpoint}`;
 
+        this.hash = crypto.createHmac(this.hashType, Config.secret);
+        this.key = this.hash.digest().slice(0, 32);
+        this.iv = Buffer.alloc(16, 0);
+
     }
 
-    protected encrypt = (data: string): string => {
-        const _data = Crypto.AES.encrypt(data, Config.secret);
-        return this.isProd ? _data.toString() : data;
+    protected encryptIV = (data: string) : string => {
+
+        const _cipher = crypto.createCipheriv(this.algorithm, this.key, this.iv);
+        let _encrypted = _cipher.update(data, 'utf8', 'hex');
+        let _final = _cipher.final('hex');
+
+        return this.isProd ? _encrypted : data;
+
     }
 
-    protected decrypt = (data: string): string => {
-        const _data = Crypto.AES.decrypt(data, Config.secret);
-        const _plainText = _data.toString(Crypto.enc.Utf8);
-        return this.isProd ? _plainText : data;
+    protected decryptIV = (data: string): string => {
+
+        const _decipher = crypto.createDecipheriv(this.algorithm, this.key, this.iv);
+        let _decrypted = _decipher.update(data, 'hex', 'utf8');
+
+        return this.isProd ? _decrypted : data;
+
     }
 
 }

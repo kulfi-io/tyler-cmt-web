@@ -29,7 +29,6 @@ export default Vue.extend({
         const _self = this;
         const _name = <HTMLInputElement>document.querySelector(`#${this.tag}`);
         
-
         _name.addEventListener("keypress", function(e: Event) {
             var _elm = <HTMLInputElement>_name;
 

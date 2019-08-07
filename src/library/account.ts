@@ -1,8 +1,10 @@
 import { faLock, faEye, faEyeSlash, IconDefinition, faUser, faEnvelope, faCheck } from "@fortawesome/fontawesome-free-solid";
-import { User } from '../models/account';
+import { User, Login, VerifyLogin } from '../models/account';
 import { MailerUser, Note } from '../models/mailer';
 import AccountService  from '../microservices/account';
 import MailerService from '../microservices/mailer';
+import Cookie from './cookie';
+import CookieManager from './cookieManager';
 
 export interface validKey {
     name: string;
@@ -50,17 +52,18 @@ export class ReadyToSubmit {
              
         }
     }
- 
 }
 
 export default class Account {
     public matched?: boolean
     public pwdCriteriaMatched: validKey[];
     public readyToSubmit:ReadyToSubmit;
+    private cookie?: Cookie;
 
     constructor(submitter?: Element, max: number=1) {
         this.pwdCriteriaMatched=[];
         this.readyToSubmit = new ReadyToSubmit(submitter, max);
+        this.cookie = CookieManager.getCookie('tyler-cmt')
     }
 
     private notifySubmitter = (submitter: Element, originalValue: string) => {
@@ -73,8 +76,126 @@ export default class Account {
         }
     }
 
+    private setCookie = (login: Login) => {
+        if(this.cookie) {
+            const _cookie = <Login>this.cookie.decryptedValue;
+            if(_cookie === login ) {
+               console.debug('cookie', _cookie);
+               console.debug('login', login);
+               
+            }
+        } else {
+            CookieManager.setCookie('tyler-cmt', login);
+        }
+    }
+
+    private removeCookie = () => {
+        if(this.cookie) {
+            CookieManager.deleteCookie('tyler-cmt');
+            this.cookie = undefined;
+        }
+    }
+
+    public login = (e: Event) => {
+        e.preventDefault();
+        const _failed = this.readyToSubmit.validated.filter(x => !x.value);
+        
+        if(_failed.length == 0 
+            && this.readyToSubmit.validated.length == this.readyToSubmit.max) {
+            
+            const _submitter = <HTMLButtonElement>e.currentTarget;
+            const _form = <HTMLFormElement>_submitter.closest('form');
+            const _icons = _form.querySelectorAll('.fa');
+            const _submitterTextContent = <string>_submitter.textContent;
+            let _username = <HTMLInputElement>_form.querySelector('#username');
+            let _password = <HTMLInputElement>_form.querySelector('#password')
+
+            const _data = new Login();
+            _data.username = _username.value;
+            _data.password = _password.value;
+
+            AccountService.login(_data)
+            .then((result) => {
+
+                this.readyToSubmit.validated = [];
+                _username.value = '';
+                _password.value = '';
+                this.readyToSubmit.muted();
+
+                _icons.forEach((item: Element) => {
+                    this.muted(item);
+                });
+
+                _submitter.textContent = result.status 
+                    ? `${result.statusText} ${result.data.message}.`
+                    : _submitterTextContent;
+
+                this.setCookie(_data);
+                this.notifySubmitter(_submitter, _submitterTextContent)
+            })
+            .catch((err) => {
+                _submitter.textContent = err.response.data.message;
+                this.notifySubmitter(_submitter, _submitterTextContent);
+                this.removeCookie();
+            });
+        }
+    }
+
+    public verify = (e: Event) => {
+        e.preventDefault();
+        console.debug('verify');
+        const _failed = this.readyToSubmit.validated.filter(x => !x.value);
+        
+        if(_failed.length == 0 
+            && this.readyToSubmit.validated.length == this.readyToSubmit.max) {
+            
+            const _submitter = <HTMLButtonElement>e.currentTarget;
+            const _form = <HTMLFormElement>_submitter.closest('form');
+            const _icons = _form.querySelectorAll('.fa');
+            const _submitterTextContent = <string>_submitter.textContent;
+            let _token = <HTMLInputElement>_form.querySelector('#token');
+            let _username = <HTMLInputElement>_form.querySelector('#username');
+            let _password = <HTMLInputElement>_form.querySelector('#password')
+
+            const _data = new VerifyLogin();
+            _data.username = _username.value;
+            _data.password = _password.value;
+            _data.token = _token.value;
+
+            console.debug('_data', _data);
+            AccountService.verify(_data)
+            .then((result) => {
+
+                this.readyToSubmit.validated = [];
+                _username.value = '';
+                _password.value = '';
+                _token.value = '';
+                
+                this.readyToSubmit.muted();
+
+                _icons.forEach((item: Element) => {
+                    this.muted(item);
+                });
+
+                _submitter.textContent = result.status 
+                    ? `${result.statusText} ${result.data.message}.`
+                    : _submitterTextContent;
+
+                this.setCookie(_data);
+                this.notifySubmitter(_submitter, _submitterTextContent)
+            })
+            .catch((err) => {
+                console.debug('err', err);
+                _submitter.textContent = err.response.data.message;
+                this.notifySubmitter(_submitter, _submitterTextContent);
+                this.removeCookie();
+            });
+        }
+
+    }
 
     public sendNote = (e: Event) => {
+        e.preventDefault();
         const _failed = this.readyToSubmit.validated.filter(x => !x.value);
         
         if(_failed.length == 0 
@@ -139,6 +260,7 @@ export default class Account {
     }
 
     public register = (e: Event) => {
+        e.preventDefault();
         const _failed = this.readyToSubmit.validated.filter(x => !x.value);
 
         if(_failed.length == 0 

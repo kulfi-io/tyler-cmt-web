@@ -1,79 +1,55 @@
-import Crypto from 'crypto-js';
 import Config from '../config/config.json';
+import Crypto from 'crypto';
+import { ICookie, IDuration } from '../models/interfaces';
 
 export class Cookie {
     public name: string;
-    public expires: string;
-    public duration: string;
-    private value:  Crypto.WordArray;
-    private config: { "secret": string; "expiration": { "durations": { "min": string; "sec": string; "hour": string; "day": string; "month": string; "year": string; }; "duration": string; }; };
-    private durations: { "min": string; "sec": string; "hour": string; "day": string; "month": string; "year": string; };
+    public expires: IDuration;
+    private config: ICookie
+    private algorithm: string;
+    private cipher: Crypto.Cipher;
+    private decipher: Crypto.Decipher;
+    private value: Object;
 
     constructor(name: string, value: Object) {
-        this.config = Config.cookie;
+
+        this.algorithm = 'aes-256-gcm';
+      
+        this.cipher = Crypto.createCipher(this.algorithm, Config.secret);
+        this.decipher = Crypto.createDecipher(this.algorithm, Config.secret);
+
+        this.config = Config.cookie
         this.name = name;
-        this.value =  Crypto.AES.encrypt(value.toString(), Config.cookie.secret)
-        this.durations = Config.cookie.expiration.durations;
-        this.duration = Config.cookie.expiration.duration;
-        this.expires = "1m";   
+        this.value = this.encrypt(value);
+        this.expires = {
+            name: 'sec',
+            value: '20sec'
+        };
         this.initDuration();
     }
 
     private initDuration = () => {
+        const _selected = this.config.expiration.selected;
+        const _expires = this.config.expiration.duration
+                        .find((x:IDuration) => x.name === _selected);
 
+        if(_expires) this.expires = _expires;
 
-        if(this.duration.indexOf('min') >= 0) {
-            this.setMinDuration();
-        }
-
-        if(this.duration.indexOf('sec') >= 0) {
-            this.setSecDuration();
-        }
-
-        if(this.duration.indexOf('day') >= 0) {
-            this.setDayDuration();
-        }
-
-        if(this.duration.indexOf('month') >= 0) {
-            this.setMonthDuration();
-        }
-
-        if(this.duration.indexOf('year') >= 0) {
-            this.setYearDuration();
-        }
     }
 
-
-
-    private setMinDuration = () => {
-        this.expires = this.durations.min;
-    }
-
-    private setSecDuration = () => {
-        this.expires = this.durations.sec;
-    }
-
-    private setDayDuration = () => {
-        this.expires = this.durations.day;
-    }
-
-    private setMonthDuration = () => {
-        this.expires = this.durations.month;
-    }
-
-    private setYearDuration = () => {
-        this.expires = this.durations.year;
-    }
-
-    public getCookieValue = () => {
+    public get cookieValue() {
         return this.value;
     }
 
-    public decryptedValue = () => {
+    protected encrypt = (data: Object): string => {
+        var crypted = this.cipher.update(data.toString(),'utf8','hex')
+        crypted += this.cipher.final('hex');
+        return crypted; 
+    }
 
-        const _bytes = Crypto.AES.decrypt(this.value, this.config.secret);
-        const _plainText = _bytes.toString(Crypto.enc.Utf8);
-        return _plainText;
+    public get decryptedValue() {
+        var decrypted = this.decipher.update(this.value.toString(), 'hex', 'utf8');
+        return decrypted;
     }
 }
 

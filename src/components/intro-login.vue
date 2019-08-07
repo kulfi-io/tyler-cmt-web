@@ -63,13 +63,21 @@ export default Vue.extend({
     computed: {
         initLoginAccount: function() {
             const _submitter = <Element>document.querySelector('#login-account');
-            const _account =  new Library(_submitter, 2);
+            const _account =  <Library>this.$data.login;
+            _account.readyToSubmit.submitter = _submitter;
+            _account.readyToSubmit.max = 2;
             this.$data.login = _account;
+
+            _submitter.addEventListener('click', _account.login)
         },
         initResetAccount: function() {
             const _submitter = <Element>document.querySelector('#reset-account');
-            const _account =  new Library(_submitter);
+            const _account =  <Library>this.$data.reset;
+            _account.readyToSubmit.submitter = _submitter;
+            _account.readyToSubmit.max = 1;
             this.$data.reset = _account;
+
+            _submitter.addEventListener('click', _account.login)
         }
 
     },

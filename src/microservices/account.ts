@@ -11,30 +11,32 @@ export class AccountService extends BaseService{
 
         if(data.email && data.firstname && data.lastname
             && data.password && data.type && data.username) {
-                data.email = this.encrypt(data.email);
-                data.firstname = this.encrypt(data.firstname);
-                data.lastname = this.encrypt(data.lastname);
-                data.password = this.encrypt(data.password);
-                data.type = this.encrypt(data.type);
-                data.username = this.encrypt(data.username)
+                data.email = this.encryptIV(data.email);
+                data.firstname = this.encryptIV(data.firstname);
+                data.lastname = this.encryptIV(data.lastname);
+                data.password = this.encryptIV(data.password);
+                data.type = this.encryptIV(data.type);
+                data.username = this.encryptIV(data.username);
         }
 
         return Axios.post(this.accountRegisterEndpoint, data, {headers: this.header});
     }
 
     login(data: Login): AxiosPromise {
-        if(data.username && data.password) {
-            data.username = this.encrypt(data.username);
-            data.password = this.encrypt(data.password);
-        }
 
+        if(data.username && data.password) {
+            data.password = this.encryptIV(data.password);
+            data.username = this.encryptIV(data.username);
+        }
+    
         return Axios.post(this.accountLoginEndpoint, data, {headers: this.header});
     }
 
     verify(data: VerifyLogin): AxiosPromise {
+
         if(data.username && data.password && data.token) {
-            data.username = this.encrypt(data.username);
-            data.password = this.encrypt(data.password);
+            data.username = this.encryptIV(data.username);
+            data.password = this.encryptIV(data.password);
         }
 
         return Axios.post(this.accountVerifyEndpoint, data, {headers: this.header});

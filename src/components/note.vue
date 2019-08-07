@@ -104,18 +104,19 @@ export default Vue.extend({
         initAccount: function() {
             const _portSubmitter = <Element>document.querySelector('#send-note');
             const _landSubmitter = <Element>document.querySelector('#land-send-note');
-
-            const _account =  new Library(_portSubmitter, 4);
+            const _account =  <Library>this.$data.account;
+            _account.readyToSubmit.submitter = _portSubmitter;
+            _account.readyToSubmit.max = 4;
             this.$data.account = _account;
 
-            _portSubmitter.addEventListener('click', this.account.sendNote);
-            _landSubmitter.addEventListener('click', this.account.sendNote);
+            _portSubmitter.addEventListener('click', this.$data.account.sendNote);
+            _landSubmitter.addEventListener('click', this.$data.account.sendNote);
 
         }
     },
     data: function() {
         return {
-            account: new Library()
+            account: new Library(),
         }
     },
     mounted: function() {
@@ -130,10 +131,6 @@ export default Vue.extend({
 
     }, 
     methods: {
-
-        validate: () => {
-            console.log('validate');
-        },
 
         matchPortView: function() {
             const _faElements: Element[]= [];
@@ -164,7 +161,7 @@ export default Vue.extend({
             _faElements.push(_lastFa);
             _faElements.push(_noteFa);
 
-            this.account.matchSiblingState(_faElements);
+            this.$data.account.matchSiblingState(_faElements);
         },
 
         matchLandView: function() {
@@ -197,7 +194,7 @@ export default Vue.extend({
             _faElements.push(_noteFa);
 
 
-            this.account.matchSiblingState(_faElements);
+            this.$data.account.matchSiblingState(_faElements);
         },
 
         displayBasedOnOrientation: function() {
@@ -207,15 +204,15 @@ export default Vue.extend({
             const _portraitClassList = _portrait.classList;
             const _landscapeClassList = _landscape.classList;
 
-
             if(window.screen.height <= 414) {
+                
                 if(!_portraitClassList.contains('hide-element')) {
                     
                     _portrait.classList.add('hide-element');
                     _landscape.classList.remove('hide-element');
                     
                     const _submitter = <Element>document.querySelector('#land-send-note');
-                    this.account.readyToSubmit.submitter= _submitter;
+                    this.$data.account.readyToSubmit.submitter= _submitter;
                     this.matchPortView();
 
                 }
@@ -228,7 +225,7 @@ export default Vue.extend({
                     _portrait.classList.remove('hide-element');
                     
                     const _submitter = <Element>document.querySelector('#send-note');
-                    this.account.readyToSubmit.submitter = _submitter;
+                    this.$data.account.readyToSubmit.submitter = _submitter;
                     this.matchLandView();
 
                 }
