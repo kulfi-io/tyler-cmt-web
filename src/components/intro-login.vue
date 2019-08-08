@@ -68,7 +68,7 @@ export default Vue.extend({
             _account.readyToSubmit.max = 2;
             this.$data.login = _account;
 
-            _submitter.addEventListener('click', _account.login)
+            _submitter.addEventListener('click', _account.login);
         },
         initResetAccount: function() {
             const _submitter = <Element>document.querySelector('#reset-account');
@@ -77,7 +77,7 @@ export default Vue.extend({
             _account.readyToSubmit.max = 1;
             this.$data.reset = _account;
 
-            _submitter.addEventListener('click', _account.login)
+            _submitter.addEventListener('click', _account.resetRequest);
         }
 
     },

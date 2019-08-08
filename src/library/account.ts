@@ -5,6 +5,7 @@ import AccountService  from '../microservices/account';
 import MailerService from '../microservices/mailer';
 import Cookie from './cookie';
 import CookieManager from './cookieManager';
+import { IResetAccount, IResetRequest } from '@/models/interfaces';
 
 export interface validKey {
     name: string;
@@ -138,6 +139,60 @@ export default class Account {
                 this.notifySubmitter(_submitter, _submitterTextContent);
                 this.removeCookie();
             });
+        }
+    }
+
+    public resetRequest = (e: Event) => {
+        e.preventDefault();
+        const _failed = this.readyToSubmit.validated.filter(x => !x.value);
+        
+        if(_failed.length == 0 
+            && this.readyToSubmit.validated.length == this.readyToSubmit.max) {
+                this.removeCookie();
+                const _submitter = <HTMLButtonElement>e.currentTarget;
+                const _form = <HTMLFormElement>_submitter.closest('form');
+                const _email = <HTMLInputElement>_form.querySelector('#email');
+                const _icons = _form.querySelectorAll('.fa');
+                const _submitterTextContent = <string>_submitter.textContent;
+                
+                const _data: IResetAccount = {
+                    email: _email.value,
+                } 
+
+                AccountService.resetRequest(_data)
+                .then((result) => {
+                   
+                    const _data = <IResetRequest>result.data.message;
+
+                    MailerService.resetRequest(_data) 
+                    .then((result) => {
+
+                        console.debug('result', result);
+
+                        this.readyToSubmit.validated = [];
+                        _email.value = '';
+                        this.readyToSubmit.muted();
+    
+                        _icons.forEach((item: Element) => {
+                            this.muted(item);
+                        });
+                        
+                        _submitter.textContent = result.status 
+                            ? `${result.statusText} ${result.data.message}.`
+                            : _submitterTextContent;
+                        this.notifySubmitter(_submitter, _submitterTextContent)
+
+                    })
+                    .catch((err) => {
+                        _submitter.textContent = err.response.data.message;
+                        this.notifySubmitter(_submitter, _submitterTextContent);
+                    });
+
+                })
+                .catch((err) => {
+                    _submitter.textContent = err.response.data.message;
+                    this.notifySubmitter(_submitter, _submitterTextContent);
+                });
         }
     }
 

@@ -1,6 +1,7 @@
 import Axios, { AxiosPromise } from 'axios';
 import BaseService from './base-service';
 import { User, Login, VerifyLogin } from '../models/account';
+import { IResetAccount} from '../models/interfaces';
 
 export class AccountService extends BaseService{
     constructor() {
@@ -39,7 +40,17 @@ export class AccountService extends BaseService{
             data.password = this.encryptIV(data.password);
         }
 
+
         return Axios.post(this.accountVerifyEndpoint, data, {headers: this.header});
+    }
+
+    resetRequest(data: IResetAccount): AxiosPromise {
+        
+        if(data) {
+            data.email = this.encryptIV(data.email);
+        }
+
+        return Axios.post(this.accountResetRequestEndpoint, data, {headers: this.header});
     }
 }
 

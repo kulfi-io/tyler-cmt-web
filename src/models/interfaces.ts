@@ -41,13 +41,14 @@ export interface IDuration {
     value: string;
 }
 
-export interface IEncryptedData {
-    iv: Buffer;
-    data: string;
-    tag: Buffer;
+export interface IResetAccount {
+    email: string;
 }
 
-export interface IEncryptedLogin {
-    username: IEncryptedData;
-    password: IEncryptedData;
+export interface IResetRequest {
+    username: string,
+    firstname: string,
+    lastname: string,
+    email: string;
+    token: string;
 }

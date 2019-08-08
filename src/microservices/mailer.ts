@@ -1,6 +1,6 @@
 import Axios, { AxiosPromise } from 'axios';
 import BaseService from './base-service';
-import {IUser,INote} from '../models/interfaces';
+import {IUser,INote, IResetRequest} from '../models/interfaces';
 
 export class MailerService extends BaseService{
     constructor() {
@@ -18,6 +18,12 @@ export class MailerService extends BaseService{
         }
 
         return Axios.post(this.mailerRegisterEndpoint, data, {headers: this.header});
+    }
+
+    resetRequest(data: IResetRequest): AxiosPromise {
+        console.debug('reset-request', data);
+        console.debug('reset', this.mailerResetRequestEndpoint);
+        return Axios.post(this.mailerResetRequestEndpoint, data, {headers: this.header})
     }
 
     sendNote(data: INote): AxiosPromise {
