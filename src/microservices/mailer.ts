@@ -29,10 +29,10 @@ export class MailerService extends BaseService{
         if(data.email && data.firstname && data.lastname
             && data.content) {
             
-            data.email = this.encrpyt(data.email);
-            data.firstname = this.encrpyt(data.firstname);
-            data.lastname = this.encrpyt(data.lastname);
-            data.content = this.encrpyt(data.content);
+            data.email = this.encrypt(data.email);
+            data.firstname = this.encrypt(data.firstname);
+            data.lastname = this.encrypt(data.lastname);
+            data.content = this.encrypt(data.content);
 
         }
 

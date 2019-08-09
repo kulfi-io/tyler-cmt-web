@@ -72,7 +72,7 @@ export default class BaseService {
 
     }
 
-    protected encrpyt = (data: string) : string => {
+    protected encrypt = (data: string) : string => {
 
         const cipher = crypto.createCipher(this.algorithm, Config.secret);
 
@@ -84,13 +84,14 @@ export default class BaseService {
         });
         cipher.on('end', () => {
             console.log(encrypted);
-            // Prints: ca981be48e90867604588e75d04feabb63cc007a8f8ad89b10616ed84d815504
         });
 
         cipher.write(data);
         cipher.end();
 
         return encrypted;
+
+        // return this.isProd ? encrypted : data;
     }
 
     protected decrypt = (data: string): string => {
@@ -111,6 +112,8 @@ export default class BaseService {
         decipher.end();
 
         return decrypted;
+
+        // return this.isProd ? decrypted : data;
     }
 
 }
