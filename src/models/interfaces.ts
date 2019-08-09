@@ -41,14 +41,21 @@ export interface IDuration {
     value: string;
 }
 
+
 export interface IResetAccount {
     email: string;
 }
 
-export interface IResetRequest {
-    username: string,
+export interface IResetRequest extends IResetAccount {
     firstname: string,
     lastname: string,
-    email: string;
+    username: string,
     token: string;
 }
+
+export interface IReset extends IResetAccount{
+    username: string;
+    token: string;
+    password: string;
+}
+

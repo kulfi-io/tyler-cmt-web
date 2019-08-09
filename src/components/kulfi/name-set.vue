@@ -17,14 +17,15 @@ import Name from './name.vue';
 import { validKey } from '@/library/account';
 export default Vue.extend({
     name: 'name-set',
+    props: ['account'],
     components: {
         Name
     },
-    computed: {
-        account: function()  {
-            return this.$parent.$data.account;
-        }
-    },
+    // computed: {
+    //     account: function()  {
+    //         return this.$parent.$data.account;
+    //     }
+    // },
     mounted: function(){
         const _self = this;
         const _last = <Element>document.querySelector(`#lastname`);

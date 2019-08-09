@@ -14,6 +14,7 @@ export default class BaseService {
     protected accountVerifyEndpoint: string;
     protected accountLoginEndpoint: string;
     protected accountResetRequestEndpoint: string;
+    protected accountResetEndpoint: string;
 
     private mailer: IMicroService;
     private mailerBaseUrl: string;
@@ -47,12 +48,15 @@ export default class BaseService {
             .find(x => x.name === 'login');
         const _accountResetRequest = <IEndpoint>this.account.endpoints
             .find(x => x.name === 'resetRequest');
+        const _accountReset = <IEndpoint>this.account.endpoints
+            .find(x => x.name === 'reset');
 
         this.accountUserEndpoint = `${this.accountBaseUrl}/${_accountUser.endpoint}`;
         this.accountRegisterEndpoint = `${this.accountBaseUrl}/${_accountRegister.endpoint}`;
         this.accountVerifyEndpoint = `${this.accountBaseUrl}/${_accountVerify.endpoint}`;
         this.accountLoginEndpoint = `${this.accountBaseUrl}/${_accountLogin.endpoint}`;
         this.accountResetRequestEndpoint = `${this.accountBaseUrl}/${_accountResetRequest.endpoint}`;
+        this.accountResetEndpoint = `${this.accountBaseUrl}/${_accountReset.endpoint}`;
 
         // MAILER
         this.mailerBaseUrl = `${this.mailer.scheme}://${this.mailer.baseEndpoint}:${this.mailer.port}`;

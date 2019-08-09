@@ -16,13 +16,13 @@
                             :label="'email'"
                             :account="account" :validKey="'email'")
                         div.form-group
-                            NameSet
+                            NameSet(:account="account")
                         div.form-group
                             PasswordSet(
                             :tag="'password'"
                             :placeholder="'Password'"
                             :title="'Password is required'"
-                            :label="'Password'"
+                            :label="'Password'" :account="account"
                             )                     
                         div.form-group(class="submit")
                             button.form-control(id="register-account" class="submitter bg-muted" type="submit" ) Register

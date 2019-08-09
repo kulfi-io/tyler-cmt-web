@@ -21,8 +21,6 @@ export class MailerService extends BaseService{
     }
 
     resetRequest(data: IResetRequest): AxiosPromise {
-        console.debug('reset-request', data);
-        console.debug('reset', this.mailerResetRequestEndpoint);
         return Axios.post(this.mailerResetRequestEndpoint, data, {headers: this.header})
     }
 

@@ -34,14 +34,9 @@ import Password from '../kulfi/password.vue';
 
 export default Vue.extend({
     name: 'kulfi-password-set',
-    props: ["tag", "title", "placeholder", "label"],
+    props: ["tag", "title", "placeholder", "label", "account"],
     components: {
         Password,
-    },
-    computed: {
-        account: function()  {
-            return this.$parent.$data.account;
-        }
     },
     mounted: function() {
         const _self = this;
@@ -69,7 +64,7 @@ export default Vue.extend({
     },
     methods: {
         setMatched: function(label:string, matched: boolean, target: Element): void {
-            const _library = this.$parent.$data.account;
+            const _library = this.account;
             matched ? _library.passed(target) : _library.muted(target);
             const _key: validKey = {
                 name: label,
@@ -81,7 +76,7 @@ export default Vue.extend({
 
         },
         resetValidation: function() {
-            const _library = this.$parent.$data.account;
+            const _library = this.account;
             _library.pwdCriteriaMatched = [];
         
             var _length = <Element>this.$refs.pwdLength; 
@@ -98,7 +93,7 @@ export default Vue.extend({
             _library.muted(_special);
         },
         validatePassword: function(source: HTMLInputElement, target: HTMLInputElement): boolean {
-            const _library = this.$parent.$data.account
+            const _library = this.account
             const _parent = <Element>source.closest('main');
             var _length = <Element>this.$refs.pwdLength; 
             var _upper = <Element>this.$refs.pwdUpper;

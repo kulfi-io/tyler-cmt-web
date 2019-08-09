@@ -11,14 +11,14 @@
                             Token
                         div.split
                             div.split-half-left
-                                Username(:account="validate")
+                                Username(:account="account")
                             div.split-half-right
                                 Password(
                                 :tag="'password'"
                                 :placeholder="'Password'"
                                 :title="'Password is required'"
                                 :label="'Password'"
-                                :account="validate" :set="false")
+                                :account="account" :set="false")
                         div.split
                             div.split-half-flush(class="split custom-control-input")
                                 div.split-for-cb(class="checkbox")
@@ -50,9 +50,9 @@ export default Vue.extend({
         initLoginAccount: function() {
             const _submitter = <Element>document.querySelector('#validate-account');
             const _account =  new Library(_submitter, 2);
-            this.$data.validate = _account;
 
             _submitter.addEventListener('click', _account.verify);
+            this.$data.account = _account;
 
         },
     },
@@ -61,7 +61,7 @@ export default Vue.extend({
     },
     data: function() {
         return {
-            validate: new Library(),
+            account: new Library(),
         }
     },
 });
