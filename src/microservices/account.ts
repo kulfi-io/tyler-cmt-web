@@ -12,12 +12,12 @@ export class AccountService extends BaseService{
 
         if(data.email && data.firstname && data.lastname
             && data.password && data.type && data.username) {
-                data.email = this.encryptIV(data.email);
-                data.firstname = this.encryptIV(data.firstname);
-                data.lastname = this.encryptIV(data.lastname);
-                data.password = this.encryptIV(data.password);
-                data.type = this.encryptIV(data.type);
-                data.username = this.encryptIV(data.username);
+                data.email = this.encrpyt(data.email);
+                data.firstname = this.encrpyt(data.firstname);
+                data.lastname = this.encrpyt(data.lastname);
+                data.password = this.encrpyt(data.password);
+                data.type = this.encrpyt(data.type);
+                data.username = this.encrpyt(data.username);
         }
 
         return Axios.post(this.accountRegisterEndpoint, data, {headers: this.header});
@@ -26,8 +26,8 @@ export class AccountService extends BaseService{
     login(data: Login): AxiosPromise {
 
         if(data.username && data.password) {
-            data.password = this.encryptIV(data.password);
-            data.username = this.encryptIV(data.username);
+            data.password = this.encrpyt(data.password);
+            data.username = this.encrpyt(data.username);
         }
     
         return Axios.post(this.accountLoginEndpoint, data, {headers: this.header});
@@ -36,8 +36,8 @@ export class AccountService extends BaseService{
     verify(data: VerifyLogin): AxiosPromise {
 
         if(data.username && data.password && data.token) {
-            data.username = this.encryptIV(data.username);
-            data.password = this.encryptIV(data.password);
+            data.username = this.encrpyt(data.username);
+            data.password = this.encrpyt(data.password);
         }
 
         return Axios.post(this.accountVerifyEndpoint, data, {headers: this.header});
@@ -46,9 +46,9 @@ export class AccountService extends BaseService{
     resetUser(data: IReset): AxiosPromise {
         
         if(data.username && data.password && data.email && data.token) {
-            data.username = this.encryptIV(data.username);
-            data.password = this.encryptIV(data.password);
-            data.email = this.encryptIV(data.email);
+            data.username = this.encrpyt(data.username);
+            data.password = this.encrpyt(data.password);
+            data.email = this.encrpyt(data.email);
         } 
 
         return Axios.post(this.accountResetEndpoint, data, {headers: this.header});
@@ -57,7 +57,7 @@ export class AccountService extends BaseService{
     resetRequest(data: IResetAccount): AxiosPromise {
         
         if(data) {
-            data.email = this.encryptIV(data.email);
+            data.email = this.encrpyt(data.email);
         }
 
         return Axios.post(this.accountResetRequestEndpoint, data, {headers: this.header});

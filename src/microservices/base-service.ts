@@ -22,10 +22,6 @@ export default class BaseService {
     protected mailerRegisterEndpoint: string;
     protected mailerResetRequestEndpoint: string;
     private algorithm: string;
-    private hashType: string;
-    private hash: crypto.Hmac;
-    private key: Buffer;
-    private iv: Buffer;
 
     constructor() {
         
@@ -72,34 +68,49 @@ export default class BaseService {
         this.mailerResetRequestEndpoint = `${this.mailerBaseUrl}/${_mailerResetRequest.endpoint}`;
 
         // CRYPTO
-        this.hashType = 'sha512';
-        this.algorithm = 'aes-256-gcm';
-        this.hash = crypto.createHmac(this.hashType, Config.secret);
-        this.key = this.hash.digest().slice(0, 32);
-        this.iv = Buffer.alloc(16, 0);
+        this.algorithm = 'aes192';
 
     }
 
-    protected encryptIV = (data: string) : string => {
+    protected encrpyt = (data: string) : string => {
 
-        const _cipher = crypto.createCipheriv(this.algorithm, this.key, this.iv);
-        let _encrypted = _cipher.update(data, 'utf8', 'hex');
-        let _final = _cipher.final('hex');
+        const cipher = crypto.createCipher(this.algorithm, Config.secret);
 
-        return _encrypted;
+        let encrypted = '';
+        cipher.on('readable', () => {
+        const data = cipher.read();
+        if (data)
+            encrypted += data.toString('hex');
+        });
+        cipher.on('end', () => {
+            console.log(encrypted);
+            // Prints: ca981be48e90867604588e75d04feabb63cc007a8f8ad89b10616ed84d815504
+        });
 
-        // return this.isProd ? _encrypted : data;
+        cipher.write(data);
+        cipher.end();
 
+        return encrypted;
     }
 
-    protected decryptIV = (data: string): string => {
+    protected decrypt = (data: string): string => {
+        const decipher = crypto.createDecipher(this.algorithm, Config.secret);
 
-        const _decipher = crypto.createDecipheriv(this.algorithm, this.key, this.iv);
-        let _decrypted = _decipher.update(data, 'hex', 'utf8');
+        let decrypted = '';
+        decipher.on('readable', () => {
+        const data = decipher.read();
+        if (data)
+            decrypted += data.toString('utf8');
+        });
+        decipher.on('end', () => {
+            console.log(decrypted);
+            // Prints: some clear text data
+        });
 
-        return _decrypted;
-        // return this.isProd ? _decrypted : data;
+        decipher.write(data, 'hex');
+        decipher.end();
 
+        return decrypted;
     }
 
 }
