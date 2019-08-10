@@ -29,10 +29,10 @@ import IntroVision from "../components/intro-vision.vue";
 import IntroLogin from '../components/intro-login.vue';
 import IntroContact from '../components/intro-contact.vue';
 import IntroRegister from '../components/intro-register.vue';
-import Home from '../library/home';
+import Option from  '../library/fpOption-home';
 import '../assets/sass/home.scss';
 
-const _home = new Home(['home', 'vision', 'login', 'register', 'contact']
+const _home = new Option(['home', 'vision', 'login', 'register', 'contact']
   , ['#C8C8C8', '#C8C8C8', '#C8C8C8', '#C8C8C8', '#C8C8C8]'])
 
 export default Vue.extend({
@@ -49,12 +49,11 @@ export default Vue.extend({
   },
   data() {
     return {
-      options: _home.options,
-      homeTop:  _home.findAnimation(`${_home.fullpageAnchors[0]}-top`),
-      homeBottom: _home.findAnimation(`${_home.fullpageAnchors[0]}-bottom`),
-      visionTop: _home.findAnimation(`${_home.fullpageAnchors[1]}-top`),
-      visionBottom: _home.findAnimation(`${_home.fullpageAnchors[1]}-bottom`),
-
+      options: _home.Option,
+      homeTop:  _home.findAnimation(`${_home.Anchors[0]}-top`),
+      homeBottom: _home.findAnimation(`${_home.Anchors[0]}-bottom`),
+      visionTop: _home.findAnimation(`${_home.Anchors[1]}-top`),
+      visionBottom: _home.findAnimation(`${_home.Anchors[1]}-bottom`),
     };
   },
 });

@@ -13,9 +13,9 @@ import ValidateVue from '../components/validate-login.vue';
 import HeaderVue from '../components/header.vue';
 import FooterVue from '../components/footer.vue';
 import FullPage from 'vue-fullpage.js/src/FullPage.vue';
-import Validate from '../library/validate';
+import Option from '../library/fpOption';
 
-const _validate = new Validate(['validate']
+const _validate = new Option(['validate']
   , ['#C8C8C8']);
 
 export default Vue.extend({
@@ -28,7 +28,7 @@ export default Vue.extend({
     },
     data() {
         return {
-            options: _validate.options,
+            options: _validate.Option,
         };
     },
     
