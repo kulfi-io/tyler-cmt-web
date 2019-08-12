@@ -12,7 +12,7 @@ export interface IEndpoint {
     endpoint: string;
 }
 
-export interface IUser {
+export interface IMailerUser {
     userId?: string;
     email?: string;
     username?: string;
@@ -58,4 +58,49 @@ export interface IReset extends IResetAccount{
     token: string;
     password: string;
 }
+
+export interface IVerifyLogin {
+    username: string,
+    password: string,
+    token: string
+}
+
+export interface ILogin {
+    username: string;
+    password: string;
+}
+
+export interface IRegisterUser {
+    id?: string;
+    email: string;
+    firstname: string;
+    lastname: string;
+    password: string;
+    username: string;
+    type: string;
+    active?: boolean
+}
+
+export interface IUserType  {
+    id: string;
+    display: string;
+    description: string;
+    active: boolean | string;
+  }
+  
+  export interface IUser  {
+    id: string;
+    username: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    userType: IUserType;
+    active: boolean;
+    tokenValidated: boolean;
+    validationToken: string;
+  }
+
+  export interface ICookieUser {
+      id: string;
+  }
 

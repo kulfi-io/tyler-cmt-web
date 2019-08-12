@@ -1,13 +1,13 @@
 import Axios, { AxiosPromise } from 'axios';
 import BaseService from './base-service';
-import {IUser,INote, IResetRequest} from '../models/interfaces';
+import {IMailerUser,INote, IResetRequest} from '../models/interfaces';
 
 export class MailerService extends BaseService{
     constructor() {
         super();
     }
 
-    register(data: IUser): AxiosPromise {
+    register(data: IMailerUser): AxiosPromise {
 
         if(data.email && data.username && data.userId
             && data.token) {

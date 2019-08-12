@@ -1,15 +1,21 @@
 import Axios, { AxiosPromise } from 'axios';
 import BaseService from './base-service';
-import { User, Login, VerifyLogin } from '../models/account';
-import { IResetAccount, IReset} from '../models/interfaces';
+import {
+    ICookieUser,
+    ILogin,
+    IRegisterUser,
+    IReset,
+    IResetAccount,
+    IVerifyLogin
+    } from '../models/interfaces';
 
 export class AccountService extends BaseService{
     constructor() {
         super();
     }
 
-    register(data: User): AxiosPromise {
-
+    register(data: IRegisterUser): AxiosPromise {
+        
         if(data.email && data.firstname && data.lastname
             && data.password && data.type && data.username) {
                 data.email = this.encrypt(data.email);
@@ -18,12 +24,14 @@ export class AccountService extends BaseService{
                 data.password = this.encrypt(data.password);
                 data.type = this.encrypt(data.type);
                 data.username = this.encrypt(data.username);
+                
+                // data.email = this.crypter(data.email).;
         }
 
         return Axios.post(this.accountRegisterEndpoint, data, {headers: this.header});
     }
 
-    login(data: Login): AxiosPromise {
+    login(data: ILogin): AxiosPromise {
 
         if(data.username && data.password) {
             data.password = this.encrypt(data.password);
@@ -33,7 +41,7 @@ export class AccountService extends BaseService{
         return Axios.post(this.accountLoginEndpoint, data, {headers: this.header});
     }
 
-    verify(data: VerifyLogin): AxiosPromise {
+    verify(data: IVerifyLogin): AxiosPromise {
 
         if(data.username && data.password && data.token) {
             data.username = this.encrypt(data.username);
@@ -61,6 +69,13 @@ export class AccountService extends BaseService{
         }
 
         return Axios.post(this.accountResetRequestEndpoint, data, {headers: this.header});
+    }
+
+    findUser(data: ICookieUser): AxiosPromise {
+        console.debug('cookieuser', data.id);
+
+        const _url = `${this.accountUserEndpoint}/${data.id}`;
+        return Axios.get(_url, {headers: this.header});
     }
 }
 
