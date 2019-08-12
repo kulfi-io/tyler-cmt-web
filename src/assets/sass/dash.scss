@@ -1,4 +1,12 @@
 @import "./account.variable.scss";
 @import "../sass/checkbox.scss";
 
+.dash {
+    margin: auto;
+    display: block;
 
+    .dashboard-vue {
+        margin: auto;
+        display: block;
+    }
+}
