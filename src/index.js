@@ -7,7 +7,6 @@ import 'fullpage.js/dist/fullpage.css';
 import 'fullpage.js/vendors/scrolloverflow';
 import animate from 'animate.css';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
-import Account from './library/account';
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;
