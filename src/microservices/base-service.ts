@@ -1,11 +1,9 @@
 import Config from '../config/config.json';
-import crypto from 'crypto';
-import { ENV } from '../models/model-enums';
+import { cryptor } from '@/library/cryptor';
 import { IEndpoint, IMicroService } from '../models/interfaces';
 
-export default class BaseService {
+export default class BaseService extends cryptor {
     protected header: { "Accept": string; "Content-Type": string; "enctype": string; "x_access_token": string; };
-    private isProd: boolean;
 
     private account: IMicroService;
     private accountBaseUrl: string;
@@ -21,12 +19,10 @@ export default class BaseService {
     protected mailerNoteEndpoint: string;
     protected mailerRegisterEndpoint: string;
     protected mailerResetRequestEndpoint: string;
-    private algorithm: string;
 
     constructor() {
-        
+        super();
         this.header = Config.header;
-        this.isProd = process.env.NODE_ENV === ENV.PROD;
 
         // API
         this.account = <IMicroService>Config.microservices.find(x => x.name === 'account');
@@ -46,7 +42,7 @@ export default class BaseService {
             .find(x => x.name === 'resetRequest');
         const _accountReset = <IEndpoint>this.account.endpoints
             .find(x => x.name === 'reset');
-
+        
         this.accountUserEndpoint = `${this.accountBaseUrl}/${_accountUser.endpoint}`;
         this.accountRegisterEndpoint = `${this.accountBaseUrl}/${_accountRegister.endpoint}`;
         this.accountVerifyEndpoint = `${this.accountBaseUrl}/${_accountVerify.endpoint}`;
@@ -66,54 +62,5 @@ export default class BaseService {
         this.mailerNoteEndpoint = `${this.mailerBaseUrl}/${_mailerNote.endpoint}`;
         this.mailerRegisterEndpoint = `${this.mailerBaseUrl}/${_mailerRegister.endpoint}`;
         this.mailerResetRequestEndpoint = `${this.mailerBaseUrl}/${_mailerResetRequest.endpoint}`;
-
-        // CRYPTO
-        this.algorithm = 'aes192';
-
     }
-
-    protected encrypt = (data: string) : string => {
-
-        const cipher = crypto.createCipher(this.algorithm, Config.secret);
-
-        let encrypted = '';
-        cipher.on('readable', () => {
-        const data = cipher.read();
-        if (data)
-            encrypted += data.toString('hex');
-        });
-        cipher.on('end', () => {
-            console.log(encrypted);
-        });
-
-        cipher.write(data);
-        cipher.end();
-
-        return encrypted;
-
-        // return this.isProd ? encrypted : data;
-    }
-
-    protected decrypt = (data: string): string => {
-        const decipher = crypto.createDecipher(this.algorithm, Config.secret);
-
-        let decrypted = '';
-        decipher.on('readable', () => {
-        const data = decipher.read();
-        if (data)
-            decrypted += data.toString('utf8');
-        });
-        decipher.on('end', () => {
-            console.log(decrypted);
-            // Prints: some clear text data
-        });
-
-        decipher.write(data, 'hex');
-        decipher.end();
-
-        return decrypted;
-
-        // return this.isProd ? decrypted : data;
-    }
-
 }

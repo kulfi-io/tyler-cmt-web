@@ -1,30 +1,24 @@
 import Config from '../config/config.json';
-import Crypto from 'crypto';
-import { ICookie, IDuration } from '../models/interfaces';
+import { ICookie, IDuration, ICookieUser } from '../models/interfaces';
+import { cryptor } from './cryptor';
+import * as TinyCookie from 'tiny-cookie';
 
-export class Cookie {
-    public name: string;
-    public expires: IDuration;
-    private config: ICookie
-    private algorithm: string;
-    private cipher: Crypto.Cipher;
-    private decipher: Crypto.Decipher;
-    private value: Object;
+export class CookieManager extends cryptor{
+    public name?: string;
+    protected expires: IDuration;
+    protected config: ICookie;
+    public value?: Object;
+    public decryptedValue?: ICookieUser;
 
-    constructor(name: string, value: Object) {
-
-        this.algorithm = 'aes-256-gcm';
-      
-        this.cipher = Crypto.createCipher(this.algorithm, Config.secret);
-        this.decipher = Crypto.createDecipher(this.algorithm, Config.secret);
-
+    constructor() {
+        super();
         this.config = Config.cookie
-        this.name = name;
-        this.value = this.encrypt(value);
+
         this.expires = {
             name: 'sec',
             value: '20sec'
         };
+
         this.initDuration();
     }
 
@@ -37,20 +31,39 @@ export class Cookie {
 
     }
 
-    public get cookieValue() {
-        return this.value;
+    public setCookie = (name: string, value: Object) => {
+        this.name = name;
+        this.value = this.encryptUserCookie(value);
+
+        if(TinyCookie.isCookieEnabled && this.value)  {
+
+            TinyCookie.setCookie(this.name
+                , this.value.toString(), {expires: this.expires.value});
+        }
     }
 
-    protected encrypt = (data: Object): string => {
-        var crypted = this.cipher.update(data.toString(),'utf8','hex')
-        crypted += this.cipher.final('hex');
-        return crypted; 
+    public findCookie = (name: string) => {
+        const _cookie = TinyCookie.getCookie(name);
+
+        if(_cookie)  {
+            this.name = name;
+            this.value = <Object>_cookie;
+            this.decryptedValue = this.decryptUserValue;
+        }   
     }
 
-    public get decryptedValue() {
-        var decrypted = this.decipher.update(this.value.toString(), 'hex', 'utf8');
-        return decrypted;
+    public deleteCookie = () => {
+        if(this.name) {
+            TinyCookie.remove(this.name);
+            this.name = undefined;
+            this.value = undefined;
+        }
+    }
+
+    private get decryptUserValue(): ICookieUser | undefined {
+        if(this.value) 
+            return this.decryptUserCookie(this.value.toString());
     }
 }
 
-export default Cookie;
+export default CookieManager;

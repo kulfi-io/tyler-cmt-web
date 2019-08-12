@@ -1,6 +1,5 @@
 import AccountService from '../microservices/account';
 import Cookie from './cookie';
-import CookieManager from './cookieManager';
 import MailerService from '../microservices/mailer';
 import { AxiosResponse } from 'axios';
 import {
@@ -12,9 +11,17 @@ import {
     faUser,
     IconDefinition
 } from '@fortawesome/fontawesome-free-solid';
-import { IReset, IResetAccount, IResetRequest } from '@/models/interfaces';
-import { Login, User, VerifyLogin } from '../models/account';
-import { MailerUser, Note } from '../models/mailer';
+import {
+    ICookieUser,
+    IMailerUser,
+    INote,
+    IReset,
+    IResetAccount,
+    IResetRequest,
+    ILogin,
+    IRegisterUser,
+    IVerifyLogin
+} from '@/models/interfaces';
 
 export interface validKey {
     name: string;
@@ -68,12 +75,12 @@ export default class Account {
     public matched?: boolean
     public pwdCriteriaMatched: validKey[];
     public readyToSubmit: ReadyToSubmit;
-    private cookie?: Cookie;
+    public cookieManager: Cookie;
 
     constructor(submitter?: Element, max: number = 1) {
+        this.cookieManager = new Cookie();
         this.pwdCriteriaMatched = [];
         this.readyToSubmit = new ReadyToSubmit(submitter, max);
-        this.cookie = CookieManager.getCookie('tyler-cmt')
     }
 
     private notifySubmitter = (submitter: Element, originalValue: string) => {
@@ -83,26 +90,6 @@ export default class Account {
                 this.readyToSubmit.muted;
             }
             setTimeout(_reset, 2000);
-        }
-    }
-
-    private setCookie = (login: Login) => {
-        if (this.cookie) {
-            const _cookie = <Login>this.cookie.decryptedValue;
-            if (_cookie === login) {
-                console.debug('cookie', _cookie);
-                console.debug('login', login);
-
-            }
-        } else {
-            CookieManager.setCookie('tyler-cmt', login);
-        }
-    }
-
-    private removeCookie = () => {
-        if (this.cookie) {
-            CookieManager.deleteCookie('tyler-cmt');
-            this.cookie = undefined;
         }
     }
 
@@ -120,9 +107,10 @@ export default class Account {
             let _username = <HTMLInputElement>_form.querySelector('#username');
             let _password = <HTMLInputElement>_form.querySelector('#password')
 
-            const _data = new Login();
-            _data.username = _username.value;
-            _data.password = _password.value;
+            const _data: ILogin = {
+                username: _username.value,
+                password: _password.value
+            }
 
             AccountService.login(_data)
                 .then((result) => {
@@ -134,22 +122,15 @@ export default class Account {
                     this.succeded(_icons, _submitter
                         , result, _submitterTextContent);
 
-
-                    // _icons.forEach((item: Element) => {
-                    //     this.muted(item);
-                    // });
-
-                    // _submitter.textContent = result.status 
-                    //     ? `${result.statusText} ${result.data.message}.`
-                    //     : _submitterTextContent;
-
-                    this.setCookie(_data);
-                    // this.notifySubmitter(_submitter, _submitterTextContent)
+                    const _cookieUser: ICookieUser = {
+                        id: result.data.id
+                    }
+                    this.cookieManager.setCookie('tyler-cmt', _cookieUser);
                 })
                 .catch((err) => {
                     _submitter.textContent = err.response.data.message;
                     this.notifySubmitter(_submitter, _submitterTextContent);
-                    this.removeCookie();
+                    this.cookieManager.deleteCookie();
                 });
         }
     }
@@ -211,7 +192,7 @@ export default class Account {
 
         if (_failed.length == 0
             && this.readyToSubmit.validated.length == this.readyToSubmit.max) {
-            this.removeCookie();
+            this.cookieManager.deleteCookie();
             const _submitter = <HTMLButtonElement>e.currentTarget;
             const _form = <HTMLFormElement>_submitter.closest('form');
             const _email = <HTMLInputElement>_form.querySelector('#email');
@@ -265,10 +246,11 @@ export default class Account {
             let _username = <HTMLInputElement>_form.querySelector('#username');
             let _password = <HTMLInputElement>_form.querySelector('#password')
 
-            const _data = new VerifyLogin();
-            _data.username = _username.value;
-            _data.password = _password.value;
-            _data.token = _token.value;
+            const _data: IVerifyLogin = {
+                username: _username.value,
+                password: _password.value,
+                token: _token.value
+            }
 
             AccountService.verify(_data)
                 .then((result) => {
@@ -281,13 +263,19 @@ export default class Account {
                     this.succeded(_icons, _submitter
                         , result, _submitterTextContent);
 
-                    this.setCookie(_data);
+                    const _cookieUser: ICookieUser = {
+                        id: result.data.id
+                    }
+
+                    this.cookieManager.setCookie('tyler-cmt', _cookieUser);
+
+                    // Account.cookieManager.setCookie('tyler-cmt', _cookieUser);
+
                 })
                 .catch((err) => {
-                    console.debug('err', err);
                     _submitter.textContent = err.response.data.message;
                     this.notifySubmitter(_submitter, _submitterTextContent);
-                    this.removeCookie();
+                    this.cookieManager.deleteCookie();
                 });
         }
 
@@ -323,11 +311,13 @@ export default class Account {
                     _content = <HTMLDivElement>_form.querySelector('#land-note');
                 }
 
-                const _data = new Note();
-                _data.email = _email.value;
-                _data.firstname = _first.value;
-                _data.lastname = _last.value;
-                _data.content = _content.innerText;
+                const _data: INote = {
+                    email: _email.value,
+                    firstname: _first.value,
+                    lastname: _last.value,
+                    content: _content.innerText
+
+                };
 
                 MailerService.sendNote(_data)
                     .then((result) => {
@@ -338,18 +328,6 @@ export default class Account {
 
                         this.succeded(_icons, _submitter, result
                             , _submitterTextContent);
-
-                        // this.readyToSubmit.muted();
-
-                        // _icons.forEach((item: Element) => {
-                        //     this.muted(item);
-                        // });
-
-                        // _submitter.textContent = result.status 
-                        //     ? `${result.statusText} ${result.data.message}.`
-                        //     : _submitterTextContent;
-
-                        // this.notifySubmitter(_submitter, _submitterTextContent)
 
                     })
                     .catch((err) => {
@@ -381,13 +359,15 @@ export default class Account {
             const _icons = _form.querySelectorAll('.fa');
             const _criteriaPassed = _form.querySelectorAll('.instructions .passed');
 
-            const _user = new User();
-            _user.username = _username.value;
-            _user.email = _email.value;
-            _user.firstname = _first.value;
-            _user.lastname = _last.value;
-            _user.password = _pwd.value;
-            _user.type = 'basic';
+            const _user: IRegisterUser = {
+                username: _username.value,
+                email: _email.value,
+                firstname: _first.value,
+                lastname: _last.value,
+                password: _pwd.value,
+                type: 'basic'
+            }
+
 
             AccountService.register(_user)
                 .then((result) => {
@@ -396,7 +376,7 @@ export default class Account {
                         ? `${result.statusText} ${result.data.message.username}.`
                         : _submitterTextContent;
 
-                    MailerService.register(<MailerUser>result.data.message)
+                    MailerService.register(<IMailerUser>result.data.message)
                         .then((result) => {
 
                             this.readyToSubmit.validated = [];
