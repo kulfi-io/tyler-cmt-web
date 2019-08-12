@@ -20,7 +20,8 @@ let routes = [
     { path: '/validate/:id', name: 'validate', title: 'validate', component: Validate},
     { path: '/reset/:id', name: 'reset', title: 'reset', component: Reset},
     { path: '/dash', name: 'dash', title: 'dash', component: Dash},
-    
+    { path: '/schedule', name: 'schedule', title: 'schedule', component: Schedule}
+
     // { path: '/register', name: 'register', title: 'register', component: Register},
     // { path: '/schedule', name: 'schedule', title: 'schedule', component: Schedule}
 

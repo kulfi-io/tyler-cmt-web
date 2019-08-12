@@ -18,6 +18,7 @@ import Library from '../library/dash';
 import '../assets/sass/dash.scss';
 
 const _options = new Options(['Dash'], ['#C8C8C8']);
+const _library = new Library();
 
 export default Vue.extend({
     name: 'dash',
@@ -30,7 +31,7 @@ export default Vue.extend({
     data: () => {
         return {
             options: _options.Option,
-            library: new Library(),
+            library: _library,
         }
     }
 });

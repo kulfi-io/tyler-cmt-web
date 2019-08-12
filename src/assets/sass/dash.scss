@@ -7,8 +7,11 @@
     color: $default-font-color;
     font-family: inherit;
 
+    @import "./account.helper.scss";
+
     .dashboard-vue {
         .header {
+            min-height: 10vh;
             .greeting {
                 text-align: center;
 
@@ -20,6 +23,71 @@
                     font-size: .5em;
                 }
             }
+        }
+        .content {
+            margin: auto;
+            display: block;
+            max-width: 90vw;
+            
+            
+            .heading {
+              color: $default-read-more;
+              margin-bottom: 4vh;
+              letter-spacing: .05em;
+            }
+
+            .account-info {
+                font-size: .875rem;
+
+                .control-label {
+                    padding: 0.525rem 0.875rem;
+                    font-size: inherit;
+                    background: #9d9d9d;
+                    color: $default-white;
+                }
+              
+                .data {
+                    margin-top: 2vh;
+                    text-indent: 2vw;
+                }
+                
+            }
+
+            .other-info {
+              margin: auto;
+              display: block;
+              text-indent: 1em;
+              line-height: 2;
+              color: $input-text-color;
+              font-weight: 400;
+              section {
+                
+                margin-left: 4%;
+                .title {
+                  font-size: 1.4rem;
+                  font-weight: 500;
+                  letter-spacing: .1em;
+                }
+      
+                p {
+                  letter-spacing: .04em;
+                  font-size: 1rem;
+                }
+              }
+            }
+        }
+
+        .footer {
+            margin: auto;
+            display: block;
+            max-width: 90vw;
+
+            .heading {
+                color: $default-read-more;
+                margin-bottom: 4vh;
+                letter-spacing: .05em;
+            }
+  
         }
     }
 }

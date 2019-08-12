@@ -16,8 +16,26 @@ export default class Dash extends cryptor {
         this._cookieManager.findCookie(this._cookieName);
         this.userAccessRedirect();
         this.findUser();
+
     } 
 
+    private setValues = () => {
+        if(this.user) {
+            const _greet = <HTMLElement>document.querySelector('.greet');
+            const _today = <HTMLElement>document.querySelector('.today');
+            const _first = <HTMLElement>document.querySelector('.firstname');
+            const _last = <HTMLElement>document.querySelector('.lastname');
+            const _email = <HTMLElement>document.querySelector('.email');
+            const _username = <HTMLElement>document.querySelector('.username');
+
+            _first.innerText = this.user.firstName;
+            _last.innerText = this.user.lastName;
+            _greet.innerText += ` ${this.user.firstName} ${this.user.lastName}`;
+            _today.innerText = new Date().toDateString();
+            _email.innerText = this.user.email;
+            _username.innerText = this.user.username;
+        }
+    }
     private userAccessRedirect = () => {
         if(!this._cookieManager.value) {
            window.location.href = `${window.location.protocol}//${window.location.host}/#login`;
@@ -41,6 +59,8 @@ export default class Dash extends cryptor {
     private findUser = () => {
 
         if(this._value) {
+            console.debug('start-find', new Date().toLocaleTimeString())
+
             AccountService.findUser(this._value)
             .then((user) => {
                 this.user = user.data;
@@ -61,6 +81,9 @@ export default class Dash extends cryptor {
                 
                 if(this._value)
                     this._cookieManager.setCookie(this._cookieName, this._value);
+
+                this.setValues();
+                console.debug('end-find', new Date().toLocaleTimeString())
 
             })
             .catch((err) => {
