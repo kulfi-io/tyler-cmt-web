@@ -1,42 +1,10 @@
 <template lang="pug">
-    HeaderVue
-    div.dash-vue
-        FullPage(:options: options)
-    //- div.dash-vue
-    //-     div.header
-    //-         div.greeting 
-    //-             p {{ today }}
-    //-             p Wecome {{fullname}},
-        //- div.content
-        //-     div.account
-        //-         div.split
-        //-             div.split-half-left
-        //-                 username: {{username}}
-        //-             div.split-half-right
-        //-                 fullname: {{fullname}}
-        //-         div.split
-        //-             div.split-half-left
-        //-                 email: {{email}}
-        //-             div.split-half-right
-        //-                 created: {{createdate}}
-        //-     div.appointment
-        //-         div.split
-        //-             div.split-half-left
-        //-                 last: {{last-appointment}}
-        //-             div.split-half-right
-        //-                 next: {{next-apointment}}
-        //- div.footer
-            div.split
-                div.split-half-left
-                    a.note() Note
-                div.split-half-right
-                    a.schedule() Schedule | Re-schedule | Cancel an appointment
-            div.split
-                div.split-half-left
-                    a.note() Reset password
-                div.split-half-right
-                    a.schedule() Update account info
-    FooterVue
+    div.dash
+        HeaderVue
+        FullPage.fullpage( :options="options")
+            div(class="section page dashboard")
+                Dashboard(:library="library")
+        FooterVue
 </template>
 
 <script lang="ts">
@@ -44,14 +12,26 @@ import Vue from 'vue';
 import HeaderVue from '../components/header.vue';
 import FooterVue from '../components/footer.vue';
 import FullPage from "vue-fullpage.js/src/FullPage.vue";
+import Dashboard from '../components/dashboard.vue';
+import Options from '../library/fpOption';
+import Library from '../library/dash';
+import '../assets/sass/dash.scss';
 
+const _options = new Options(['Dash'], ['#C8C8C8']);
 
 export default Vue.extend({
-    name: 'main',
+    name: 'dash',
     components: {
         HeaderVue,
         FooterVue,
         FullPage,
+        Dashboard
+    },
+    data: () => {
+        return {
+            options: _options.Option,
+            library: new Library(),
+        }
     }
 });
 </script>
