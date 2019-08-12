@@ -102,5 +102,6 @@ export interface IUserType  {
 
   export interface ICookieUser {
       id: string;
+      fullname: string
   }
 

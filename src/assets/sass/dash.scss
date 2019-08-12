@@ -4,9 +4,22 @@
 .dash {
     margin: auto;
     display: block;
+    color: $default-font-color;
+    font-family: inherit;
 
     .dashboard-vue {
-        margin: auto;
-        display: block;
+        .header {
+            .greeting {
+                text-align: center;
+
+                .greet {
+                    font-size: 1em;
+                }
+
+                .today {
+                    font-size: .5em;
+                }
+            }
+        }
     }
 }

@@ -1,38 +1,47 @@
 import Cookie from './cookie';
-import { IUser } from '@/models/interfaces';
+import { IUser, ICookieUser } from '@/models/interfaces';
 import AccountService from '@/microservices/account';
 import { cryptor } from './cryptor';
 
 export default class Dash extends cryptor {
     public user?: IUser;
-    private CookieManager: Cookie;
+    private _cookieManager: Cookie;
+    private _value?: ICookieUser;
+    private _cookieName: string;
 
     constructor() {
         super();
-        this.CookieManager = new Cookie();
-        this.CookieManager.findCookie('tyler-cmt');
+        this._cookieName = 'tyler-cmt';
+        this._cookieManager = new Cookie();
+        this._cookieManager.findCookie(this._cookieName);
+        this.userAccessRedirect();
         this.findUser();
     } 
 
-    public today = (): string => {
+    private userAccessRedirect = () => {
+        if(!this._cookieManager.value) {
+           window.location.href = `${window.location.protocol}//${window.location.host}/#login`;
+        } else {
+            this._value = this._cookieManager.decryptedValue;
+        }
+    }
+
+    public get today(): string {
         const _date = new Date();
         return _date.toDateString();
     }
 
-    public fullname = (): string => {
-        console.debug('fullname')
-        if(this.user) 
-            return `${this.user.firstName} ${this.user.lastName}`
+    public get fullname(): string | undefined  {
+        if(this._value) 
+            return this.decrypt(this._value.fullname);
         else 
-            return 'no-user';
+           this.userAccessRedirect();
     }
-
 
     private findUser = () => {
 
-        if(this.CookieManager.decryptedValue) {
-            console.debug('find called');
-            AccountService.findUser(this.CookieManager.decryptedValue)
+        if(this._value) {
+            AccountService.findUser(this._value)
             .then((user) => {
                 this.user = user.data;
                 if(user.data && this.user) {
@@ -45,14 +54,18 @@ export default class Dash extends cryptor {
                     this.user.userType.display = this.decrypt(user.data.userType.display);
                     this.user.userType.description = this.decrypt(user.data.userType.description);
 
+                } else {
+                    this._cookieManager.deleteCookie();
+                    this.userAccessRedirect();
                 }
                 
-                console.debug('user', this.user);
+                if(this._value)
+                    this._cookieManager.setCookie(this._cookieName, this._value);
+
             })
             .catch((err) => {
                 console.debug(err.message);
             });
-
         }
     }
 }

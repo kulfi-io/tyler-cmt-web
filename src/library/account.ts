@@ -75,10 +75,12 @@ export default class Account {
     public matched?: boolean
     public pwdCriteriaMatched: validKey[];
     public readyToSubmit: ReadyToSubmit;
-    public cookieManager: Cookie;
+    private _cookieManager: Cookie;
+    private _cookieName: string;
 
     constructor(submitter?: Element, max: number = 1) {
-        this.cookieManager = new Cookie();
+        this._cookieName = 'tyler-cmt';
+        this._cookieManager = new Cookie();
         this.pwdCriteriaMatched = [];
         this.readyToSubmit = new ReadyToSubmit(submitter, max);
     }
@@ -123,14 +125,15 @@ export default class Account {
                         , result, _submitterTextContent);
 
                     const _cookieUser: ICookieUser = {
-                        id: result.data.id
+                        id: result.data.id,
+                        fullname: result.data.fullname
                     }
-                    this.cookieManager.setCookie('tyler-cmt', _cookieUser);
+                    this._cookieManager.setCookie(this._cookieName, _cookieUser);
                 })
                 .catch((err) => {
                     _submitter.textContent = err.response.data.message;
                     this.notifySubmitter(_submitter, _submitterTextContent);
-                    this.cookieManager.deleteCookie();
+                    this._cookieManager.deleteCookie();
                 });
         }
     }
@@ -192,7 +195,7 @@ export default class Account {
 
         if (_failed.length == 0
             && this.readyToSubmit.validated.length == this.readyToSubmit.max) {
-            this.cookieManager.deleteCookie();
+            this._cookieManager.deleteCookie();
             const _submitter = <HTMLButtonElement>e.currentTarget;
             const _form = <HTMLFormElement>_submitter.closest('form');
             const _email = <HTMLInputElement>_form.querySelector('#email');
@@ -264,18 +267,18 @@ export default class Account {
                         , result, _submitterTextContent);
 
                     const _cookieUser: ICookieUser = {
-                        id: result.data.id
+                        id: result.data.id,
+                        fullname: result.data.fullname
                     }
 
-                    this.cookieManager.setCookie('tyler-cmt', _cookieUser);
-
-                    // Account.cookieManager.setCookie('tyler-cmt', _cookieUser);
+                    this._cookieManager.setCookie( this._cookieName , _cookieUser);
+                    window.location.href = `${window.location.protocol}//${window.location.host}/dash`;
 
                 })
                 .catch((err) => {
                     _submitter.textContent = err.response.data.message;
                     this.notifySubmitter(_submitter, _submitterTextContent);
-                    this.cookieManager.deleteCookie();
+                    this._cookieManager.deleteCookie();
                 });
         }
 
