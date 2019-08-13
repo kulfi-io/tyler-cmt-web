@@ -15,7 +15,7 @@ import FooterVue from '../components/footer.vue';
 import FullPage from 'vue-fullpage.js/src/FullPage.vue';
 import AccountRegister from '../components/account/account-register.vue';
 export default Vue.extend({
-   name: 'register',
+   name: 'register-view',
    components: {
        HeaderVue,
        FooterVue,

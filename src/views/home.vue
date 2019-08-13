@@ -36,7 +36,7 @@ const _home = new Option(['home', 'vision', 'login', 'register', 'contact']
   , ['#C8C8C8', '#C8C8C8', '#C8C8C8', '#C8C8C8', '#C8C8C8]'])
 
 export default Vue.extend({
-  name: "home",
+  name: "home-view",
   components: {
     HeaderVue,
     FullPage,

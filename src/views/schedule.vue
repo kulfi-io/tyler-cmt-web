@@ -21,7 +21,7 @@ const _schedule = new Option(['schedule-appointment']
   , ['#C8C8C8']);
 
 export default Vue.extend({
-  name: "schedule",
+  name: "schedule-view",
   components: {
       HeaderVue,
       FooterVue,

@@ -14,7 +14,7 @@ import FooterVue from '../components/footer.vue';
 import FullPage from "vue-fullpage.js/src/FullPage.vue";
 import Dashboard from '../components/dashboard.vue';
 import Options from '../library/fpOption';
-import Library from '../library/dash';
+import Library from '../library/dashboard';
 import '../assets/sass/dashboard.scss';
 
 const _options = new Options(['dashboard'], ['#C8C8C8']);

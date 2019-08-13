@@ -19,7 +19,7 @@ const _validate = new Option(['validate']
   , ['#C8C8C8']);
 
 export default Vue.extend({
-    name: 'about',
+    name: 'validate-reset-view',
     components: {
         HeaderVue,
         ValidateVue,

@@ -22,7 +22,7 @@ import FullPage from 'vue-fullpage.js/src/FullPage.vue';
 import ChangePassword from '../components/account/change-password.vue';
 import ResetPassword from '../components/account/reset-password.vue';
 export default Vue.extend({
-    name: 'login',
+    name: 'login-view',
     components: {
         AccountLogin,
         HeaderVue,

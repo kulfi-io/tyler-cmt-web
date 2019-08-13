@@ -12,7 +12,7 @@ import HeaderVue from '../components/header.vue';
 import FooterVue from '../components/footer.vue';
 
 export default Vue.extend({
-  name: 'privacy',
+  name: 'privacy-view',
   components: {
     HeaderVue,
     Privacy,
