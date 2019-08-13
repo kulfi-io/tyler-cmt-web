@@ -15,13 +15,12 @@ import FullPage from "vue-fullpage.js/src/FullPage.vue";
 import Dashboard from '../components/dashboard.vue';
 import Options from '../library/fpOption';
 import Library from '../library/dash';
-import '../assets/sass/dash.scss';
+import '../assets/sass/dashboard.scss';
 
-const _options = new Options(['Dash'], ['#C8C8C8']);
-const _library = new Library();
+const _options = new Options(['dashboard'], ['#C8C8C8']);
 
 export default Vue.extend({
-    name: 'dash',
+    name: 'dashboard-view',
     components: {
         HeaderVue,
         FooterVue,
@@ -31,7 +30,7 @@ export default Vue.extend({
     data: () => {
         return {
             options: _options.Option,
-            library: _library,
+            library: new Library(),
         }
     }
 });

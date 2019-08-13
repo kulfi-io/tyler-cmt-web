@@ -1,10 +1,10 @@
 <template lang="pug">
-    div.schedule-vue
+    div.send-note-vue
         HeaderVue
-        div.schedule-appointment-vue
+        div.note-vue
             FullPage.fullpage( :options="options")
-                div.section(class="page schedule-appointment")
-                  ScheduleAppointmenVue
+              div.section(class="page send-note-view")
+                NoteVue
         FooterVue
 </template>
 
@@ -13,25 +13,25 @@ import Vue from "vue";
 import FullPage from "vue-fullpage.js/src/FullPage.vue";
 import HeaderVue from '../components/header.vue';
 import FooterVue from '../components/footer.vue';
-import ScheduleAppointmenVue from '../components/schedule-appointment.vue';
+import NoteVue from '../components/send-note.vue';
 import Option from '../library/fpOption';
+import '../assets/sass/note.scss';
 
-
-const _schedule = new Option(['schedule-appointment']
+const _note = new Option(['send-note-view']
   , ['#C8C8C8']);
 
 export default Vue.extend({
-  name: "schedule",
+  name: "send-note-view",
   components: {
       HeaderVue,
       FooterVue,
       FullPage,
-      ScheduleAppointmenVue,
+      NoteVue,
   },
   data: () => {
     return {
-      options: _schedule.Option,
-    };
+      options: _note.Option,
+    }
   }
 });
 </script>

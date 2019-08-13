@@ -9,7 +9,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Note from './note.vue';
+import Note from './intro-note.vue';
 
 export default Vue.extend({
     name: 'contact',

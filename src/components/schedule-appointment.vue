@@ -1,6 +1,6 @@
 <template lang="pug">
     div.schedule-appointment
-        div.schedule
+        div.schedule-background
         div.schedule-header
             div.schedule-navigation
                 div.navigation(class="split")
@@ -19,24 +19,21 @@
             form(id="schedule-appointment-form")
                 div.content
                     div.calendar(ref="calendar")
-        ScheduleFooter
+        div.schedule-footer
+            div.split
+                div.split-half-left
+                    a.heading(class="link" href="/dash") Account Information
+                div.split-half-right(class="link-last")
+                    a.heading(class="link" href="/note") Send a note
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import ScheduleHeader from './schedule-header.vue';
-import ScheduleFooter from './schedule-footer.vue';
-import CalendarVue from '../kulfi/calendar.vue';
-import Schedule from '../../library/calendar';
-import User from '../../library/user';
+import Schedule from '../library/calendar' ;
+import User from '../library/user';
 
 export default Vue.extend({
     name: 'schedule-appointment',
-    components: {
-        ScheduleHeader,
-        ScheduleFooter,
-        CalendarVue,
-    },
     mounted: function() {
         const calendar = <HTMLDivElement>this.$refs.calendar;
         const previous = <HTMLButtonElement>this.$refs.previous;

@@ -10,12 +10,11 @@
 
 }
 
-.schedule {
+.schedule-background {
   margin: auto;
   display: block;
   background: $background-dusk-gradient;
-  width: 90%;
-  // margin-top: unset;
+  max-width: 90vw;
   min-height: calc(50vh - 115px);
 }
 
@@ -25,7 +24,7 @@
   position: relative;
   text-align: center;
   background: $default-background-color;
-  width: 85%;
+  max-width: 85vw;
   margin-top: -43vh;
   min-height: calc(10vh - 115px);
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
@@ -33,12 +32,14 @@
   .schedule-navigation {
     display: flex;
     padding: 1%;
+
     .navigation {
       width: 30%;
     }
+
     .title {
       color: $default-white;
-      font-weight: 600;
+      font-weight: 400;
       text-transform: uppercase;
       width: 40%;
 
@@ -47,8 +48,8 @@
         display: block;
         font-family: Montserrat, serif;
         font-size: 1.6875rem;
-        font-weight: 600;
-        line-height: 1.5555555556;
+        font-weight: inherit;
+        line-height: 1.5;
       }
 
       p {
@@ -56,13 +57,13 @@
         font-size: 1rem;
         color: $default-sub-text;
         color: $default-white;
-        letter-spacing: 0.3rem;
+        letter-spacing: 0.3em;
         text-transform: none;
 
         a {
           color: $default-white;
           text-transform: uppercase;
-          letter-spacing: 0.3rem;
+          letter-spacing: 0.3em;
 
           &:hover {
             color: $default-hover-color;
@@ -70,6 +71,7 @@
         }
       }
     }
+
     .view {
       width: 30%;
     }
@@ -82,7 +84,12 @@
       text-align: center;
 
       &:hover,
-      &:focus,
+      &:focus {
+        border-bottom: 0.0525rem solid $default-input-border-color;
+        box-shadow: none;
+        color: $default-hover-color;
+      }
+
       &.active {
         border-bottom: 0.0525rem solid $default-input-border-color;
         box-shadow: none;
@@ -96,8 +103,8 @@
   margin: auto;
   display: block;
   position: relative;
-  background: $default-body-background;
-  width: 85%;
+  background: $background-dusk-gradient;
+  max-width: 85vw;
   // margin-top: 5vh;
   min-height: calc(35vh - 115px);
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
@@ -107,6 +114,9 @@
     margin: auto;
     display: block;
     position: relative;
+    background: $background-dusk-gradient;
+
+
     .control-label {
       display: none;
     }
@@ -114,20 +124,28 @@
     @import "./calendar.scss";
 
 
-    .fc-timeGridWeek-view, .fc-timeGrid-view {
-      .fc-scroller, .fc-time-grid-container {
+    .fc-timeGridWeek-view,
+    .fc-timeGrid-view {
+
+      .fc-scroller,
+      .fc-time-grid-container {
         height: inherit;
         background-color: transparent;
+
         .fc-time-grid .fc-slats td {
           background-color: transparent;
         }
+
         .fc-time-grid {
           height: inherit;
           background-color: transparent;
-          .fc-slats, .fc-bg {
+
+          .fc-slats,
+          .fc-bg {
             max-height: inherit;
             height: inherit;
             background-color: inherit;
+
             table {
               background-color: inherit;
             }
@@ -137,15 +155,17 @@
             height: 59vh;
             max-height: 59vh;
             background-color: inherit;
-           
+
             table {
               height: inherit;
               background-color: inherit;
+
               tbody {
                 tr {
                   .fc-axis {
                     height: 0;
                   }
+
                   td {
                     .fc-content-col {
                       height: 59vh;
@@ -153,7 +173,7 @@
                   }
                 }
 
-                
+
               }
             }
           }
@@ -174,6 +194,7 @@
     .fc-dayGridMonth-view {
       .fc-day-grid-container {
         max-height: 59vh;
+
         .fc-day-grid {
           .fc-row {
             max-height: calc(59vh / 6);
@@ -181,7 +202,7 @@
         }
       }
     }
-  
+
     .fc-time-grid-container {
       height: inherit;
       max-height: 59vh;
@@ -213,11 +234,32 @@
 
 .schedule-footer {
   margin: auto;
-  display: none;
   position: relative;
-  width: 85%;
+  max-width: 85vw;
   margin-top: 2vh;
   min-height: calc(15vh - 115px);
+
+  .link {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+      color: $default-hover-color;
+    }
+  }
+
+  .link-last {
+    text-align: right;
+  }
+
+  .heading {
+    color: $default-read-more;
+    margin-bottom: 4vh;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .3em;
+  }
 
   .required-field {
     display: inline-block;
