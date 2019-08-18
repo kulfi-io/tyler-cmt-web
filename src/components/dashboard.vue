@@ -37,7 +37,7 @@
                             div.next( class="data" ref="next-appt") Sun Sep 12 2019
                 div.notes
                     div.account-info
-                            div.control-label Notes
+                            div.control-label Meeting notes
                             div.note-list( class="data" ref="note-list")
                                 p This is the first note
                                 p This is the second note

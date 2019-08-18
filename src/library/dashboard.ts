@@ -16,7 +16,6 @@ export default class Dash extends cryptor {
         this._cookieManager.findCookie(this._cookieName);
         this.userAccessRedirect();
         this.findUser();
-
     } 
 
     private setValues = () => {
@@ -59,7 +58,6 @@ export default class Dash extends cryptor {
     private findUser = () => {
 
         if(this._value) {
-            console.debug('start-find', new Date().toLocaleTimeString())
 
             AccountService.findUser(this._value)
             .then((user) => {
@@ -83,7 +81,6 @@ export default class Dash extends cryptor {
                     this._cookieManager.setCookie(this._cookieName, this._value);
 
                 this.setValues();
-                console.debug('end-find', new Date().toLocaleTimeString())
 
             })
             .catch((err) => {

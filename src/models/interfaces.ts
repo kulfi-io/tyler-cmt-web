@@ -53,7 +53,7 @@ export interface IResetRequest extends IResetAccount {
     token: string;
 }
 
-export interface IReset extends IResetAccount{
+export interface IReset extends IResetAccount {
     username: string;
     token: string;
     password: string;
@@ -81,14 +81,14 @@ export interface IRegisterUser {
     active?: boolean
 }
 
-export interface IUserType  {
+export interface IUserType {
     id: string;
     display: string;
     description: string;
     active: boolean | string;
-  }
-  
-  export interface IUser  {
+}
+
+export interface IUser {
     id: string;
     username: string;
     email: string;
@@ -98,10 +98,25 @@ export interface IUserType  {
     active: boolean;
     tokenValidated: boolean;
     validationToken: string;
-  }
+}
 
-  export interface ICookieUser {
-      id: string;
-      fullname: string
-  }
+export interface ICookieUser {
+    id: string;
+    fullname: string
+}
+
+export interface ICalendarUser {
+    id: string;
+    firstName: string;
+    lastName: string;
+    fullName: string;
+}
+
+export interface meetingNote {
+    title: string;
+    display: string;
+    detail: string;
+    user: ICalendarUser;
+    id: string;
+}
 

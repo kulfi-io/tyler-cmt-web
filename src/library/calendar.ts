@@ -1,10 +1,12 @@
-import { Calendar, View, EventInput, constrainPoint } from '@fullcalendar/core';
+import { Calendar,  EventInput} from '@fullcalendar/core';
 import DayGrid from '@fullcalendar/daygrid';
 import TimeGrid from '@fullcalendar/timegrid';
 import Interaction from '@fullcalendar/interaction';
 import Event from './event';
-import User from './user';
-import Note from './note';
+// import User from './user';
+// import Note from './note';
+import { ICalendarUser } from '@/models/interfaces';
+
 
 import '../assets/sass/schedule.scss';
 import '@fullcalendar/daygrid/main.min.css';
@@ -18,9 +20,11 @@ export class Schedule {
     private lineHeight = 1.5;
     private lineHeightPxEquivalent = 12.775;
 
-    public refresh = (user: User): void => {
+    public refresh = (user?: ICalendarUser): void => {
         if(this.calendar) {
             console.debug('refresh');
+
+            
 
             const _calendar = this.calendar;
             this.calendar.destroy();
@@ -35,7 +39,7 @@ export class Schedule {
         }
     }
 
-    private setCalendarConfig(target: HTMLElement, user: User) {
+    private setCalendarConfig(target: HTMLElement, user?: ICalendarUser) {
         this.calendar = new Calendar(target, {
             plugins: [DayGrid, TimeGrid, Interaction],
             header: false,
@@ -43,11 +47,11 @@ export class Schedule {
             maxTime: '24:00',
             allDaySlot: false,
             selectable: true,
-            events: this.events(user),
+            //events: this.events(user),
         });
     }
 
-    public init = (target: HTMLDivElement, user: User): void => {
+    public init = (target: HTMLDivElement, user?: ICalendarUser): void => {
         if (target) {
             this.setCalendarConfig(target, user);
             if(this.calendar) {
@@ -57,38 +61,38 @@ export class Schedule {
         }
     }
 
-    private events = (user: User): EventInput[] => {
+    // private events = (user: ICalendarUser): EventInput[] => {
         
-        const _notes: Note[] = [
-            new Note('note', 'back', 'my back is tight', '1', '1'),
-            new Note('note', 'back 1', 'my back is tight 1', '2', '2'),
-            new Note('note', 'back 2', 'my back is tight 2', '3', '3'),
-            new Note('note', 'back 2', 'my back is tight 2', '3', '3'),
-            new Note('note', 'back 4', 'my back is tight 4', '4', '4'),
-        ]
+    //     const _notes: Note[] = [
+    //         new Note('note', 'back', 'my back is tight', '1', '1'),
+    //         new Note('note', 'back 1', 'my back is tight 1', '2', '2'),
+    //         new Note('note', 'back 2', 'my back is tight 2', '3', '3'),
+    //         new Note('note', 'back 2', 'my back is tight 2', '3', '3'),
+    //         new Note('note', 'back 4', 'my back is tight 4', '4', '4'),
+    //     ]
         
-        const _today = new Date('2019');
-        const _events: Event[] = [
-            new Event('Event 1', new Date("2019-07-13 10:00:00"), 60, user, _notes, 'First Event', '1'),
-            new Event('Event 3', new Date('2019-07-13 12:00:00'), 60, user, _notes, 'Third Event', '2'),
-            new Event('Event 4', new Date('2019-07-13 13:00:00'), 60, user, _notes, 'Fouth Event', '3'),
-            new Event('Event 5', new Date("2019-07-13 15:00:00"), 60, user, _notes, 'Fifth Event', '4'),
-            new Event('Event 6', new Date('2019-07-13 17:00:00'), 60, user, _notes, 'Sixth Event', '5'),
-            new Event('Event 8', new Date('2019-07-13 18:00:00'), 60, user, _notes, 'Eighth Event', '6')
-        ]
+    //     const _today = new Date('2019');
+    //     const _events: Event[] = [
+    //         new Event('Event 1', new Date("2019-07-13 10:00:00"), 60, user, _notes, 'First Event', '1'),
+    //         new Event('Event 3', new Date('2019-07-13 12:00:00'), 60, user, _notes, 'Third Event', '2'),
+    //         new Event('Event 4', new Date('2019-07-13 13:00:00'), 60, user, _notes, 'Fouth Event', '3'),
+    //         new Event('Event 5', new Date("2019-07-13 15:00:00"), 60, user, _notes, 'Fifth Event', '4'),
+    //         new Event('Event 6', new Date('2019-07-13 17:00:00'), 60, user, _notes, 'Sixth Event', '5'),
+    //         new Event('Event 8', new Date('2019-07-13 18:00:00'), 60, user, _notes, 'Eighth Event', '6')
+    //     ]
 
-        const _inputs = [
-            _events[0].eventInput,
-            _events[1].eventInput,
-            _events[2].eventInput,
-            _events[3].eventInput,
-            // _events[5].eventInput,
-        ]
+    //     const _inputs = [
+    //         _events[0].eventInput,
+    //         _events[1].eventInput,
+    //         _events[2].eventInput,
+    //         _events[3].eventInput,
+    //         // _events[5].eventInput,
+    //     ]
 
-        this.eventInputs = _inputs;
+    //     this.eventInputs = _inputs;
 
-        return this.eventInputs;
-    }
+    //     return this.eventInputs;
+    // }
 
     public title = (date?: Date): string => {
 

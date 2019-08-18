@@ -30,7 +30,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Schedule from '../library/calendar' ;
-import User from '../library/user';
+// import User from '../library/user';
 
 export default Vue.extend({
     name: 'schedule-appointment',
@@ -42,8 +42,8 @@ export default Vue.extend({
         const week = <HTMLButtonElement>this.$refs.week;
         const month = <HTMLButtonElement>this.$refs.month;
 
-        const _user = new User('1', 'Lucy', 'Dog');
-        Schedule.init(calendar, _user);
+        // const _user = new User('1', 'Lucy', 'Dog');
+        Schedule.init(calendar);
         previous.addEventListener('click', (e: Event) => {
             Schedule.previous(heading)
         });
@@ -58,7 +58,7 @@ export default Vue.extend({
         });
 
         window.addEventListener('resize', (e: Event) => {
-            Schedule.refresh(_user);
+            Schedule.refresh();
         });
     },
     methods: {

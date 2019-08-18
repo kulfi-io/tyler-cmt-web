@@ -2,7 +2,8 @@ import { FPOptions } from './fp-option-abstract';
 import AfterAnime from './after-anime';
 import SplashBottomData from '../assets/animations/intro-banner.json';
 import SplashTopData from '../assets/animations/splash-top.json';
-import CollageImageData from '../assets/animations/collage-1.json';
+// import CollageImageData from '../assets/animations/collage-1.json';
+import TableSketchData from '../assets/animations/table-sketch.json';
 import CollageHeadingData from '../assets/animations/healing.json';
 
 export default class FPOptionHome extends FPOptions {
@@ -74,7 +75,7 @@ export default class FPOptionHome extends FPOptions {
         _animations.push(this.createAnimation('home-top', SplashTopData));
         _animations.push(this.createAnimation('home-bottom', SplashBottomData));
         _animations.push(this.createAnimation('vision-top', CollageHeadingData));
-        _animations.push(this.createAnimation('vision-bottom', CollageImageData));
+        _animations.push(this.createAnimation('vision-bottom', TableSketchData));
 
         return _animations;
     }
