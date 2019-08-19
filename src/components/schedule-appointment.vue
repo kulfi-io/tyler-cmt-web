@@ -30,7 +30,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import Schedule from '../library/calendar' ;
-// import User from '../library/user';
 
 export default Vue.extend({
     name: 'schedule-appointment',
@@ -63,7 +62,7 @@ export default Vue.extend({
     },
     methods: {
         title: function(): string {
-            return Schedule.title();
+            return Schedule.calTitle();
         },
        
     },

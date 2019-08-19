@@ -160,11 +160,14 @@
               height: inherit;
               background-color: inherit;
 
+              
+
               tbody {
                 tr {
                   .fc-axis {
                     height: 0;
                   }
+                  
 
                   td {
                     .fc-content-col {
@@ -182,7 +185,6 @@
     }
 
 
-
     .fc-past {
       background: $calendar-disable-color;
     }
@@ -198,6 +200,24 @@
         .fc-day-grid {
           .fc-row {
             max-height: calc(59vh / 6);
+          }
+        }
+      }
+
+      .fc-bg {
+        .total {
+          font-size: 50px;
+          opacity: .1;
+          text-align: center;
+        }
+      }
+
+      .fc-content-skeleton {
+        table {
+          tr {
+            .fc-event-container {
+              opacity: .4;
+            }
           }
         }
       }

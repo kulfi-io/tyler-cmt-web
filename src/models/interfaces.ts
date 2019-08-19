@@ -112,11 +112,50 @@ export interface ICalendarUser {
     fullName: string;
 }
 
-export interface meetingNote {
+export interface IMeetingNote {
     title: string;
     display: string;
     detail: string;
-    user: ICalendarUser;
     id: string;
+}
+
+export interface IMeetingNoteUser extends IMeetingNote {
+    user: ICalendarEvent
+}
+
+export interface ICalendarEvent {
+    id: string;
+    start: Date;
+    end: Date;
+    title: string;
+    description: string;
+    meetingNotes: IMeetingNote[],
+    user: ICalendarUser
+}
+
+export interface IEventRange {
+    start: Date | string;
+    end: Date | string;
+}
+
+export interface ICalTime {
+    dateTime: string;
+    timeZone: string;
+}
+
+export interface IAttendee {
+    email: string;
+    responseStatus?: string;
+}
+
+
+export interface ICalEventResponse  {
+    id?: string;
+    summary?: string;
+    location?: string;
+    description?: string;
+    start?: ICalTime;
+    end?: ICalTime;
+    attendees?: IAttendee[]
 }
 

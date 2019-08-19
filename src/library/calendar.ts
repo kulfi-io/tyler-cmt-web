@@ -1,18 +1,18 @@
-import { Calendar,  EventInput} from '@fullcalendar/core';
+import CalendarEventService from '../microservices/calendar-event';
 import DayGrid from '@fullcalendar/daygrid';
-import TimeGrid from '@fullcalendar/timegrid';
 import Interaction from '@fullcalendar/interaction';
-import Event from './event';
-// import User from './user';
-// import Note from './note';
-import { ICalendarUser } from '@/models/interfaces';
-
-
+import moment from 'moment';
+import TimeGrid from '@fullcalendar/timegrid';
+import { Calendar, EventInput } from '@fullcalendar/core';
+import { cryptor } from './cryptor';
+import { IAttendee, ICalendarUser, ICalEventResponse } from '../models/interfaces';
 import '../assets/sass/schedule.scss';
 import '@fullcalendar/daygrid/main.min.css';
 import '@fullcalendar/timegrid/main.min.css';
 
-export class Schedule {
+
+
+export class Schedule extends cryptor{
     private calendar?: Calendar;
     private heading?: HTMLDivElement;
     private monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
@@ -22,79 +22,115 @@ export class Schedule {
 
     public refresh = (user?: ICalendarUser): void => {
         if(this.calendar) {
-            console.debug('refresh');
-
-            
 
             const _calendar = this.calendar;
             this.calendar.destroy();
-            this.setCalendarConfig(_calendar.el, user);
+            this.setCalendarConfig(_calendar.el);
             
             if(this.calendar) {
                 this.calendar.state = _calendar.state;
                 this.calendar.changeView(_calendar.state.viewType);
                 this.calendar.render();
                 this.resizeScroller();
+                this.insertTotal();
             }
         }
     }
 
-    private setCalendarConfig(target: HTMLElement, user?: ICalendarUser) {
+    private setCalendarConfig(target: HTMLElement) {
+        
         this.calendar = new Calendar(target, {
             plugins: [DayGrid, TimeGrid, Interaction],
             header: false,
-            minTime: '09:00',
+            minTime: '10:00',
             maxTime: '24:00',
             allDaySlot: false,
             selectable: true,
-            //events: this.events(user),
+            events: this.eventInputs,
         });
+
+       
     }
 
     public init = (target: HTMLDivElement, user?: ICalendarUser): void => {
+        
         if (target) {
-            this.setCalendarConfig(target, user);
-            if(this.calendar) {
-                this.calendar.render();
-                this.resizeScroller();
+            this.targetEvents()
+            .then(() => {
+                this.setCalendarConfig(target);
+            })
+            .catch((err: Error) => {
+                console.debug(err);
+            })
+            .finally(() => {
+                if(this.calendar) {
+                    this.calendar.render();
+                    this.resizeScroller();
+                    this.insertTotal();
+                }
+            });
+        }
+    }
+
+    private decryptResponse = (item: ICalEventResponse): EventInput => {
+        
+        const _eventInput: EventInput = {
+            id: item.id ? this.decrypt(item.id) : undefined,
+            title: item.summary ? this.decrypt(item.summary) : undefined,
+            start: item.start ? this.decrypt(item.start.dateTime) : undefined,
+            end: item.end ? this.decrypt(item.end.dateTime) : undefined,
+            date: item.start ? this.decrypt(item.start.dateTime) : undefined,
+            allDay: false,
+            // backgroundColor: '#efefef',
+            // borderColor: '#005276',
+            
+        }
+
+        return _eventInput;
+
+    }
+
+    private insertTotal = () => {
+        if(this.eventInputs && this.eventInputs.length) {
+            if(this.calendar && this.calendar.view.type ===  'dayGridMonth') {
+                
+                this.eventInputs.forEach((event: EventInput) => {
+                    
+                    const _target = <HTMLElement>document.querySelector(`.fc-bg table tbody tr td[data-date="${moment(event.date).format('YYYY-MM-DD')}"]`);
+                    if(_target) {
+                        const _total = document.createElement('div')
+                        _total.setAttribute('class', 'total')
+                        _total.innerText = '30';
+
+                        _target.appendChild(_total);
+                    }
+
+                });
             }
         }
     }
 
-    // private events = (user: ICalendarUser): EventInput[] => {
-        
-    //     const _notes: Note[] = [
-    //         new Note('note', 'back', 'my back is tight', '1', '1'),
-    //         new Note('note', 'back 1', 'my back is tight 1', '2', '2'),
-    //         new Note('note', 'back 2', 'my back is tight 2', '3', '3'),
-    //         new Note('note', 'back 2', 'my back is tight 2', '3', '3'),
-    //         new Note('note', 'back 4', 'my back is tight 4', '4', '4'),
-    //     ]
-        
-    //     const _today = new Date('2019');
-    //     const _events: Event[] = [
-    //         new Event('Event 1', new Date("2019-07-13 10:00:00"), 60, user, _notes, 'First Event', '1'),
-    //         new Event('Event 3', new Date('2019-07-13 12:00:00'), 60, user, _notes, 'Third Event', '2'),
-    //         new Event('Event 4', new Date('2019-07-13 13:00:00'), 60, user, _notes, 'Fouth Event', '3'),
-    //         new Event('Event 5', new Date("2019-07-13 15:00:00"), 60, user, _notes, 'Fifth Event', '4'),
-    //         new Event('Event 6', new Date('2019-07-13 17:00:00'), 60, user, _notes, 'Sixth Event', '5'),
-    //         new Event('Event 8', new Date('2019-07-13 18:00:00'), 60, user, _notes, 'Eighth Event', '6')
-    //     ]
+    private targetEvents = ()  => {
 
-    //     const _inputs = [
-    //         _events[0].eventInput,
-    //         _events[1].eventInput,
-    //         _events[2].eventInput,
-    //         _events[3].eventInput,
-    //         // _events[5].eventInput,
-    //     ]
+        return new Promise((resolve, reject) => {
+            CalendarEventService.events()
+            .then((result) => {
+                const  _items = <ICalEventResponse[]>result.data.events;
+                const _eventInputs: EventInput[] = [];
 
-    //     this.eventInputs = _inputs;
-
-    //     return this.eventInputs;
-    // }
-
-    public title = (date?: Date): string => {
+                _items.forEach((item: ICalEventResponse) => {
+                    _eventInputs.push(this.decryptResponse(item));
+                });
+                this.eventInputs = _eventInputs
+                resolve();
+                
+            })
+            .catch((err) => {
+                return reject(err);
+            });
+        });
+    }
+    public calTitle = (date?: Date): string => {
 
         date = date ? date : new Date();
         if(screen.width <= 411) {
@@ -103,11 +139,11 @@ export class Schedule {
         return `${this.monthNames[date.getMonth()]}, ${date.getFullYear()}`;
     }
 
-    private setTitle = () => {
+    private setCalTitle = () => {
         if (this.heading) {
             if (this.calendar) {
                 const _date = this.calendar.getDate();
-                this.heading.innerText = this.title(_date);
+                this.heading.innerText = this.calTitle(_date);
             }
         }
     }
@@ -116,7 +152,7 @@ export class Schedule {
         if (this.calendar) {
             this.calendar.next();
             this.heading = heading;
-            this.setTitle();
+            this.setCalTitle();
 
             this.reposition();
         }
@@ -126,7 +162,7 @@ export class Schedule {
         if (this.calendar) {
             this.calendar.prev();
             this.heading = heading;
-            this.setTitle();
+            this.setCalTitle();
 
             this.reposition();
         }
@@ -169,10 +205,10 @@ export class Schedule {
         let _lastStartPosition = _startPosition;
         let _lastInterval = 0;
 
-        const _events = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
-        if(_events) {
+        const _eventElements = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
+        if(_eventElements) {
 
-            _events.forEach((event: Element)  => {
+            _eventElements.forEach((event: Element)  => {
                 const _event = <HTMLDivElement>event
                 const _time = <HTMLDivElement>_event.querySelector('.fc-time');
             
@@ -229,9 +265,9 @@ export class Schedule {
         const _halfHeight = this.lineHeightPxEquivalent * this.lineHeight;
         const _hourHeight = this.lineHeightPxEquivalent * (this.lineHeight * 2);
        
-        const _events = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
-        if(_events) {
-            _events.forEach((event: Element) => {
+        const _eventElements = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
+        if(_eventElements) {
+            _eventElements.forEach((event: Element) => {
                 const _content = <HTMLDivElement>event.querySelector('.fc-content'); 
                 
                 const _time = <HTMLDivElement>event.querySelector('.fc-content .fc-time');
