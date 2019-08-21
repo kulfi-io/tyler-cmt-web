@@ -3,6 +3,7 @@
     div.container
       div.range-slider
         div.bullet(id="bullet" ) 10:00 am
+        div.availability Open
         input.range-line(id="range-line" type="range" value="10" min="10" max="23")
       div.box-minmax
         div.split
@@ -12,12 +13,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Slider } from "../library/slider";
 
 export default Vue.extend({
   name: "slider",
-  mounted: function() {
-    const _slider = new Slider();
-  }
+  // mounted: function() {
+  //   const _slider = new Slider();
+  // }
 });
 </script>

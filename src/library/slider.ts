@@ -18,9 +18,11 @@ export class Slider {
         }
     }
 
-    showSliderValue = () => {
+    protected showSliderValue = () => {
 
         const _busy = [13, 18, 21];
+
+        const _availalility = <HTMLSpanElement>document.querySelector('.availability');
 
         const _targetVal = parseInt(this.rangeSlider.value);
         const _val =  momemt(_targetVal, ['HH:MM']).format('hh:mm a');
@@ -30,10 +32,17 @@ export class Slider {
 
             if(!this.rangeBullet.classList.contains('reserved')) {
                 this.rangeBullet.classList.add('reserved');
+                _availalility.classList.add('reserved');
+                _availalility.textContent = 'reserved';
+                this.rangeSlider.classList.add('reserved');
             }
 
         } else {
             this.rangeBullet.classList.remove('reserved');
+            _availalility.classList.remove('reserved');
+            this.rangeSlider.classList.remove('reserved')
+            _availalility.textContent = 'open';
+
         }
     }
 }

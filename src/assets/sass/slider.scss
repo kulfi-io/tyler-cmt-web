@@ -17,6 +17,13 @@
                 text-align: right;
             }
         }
+
+        // .availability {
+        //     font-size: .9rem;
+        //     color: #ffffff;
+        //     text-align: center;
+        //     margin-top: 1vh;
+        // }
     
         .range-slider {
             margin: auto;
@@ -82,12 +89,23 @@
             &::-moz-focus-outer {
                 border: 0;
             }
+
+            &.reserved {
+               
+                &::-moz-range-thumb {
+                    background:  #9d9d9d;
+                }
+
+                &::-webkit-slider-thumb {
+                    background:  #9d9d9d;
+                }
+            }
         }
     
-        .bullet {
+        .bullet, .availability {
     
             position: relative;
-            transform-origin: center center;
+            // transform-origin: center center;
             display: block;
             width: 85px;
             height: 60px;
@@ -116,9 +134,19 @@
                 margin-top: -2px;
             }
         }
+
+        .availability{
+            border: none;
+            font-size: .9rem;
+            line-height: unset;
+            height: unset;
+            text-transform: capitalize;
+        }
     
         .reserved {
             color: #9d9d9d;
         }
+
+        
     }
 }

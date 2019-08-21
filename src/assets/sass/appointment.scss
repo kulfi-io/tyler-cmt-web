@@ -96,31 +96,6 @@
       padding: 0.525rem 0.875rem;
     }
 
-    .text-area {
-      color: $default-sub-text;
-      background: transparent;
-      min-height: 100px;
-      max-height: 200px;
-      overflow-y: auto;
-      overflow-x: hidden;
-
-
-      &:focus,
-      &:hover {
-        border-bottom: 1px solid $input-hover-border-color;
-        box-shadow: none;
-        color: $input-text-color;
-        outline: none;
-      }
-
-      &:empty:before {
-        content: attr(data-text);
-        color: $default-sub-text; // $default-white;
-        font-size: x-small;
-        text-transform: uppercase;
-        letter-spacing: .4em;
-      }
-    }
 
     .text-muted {
       color: $text-muted;
@@ -153,8 +128,37 @@
       background: $default-passed-color;
     }
 
-    input[type="text"]::placeholder,
-    input[type="password"]::placeholder {
+    .text-area {
+      color: $default-sub-text;
+      background: transparent;
+      min-height: 100px;
+      max-height: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+
+      &:focus,
+      &:hover {
+        border-bottom: 1px solid $input-hover-border-color;
+        box-shadow: none;
+        color: $input-text-color;
+        outline: none;
+      }
+
+      &:empty:before {
+        content: attr(data-text);
+        color: $default-sub-text; // $default-white;
+        font-size: x-small;
+        text-transform: uppercase;
+        letter-spacing: .4em;
+      }
+    }
+
+    input[type="text"] {
+      background: transparent;
+    }
+
+    input[type="text"]::placeholder {
       color: $default-white;
       font-size: x-small;
     }
@@ -165,7 +169,7 @@
       box-shadow: none;
       color: $input-text-color;
       outline: none;
-  }
+    }
 
     .fa {
       font-size: 12px;
