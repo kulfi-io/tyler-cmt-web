@@ -29,12 +29,10 @@ export class Slider {
         if(_busy.indexOf(_targetVal) >= 0) {
 
             if(!this.rangeBullet.classList.contains('reserved')) {
-                this.rangeBullet.classList.remove('free');
                 this.rangeBullet.classList.add('reserved');
             }
 
         } else {
-            this.rangeBullet.classList.add('free');
             this.rangeBullet.classList.remove('reserved');
         }
     }
