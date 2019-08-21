@@ -11,7 +11,7 @@
       div(class="section page register")
         IntroRegister
       div(class="section page contact")
-        IntroContact
+        IntroContact(:animations="[contactTop]")
       //-   h3 Services
       //- div(class="section page contact")
       //-   h3 Contact
@@ -54,6 +54,8 @@ export default Vue.extend({
       homeBottom: _home.findAnimation(`${_home.Anchors[0]}-bottom`),
       visionTop: _home.findAnimation(`${_home.Anchors[1]}-top`),
       visionBottom: _home.findAnimation(`${_home.Anchors[1]}-bottom`),
+      contactTop: _home.findAnimation(`${_home.Anchors[4]}-top`),
+    
     };
   },
 });

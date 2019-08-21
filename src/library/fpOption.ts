@@ -9,6 +9,7 @@ export default class FPOption extends FPOptions {
         super(anchors, sectionsColor, overflow
             ,scrollBar, menu);
         this.options = this.initOptions();
+        
     }
 
     public get Option() : Object {
@@ -22,9 +23,11 @@ export default class FPOption extends FPOptions {
             menu: this.fullpageMenu,
             anchors: this.fullpageAnchors,
             sectionsColor: this.fullpageSectionsColor,
-            licenseKey: this.fullpageLicenseKey
+            licenseKey: this.fullpageLicenseKey,
         }
 
         return options;
     }
+
+    
 }

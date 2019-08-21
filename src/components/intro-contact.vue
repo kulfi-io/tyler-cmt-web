@@ -1,20 +1,22 @@
 <template lang="pug">
     main.intro-contact-vue
         div.content 
-            div.contact-banner
-                img.salutation( src="../assets/img/hear.png")
+            AfterAnime.contact-banner(:animation="animations[0]")
             Note
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
+import AfterAnime from '../components/after-anime.vue';
 import Note from './intro-note.vue';
 
 export default Vue.extend({
     name: 'contact',
+    props: ['animations'],
     components: {
         Note,
+        AfterAnime,
     },
     
 });
