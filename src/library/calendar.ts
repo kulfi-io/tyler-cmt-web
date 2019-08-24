@@ -5,10 +5,11 @@ import moment from 'moment';
 import TimeGrid from '@fullcalendar/timegrid';
 import { Calendar, EventInput } from '@fullcalendar/core';
 import { cryptor } from './cryptor';
-import { ICalEventResponse, IDayClickArgs } from '../models/interfaces';
+import { ICalEventResponse, IDayClickArgs, IAppointmentMessage } from '../models/interfaces';
 import '../assets/sass/schedule.scss';
 import '@fullcalendar/daygrid/main.min.css';
 import '@fullcalendar/timegrid/main.min.css';
+import {  defaultApptMessage }  from '../config/config.json';
 
 export class Schedule extends cryptor{
     private calendar?: Calendar;
@@ -31,11 +32,19 @@ export class Schedule extends cryptor{
     private fpData: Record<string, any>;
 
     // Appointment
-    // TODO set appointment calendar values 
+    private apptTitle: HTMLInputElement;
+    private apptLocation: HTMLInputElement;
+    private apptTime: HTMLInputElement;
+    private apptDefaultText:IAppointmentMessage;
+    // TODO
+    // load free time from db
+    // load busy times from db
+
 
     constructor(target: HTMLDivElement, fpData: Record<string, any>) {
 
         super();
+        this.apptDefaultText = defaultApptMessage;
         this.fpData = fpData;
         this.target = target;
         this.title = <HTMLDivElement>document.querySelector('.cal-title');
@@ -59,6 +68,13 @@ export class Schedule extends cryptor{
         
         this.cancel.addEventListener('click', this.cancelAppointment);
         this.selectTime.addEventListener('click', this.selectAppointmentTime);
+        
+        // Appointment body
+        const _apptBody = <HTMLDivElement>document.querySelector('.appointment-body');
+        this.apptTitle = <HTMLInputElement>_apptBody.querySelector('#title');
+        this.apptLocation = <HTMLInputElement>_apptBody.querySelector('#location');
+        this.apptTime = <HTMLInputElement>_apptBody.querySelector('#time');
+    
     }
 
     public refresh = (): void => {
@@ -86,9 +102,16 @@ export class Schedule extends cryptor{
 
     private selectAppointmentTime = (e: Event) => {
         this.selectTime.addEventListener('click', (e: Event) => {
+            this.setApptValues();
             this.overlay.classList.remove('schedule-popup-display');
             this.fpData.api.moveSlideRight();
         });
+    }
+
+    private setApptValues = () => {
+        this.apptTitle.value = this.calTitle.innerText;
+        this.apptLocation.value = this.calLocation.innerText;
+        this.apptTime.value = this.calDate.innerText;
     }
 
 
@@ -99,8 +122,8 @@ export class Schedule extends cryptor{
         if (_selectDay >= _today) {
 
             this.overlay.classList.remove('schedule-popup-display');
-            this.calTitle.innerHTML = 'Schedule an appointment with Kulfi';
-            this.calLocation.innerHTML = '333 sutter street, SF CA, 94109';
+            this.calTitle.innerHTML = this.apptDefaultText.title + ' Kulfi';
+            this.calLocation.innerHTML = this.apptDefaultText.location;
             this.calDate.innerHTML = moment(args.date).format('LL');
             this.overlay.classList.add('schedule-popup-display');
 

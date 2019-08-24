@@ -4,8 +4,8 @@
         div.appointment-header
           div.title
             div.heading
-                p.greet(ref="greet") Appointment
-                p.greet-sub schedule an appointment!
+              p.greet(ref="greet") Appointment
+              p.greet-sub schedule an appointment!
         div.appointment-body
           div.content
             form(id="appointment-form")
@@ -38,7 +38,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Slider from "./slider.vue";
-import {Appointment} from '../library/appointment'
+import { Appointment } from "../library/appointment";
 
 export default Vue.extend({
   name: "appointment",
@@ -48,7 +48,7 @@ export default Vue.extend({
   data: function() {
     return {
       library: typeof Appointment
-    }
+    };
   },
   mounted: function() {
     this.$data.library = new Appointment();

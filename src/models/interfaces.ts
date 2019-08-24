@@ -1,4 +1,4 @@
-import { View, EventApi } from '@fullcalendar/core';
+import { View } from '@fullcalendar/core';
 
 export interface IMicroService {
     name: string;
@@ -12,6 +12,11 @@ export interface IMicroService {
 export interface IEndpoint {
     name: string;
     endpoint: string;
+}
+
+export interface IAppointmentMessage {
+    title: string;
+    location: string;
 }
 
 export interface IMailerUser {

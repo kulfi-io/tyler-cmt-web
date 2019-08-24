@@ -2,10 +2,12 @@ import '../assets/sass/appointment.scss';
 import '../assets/sass/slider.scss';
 import momemt from 'moment';
 
+
 export class Slider {
     private rangeSlider: HTMLInputElement;
     private rangeBullet: HTMLElement;
-
+    protected target?: HTMLInputElement;
+    
     constructor() {
 
         this.rangeSlider =  <HTMLInputElement>document.querySelector('#range-line');
@@ -18,6 +20,7 @@ export class Slider {
         }
     }
 
+   
     protected showSliderValue = () => {
 
         const _busy = [13, 18, 21];
@@ -27,6 +30,7 @@ export class Slider {
         const _targetVal = parseInt(this.rangeSlider.value);
         const _val =  momemt(_targetVal, ['HH:MM']).format('hh:mm a');
         this.rangeBullet.innerHTML = _val;
+        
 
         if(_busy.indexOf(_targetVal) >= 0) {
 
@@ -43,6 +47,10 @@ export class Slider {
             this.rangeSlider.classList.remove('reserved')
             _availalility.textContent = 'open';
 
+            if(this.target) {
+                const _targetVal: string[] = this.target.value.split('@');
+                this.target.value = `${_targetVal[0].trim()} @ ${_val}`;
+            }
         }
     }
 }
