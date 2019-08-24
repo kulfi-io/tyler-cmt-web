@@ -1,3 +1,5 @@
+import { View, EventApi } from '@fullcalendar/core';
+
 export interface IMicroService {
     name: string;
     scheme: string;
@@ -157,5 +159,23 @@ export interface ICalEventResponse  {
     start?: ICalTime;
     end?: ICalTime;
     attendees?: IAttendee[]
+}
+
+
+export interface IDayRenderArg {
+    view: View;
+    date: Date;
+    allDay?: boolean;
+    el: HTMLElement;
+}
+
+export interface IDayClickArgs {
+    date: Date;
+    dateStr: string;
+    allDay: boolean;
+    resource?: any;
+    dayEl: HTMLElement;
+    jsEvent: MouseEvent;
+    view: View;
 }
 

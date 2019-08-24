@@ -5,20 +5,32 @@
             div.schedule-navigation
                 div.navigation(class="split")
                     div.split-half-left
-                        button.form-control(ref="previous" ) prev
+                        button.form-control(ref="previous" class="previous") prev
                     div.split-half-right
-                        button.form-control( ref="next") next
+                        button.form-control( ref="next" class="next") next
                 div.title
-                    div.heading( ref="heading") {{ title() }}
+                    div.heading(class="cal-title" ref="heading") 
                 div.view(class="split")
                     div.split-half-left
-                        button.form-control(ref="month" class="active") month
+                        button.form-control(ref="month" class="active" class="month") month
                     div.split-half-right
-                        button.form-control(ref="week") week
+                        button.form-control(ref="week" class="week") week
         div.schedule-body
-            form(id="schedule-appointment-form")
-                div.content
+            div.content
+                form(id="schedule-appointment-form")
                     div.calendar(ref="calendar")
+                    div.schedule-popup(id="schedule-popup" ref="schedule-popup")
+                        div.popup
+                            div.title Schedule Appointment
+                            div.body
+                                div.name(class="info") 
+                                div.location(class="info") 
+                                div.date(class="info") 
+                                div.split
+                                    div.split-half-left
+                                        a.heading(class="link select-time" href="#") select time 
+                                    div.split-half-right(class="link-last")
+                                        a.heading(class="link cancel" href="#") Cancel 
         div.schedule-footer
             div.split
                 div.split-half-left
@@ -29,42 +41,21 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Schedule from '../library/calendar' ;
+import {Schedule} from '../library/calendar' ;
 
 export default Vue.extend({
     name: 'schedule-appointment',
+    data: function() {
+        return {
+            schedule: typeof Schedule,
+        }
+    },
     mounted: function() {
         const calendar = <HTMLDivElement>this.$refs.calendar;
-        const previous = <HTMLButtonElement>this.$refs.previous;
-        const next = <HTMLButtonElement>this.$refs.next;
-        const heading = <HTMLDivElement>this.$refs.heading;
-        const week = <HTMLButtonElement>this.$refs.week;
-        const month = <HTMLButtonElement>this.$refs.month;
-
-        // const _user = new User('1', 'Lucy', 'Dog');
-        Schedule.init(calendar);
-        previous.addEventListener('click', (e: Event) => {
-            Schedule.previous(heading)
-        });
-        next.addEventListener('click', (e: Event) => {
-            Schedule.next(heading);
-        });
-        week.addEventListener('click', (e: Event) => {
-            Schedule.weekView(week, month);
-        });
-        month.addEventListener('click', (e: Event) => {
-            Schedule.monthView(month, week);
-        });
-
-        window.addEventListener('resize', (e: Event) => {
-            Schedule.refresh();
-        });
-    },
-    methods: {
-        title: function(): string {
-            return Schedule.calTitle();
-        },
-       
-    },
+        const _data = this.$parent.$data;
+        this.$data.schedule = new Schedule(calendar, this.$parent.$data);
+        this.$data.schedule.init();
+        
+    }
 })
 </script>

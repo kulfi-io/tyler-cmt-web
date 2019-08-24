@@ -2,7 +2,7 @@
   div.schedule-vue
     HeaderVue
     div.schedule-appointment-vue
-      FullPage.fullpage( :options="options")
+      FullPage.fullpage( :options="schedule.Option" id="fullpage" ref="fullpage")
         div.section(class="page schedule")
           div.slide(class="calendar")
             ScheduleAppointmenVue
@@ -20,7 +20,7 @@ import ScheduleAppointmenVue from "../components/schedule-appointment.vue";
 import Appointment from "../components/appointment.vue";
 import Option from "../library/fpOption";
 
-const _schedule = new Option(['schedule'], ['#C8C8C8']);
+const _schedule = new Option([], ['#C8C8C8']);
 
 export default Vue.extend({
   name: "schedule-view",
@@ -33,9 +33,12 @@ export default Vue.extend({
   },
   data: () => {
     return {
-      options: _schedule.Option
+      schedule: _schedule
     };
   }
+
+  
+
 });
 </script>
 

@@ -22,7 +22,7 @@ let routes = [
     { path: '/reset/:id', name: 'reset', title: 'reset', component: Reset},
     { path: '/dash', name: 'dashboard', title: 'dashboard', component: Dashboard},
     { path: '/schedule', name: 'schedule', title: 'schedule', component: Schedule},
-    { path: '/note', name: 'send-note', title: 'send-note', component: SendNote}
+    { path: '/note', name: 'send-note', title: 'send-note', component: SendNote},
 
     // { path: '/register', name: 'register', title: 'register', component: Register},
     // { path: '/schedule', name: 'schedule', title: 'schedule', component: Schedule}

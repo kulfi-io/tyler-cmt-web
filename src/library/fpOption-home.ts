@@ -18,6 +18,7 @@ export default class FPOptionHome extends FPOptions {
             ,scrollBar, menu);
         this.options = this.initOptions();
         this.animations = this.initAnimations();
+        
     }
 
     public get Option() : Object {
@@ -52,7 +53,7 @@ export default class FPOptionHome extends FPOptions {
             const _destTargets = this.containsAnimation(_destination.anchor);
             _destTargets.forEach((anime: AfterAnime) => {
                 if(anime.animationItem) {
-                    anime.animationItem.goToAndPlay(4, true);
+                    anime.animationItem.goToAndPlay(4, true)
                 }
             });
         }

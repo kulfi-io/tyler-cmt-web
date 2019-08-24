@@ -5,27 +5,68 @@ import moment from 'moment';
 import TimeGrid from '@fullcalendar/timegrid';
 import { Calendar, EventInput } from '@fullcalendar/core';
 import { cryptor } from './cryptor';
-import { IAttendee, ICalendarUser, ICalEventResponse } from '../models/interfaces';
+import { ICalEventResponse, IDayClickArgs } from '../models/interfaces';
 import '../assets/sass/schedule.scss';
 import '@fullcalendar/daygrid/main.min.css';
 import '@fullcalendar/timegrid/main.min.css';
 
-
-
 export class Schedule extends cryptor{
     private calendar?: Calendar;
-    private heading?: HTMLDivElement;
     private monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     private eventInputs?: EventInput[];
     private lineHeight = 1.5;
     private lineHeightPxEquivalent = 12.775;
+    private target: HTMLDivElement;
+    private title: HTMLDivElement;
+    private previous: HTMLButtonElement;
+    private next: HTMLButtonElement;
+    private month: HTMLButtonElement;
+    private week: HTMLButtonElement;
+    private overlay: HTMLDivElement;
+    private cancel: HTMLAnchorElement;
+    private selectTime: HTMLAnchorElement;
+    private calDate: HTMLDivElement;
+    private calTitle: HTMLDivElement;
+    private calLocation: HTMLDivElement;
+    private fpData: Record<string, any>;
 
-    public refresh = (user?: ICalendarUser): void => {
+    // Appointment
+    // TODO set appointment calendar values 
+
+    constructor(target: HTMLDivElement, fpData: Record<string, any>) {
+
+        super();
+        this.fpData = fpData;
+        this.target = target;
+        this.title = <HTMLDivElement>document.querySelector('.cal-title');
+        this.previous = <HTMLButtonElement>document.querySelector('.previous');
+        this.next = <HTMLButtonElement>document.querySelector('.next');
+        this.month = <HTMLButtonElement>document.querySelector('.month');
+        this.week = <HTMLButtonElement>document.querySelector('.week');
+        this.overlay = <HTMLDivElement>document.querySelector('.schedule-popup');
+        this.cancel = <HTMLAnchorElement>document.querySelector('.cancel');
+        this.selectTime = <HTMLAnchorElement>document.querySelector('.select-time');
+        this.calDate = <HTMLDivElement>document.querySelector('.date');
+        this.calTitle = <HTMLDivElement>document.querySelector('.name');
+        this.calLocation = <HTMLDivElement>document.querySelector('.location');
+        
+        this.title.innerHTML = this.calHeading();
+
+        this.previous.addEventListener('click', this.moveToPrevious);
+        this.next.addEventListener('click', this.moveToNext);
+        this.month.addEventListener('click', this.monthView);
+        this.week.addEventListener('click', this.weekView);
+        
+        this.cancel.addEventListener('click', this.cancelAppointment);
+        this.selectTime.addEventListener('click', this.selectAppointmentTime);
+    }
+
+    public refresh = (): void => {
         if(this.calendar) {
 
             const _calendar = this.calendar;
             this.calendar.destroy();
-            this.setCalendarConfig(_calendar.el);
+            this.setCalendarConfig();
             
             if(this.calendar) {
                 this.calendar.state = _calendar.state;
@@ -37,9 +78,38 @@ export class Schedule extends cryptor{
         }
     }
 
-    private setCalendarConfig(target: HTMLElement) {
+    private cancelAppointment = (e: Event) => {
+        this.cancel.addEventListener('click', (e: Event) => {
+            this.overlay.classList.remove('schedule-popup-display');
+        });
+    }
+
+    private selectAppointmentTime = (e: Event) => {
+        this.selectTime.addEventListener('click', (e: Event) => {
+            this.overlay.classList.remove('schedule-popup-display');
+            this.fpData.api.moveSlideRight();
+        });
+    }
+
+
+    private dayClickListener = (args: IDayClickArgs) => {
+        const _selectDay = moment(args.date).format('ll').valueOf();
+        const _today = moment(new Date()).format('ll').valueOf();
+
+        if (_selectDay >= _today) {
+
+            this.overlay.classList.remove('schedule-popup-display');
+            this.calTitle.innerHTML = 'Schedule an appointment with Kulfi';
+            this.calLocation.innerHTML = '333 sutter street, SF CA, 94109';
+            this.calDate.innerHTML = moment(args.date).format('LL');
+            this.overlay.classList.add('schedule-popup-display');
+
+        }
+    }
+
+    private setCalendarConfig() {
         
-        this.calendar = new Calendar(target, {
+        this.calendar = new Calendar(this.target, {
             plugins: [DayGrid, TimeGrid, Interaction],
             header: false,
             minTime: '10:00',
@@ -47,17 +117,21 @@ export class Schedule extends cryptor{
             allDaySlot: false,
             selectable: true,
             events: this.eventInputs,
-        });
+            eventClick: function (args) {
+                console.debug('event-click', args);
+            },
+            dateClick: this.dayClickListener
 
-       
+        });
     }
 
-    public init = (target: HTMLDivElement, user?: ICalendarUser): void => {
+    public init = (): void => {
         
-        if (target) {
+        if (this.target) {
             this.targetEvents()
             .then(() => {
-                this.setCalendarConfig(target);
+                this.setCalendarConfig();
+                
             })
             .catch((err: Error) => {
                 console.debug(err);
@@ -130,7 +204,8 @@ export class Schedule extends cryptor{
             });
         });
     }
-    public calTitle = (date?: Date): string => {
+
+    private calHeading = (date?: Date): string => {
 
         date = date ? date : new Date();
         if(screen.width <= 411) {
@@ -139,42 +214,38 @@ export class Schedule extends cryptor{
         return `${this.monthNames[date.getMonth()]}, ${date.getFullYear()}`;
     }
 
-    private setCalTitle = () => {
-        if (this.heading) {
-            if (this.calendar) {
-                const _date = this.calendar.getDate();
-                this.heading.innerText = this.calTitle(_date);
-            }
+    private setCalHeading = () => {
+        if (this.calendar) {
+            const _date = this.calendar.getDate();
+            this.title.innerText = this.calHeading(_date);
         }
     }
 
-    public next = (heading: HTMLDivElement): void => {
+    public moveToNext = (e: Event): void => {
         if (this.calendar) {
             this.calendar.next();
-            this.heading = heading;
-            this.setCalTitle();
+            this.setCalHeading();
 
             this.reposition();
         }
     }
 
-    public previous = (heading: HTMLDivElement): void => {
+    public moveToPrevious = (e: Event): void => {
         if (this.calendar) {
             this.calendar.prev();
-            this.heading = heading;
-            this.setCalTitle();
+            this.setCalHeading();
 
             this.reposition();
         }
     }
 
-    public weekView = (week: HTMLButtonElement, month: HTMLButtonElement): void => {
+    public weekView = (e: Event): void => {
         if (this.calendar) {
             this.calendar.changeView('timeGridWeek');
             this.calendar.getDate();
 
-            week.classList.toggle('active');
-            month.classList.toggle('active');
+            this.week.classList.toggle('active');
+            this.month.classList.toggle('active');
             this.reposition();
         }
     }
@@ -244,10 +315,6 @@ export class Schedule extends cryptor{
                             _style = `top: ${_interval * _activeLocation}px; z-index: 1`;
                         }
 
-                        // console.debug('start:', _startTime, ' lastPosition:', _lastStartPosition);
-                        // console.debug('interval:', _interval, ' lastInterval:', _lastInterval);
-                        // console.debug(' ------------------------- ');
-
                         _event.setAttribute('style', _style);
                         _lastStartPosition = _startTime
 
@@ -266,6 +333,7 @@ export class Schedule extends cryptor{
         const _hourHeight = this.lineHeightPxEquivalent * (this.lineHeight * 2);
        
         const _eventElements = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
+        
         if(_eventElements) {
             _eventElements.forEach((event: Element) => {
                 const _content = <HTMLDivElement>event.querySelector('.fc-content'); 
@@ -292,17 +360,17 @@ export class Schedule extends cryptor{
         }
     }
     
-    public monthView = (month: HTMLButtonElement, week: HTMLButtonElement): void => {
+    public monthView = (e: Event): void => {
         if (this.calendar) {
             this.calendar.changeView('dayGridMonth');
             this.calendar.getDate();
 
-            week.classList.toggle('active');
-            month.classList.toggle('active');
+            this.week.classList.toggle('active');
+            this.month.classList.toggle('active');
 
             this.resizeScroller();
         }
     }
 }
 
-export default new Schedule();
+export default Schedule;

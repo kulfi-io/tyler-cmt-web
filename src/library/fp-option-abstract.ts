@@ -2,7 +2,6 @@ import Config from '../config/config.json';
 import '../assets/sass/fullpage-override.scss';
 import 'fullpage.js/vendors/scrolloverflow';
 
-
 export abstract class FPOptions {
     protected fullpageLicenseKey: string;
     protected fullpageScrollOverflow: boolean;
@@ -25,7 +24,7 @@ export abstract class FPOptions {
         this.fullpageSectionsColor = sectionsColor;
     }
 
-    abstract initOptions(): Object;
+   
 
-    
+    abstract initOptions(): Object;
 }
