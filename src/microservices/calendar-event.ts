@@ -1,23 +1,40 @@
 import Axios, { AxiosPromise } from 'axios';
 import BaseService from './base-service';
-import { IEndpoint} from '../models/interfaces';
+import { IEndpoint, ICalEvent} from '../models/interfaces';
 
 export class CalendarEventService extends BaseService{
 
+    private eventsEndpoint: string;
     private eventEndpoint: string;
 
-    
     constructor() {
         super();
-        const _event = <IEndpoint>this.event.endpoints
+        const _events = <IEndpoint>this.event.endpoints
             .find(x => x.name === 'events');
         
+        const _event = <IEndpoint>this.event.endpoints
+            .find(x => x.name === 'event');
+        
+        this.eventsEndpoint = `${this.eventBaseUrl}/${_events.endpoint}`;
         this.eventEndpoint = `${this.eventBaseUrl}/${_event.endpoint}`;
 
     }
 
     events(): AxiosPromise {
-        return Axios.get(this.eventEndpoint);
+        return Axios.get(this.eventsEndpoint);
+    }
+
+    create(data: ICalEvent): AxiosPromise {
+        
+        data.end = this.encrypt(data.end);
+        data.location = this.encrypt(data.location);
+        data.start = this.encrypt(data.start);
+        data.title = this.encrypt(data.title);
+        data.email = this.encrypt(data.email);
+
+        console.debug('ms-data', data);
+        console.debug('endpoint', this.eventEndpoint);
+        return Axios.post(this.eventEndpoint, data, {headers: this.header});
     }
 }
 

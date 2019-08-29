@@ -96,6 +96,77 @@
       padding: 0.525rem 0.875rem;
     }
 
+    .appt-popup {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      transition: opacity 500ms;
+      visibility: hidden;
+      opacity: 0;
+      z-index: 2;
+    }
+
+    .appt-popup-display {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .popup {
+      margin: auto;
+      display: block;
+      border: 5px solid $default-white;
+      padding: 1%;
+      background: $default-background-color;
+      border-radius: 1px;
+      position: relative;
+      transition: all 5s ease-in-out;
+      max-width: 35vw;
+
+      .title {
+        text-align: center;
+        color: $default-white;
+        letter-spacing: .2em;
+        font-size: 1rem;
+      }
+
+      .body {
+        .link {
+          //text-decoration: none;
+
+          &:hover,
+          &:focus {
+            text-decoration: none;
+            color: $default-hover-color;
+          }
+        }
+
+        .link-last {
+          text-align: right;
+        }
+
+        .info {
+          text-align: left;
+          line-height: 1.5;
+          color: $default-font-color;
+          font-size: .8rem;
+          text-transform: none;
+        }
+
+        .heading {
+          color: $default-read-more;
+          margin-bottom: 4vh;
+          font-size: .75rem;
+          text-transform: uppercase;
+          letter-spacing: .3em;
+          white-space: nowrap;
+        }
+      }
+
+    }
+
 
     .text-muted {
       color: $text-muted;

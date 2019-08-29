@@ -23,9 +23,9 @@
                         div.popup
                             div.title Schedule Appointment
                             div.body
-                                div.name(class="info") 
-                                div.location(class="info") 
-                                div.date(class="info") 
+                                div.cal-name(class="info") 
+                                div.cal-location(class="info") 
+                                div.cal-date(class="info") 
                                 div.split
                                     div.split-half-left
                                         a.heading(class="link select-time" href="#") select time 

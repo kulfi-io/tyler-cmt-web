@@ -1,17 +1,24 @@
 import CalendarEventService from '../microservices/calendar-event';
 import DayGrid from '@fullcalendar/daygrid';
 import Interaction from '@fullcalendar/interaction';
-import moment from 'moment';
+import moment, { duration } from 'moment';
 import TimeGrid from '@fullcalendar/timegrid';
-import { Calendar, EventInput } from '@fullcalendar/core';
+import { Appointment } from './appointment';
+import { Calendar,  EventInput } from '@fullcalendar/core';
 import { cryptor } from './cryptor';
-import { ICalEventResponse, IDayClickArgs, IAppointmentMessage } from '../models/interfaces';
+import { defaultApptMessage } from '../config/config.json';
+import {
+    IAppointmentMessage,
+    ICalEventResponse,
+    IDayClickArgs,
+    IEventArgs
+    } from '../models/interfaces';
 import '../assets/sass/schedule.scss';
 import '@fullcalendar/daygrid/main.min.css';
 import '@fullcalendar/timegrid/main.min.css';
-import {  defaultApptMessage }  from '../config/config.json';
 
-export class Schedule extends cryptor{
+
+export class Schedule extends cryptor {
     private calendar?: Calendar;
     private monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     private eventInputs?: EventInput[];
@@ -32,10 +39,8 @@ export class Schedule extends cryptor{
     private fpData: Record<string, any>;
 
     // Appointment
-    private apptTitle: HTMLInputElement;
-    private apptLocation: HTMLInputElement;
-    private apptTime: HTMLInputElement;
-    private apptDefaultText:IAppointmentMessage;
+    private apptDefaultText: IAppointmentMessage;
+    private appointment: Appointment;
     // TODO
     // load free time from db
     // load busy times from db
@@ -44,6 +49,7 @@ export class Schedule extends cryptor{
     constructor(target: HTMLDivElement, fpData: Record<string, any>) {
 
         super();
+        this.appointment = new Appointment();
         this.apptDefaultText = defaultApptMessage;
         this.fpData = fpData;
         this.target = target;
@@ -55,36 +61,30 @@ export class Schedule extends cryptor{
         this.overlay = <HTMLDivElement>document.querySelector('.schedule-popup');
         this.cancel = <HTMLAnchorElement>document.querySelector('.cancel');
         this.selectTime = <HTMLAnchorElement>document.querySelector('.select-time');
-        this.calDate = <HTMLDivElement>document.querySelector('.date');
-        this.calTitle = <HTMLDivElement>document.querySelector('.name');
-        this.calLocation = <HTMLDivElement>document.querySelector('.location');
-        
+        this.calDate = <HTMLDivElement>document.querySelector('.cal-date');
+        this.calTitle = <HTMLDivElement>document.querySelector('.cal-name');
+        this.calLocation = <HTMLDivElement>document.querySelector('.cal-location');
+
         this.title.innerHTML = this.calHeading();
 
         this.previous.addEventListener('click', this.moveToPrevious);
         this.next.addEventListener('click', this.moveToNext);
         this.month.addEventListener('click', this.monthView);
         this.week.addEventListener('click', this.weekView);
-        
+
         this.cancel.addEventListener('click', this.cancelAppointment);
         this.selectTime.addEventListener('click', this.selectAppointmentTime);
-        
-        // Appointment body
-        const _apptBody = <HTMLDivElement>document.querySelector('.appointment-body');
-        this.apptTitle = <HTMLInputElement>_apptBody.querySelector('#title');
-        this.apptLocation = <HTMLInputElement>_apptBody.querySelector('#location');
-        this.apptTime = <HTMLInputElement>_apptBody.querySelector('#time');
-    
+
     }
 
     public refresh = (): void => {
-        if(this.calendar) {
+        if (this.calendar) {
 
             const _calendar = this.calendar;
             this.calendar.destroy();
             this.setCalendarConfig();
-            
-            if(this.calendar) {
+
+            if (this.calendar) {
                 this.calendar.state = _calendar.state;
                 this.calendar.changeView(_calendar.state.viewType);
                 this.calendar.render();
@@ -95,23 +95,20 @@ export class Schedule extends cryptor{
     }
 
     private cancelAppointment = (e: Event) => {
-        this.cancel.addEventListener('click', (e: Event) => {
-            this.overlay.classList.remove('schedule-popup-display');
-        });
+        this.overlay.classList.remove('schedule-popup-display');
     }
 
     private selectAppointmentTime = (e: Event) => {
-        this.selectTime.addEventListener('click', (e: Event) => {
-            this.setApptValues();
-            this.overlay.classList.remove('schedule-popup-display');
-            this.fpData.api.moveSlideRight();
-        });
+        this.setApptValues();
+        this.overlay.classList.remove('schedule-popup-display');
+        this.fpData.api.moveSlideRight();
     }
 
     private setApptValues = () => {
-        this.apptTitle.value = this.calTitle.innerText;
-        this.apptLocation.value = this.calLocation.innerText;
-        this.apptTime.value = this.calDate.innerText;
+        this.appointment.title.value = this.calTitle.innerText;
+        this.appointment.selectDate.value = this.calDate.innerText;
+        this.appointment.location.value = this.calLocation.innerText;
+        this.appointment.findFistAppointment();
     }
 
 
@@ -126,12 +123,54 @@ export class Schedule extends cryptor{
             this.calLocation.innerHTML = this.apptDefaultText.location;
             this.calDate.innerHTML = moment(args.date).format('LL');
             this.overlay.classList.add('schedule-popup-display');
+            this.selectTime.focus();
+        }
+    }
 
+    private GetDifference = (start: string, end: string): number => {
+        const _start = new Date(start);
+        const _end = new Date(end);
+
+        const _endHr = _end.getHours() == 0 ? 24 : _end.getHours();
+
+        let _diffHr = (_endHr - _start.getHours()) * 60;
+        let _diffmin = (_end.getMinutes() - _start.getMinutes())
+
+        return _diffHr + _diffmin;
+
+    }
+
+    private addEventDateAttribute = (args: IEventArgs) => {
+        const _el = <HTMLAnchorElement>args.el;
+        const _elTime = <HTMLDivElement>_el.querySelector('.fc-time');
+
+        if (_elTime) {
+            if (this.eventInputs) {
+                const _input = this.eventInputs.find(x => x.id === args.event.id);
+                if (_input && _input.start && _input.end) {
+
+                    const _eventDate = moment(_input.start).format('L');
+                    const _eventDateNum = moment(moment(new Date(_eventDate)).format('ll')).valueOf()
+                    const _diff = this.GetDifference(_input.start.toString(), _input.end.toString());
+                    const _start24 = new Date(_input.start.toString()).getHours();
+                    
+                    const _start = new Date(_input.start.toString()).toString();
+                    const _end = new Date(_input.end.toString()).toString();
+
+                    _elTime.setAttribute('event-date', _eventDateNum.toString());
+                    _elTime.setAttribute('event-duration', _diff.toString());
+                    _elTime.setAttribute('event-min', '10');
+                    _elTime.setAttribute('event-max', '23');
+                    _elTime.setAttribute('event-hour-val', _start24.toString())
+                    _elTime.setAttribute('start', _start);
+                    _elTime.setAttribute('end', _end);
+                }
+            }
         }
     }
 
     private setCalendarConfig() {
-        
+
         this.calendar = new Calendar(this.target, {
             plugins: [DayGrid, TimeGrid, Interaction],
             header: false,
@@ -140,6 +179,7 @@ export class Schedule extends cryptor{
             allDaySlot: false,
             selectable: true,
             events: this.eventInputs,
+            eventRender: this.addEventDateAttribute,
             eventClick: function (args) {
                 console.debug('event-click', args);
             },
@@ -149,28 +189,28 @@ export class Schedule extends cryptor{
     }
 
     public init = (): void => {
-        
+
         if (this.target) {
             this.targetEvents()
-            .then(() => {
-                this.setCalendarConfig();
-                
-            })
-            .catch((err: Error) => {
-                console.debug(err);
-            })
-            .finally(() => {
-                if(this.calendar) {
-                    this.calendar.render();
-                    this.resizeScroller();
-                    this.insertTotal();
-                }
-            });
+                .then(() => {
+                    this.setCalendarConfig();
+
+                })
+                .catch((err: Error) => {
+                    console.debug(err);
+                })
+                .finally(() => {
+                    if (this.calendar) {
+                        this.calendar.render();
+                        this.resizeScroller();
+                        this.insertTotal();
+                    }
+                });
         }
     }
 
     private decryptResponse = (item: ICalEventResponse): EventInput => {
-        
+
         const _eventInput: EventInput = {
             id: item.id ? this.decrypt(item.id) : undefined,
             title: item.summary ? this.decrypt(item.summary) : undefined,
@@ -178,9 +218,6 @@ export class Schedule extends cryptor{
             end: item.end ? this.decrypt(item.end.dateTime) : undefined,
             date: item.start ? this.decrypt(item.start.dateTime) : undefined,
             allDay: false,
-            // backgroundColor: '#efefef',
-            // borderColor: '#005276',
-            
         }
 
         return _eventInput;
@@ -188,13 +225,13 @@ export class Schedule extends cryptor{
     }
 
     private insertTotal = () => {
-        if(this.eventInputs && this.eventInputs.length) {
-            if(this.calendar && this.calendar.view.type ===  'dayGridMonth') {
-                
+        if (this.eventInputs && this.eventInputs.length) {
+            if (this.calendar && this.calendar.view.type === 'dayGridMonth') {
+
                 this.eventInputs.forEach((event: EventInput) => {
-                    
+
                     const _target = <HTMLElement>document.querySelector(`.fc-bg table tbody tr td[data-date="${moment(event.date).format('YYYY-MM-DD')}"]`);
-                    if(_target) {
+                    if (_target) {
                         const _total = document.createElement('div')
                         _total.setAttribute('class', 'total')
                         _total.innerText = '30';
@@ -207,33 +244,51 @@ export class Schedule extends cryptor{
         }
     }
 
-    private targetEvents = ()  => {
+    private targetEvents = () => {
 
         return new Promise((resolve, reject) => {
             CalendarEventService.events()
-            .then((result) => {
-                const  _items = <ICalEventResponse[]>result.data.events;
-                const _eventInputs: EventInput[] = [];
+                .then((result) => {
+                    const _items = <ICalEventResponse[]>result.data.events;
+                    const _eventInputs: EventInput[] = [];
 
-                _items.forEach((item: ICalEventResponse) => {
-                    _eventInputs.push(this.decryptResponse(item));
+                    _items.forEach((item: ICalEventResponse) => {
+                        _eventInputs.push(this.decryptResponse(item));
+                    });
+                    
+                    const compare =(a:EventInput, b:EventInput) => {
+
+                        if(a.start && b.start) {
+
+                           const _aStart = moment(moment(new Date(a.start.toString())).format('lll')).valueOf();
+                           const _bStart = moment(moment(new Date(b.start.toString())).format('lll')).valueOf()
+                            
+                           if( _aStart > _bStart ) return 1;
+                           if( _bStart > _aStart ) return -1;
+                        
+                        }
+                      
+                        return 0;
+                      }
+
+                    _eventInputs.sort(compare)
+
+                    this.eventInputs = _eventInputs
+                    resolve();
+
+                })
+                .catch((err) => {
+                    return reject(err);
                 });
-                this.eventInputs = _eventInputs
-                resolve();
-                
-            })
-            .catch((err) => {
-                return reject(err);
-            });
         });
     }
 
     private calHeading = (date?: Date): string => {
 
         date = date ? date : new Date();
-        if(screen.width <= 411) {
-            return `${this.monthNames[date.getMonth()].substr(0,3)}, ${date.getFullYear()}`;
-        } 
+        if (screen.width <= 411) {
+            return `${this.monthNames[date.getMonth()].substr(0, 3)}, ${date.getFullYear()}`;
+        }
         return `${this.monthNames[date.getMonth()]}, ${date.getFullYear()}`;
     }
 
@@ -254,12 +309,13 @@ export class Schedule extends cryptor{
     }
 
     public moveToPrevious = (e: Event): void => {
+        
         if (this.calendar) {
             this.calendar.prev();
             this.setCalHeading();
-
             this.reposition();
         }
+
     }
 
     public weekView = (e: Event): void => {
@@ -274,8 +330,8 @@ export class Schedule extends cryptor{
     }
 
     private resizeScroller = () => {
-        const _scrollerList = document.querySelectorAll('.fc-scroller'); 
-        if(_scrollerList) {
+        const _scrollerList = document.querySelectorAll('.fc-scroller');
+        if (_scrollerList) {
             _scrollerList.forEach((item: Element) => {
                 const _scroller = <HTMLDivElement>item;
                 _scroller.style.height = 'inherit';
@@ -284,105 +340,108 @@ export class Schedule extends cryptor{
     }
 
     private reposition = () => {
-        
+
         this.resizeScroller();
         this.resizeWeekViewContent();
-        this.positionMeetings()
     }
 
-    private positionMeetings = () => {
-        const _startPosition = 10
-        const _startLocation = 41;
-        // const _mediaStartLocation = 44;
-        // const _activeLocation = this.portraitMediaScreen ? _mediaStartLocation : _startLocation;
-        const _activeLocation = 41;
-        let _lastStartPosition = _startPosition;
-        let _lastInterval = 0;
+    private getPosition = (start: number): number => {
+        const _baseHeight = 41;
+        const _min = 10;
+        const _max = 23;
 
-        const _eventElements = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
-        if(_eventElements) {
+        const _interval = start - _min;
 
-            _eventElements.forEach((event: Element)  => {
-                const _event = <HTMLDivElement>event
-                const _time = <HTMLDivElement>_event.querySelector('.fc-time');
-            
-                if(_time && _event) {
-                    const _dataFull = _time.getAttribute('data-full');
-                    
-                    if(_dataFull) {
+        return _interval * _baseHeight;
+    }
 
-                        const _dataFullArray = _dataFull.split(' - ');
-                        let _startTime = parseInt(_dataFullArray[0].replace('AM', '').replace('PM', ''));
-                        let _endTime = parseInt(_dataFullArray[1].replace('AM', '').replace('PM', ''));
-
-                        _event.removeAttribute('style');
-                        let _style = `top: ${_activeLocation}px; z-index: 1`;
-
-                        let _interval = 0
-                        if(_dataFullArray[0].indexOf('PM') >=0) {
-                            if(_startTime < 12)
-                                _startTime = _startTime + 12;
-                        }
-
-                        if(_startTime > _lastStartPosition) {
-                            _interval = _startTime - _lastStartPosition;
-                            
-                            if(_lastInterval === _interval) {
-                                _interval++;
-                            } else {
-                                if(_lastInterval > _interval) {
-                                    _interval = _lastInterval;
-                                }
-                            }
-                                
-                            _style = `top: ${_interval * _activeLocation}px; z-index: 1`;
-                        }
-
-                        _event.setAttribute('style', _style);
-                        _lastStartPosition = _startTime
-
-                        if(_interval > _lastInterval)
-                            _lastInterval = _interval;
-
-                    }
-                }
-            });
-        }
+    private setMeetingDurationInterval = (duration: number): number => {
+        const _interval = ((duration / 60) / .25);
+        return _interval;
     }
 
     private resizeWeekViewContent = () => {
-
-        const _halfHeight = this.lineHeightPxEquivalent * this.lineHeight;
-        const _hourHeight = this.lineHeightPxEquivalent * (this.lineHeight * 2);
-       
+        const _durationHeight = (this.lineHeightPxEquivalent * (this.lineHeight / 2));
         const _eventElements = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
-        
-        if(_eventElements) {
-            _eventElements.forEach((event: Element) => {
-                const _content = <HTMLDivElement>event.querySelector('.fc-content'); 
-                
-                const _time = <HTMLDivElement>event.querySelector('.fc-content .fc-time');
-                if(_time) {
-                    const _full = _time.getAttribute('data-full');
-                    if(_full) {
-                        const _duration = _full.replace('AM', '').replace('PM', '').split(' - ');
-                        let _length = parseInt(_duration[1]) - parseInt(_duration[0]); 
-                        
-                        if(parseInt(_duration[0]) === 12) {
-                            _length = (parseInt(_duration[1]) + 12) - parseInt(_duration[0]) ; 
-                        }
+        const _baseDistance = 41;
 
-                        if(_duration[1].indexOf(':00') >= 0) {
-                            _content.style.height =  `${_length * _hourHeight}px`;
-                        } else {
-                            _content.style.height = `${_length * _halfHeight}px`;
-                        }
+        if (_eventElements) {
+            let _startPosition: number = 0;
+            let _activeDate: number = 0
+            let _lastPosition: number = 0;
+            let _lastTime: HTMLDivElement;
+
+            _eventElements.forEach((event: Element) => {
+                
+                const _content = <HTMLDivElement>event.querySelector('.fc-content');
+                const _time = <HTMLDivElement>event.querySelector('.fc-content .fc-time');
+                const _curentDate = _time.getAttribute('event-date');
+                const _eventHour = _time.getAttribute('event-hour-val');
+                const _eventDuration = _time.getAttribute('event-duration');
+                let _position: number = 0;
+
+                if (_startPosition == 0 && _eventHour) {
+                    _startPosition = this.getPosition(parseInt(_eventHour));
+                }
+
+                if (_eventHour && _curentDate && parseInt(_curentDate) !== _activeDate) {
+                    _activeDate = parseInt(_curentDate);
+                    _startPosition = this.getPosition(parseInt(_eventHour));
+                    _lastPosition = 0;
+                }
+
+                if (event && _time && _eventHour) {
+
+                    // Set height of the meeting based on meeding duration
+                    // at 15 minute interval
+                    if (_eventDuration) {
+
+                        const _interval = this.setMeetingDurationInterval(parseInt(_eventDuration))
+                        _content.style.height = `${_interval * _durationHeight}px`;
+                    
                     }
+
+                    event.removeAttribute('style');
+
+
+                    if (_lastPosition == 0) {
+
+                        _position = _startPosition;
+                        event.setAttribute('style', `top: ${_position}px`);
+                    
+                    } else {
+
+                        const _start = _time.getAttribute('start');
+                        const _end = _time.getAttribute('end');
+                        const _lastStart = _lastTime.getAttribute('start');
+                        const _lastEnd = _lastTime.getAttribute('end');
+                        let _durationDiff;
+
+
+                        if(_start && _end && _lastStart && _lastEnd) {
+                            
+                            const _offsetDiff = moment(_start).diff(moment(_lastEnd));
+                            _durationDiff = (_offsetDiff / 60000) / 60;
+                            
+                            if(_lastEnd.trim() ===  _start.trim()) {
+                                _position = _lastPosition;
+                            } else {
+                                _position = _lastPosition + (_durationDiff * _baseDistance);
+                            }
+
+                        }
+                       
+                        event.setAttribute('style', `top: ${_position}px`);
+
+                    }
+
+                    _lastPosition = _position;
+                    _lastTime = _time;
                 }
             });
         }
     }
-    
+
     public monthView = (e: Event): void => {
         if (this.calendar) {
             this.calendar.changeView('dayGridMonth');

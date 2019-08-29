@@ -1,4 +1,4 @@
-import { View } from '@fullcalendar/core';
+import { View, EventApi } from '@fullcalendar/core';
 
 export interface IMicroService {
     name: string;
@@ -181,6 +181,23 @@ export interface IDayClickArgs {
     resource?: any;
     dayEl: HTMLElement;
     jsEvent: MouseEvent;
+    view: View;
+}
+
+export interface ICalEvent {
+    start: string;
+    end: string;
+    title: string;
+    location: string;
+    email: string;
+}
+
+export interface  IEventArgs {
+    isMirror: boolean;
+    isStart: boolean;
+    isEnd: boolean;
+    event: EventApi;
+    el: HTMLElement;
     view: View;
 }
 
