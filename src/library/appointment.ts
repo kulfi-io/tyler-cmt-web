@@ -21,6 +21,7 @@ export class Appointment extends Slider {
 	private popCreate: HTMLAnchorElement;
 	private duration: HTMLInputElement;
 
+
 	constructor() {
 		super();
 
@@ -113,12 +114,12 @@ export class Appointment extends Slider {
 	private createAppointment = (e: Event) => {
 		const _parseSelectedDate = this.selectDate.value.replace('@ ', '');
 		const _duration = this.duration.value;
-		const _start =  moment(_parseSelectedDate);
-		const _end = moment(_parseSelectedDate).add(_duration, 'minutes');
+		const _start =  moment(_parseSelectedDate).format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
+		const _end = moment(_parseSelectedDate).add(_duration, 'minutes').format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
 
 		const _data: ICalEvent = {
-			start: _start.toString(),
-			end: _end.toString(),
+			start: new Date(_start).toISOString(),
+			end: new Date(_end).toISOString(),
 			title: this.title.value,
 			location: this.location.value,
 			email: 'ashish@ashishc.io'
@@ -129,8 +130,9 @@ export class Appointment extends Slider {
 			console.debug('result', result);
 		})
 		.catch((err) => {
-			console.debug(err);
+			console.debug(err.response.data.message);
 		});
+
 	}
 
 }

@@ -369,7 +369,7 @@ export class Schedule extends cryptor {
             let _startPosition: number = 0;
             let _activeDate: number = 0
             let _lastPosition: number = 0;
-            let _lastTime: HTMLDivElement;
+            let _lastTime: HTMLDivElement | undefined;
 
             _eventElements.forEach((event: Element) => {
                 
@@ -388,6 +388,7 @@ export class Schedule extends cryptor {
                     _activeDate = parseInt(_curentDate);
                     _startPosition = this.getPosition(parseInt(_eventHour));
                     _lastPosition = 0;
+                    _lastTime = undefined;
                 }
 
                 if (event && _time && _eventHour) {
@@ -404,17 +405,19 @@ export class Schedule extends cryptor {
                     event.removeAttribute('style');
 
 
-                    if (_lastPosition == 0) {
+                    if (_lastPosition == 0  && !_lastTime) {
 
                         _position = _startPosition;
                         event.setAttribute('style', `top: ${_position}px`);
-                    
+                        console.debug('time', _time);
+                        console.debug('last-time', _lastTime);
+
                     } else {
 
                         const _start = _time.getAttribute('start');
                         const _end = _time.getAttribute('end');
-                        const _lastStart = _lastTime.getAttribute('start');
-                        const _lastEnd = _lastTime.getAttribute('end');
+                        const _lastStart = _lastTime ? _lastTime.getAttribute('start') : '0';
+                        const _lastEnd = _lastTime ? _lastTime.getAttribute('end') : '0';
                         let _durationDiff;
 
 
@@ -422,19 +425,33 @@ export class Schedule extends cryptor {
                             
                             const _offsetDiff = moment(_start).diff(moment(_lastEnd));
                             _durationDiff = (_offsetDiff / 60000) / 60;
+
+                           
                             
                             if(_lastEnd.trim() ===  _start.trim()) {
+                                // console.debug('diff', _durationDiff);
+                                // console.debug('time', _time);
+
                                 _position = _lastPosition;
                             } else {
+                                // console.debug('diff', _durationDiff);
+                                // console.debug('time', _time);
                                 _position = _lastPosition + (_durationDiff * _baseDistance);
                             }
 
                         }
+
                        
                         event.setAttribute('style', `top: ${_position}px`);
 
                     }
 
+                    // console.debug('last', _lastPosition);
+                    // console.debug('current', _position)
+                    // console.debug('time', _time);
+
+                    // console.debug('last-position', _lastPosition);
+                    // console.debug('position', _position);
                     _lastPosition = _position;
                     _lastTime = _time;
                 }

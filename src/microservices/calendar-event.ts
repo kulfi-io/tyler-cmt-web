@@ -1,6 +1,7 @@
 import Axios, { AxiosPromise } from 'axios';
 import BaseService from './base-service';
 import { IEndpoint, ICalEvent} from '../models/interfaces';
+import moment from 'moment';
 
 export class CalendarEventService extends BaseService{
 
@@ -25,16 +26,15 @@ export class CalendarEventService extends BaseService{
     }
 
     create(data: ICalEvent): AxiosPromise {
-        
+
         data.end = this.encrypt(data.end);
         data.location = this.encrypt(data.location);
         data.start = this.encrypt(data.start);
         data.title = this.encrypt(data.title);
         data.email = this.encrypt(data.email);
 
-        console.debug('ms-data', data);
-        console.debug('endpoint', this.eventEndpoint);
-        return Axios.post(this.eventEndpoint, data, {headers: this.header});
+
+        return Axios.post(this.eventEndpoint, data, { headers: this.header});
     }
 }
 
