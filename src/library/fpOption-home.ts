@@ -2,7 +2,6 @@ import { FPOptions } from './fp-option-abstract';
 import AfterAnime from './after-anime';
 import SplashBottomData from '../assets/animations/intro-banner.json';
 import SplashTopData from '../assets/animations/splash-top.json';
-// import CollageImageData from '../assets/animations/collage-1.json';
 import TableSketchData from '../assets/animations/table-sketch.json';
 import CollageHeadingData from '../assets/animations/healing.json';
 import ContactData from '../assets/animations/contact.json';
@@ -18,7 +17,15 @@ export default class FPOptionHome extends FPOptions {
             ,scrollBar, menu);
         this.options = this.initOptions();
         this.animations = this.initAnimations();
-        
+
+    }
+
+    public playFirst = () => {
+        if(this.animations[0].animationItem 
+            && this.animations[1].animationItem) {
+            this.animations[0].animationItem.goToAndPlay(4, true);
+            this.animations[1].animationItem.goToAndPlay(4, true);
+        }
     }
 
     public get Option() : Object {
@@ -53,7 +60,7 @@ export default class FPOptionHome extends FPOptions {
             const _destTargets = this.containsAnimation(_destination.anchor);
             _destTargets.forEach((anime: AfterAnime) => {
                 if(anime.animationItem) {
-                    anime.animationItem.goToAndPlay(4, true)
+                    anime.animationItem.goToAndPlay(4, true);
                 }
             });
         }

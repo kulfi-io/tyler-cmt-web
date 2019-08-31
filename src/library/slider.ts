@@ -1,6 +1,6 @@
 import '../assets/sass/appointment.scss';
 import '../assets/sass/slider.scss';
-import momemt from 'moment';
+import moment from 'moment';
 
 export class Slider {
     private rangeSlider: HTMLInputElement;
@@ -24,7 +24,7 @@ export class Slider {
         }
 
         this.busy = [10, 13, 18, 21];
-        this.now =  momemt(new Date()).format('HH');
+        this.now =  moment(new Date()).format('HH');
         // console.debug('today', )
         // const _now = momemt(new Date()).format('mm-dd-yyyy').valueOf();
         // this.setFirstOpenAppointment(_now);
@@ -32,7 +32,8 @@ export class Slider {
     }
 
     protected setFirstOpenAppointment = (selected: number) => {
-        const _today =  momemt(momemt(new Date()).format('ll')).valueOf();
+        const _today =  moment(moment(new Date().toISOString())).valueOf();
+        
         this.selectedDate = selected;
         const recursiveNext = (next: number): number => {
             if(this.busy.indexOf(next) >= 0) {
@@ -45,7 +46,7 @@ export class Slider {
         if(selected >= _today) {
 
             if(_today == selected) {
-                const _currentNow =  momemt(new Date()).format('HH');
+                const _currentNow =  moment(new Date()).format('HH');
                 const _nextAppt = parseInt(_currentNow) + 1;
 
                 this.rangeSlider.value = recursiveNext(_nextAppt).toString();
@@ -91,24 +92,23 @@ export class Slider {
     protected showSliderValue = () => {
 
         const _targetVal = parseInt(this.rangeSlider.value);
-        const _val =  momemt(_targetVal, ['HH:MM']).format('hh:mm a');
-        const _today =  momemt(momemt(new Date()).format('ll')).valueOf();
+        const _val =  moment(_targetVal, ['HH:MM']).format('hh:mm a');
+        
+        if(this.selectedDate) {
+            const _today = Date.parse(new Date().toDateString());
+            this.rangeBullet.innerHTML = _val;
+            this.available(_val);
 
-        this.rangeBullet.innerHTML = _val;
-
-        this.available(_val);
-
-        if(this.selectedDate && this.selectedDate == _today) {
-            if(_targetVal <= parseInt(this.now)) {
-               this.reserved();
+            if(this.selectedDate === _today) {
+                if(_targetVal <= parseInt(this.now)) {
+                    this.reserved();
+                }
             }
-        }
 
-        if(this.selectedDate && this.selectedDate > _today) {
-            if(this.busy.indexOf(_targetVal) >= 0) {
-                this.reserved();
-            }
+            // TODO
+            // compare busy
         }
+        
 
        
 

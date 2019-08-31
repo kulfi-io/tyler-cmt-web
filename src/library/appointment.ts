@@ -57,8 +57,8 @@ export class Appointment extends Slider {
 		this.duration.addEventListener('keyup', this.readyToConfirm);
 	}
 
-	public findFistAppointment = () => {
-		const _selected = moment(this.selectDate.value).valueOf();
+	public findFirstAppointment = () => {
+		const _selected = Date.parse(this.selectDate.value);
 		this.setFirstOpenAppointment(_selected);
 		this.validated();
 		

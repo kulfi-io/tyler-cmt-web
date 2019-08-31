@@ -4,15 +4,17 @@ import Interaction from '@fullcalendar/interaction';
 import moment, { duration } from 'moment';
 import TimeGrid from '@fullcalendar/timegrid';
 import { Appointment } from './appointment';
-import { Calendar,  EventInput } from '@fullcalendar/core';
+import { Calendar, EventInput } from '@fullcalendar/core';
 import { cryptor } from './cryptor';
 import { defaultApptMessage } from '../config/config.json';
 import {
     IAppointmentMessage,
     ICalEventResponse,
     IDayClickArgs,
-    IEventArgs
-    } from '../models/interfaces';
+    IEventArgs,
+    ICalTime,
+    IEventSelected
+} from '../models/interfaces';
 import '../assets/sass/schedule.scss';
 import '@fullcalendar/daygrid/main.min.css';
 import '@fullcalendar/timegrid/main.min.css';
@@ -105,10 +107,12 @@ export class Schedule extends cryptor {
     }
 
     private setApptValues = () => {
+
         this.appointment.title.value = this.calTitle.innerText;
         this.appointment.selectDate.value = this.calDate.innerText;
         this.appointment.location.value = this.calLocation.innerText;
-        this.appointment.findFistAppointment();
+        
+        this.appointment.findFirstAppointment();
     }
 
 
@@ -149,19 +153,16 @@ export class Schedule extends cryptor {
                 const _input = this.eventInputs.find(x => x.id === args.event.id);
                 if (_input && _input.start && _input.end) {
 
-                    const _eventDate = moment(_input.start).format('L');
-                    const _eventDateNum = moment(moment(new Date(_eventDate)).format('ll')).valueOf()
-                    const _diff = this.GetDifference(_input.start.toString(), _input.end.toString());
-                    const _start24 = new Date(_input.start.toString()).getHours();
-                    
-                    const _start = new Date(_input.start.toString()).toString();
-                    const _end = new Date(_input.end.toString()).toString();
+                    const _diff = this.GetDifference(_input.start.toString(), _input.end.toString()).toString();
+                    const _start24 = new Date(_input.start.toString()).getHours().toString();
 
-                    _elTime.setAttribute('event-date', _eventDateNum.toString());
-                    _elTime.setAttribute('event-duration', _diff.toString());
+                    const _start = new Date(_input.start.toString()).toISOString();
+                    const _end = new Date(_input.end.toString()).toISOString();
+
+                    _elTime.setAttribute('event-duration', _diff);
                     _elTime.setAttribute('event-min', '10');
                     _elTime.setAttribute('event-max', '23');
-                    _elTime.setAttribute('event-hour-val', _start24.toString())
+                    _elTime.setAttribute('event-hour-val', _start24);
                     _elTime.setAttribute('start', _start);
                     _elTime.setAttribute('end', _end);
                 }
@@ -224,6 +225,8 @@ export class Schedule extends cryptor {
 
     }
 
+
+
     private insertTotal = () => {
         if (this.eventInputs && this.eventInputs.length) {
             if (this.calendar && this.calendar.view.type === 'dayGridMonth') {
@@ -244,6 +247,8 @@ export class Schedule extends cryptor {
         }
     }
 
+   
+
     private targetEvents = () => {
 
         return new Promise((resolve, reject) => {
@@ -255,23 +260,7 @@ export class Schedule extends cryptor {
                     _items.forEach((item: ICalEventResponse) => {
                         _eventInputs.push(this.decryptResponse(item));
                     });
-                    
-                    const compare =(a:EventInput, b:EventInput) => {
 
-                        if(a.start && b.start) {
-
-                           const _aStart = moment(moment(new Date(a.start.toString())).format('lll')).valueOf();
-                           const _bStart = moment(moment(new Date(b.start.toString())).format('lll')).valueOf()
-                            
-                           if( _aStart > _bStart ) return 1;
-                           if( _bStart > _aStart ) return -1;
-                        
-                        }
-                      
-                        return 0;
-                      }
-
-                    _eventInputs.sort(compare)
 
                     this.eventInputs = _eventInputs
                     resolve();
@@ -309,7 +298,7 @@ export class Schedule extends cryptor {
     }
 
     public moveToPrevious = (e: Event): void => {
-        
+
         if (this.calendar) {
             this.calendar.prev();
             this.setCalHeading();
@@ -367,25 +356,31 @@ export class Schedule extends cryptor {
 
         if (_eventElements) {
             let _startPosition: number = 0;
-            let _activeDate: number = 0
+            let _activeDate: string ; 
             let _lastPosition: number = 0;
             let _lastTime: HTMLDivElement | undefined;
 
             _eventElements.forEach((event: Element) => {
-                
+
                 const _content = <HTMLDivElement>event.querySelector('.fc-content');
                 const _time = <HTMLDivElement>event.querySelector('.fc-content .fc-time');
-                const _curentDate = _time.getAttribute('event-date');
+                let _currentDate = _time.getAttribute('start');
                 const _eventHour = _time.getAttribute('event-hour-val');
                 const _eventDuration = _time.getAttribute('event-duration');
                 let _position: number = 0;
+
+                if(_currentDate) {
+                  _currentDate = new Date(_currentDate).toString();
+                }
 
                 if (_startPosition == 0 && _eventHour) {
                     _startPosition = this.getPosition(parseInt(_eventHour));
                 }
 
-                if (_eventHour && _curentDate && parseInt(_curentDate) !== _activeDate) {
-                    _activeDate = parseInt(_curentDate);
+
+                if (_eventHour && _currentDate 
+                    && new Date(_currentDate).toDateString() !==  new Date(_activeDate).toDateString()) {
+                    _activeDate = _currentDate;
                     _startPosition = this.getPosition(parseInt(_eventHour));
                     _lastPosition = 0;
                     _lastTime = undefined;
@@ -399,59 +394,39 @@ export class Schedule extends cryptor {
 
                         const _interval = this.setMeetingDurationInterval(parseInt(_eventDuration))
                         _content.style.height = `${_interval * _durationHeight}px`;
-                    
+
                     }
 
                     event.removeAttribute('style');
 
-
-                    if (_lastPosition == 0  && !_lastTime) {
-
+                    if (_lastPosition == 0 && !_lastTime) {
                         _position = _startPosition;
                         event.setAttribute('style', `top: ${_position}px`);
-                        console.debug('time', _time);
-                        console.debug('last-time', _lastTime);
 
                     } else {
 
-                        const _start = _time.getAttribute('start');
-                        const _end = _time.getAttribute('end');
+                        let _start = _time.getAttribute('start');
+                        let _end = _time.getAttribute('end');
                         const _lastStart = _lastTime ? _lastTime.getAttribute('start') : '0';
                         const _lastEnd = _lastTime ? _lastTime.getAttribute('end') : '0';
                         let _durationDiff;
 
+                        if (_start && _end && _lastStart && _lastEnd) {
 
-                        if(_start && _end && _lastStart && _lastEnd) {
-                            
                             const _offsetDiff = moment(_start).diff(moment(_lastEnd));
                             _durationDiff = (_offsetDiff / 60000) / 60;
 
-                           
-                            
-                            if(_lastEnd.trim() ===  _start.trim()) {
-                                // console.debug('diff', _durationDiff);
-                                // console.debug('time', _time);
-
+                            if (_lastEnd.trim() === _start.trim()) {
                                 _position = _lastPosition;
                             } else {
-                                // console.debug('diff', _durationDiff);
-                                // console.debug('time', _time);
                                 _position = _lastPosition + (_durationDiff * _baseDistance);
                             }
-
                         }
 
-                       
                         event.setAttribute('style', `top: ${_position}px`);
 
                     }
 
-                    // console.debug('last', _lastPosition);
-                    // console.debug('current', _position)
-                    // console.debug('time', _time);
-
-                    // console.debug('last-position', _lastPosition);
-                    // console.debug('position', _position);
                     _lastPosition = _position;
                     _lastTime = _time;
                 }

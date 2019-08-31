@@ -201,3 +201,7 @@ export interface  IEventArgs {
     view: View;
 }
 
+export interface IEventSelected {
+    start: string;
+}
+

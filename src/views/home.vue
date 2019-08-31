@@ -33,7 +33,7 @@ import Option from  '../library/fpOption-home';
 import '../assets/sass/home.scss';
 
 const _home = new Option(['home', 'vision', 'login', 'register', 'contact']
-  , ['#C8C8C8', '#C8C8C8', '#C8C8C8', '#C8C8C8', '#C8C8C8]'])
+  , ['#C8C8C8'])
 
 export default Vue.extend({
   name: "home-view",
@@ -46,6 +46,9 @@ export default Vue.extend({
     IntroLogin,
     IntroRegister,
     IntroContact
+  },
+  mounted: function() {
+    _home.playFirst();
   },
   data() {
     return {
