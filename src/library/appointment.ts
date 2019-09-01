@@ -10,7 +10,6 @@ export class Appointment extends Slider {
 	public location: HTMLInputElement;
 	private comment: HTMLDivElement;
 	public selectDate: HTMLInputElement;
-	private schedule: HTMLButtonElement;
 	private popOverlay: HTMLDivElement;
 	private popName: HTMLDivElement;
 	private popLocation: HTMLDivElement;
@@ -32,7 +31,7 @@ export class Appointment extends Slider {
 		this.comment = <HTMLDivElement>this.body.querySelector('#comment');
 		this.target = this.selectDate;
 		this.duration = <HTMLInputElement>this.body.querySelector('#duration');
-		this.schedule = <HTMLButtonElement>this.body.querySelector('.submitter');
+		this.submitter = <HTMLButtonElement>this.body.querySelector('.submitter');
 		
 		this.popOverlay = <HTMLDivElement>this.body.querySelector('.appt-popup');
 		this.popName = <HTMLDivElement>this.popOverlay.querySelector('.pop-name');
@@ -43,7 +42,7 @@ export class Appointment extends Slider {
 		this.popReset = <HTMLAnchorElement>this.popOverlay.querySelector('.cancel');
 		this.popCreate = <HTMLAnchorElement>this.popOverlay.querySelector('.create');
 
-		this.schedule.addEventListener('click', this.confirmAppointment);
+		this.submitter.addEventListener('click', this.confirmAppointment);
 		this.popReset.addEventListener('click', this.resetAppointment);
 		this.popCreate.addEventListener('click', this.createAppointment)	
 		this.title.addEventListener('keyup', this.readyToConfirm);
@@ -55,11 +54,12 @@ export class Appointment extends Slider {
 		
 		this.duration.addEventListener('keydown', this.preventDurationKeyEntry);
 		this.duration.addEventListener('keyup', this.readyToConfirm);
+		
 	}
 
-	public findFirstAppointment = () => {
+	public findFirstAppointment = (reserved: number[]) => {
 		const _selected = Date.parse(this.selectDate.value);
-		this.setFirstOpenAppointment(_selected);
+		this.setFirstOpenAppointment(_selected, reserved);
 		this.validated();
 		
 	}
@@ -82,11 +82,17 @@ export class Appointment extends Slider {
 			&& this.selectDate.value.indexOf('@') >= 0
 			&& this.duration.value.trim().length > 0)  {
 
-				if(this.schedule.classList.contains('bg-muted')) {
-					this.schedule.classList.replace('bg-muted', 'bg-passed');
-				} else {
-					this.schedule.classList.replace('bg-passed', 'bg-muted');
+				if(this.submitter) {
+					this.submitter.classList.replace('bg-muted', 'bg-passed');
+					this.submitter.textContent = this.submitter.getAttribute('data-label-create');
 				}
+
+		} else {
+
+			if(this.submitter) {
+				this.submitter.classList.replace('bg-passed', 'bg-muted');
+				this.submitter.textContent = this.submitter.getAttribute('data-label-reserved');
+			}
 		}
 	}
 
@@ -98,7 +104,7 @@ export class Appointment extends Slider {
 
 		e.preventDefault();
 
-		if(this.schedule.classList.contains('bg-passed')) {
+		if(this.submitter && this.submitter.classList.contains('bg-passed')) {
 			this.popName.innerText = this.title.value;
 			this.popLocation.innerText = this.location.value;
 			this.popDate.innerText = this.selectDate.value;
@@ -108,22 +114,30 @@ export class Appointment extends Slider {
 		} else {
 			return false;
 		}
-
 	}
 
 	private createAppointment = (e: Event) => {
 		const _parseSelectedDate = this.selectDate.value.replace('@ ', '');
-		const _duration = this.duration.value;
-		const _start =  moment(_parseSelectedDate).format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
-		const _end = moment(_parseSelectedDate).add(_duration, 'minutes').format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
+		const _duration = parseInt(this.duration.value);
+		const _start = new Date(_parseSelectedDate);
+		let _end =  new Date(_parseSelectedDate);
+		_end.setMinutes(_start.getMinutes() + _duration);
 
+		console.debug('start', _start);
+		console.debug('end', _end);
+
+		console.debug('start-iso', _start.toISOString());
+		console.debug('end-iso', _end.toISOString());
+		
 		const _data: ICalEvent = {
-			start: new Date(_start).toISOString(),
-			end: new Date(_end).toISOString(),
+			start: _start.toISOString(),
+			end: _end.toISOString(),
 			title: this.title.value,
 			location: this.location.value,
 			email: 'ashish@ashishc.io'
 		}
+
+		console.debug('data', _data);
 
 		CalendarEventService.create(_data)
 		.then((result) => {

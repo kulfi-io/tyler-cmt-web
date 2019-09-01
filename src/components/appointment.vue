@@ -35,7 +35,7 @@
 					div.text-area(class="form-control" contenteditable="true"
 						id="comment" data-text="comment")
 					div.form-group(class="submit")
-						button.form-control(class="submitter bg-muted" type="submit" id="create-meeting") Schedule Appointment
+						button.form-control(class="submitter bg-muted" type="submit" id="create-meeting" data-label-reserved="Reserved" data-label-create="Schedule Appointment") 
 					div.appt-popup(id="appt-popup" ref="appt-popup")
 						div.popup
 							div.title Appointment Confirmation

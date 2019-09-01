@@ -1,6 +1,8 @@
 import '../assets/sass/appointment.scss';
 import '../assets/sass/slider.scss';
 import moment from 'moment';
+import {range} from '../config/config.json';
+
 
 export class Slider {
     private rangeSlider: HTMLInputElement;
@@ -8,8 +10,8 @@ export class Slider {
     protected target?: HTMLInputElement;
     private availabilty: HTMLSpanElement;
     private busy: number[];
-    private now: string;
     private selectedDate?: number;
+    protected submitter?: HTMLButtonElement;
     
     constructor() {
 
@@ -23,19 +25,21 @@ export class Slider {
           });
         }
 
-        this.busy = [10, 13, 18, 21];
-        this.now =  moment(new Date()).format('HH');
-        // console.debug('today', )
-        // const _now = momemt(new Date()).format('mm-dd-yyyy').valueOf();
-        // this.setFirstOpenAppointment(_now);
+        this.busy = [];
        
     }
 
-    protected setFirstOpenAppointment = (selected: number) => {
-        const _today =  moment(moment(new Date().toISOString())).valueOf();
-        
+    protected setFirstOpenAppointment = (selected: number, reserved: number[]) => {
+        const _today =  Date.parse(new Date().toDateString());  //moment(moment(new Date().toISOString())).valueOf();
         this.selectedDate = selected;
+        this.busy = reserved;
         const recursiveNext = (next: number): number => {
+            const _current = reserved.find(x => new Date(x).getHours() == next)
+
+            if( _current 
+                && new Date(_current).getHours() == next) {
+                    return recursiveNext(next + 1);
+                }
             if(this.busy.indexOf(next) >= 0) {
                 return recursiveNext(next + 1);
             } 
@@ -46,8 +50,8 @@ export class Slider {
         if(selected >= _today) {
 
             if(_today == selected) {
-                const _currentNow =  moment(new Date()).format('HH');
-                const _nextAppt = parseInt(_currentNow) + 1;
+                const _currentHour =   new Date().getHours() + 1; //moment(new Date()).format('HH');
+                const _nextAppt = _currentHour < range.min ? range.min :  _currentHour;
 
                 this.rangeSlider.value = recursiveNext(_nextAppt).toString();
             } else {
@@ -66,7 +70,13 @@ export class Slider {
             this.availabilty.textContent = 'reserved';
             this.rangeSlider.classList.add('reserved');
 
-            this.setSelectedTime()
+            if(this.submitter) {
+                this.submitter.classList.replace('bg-passed', 'bg-muted');
+                this.submitter.textContent = this.submitter.getAttribute('data-label-reserved');
+
+            }
+
+            this.setSelectedTime();
         }
     }
 
@@ -86,27 +96,42 @@ export class Slider {
         this.availabilty.classList.remove('reserved');
         this.rangeSlider.classList.remove('reserved')
         this.availabilty.textContent = 'open';
+        if(this.submitter) {
+            this.submitter.classList.replace('bg-muted', 'bg-passed');
+            this.submitter.textContent = this.submitter.getAttribute('data-label-create');
+
+        }
         this.setSelectedTime(time);
     }
 
     protected showSliderValue = () => {
 
         const _targetVal = parseInt(this.rangeSlider.value);
-        const _val =  moment(_targetVal, ['HH:MM']).format('hh:mm a');
+        const _val = moment(_targetVal, ['HH:MM']).format('hh:mm a');
+        
+        const _reserved = this.busy.find(x => new Date(x).getHours() == _targetVal)
         
         if(this.selectedDate) {
             const _today = Date.parse(new Date().toDateString());
             this.rangeBullet.innerHTML = _val;
-            this.available(_val);
+            
 
             if(this.selectedDate === _today) {
-                if(_targetVal <= parseInt(this.now)) {
+                if(_targetVal <= new Date().getHours()) {
                     this.reserved();
+                } else {
+                    this.available(_val);
                 }
             }
 
             // TODO
-            // compare busy
+            if(_reserved) {
+                if(_targetVal == new Date(_reserved).getHours()) {
+                    this.reserved();
+                } else {
+                    this.available(_val);
+                }
+            }
         }
         
 

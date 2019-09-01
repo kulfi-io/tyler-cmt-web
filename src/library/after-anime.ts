@@ -8,7 +8,7 @@ export class AfterAnime {
     private data: Object;
     public name: string;
     
-    constructor(name:string, data: Object, loop: boolean=false, autoPlay: boolean = true, ) {
+    constructor(name:string, data: Object, loop: boolean=false, autoPlay: boolean = false) {
         this.name = name;
         this.loop = loop;
         this.autoPlay = autoPlay;

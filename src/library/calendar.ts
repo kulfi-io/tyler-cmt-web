@@ -1,7 +1,7 @@
 import CalendarEventService from '../microservices/calendar-event';
 import DayGrid from '@fullcalendar/daygrid';
 import Interaction from '@fullcalendar/interaction';
-import moment, { duration } from 'moment';
+import moment from 'moment';
 import TimeGrid from '@fullcalendar/timegrid';
 import { Appointment } from './appointment';
 import { Calendar, EventInput } from '@fullcalendar/core';
@@ -12,12 +12,11 @@ import {
     ICalEventResponse,
     IDayClickArgs,
     IEventArgs,
-    ICalTime,
-    IEventSelected
 } from '../models/interfaces';
 import '../assets/sass/schedule.scss';
 import '@fullcalendar/daygrid/main.min.css';
 import '@fullcalendar/timegrid/main.min.css';
+import {range} from '../config/config.json';
 
 
 export class Schedule extends cryptor {
@@ -39,6 +38,7 @@ export class Schedule extends cryptor {
     private calTitle: HTMLDivElement;
     private calLocation: HTMLDivElement;
     private fpData: Record<string, any>;
+    private reserved: number[];
 
     // Appointment
     private apptDefaultText: IAppointmentMessage;
@@ -76,7 +76,7 @@ export class Schedule extends cryptor {
 
         this.cancel.addEventListener('click', this.cancelAppointment);
         this.selectTime.addEventListener('click', this.selectAppointmentTime);
-
+        this.reserved = [];
     }
 
     public refresh = (): void => {
@@ -111,8 +111,11 @@ export class Schedule extends cryptor {
         this.appointment.title.value = this.calTitle.innerText;
         this.appointment.selectDate.value = this.calDate.innerText;
         this.appointment.location.value = this.calLocation.innerText;
-        
-        this.appointment.findFirstAppointment();
+        let _targetdate = new Date(this.appointment.selectDate.value);
+    
+        const _reserved = this.reserved.filter(x => new Date(x).toDateString() === _targetdate.toDateString())
+
+        this.appointment.findFirstAppointment(_reserved);
     }
 
 
@@ -175,8 +178,8 @@ export class Schedule extends cryptor {
         this.calendar = new Calendar(this.target, {
             plugins: [DayGrid, TimeGrid, Interaction],
             header: false,
-            minTime: '10:00',
-            maxTime: '24:00',
+            minTime: `${range.min}:00`,
+            maxTime: `${range.max}:59`,
             allDaySlot: false,
             selectable: true,
             events: this.eventInputs,
@@ -225,8 +228,6 @@ export class Schedule extends cryptor {
 
     }
 
-
-
     private insertTotal = () => {
         if (this.eventInputs && this.eventInputs.length) {
             if (this.calendar && this.calendar.view.type === 'dayGridMonth') {
@@ -256,9 +257,13 @@ export class Schedule extends cryptor {
                 .then((result) => {
                     const _items = <ICalEventResponse[]>result.data.events;
                     const _eventInputs: EventInput[] = [];
-
+                    
                     _items.forEach((item: ICalEventResponse) => {
-                        _eventInputs.push(this.decryptResponse(item));
+                        const _item = this.decryptResponse(item);
+                        if(_item.start)
+                            this.reserved.push(Date.parse(_item.start.toString()))
+                        
+                        _eventInputs.push(_item);
                     });
 
 
@@ -353,6 +358,8 @@ export class Schedule extends cryptor {
         const _durationHeight = (this.lineHeightPxEquivalent * (this.lineHeight / 2));
         const _eventElements = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
         const _baseDistance = 41;
+
+        console.debug(_eventElements.length);
 
         if (_eventElements) {
             let _startPosition: number = 0;
