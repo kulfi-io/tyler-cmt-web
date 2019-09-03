@@ -1,5 +1,4 @@
 import Slider from './slider';
-import moment from 'moment';
 import { ICalEvent } from '@/models/interfaces';
 import CalendarEventService from '@/microservices/calendar-event';
 
@@ -19,6 +18,8 @@ export class Appointment extends Slider {
 	private popComment: HTMLDivElement;
 	private popCreate: HTMLAnchorElement;
 	private duration: HTMLInputElement;
+	private popStatus: HTMLDivElement;
+	private fpData?: Record<string, any>;
 
 
 	constructor() {
@@ -41,7 +42,8 @@ export class Appointment extends Slider {
 		this.popComment = <HTMLDivElement>this.popOverlay.querySelector('.pop-comment');
 		this.popReset = <HTMLAnchorElement>this.popOverlay.querySelector('.cancel');
 		this.popCreate = <HTMLAnchorElement>this.popOverlay.querySelector('.create');
-
+		this.popStatus = <HTMLDivElement>this.popOverlay.querySelector('.pop-status');
+		
 		this.submitter.addEventListener('click', this.confirmAppointment);
 		this.popReset.addEventListener('click', this.resetAppointment);
 		this.popCreate.addEventListener('click', this.createAppointment)	
@@ -57,7 +59,8 @@ export class Appointment extends Slider {
 		
 	}
 
-	public findFirstAppointment = (reserved: number[]) => {
+	public findFirstAppointment = (reserved: number[], fpData: Record<string, any>) => {
+		this.fpData = fpData;
 		const _selected = Date.parse(this.selectDate.value);
 		this.setFirstOpenAppointment(_selected, reserved);
 		this.validated();
@@ -73,7 +76,26 @@ export class Appointment extends Slider {
 	}
 
 	private resetAppointment = (e: Event) => {
+		this.popName.innerText = '';
+		this.popLocation.innerText = '';
+		this.popDate.innerText = '';
+		this.popDuration.innerText = ''
+		this.popComment.innerHTML = ''
+		this.popStatus.innerText = '';
+		this.title.value = '';
+		this.location.value = '';
+		this.selectDate.value = '';
+		this.duration.value = '';
+		this.comment.innerText = '';
 		this.popOverlay.classList.remove('appt-popup-display');
+		
+		if(this.submitter)
+			this.submitter.classList.replace('bg-passed', 'bg-muted');
+
+		if(this.fpData)
+			this.fpData.api.moveSlideLeft();
+
+		this.popCreate.removeAttribute('display');
 	}
 
 	private validated = () => {
@@ -110,6 +132,7 @@ export class Appointment extends Slider {
 			this.popDate.innerText = this.selectDate.value;
 			this.popDuration.innerText = this.duration.value + ' minutes';
 			this.popComment.innerHTML = this.comment.innerText;
+			this.popStatus.innerText = 'create appointment request...';
 			this.popOverlay.classList.add('appt-popup-display');
 		} else {
 			return false;
@@ -123,12 +146,6 @@ export class Appointment extends Slider {
 		let _end =  new Date(_parseSelectedDate);
 		_end.setMinutes(_start.getMinutes() + _duration);
 
-		console.debug('start', _start);
-		console.debug('end', _end);
-
-		console.debug('start-iso', _start.toISOString());
-		console.debug('end-iso', _end.toISOString());
-		
 		const _data: ICalEvent = {
 			start: _start.toISOString(),
 			end: _end.toISOString(),
@@ -137,13 +154,16 @@ export class Appointment extends Slider {
 			email: 'ashish@ashishc.io'
 		}
 
-		console.debug('data', _data);
-
+		this.popStatus.innerText = 'creating appointment...';
+		this.popCreate.setAttribute('display', 'none');
 		CalendarEventService.create(_data)
 		.then((result) => {
+			this.popStatus.innerText = 'appointment created!';
 			console.debug('result', result);
+
 		})
 		.catch((err) => {
+			this.popStatus.innerText = 'Error occured, please notify customer service';
 			console.debug(err.response.data.message);
 		});
 

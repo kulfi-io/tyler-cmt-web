@@ -40,6 +40,7 @@
 						div.popup
 							div.title Appointment Confirmation
 							div.body
+								div.pop-status(class="info status")
 								div.pop-name(class="info") 
 								div.pop-location(class="info") 
 								div.pop-date(class="info")

@@ -44,8 +44,7 @@ export class Schedule extends cryptor {
     private apptDefaultText: IAppointmentMessage;
     private appointment: Appointment;
     // TODO
-    // load free time from db
-    // load busy times from db
+    // add meeting notes;
 
 
     constructor(target: HTMLDivElement, fpData: Record<string, any>) {
@@ -91,7 +90,7 @@ export class Schedule extends cryptor {
                 this.calendar.changeView(_calendar.state.viewType);
                 this.calendar.render();
                 this.resizeScroller();
-                this.insertTotal();
+                // this.insertTotal();
             }
         }
     }
@@ -115,7 +114,7 @@ export class Schedule extends cryptor {
     
         const _reserved = this.reserved.filter(x => new Date(x).toDateString() === _targetdate.toDateString())
 
-        this.appointment.findFirstAppointment(_reserved);
+        this.appointment.findFirstAppointment(_reserved, this.fpData);
     }
 
 
@@ -151,6 +150,7 @@ export class Schedule extends cryptor {
         const _el = <HTMLAnchorElement>args.el;
         const _elTime = <HTMLDivElement>_el.querySelector('.fc-time');
 
+        
         if (_elTime) {
             if (this.eventInputs) {
                 const _input = this.eventInputs.find(x => x.id === args.event.id);
@@ -168,9 +168,23 @@ export class Schedule extends cryptor {
                     _elTime.setAttribute('event-hour-val', _start24);
                     _elTime.setAttribute('start', _start);
                     _elTime.setAttribute('end', _end);
+
+                    if( _input && _input.start ) {
+                        const _comparer = new Date(_input.start.toString()).toDateString();
+                       
+                        const _reserved = this.eventInputs.filter(x => x.start ? new Date(x.start.toString()).toDateString() === _comparer : false)
+
+                        if(_reserved)
+                            this.insertTotal(_reserved, _comparer);
+                    }
+
                 }
+
+
             }
+
         }
+
     }
 
     private setCalendarConfig() {
@@ -207,7 +221,6 @@ export class Schedule extends cryptor {
                     if (this.calendar) {
                         this.calendar.render();
                         this.resizeScroller();
-                        this.insertTotal();
                     }
                 });
         }
@@ -228,24 +241,24 @@ export class Schedule extends cryptor {
 
     }
 
-    private insertTotal = () => {
-        if (this.eventInputs && this.eventInputs.length) {
-            if (this.calendar && this.calendar.view.type === 'dayGridMonth') {
-
-                this.eventInputs.forEach((event: EventInput) => {
-
-                    const _target = <HTMLElement>document.querySelector(`.fc-bg table tbody tr td[data-date="${moment(event.date).format('YYYY-MM-DD')}"]`);
-                    if (_target) {
-                        const _total = document.createElement('div')
-                        _total.setAttribute('class', 'total')
-                        _total.innerText = '30';
-
-                        _target.appendChild(_total);
-                    }
-
-                });
+    private insertTotal = (inputs: EventInput[], date: string) => {
+        
+        if(inputs && inputs.length) {
+            const _date = moment(inputs[0].start).format('YYYY-MM-DD')
+            const _target = <HTMLElement>document.querySelector(`.fc-bg table tbody tr td[data-date="${_date}"]`);
+            
+            if (_target) {
+                const _created = _target.querySelector('.total') 
+                if(!_created) {
+                    const _total = document.createElement('div')
+                    _total.setAttribute('class', 'total')
+                    _total.innerText = inputs.length.toString();
+                    
+                    _target.appendChild(_total);
+                }
             }
         }
+        
     }
 
    

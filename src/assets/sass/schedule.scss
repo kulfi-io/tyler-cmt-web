@@ -120,8 +120,6 @@
     position: relative;
     background: $background-dusk-gradient;
 
-  
-
     .control-label {
       display: none;
     }
@@ -187,6 +185,10 @@
           text-transform: none;
         }
 
+        .status{
+          color: $default-white;
+        }
+
         .heading {
           color: $default-read-more;
           margin-bottom: 4vh;
@@ -201,7 +203,9 @@
 
     .fc-timeGridWeek-view,
     .fc-timeGrid-view {
-
+      .total {
+        display: none;
+      }
       .fc-scroller,
       .fc-time-grid-container {
         height: inherit;
@@ -292,6 +296,7 @@
           tr {
             .fc-event-container {
               opacity: .4;
+              display: none;
             }
           }
         }
