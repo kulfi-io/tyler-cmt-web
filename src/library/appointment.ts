@@ -151,7 +151,8 @@ export class Appointment extends Slider {
 			end: _end.toISOString(),
 			title: this.title.value,
 			location: this.location.value,
-			email: 'ashish@ashishc.io'
+			email: 'ashish@ashishc.io',
+			comment: this.comment.innerText
 		}
 
 		this.popStatus.innerText = 'creating appointment...';

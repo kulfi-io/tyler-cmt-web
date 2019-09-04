@@ -90,7 +90,6 @@ export class Schedule extends cryptor {
                 this.calendar.changeView(_calendar.state.viewType);
                 this.calendar.render();
                 this.resizeScroller();
-                // this.insertTotal();
             }
         }
     }

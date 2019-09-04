@@ -190,6 +190,7 @@ export interface ICalEvent {
     title: string;
     location: string;
     email: string;
+    comment?: string;
 }
 
 export interface  IEventArgs {
