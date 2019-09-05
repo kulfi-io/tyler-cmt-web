@@ -16,8 +16,5 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "slider",
-  // mounted: function() {
-  //   const _slider = new Slider();
-  // }
 });
 </script>

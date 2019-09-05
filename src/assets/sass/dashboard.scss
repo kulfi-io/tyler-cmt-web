@@ -200,6 +200,7 @@
         display: block;
         position: relative;
         background: $background-dusk-gradient;
+        padding: 1%;
 
         .control-label {
             line-height: 1;
@@ -212,6 +213,7 @@
 
         .data {
             padding: 0.525rem 0.875rem;
+            border-bottom: 1px solid $default-sub-text;
         }
 
         .text-muted {

@@ -4,7 +4,6 @@ import { cryptor } from './cryptor';
 import * as TinyCookie from 'tiny-cookie';
 
 export class CookieManager extends cryptor{
-    public name?: string;
     protected expires: IDuration;
     protected config: ICookie;
     public value?: Object;
@@ -12,7 +11,8 @@ export class CookieManager extends cryptor{
 
     constructor() {
         super();
-        this.config = Config.cookie
+        this.config = Config.cookie;
+    
 
         this.expires = {
             name: 'sec',
@@ -31,31 +31,28 @@ export class CookieManager extends cryptor{
 
     }
 
-    public setCookie = (name: string, value: Object) => {
-        this.name = name;
+    public setCookie = (value: Object) => {
         this.value = this.encryptUserCookie(value);
 
         if(TinyCookie.isCookieEnabled && this.value)  {
 
-            TinyCookie.setCookie(this.name
+            TinyCookie.setCookie(this.config.name
                 , this.value.toString(), {expires: this.expires.value});
         }
     }
 
-    public findCookie = (name: string) => {
-        const _cookie = TinyCookie.getCookie(name);
+    public findCookie = () => {
+        const _cookie = TinyCookie.getCookie(this.config.name);
 
         if(_cookie)  {
-            this.name = name;
             this.value = <Object>_cookie;
             this.decryptedValue = this.decryptUserValue;
         }   
     }
 
     public deleteCookie = () => {
-        if(this.name) {
-            TinyCookie.remove(this.name);
-            this.name = undefined;
+        if(this.config.name) {
+            TinyCookie.remove(this.config.name);
             this.value = undefined;
         }
     }

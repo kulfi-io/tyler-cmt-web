@@ -9,27 +9,12 @@
         div.send-note-body
             div.content
                 form(id="note-form")
+                    div.split()
+                        div.split-third(class='email note')
+                        div.split-third(class='first note')
+                        div.splitflex-1(class='last note')
                     div.form-group
-                        Email( 
-                            :tag="'note-email'"
-                            :placeholder="'email'"
-                            :title="'email is required'"
-                            :label="'email'" :account="account"
-                            :validKey="'email'")
-                    div.form-group
-                        Name(
-                            :tag="'note-first'"
-                            :placeholder="'firstname'"
-                            :title="'firstname is required'"
-                            :account="account" :set="false"
-                            :validKey="'first'")
-                    div.form-group
-                        Name(
-                            :tag="'note-last'"
-                            :placeholder="'lastname'"
-                            :title="'lastname is required'"
-                            :account="account" :set="false"
-                            :validKey="'last'")
+                        input.form-control(class='subject' type='text' placeholder='Subject' required)
                     div.form-group
                         Area(
                             :tag="'note'"
@@ -49,16 +34,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Email from '../components/kulfi/email.vue';
-import Name from '../components/kulfi/name.vue';
 import Area from '../components/kulfi/large-text-area.vue';
 import Library from '../library/account';
+import { SendNote } from '../library/sendNote';
 
 export default Vue.extend({
     name: 'send-note',
     components: {
-        Email,
-        Name,
         Area,
     },
     computed: {
@@ -72,15 +54,21 @@ export default Vue.extend({
 
             _submitter.addEventListener('click', this.$data.account.sendNote);
 
+        },
+        initNote: function() {
+            const _note = new SendNote();
+            this.$data.note = _note;
         }
     },
     data: function() {
         return {
             account: new Library(),
+            note: typeof SendNote
         }
     },
     mounted: function() {
         this.initAccount;
+        this.initNote;
     }
 });
 </script>

@@ -35,6 +35,7 @@ export interface INote {
 
 export interface ICookie {
     secret: string;
+    name: string;
     expiration: IExpiration;
 }
 
@@ -110,6 +111,9 @@ export interface IUser {
 export interface ICookieUser {
     id: string;
     fullname: string
+    first: string;
+    last: string;
+    email: string;
 }
 
 export interface ICalendarUser {

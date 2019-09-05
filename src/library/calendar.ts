@@ -1,25 +1,25 @@
 import CalendarEventService from '../microservices/calendar-event';
 import DayGrid from '@fullcalendar/daygrid';
+import Helper from './helper';
 import Interaction from '@fullcalendar/interaction';
 import moment from 'moment';
 import TimeGrid from '@fullcalendar/timegrid';
 import { Appointment } from './appointment';
 import { Calendar, EventInput } from '@fullcalendar/core';
-import { cryptor } from './cryptor';
 import { defaultApptMessage } from '../config/config.json';
+import { range } from '../config/config.json';
+import '../assets/sass/schedule.scss';
+import '@fullcalendar/daygrid/main.min.css';
+import '@fullcalendar/timegrid/main.min.css';
 import {
     IAppointmentMessage,
     ICalEventResponse,
     IDayClickArgs,
     IEventArgs,
 } from '../models/interfaces';
-import '../assets/sass/schedule.scss';
-import '@fullcalendar/daygrid/main.min.css';
-import '@fullcalendar/timegrid/main.min.css';
-import {range} from '../config/config.json';
 
 
-export class Schedule extends cryptor {
+export class Schedule extends Helper {
     private calendar?: Calendar;
     private monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     private eventInputs?: EventInput[];

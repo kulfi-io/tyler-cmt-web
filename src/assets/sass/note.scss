@@ -75,12 +75,14 @@
   margin-top: -1.5vh;
   font-size: .8rem;
   padding: 10px;
+  color:  $default-font-color;
 
   .content {
     margin: auto;
     display: block;
     position: relative;
     background: $background-dusk-gradient;
+    padding-top: 2vh;
 
     .control-label {
       // line-height: 1;
@@ -95,6 +97,16 @@
     .data {
       padding: 0.525rem 0.875rem;
     }
+
+    .note {
+      color: $default-white
+    }
+
+    .form-control {
+      color: $input-text-color;
+    }
+
+    
 
     .text-area {
       color: $default-sub-text;

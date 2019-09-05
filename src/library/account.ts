@@ -76,10 +76,8 @@ export default class Account {
     public pwdCriteriaMatched: validKey[];
     public readyToSubmit: ReadyToSubmit;
     private _cookieManager: Cookie;
-    private _cookieName: string;
 
     constructor(submitter?: Element, max: number = 1) {
-        this._cookieName = 'tyler-cmt';
         this._cookieManager = new Cookie();
         this.pwdCriteriaMatched = [];
         this.readyToSubmit = new ReadyToSubmit(submitter, max);
@@ -125,10 +123,13 @@ export default class Account {
                         , result, _submitterTextContent);
 
                     const _cookieUser: ICookieUser = {
-                        id: result.data.id,
-                        fullname: result.data.fullname
+                        id: result.data.user.id,
+                        fullname: result.data.user.fullname,
+                        first: result.data.user.firstname,
+                        last: result.data.user.lastname,
+                        email: result.data.user.email
                     }
-                    this._cookieManager.setCookie(this._cookieName, _cookieUser);
+                    this._cookieManager.setCookie(_cookieUser);
                 })
                 .catch((err) => {
                     _submitter.textContent = err.response.data.message;
@@ -267,11 +268,14 @@ export default class Account {
                         , result, _submitterTextContent);
 
                     const _cookieUser: ICookieUser = {
-                        id: result.data.id,
-                        fullname: result.data.fullname
+                        id: result.data.user.id,
+                        fullname: result.data.user.fullname,
+                        first: result.data.user.firstname,
+                        last: result.data.user.lastname,
+                        email: result.data.user.email
                     }
 
-                    this._cookieManager.setCookie( this._cookieName , _cookieUser);
+                    this._cookieManager.setCookie(_cookieUser);
                     window.location.href = `${window.location.protocol}//${window.location.host}/dash`;
 
                 })
