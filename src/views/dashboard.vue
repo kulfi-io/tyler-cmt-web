@@ -27,6 +27,10 @@ export default Vue.extend({
         FullPage,
         Dashboard
     },
+    mounted: function(){
+        this.$data.library.renderLoggedInNav();
+
+    },
     data: () => {
         return {
             options: _options.Option,

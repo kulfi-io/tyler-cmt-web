@@ -1,9 +1,33 @@
 @import "./account.variable.scss";
 @import "../sass/checkbox.scss";
 
+
 .home {
   margin: auto;
   display: block;
+
+  .book {
+    margin: auto 20vw auto auto;
+    display: block;
+    background: url(../img/book-now.svg);
+    background-repeat: no-repeat;
+    width: 10vw;
+    height: 10vh;
+    visibility: hidden;
+    cursor: default;
+  }
+
+
+  .show {
+    visibility: visible;
+    cursor: pointer;
+    animation-duration: 1.5s;
+    animation-name: fadeIn;
+    animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+  
+  }
+
+
 
 
   .passed {

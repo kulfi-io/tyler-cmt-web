@@ -36,7 +36,7 @@
               stroke-width="2"
               transform="translate(1)"
             >
-              <path d="M0 1L30 1M0 9L30 9M0 17L30 17"></path>
+              <path d="M0 1L30 1M0 9L30 9M0 17L30 17" />
             </g>
           </svg>
         </a>
@@ -51,25 +51,69 @@
                 stroke-width="2"
                 transform="translate(2 2)"
               >
-                <path d="M0,11 L10,0"></path>
-                <path d="M0,22 L10,11" transform="matrix(1 0 0 -1 0 33)"></path>
+                <path d="M0,11 L10,0" />
+                <path d="M0,22 L10,11" transform="matrix(1 0 0 -1 0 33)" />
               </g>
             </svg>
           </a>
-          <ul class="pages">
+          <ul class="pages default active-nav">
             <li class="active">
               <a href="/">Home</a>
             </li>
             <li class>
-              <a href="/services/">Services</a>
+              <a href="/#login">Login</a>
             </li>
             <li class>
-              <a href="/about/">About</a>
+              <a href="/#register">Register</a>
             </li>
+            <li class>
+              <a href="/#contact">Contact</a>
+            </li>
+            <li class>
+              <a href="/about">About</a>
+            </li>
+            <li class>
+              <a href="/privacy">Privacy</a>
+            </li>
+          </ul>
+
+           <ul class="pages logged-in">
+            <li class="active">
+              <a href="/">Home</a>
+            </li>
+            <li class>
+              <a class='logout' href="#">Logout</a>
+            </li>
+            <li>
+              <a href="/#register">Register</a>
+            </li>
+            <li class>
+              <a href="/#contact">Contact</a>
+            </li>
+            <li class>
+              <a href="/schedule">Schedule</a>
+            </li>
+            <li class>
+              <a href="/dash">Account</a>
+            </li>
+             <li class>
+              <a href="/note">Note</a>
+            </li>
+            <li class>
+              <a href="/about">About</a>
+            </li>
+            <li class>
+              <a href="/privacy">Privacy</a>
+            </li>
+            
+
           </ul>
         </div>
       </nav>
     </header>
+    <div class="book"> 
+    </div>
+
   </div>
 </template>
 

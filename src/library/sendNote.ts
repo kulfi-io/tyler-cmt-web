@@ -9,11 +9,15 @@ export class SendNote extends Helper {
     constructor() {
 
         super();
+        this.userAccessRedirect();
+        this.displayloggedItems();
+
         this.email = <HTMLDivElement>document.querySelector('.email');
         this.firstname = <HTMLDivElement>document.querySelector('.first');
         this.lastname = <HTMLDivElement>document.querySelector('.last');
         this.subject = <HTMLInputElement>document.querySelector('.subject');
         this.populate();
+
     }
 
     private populate() {

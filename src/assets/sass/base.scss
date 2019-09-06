@@ -4715,6 +4715,15 @@ ul.social-links {
   overflow-y: hidden;
   
 
+  .pages {
+    display: none;
+  }
+
+  .active-nav {
+    display: block;
+  }
+
+  
   #head-logo {
     width: 400px;
     height: 35px;

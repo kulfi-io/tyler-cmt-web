@@ -1,5 +1,4 @@
 import AccountService from '../microservices/account';
-import Cookie from './cookie';
 import MailerService from '../microservices/mailer';
 import { AxiosResponse } from 'axios';
 import {
@@ -22,6 +21,7 @@ import {
     IRegisterUser,
     IVerifyLogin
 } from '@/models/interfaces';
+import Helper from './helper';
 
 export interface validKey {
     name: string;
@@ -71,16 +71,31 @@ export class ReadyToSubmit {
     }
 }
 
-export default class Account {
+export default class Account extends Helper{
     public matched?: boolean
     public pwdCriteriaMatched: validKey[];
     public readyToSubmit: ReadyToSubmit;
-    private _cookieManager: Cookie;
 
     constructor(submitter?: Element, max: number = 1) {
-        this._cookieManager = new Cookie();
+        super()
         this.pwdCriteriaMatched = [];
         this.readyToSubmit = new ReadyToSubmit(submitter, max);
+    }
+
+    private logOut = () => {
+        const _loggedOut = <HTMLAnchorElement>document.querySelector('.logout');
+
+        if(_loggedOut) {
+            _loggedOut.addEventListener('click', (e: Event) => {
+                this.LoggedOut();
+    
+            });
+        }
+    }
+
+    public renderLoggedInNav = () => {
+        this.displayloggedItems();
+        this.logOut();
     }
 
     private notifySubmitter = (submitter: Element, originalValue: string) => {
@@ -130,6 +145,8 @@ export default class Account {
                         email: result.data.user.email
                     }
                     this._cookieManager.setCookie(_cookieUser);
+
+                    this.displayloggedItems();
                 })
                 .catch((err) => {
                     _submitter.textContent = err.response.data.message;

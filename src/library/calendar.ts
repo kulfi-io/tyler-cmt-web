@@ -50,6 +50,9 @@ export class Schedule extends Helper {
     constructor(target: HTMLDivElement, fpData: Record<string, any>) {
 
         super();
+        this.userAccessRedirect();
+        this.displayloggedItems();
+
         this.appointment = new Appointment();
         this.apptDefaultText = defaultApptMessage;
         this.fpData = fpData;
@@ -76,8 +79,11 @@ export class Schedule extends Helper {
         this.cancel.addEventListener('click', this.cancelAppointment);
         this.selectTime.addEventListener('click', this.selectAppointmentTime);
         this.reserved = [];
+
+
     }
 
+  
     public refresh = (): void => {
         if (this.calendar) {
 

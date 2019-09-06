@@ -5,7 +5,12 @@ export default class Dash extends Helper {
 
     constructor() {
         super();
+        this.userAccessRedirect();
         this.findUser();
+    }
+
+    public renderLoggedInNav = () => {
+        this.displayloggedItems();
     }
 
     private setValues = () => {
