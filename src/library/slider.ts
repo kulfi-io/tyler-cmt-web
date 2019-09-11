@@ -29,6 +29,13 @@ export class Slider {
        
     }
 
+    protected setRangeSliderValue = (value: Date) => {
+        const _targetVal = value.getHours();
+        this.rangeSlider.value = _targetVal.toString();
+        this.rangeBullet.innerText = moment(_targetVal, ['HH:MM']).format('hh:mm a');
+        this.cancelState();
+    } 
+
     protected setFirstOpenAppointment = (selected: number, reserved: number[]) => {
         const _today =  Date.parse(new Date().toDateString());  //moment(moment(new Date().toISOString())).valueOf();
         this.selectedDate = selected;
@@ -62,6 +69,17 @@ export class Slider {
         }
     }
 
+    private cancelState = () => {
+        this.rangeSlider.classList.add('reserved');
+        this.rangeBullet.classList.add('reserved');
+
+
+        if(this.submitter) {
+            this.submitter.classList.replace('bg-muted', 'bg-passed');
+            this.submitter.textContent = this.submitter.getAttribute('data-label-cancel');
+        }
+    }
+
     private reserved = () => {
 
         if(!this.rangeBullet.classList.contains('reserved')) {
@@ -73,7 +91,6 @@ export class Slider {
             if(this.submitter) {
                 this.submitter.classList.replace('bg-passed', 'bg-muted');
                 this.submitter.textContent = this.submitter.getAttribute('data-label-reserved');
-
             }
 
             this.setSelectedTime();

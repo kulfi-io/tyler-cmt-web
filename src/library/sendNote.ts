@@ -10,7 +10,6 @@ export class SendNote extends Helper {
 
         super();
         this.userAccessRedirect();
-        this.displayloggedItems();
 
         this.email = <HTMLDivElement>document.querySelector('.email');
         this.firstname = <HTMLDivElement>document.querySelector('.first');
@@ -18,6 +17,12 @@ export class SendNote extends Helper {
         this.subject = <HTMLInputElement>document.querySelector('.subject');
         this.populate();
 
+    }
+
+    public start = () => {
+        this.attachNavEvents();
+        this.displayloggedItems();
+        this.logOut();
     }
 
     private populate() {

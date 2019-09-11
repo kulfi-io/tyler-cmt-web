@@ -197,7 +197,7 @@ export interface ICalEvent {
     comment?: string;
 }
 
-export interface  IEventArgs {
+export interface  IDayEventArgs {
     isMirror: boolean;
     isStart: boolean;
     isEnd: boolean;
@@ -208,5 +208,12 @@ export interface  IEventArgs {
 
 export interface IEventSelected {
     start: string;
+}
+
+export interface IEventArgs {
+    el: HTMLElement;
+    event: EventApi;
+    jsEvent: MouseEvent;
+    view: View;
 }
 

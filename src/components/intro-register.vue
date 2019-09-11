@@ -44,7 +44,7 @@ export default Vue.extend({
                  const _account =  <Library>this.$data.account;
                 _account.readyToSubmit.submitter = _submitter;
                 _account.readyToSubmit.max = 5;
-                _account.renderLoggedInNav();
+                _account.start();
                 this.$data.account = _account;
             
             _submitter.addEventListener('click', this.$data.account.register);

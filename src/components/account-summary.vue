@@ -1,12 +1,12 @@
 <template lang="pug">
-    div.dashboard-vue
-        div.dashboard-background
-        div.dashboard-header
+    div.account-summary-vue
+        div.account-summary-background
+        div.account-summary-header
             div.title
                 div.heading
                     p.greet(ref="greet") Welcome back
                     p.greet-sub( class="today" ref="today")
-        div.dashboard-body
+        div.account-summary-body
             div.content
                 div.split 
                     div.split-half-left
@@ -44,7 +44,7 @@
                                 p This is the third note
                                 p This is the fourth note
                                 p This is the fifth note
-        div.dashboard-footer
+        div.account-summary-footer
             div.split
                 div.split-half-left
                     a.heading(class="link" href="/note") Send a note
@@ -54,9 +54,18 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Library from '../library/account-summary';
 
 export default Vue.extend({
-    name: 'dashboard',
-    props: ['library']
+    name: 'account-summary',
+    mounted: function() {
+        this.$data.library.start();
+    },
+    data: function() {
+        return {
+            library: new Library()
+        }
+    }
+
 });
 </script>

@@ -1,6 +1,7 @@
 import Slider from './slider';
 import { ICalEvent } from '@/models/interfaces';
 import CalendarEventService from '@/microservices/calendar-event';
+import { EventInput } from '@fullcalendar/core';
 
 
 export class Appointment extends Slider {
@@ -64,6 +65,11 @@ export class Appointment extends Slider {
 		const _selected = Date.parse(this.selectDate.value);
 		this.setFirstOpenAppointment(_selected, reserved);
 		this.validated();
+		
+	}
+
+	public cancelAppointment = (event: EventInput) => {
+		
 		
 	}
 

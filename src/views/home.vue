@@ -30,6 +30,8 @@ import IntroLogin from '../components/intro-login.vue';
 import IntroContact from '../components/intro-contact.vue';
 import IntroRegister from '../components/intro-register.vue';
 import Option from  '../library/fpOption-home';
+import Helper from '../library/helper'
+
 import '../assets/sass/home.scss';
 
 const _home = new Option(['home', 'vision', 'login', 'register', 'contact']
@@ -48,7 +50,11 @@ export default Vue.extend({
     IntroContact
   },
   mounted: function() {
-    _home.playFirst();
+    const _helper = new Helper();
+    _helper.attachNavEvents();
+    _helper.displayBookedItems();
+    _home.start();
+
   },
   data() {
     return {

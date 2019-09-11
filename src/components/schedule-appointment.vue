@@ -34,7 +34,7 @@
         div.schedule-footer
             div.split
                 div.split-half-left
-                    a.heading(class="link" href="/dash") Account Information
+                    a.heading(class="link" href="/summary") Account Information
                 div.split-half-right(class="link-last")
                     a.heading(class="link" href="/note") Send a note
 </template>
@@ -53,8 +53,10 @@ export default Vue.extend({
     mounted: function() {
         const calendar = <HTMLDivElement>this.$refs.calendar;
         const _data = this.$parent.$data;
-        this.$data.schedule = new Schedule(calendar, this.$parent.$data);
-        this.$data.schedule.init();
+        const _schedule = new Schedule(calendar, this.$parent.$data);
+        _schedule.init();
+
+         this.$data.schedule = _schedule;
         
     }
 })

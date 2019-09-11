@@ -11,6 +11,7 @@ import AboutVue from '../components/about.vue';
 import HeaderVue from '../components/header.vue';
 import FooterVue from '../components/footer.vue';
 import Helper from '../library/helper';
+import NavHelper from '../library/nav-helper';
 
 export default Vue.extend({
     name: 'about-view',
@@ -21,6 +22,8 @@ export default Vue.extend({
     },
     mounted: function(){
         this.$data.helper.displayloggedItems();
+        this.$data.helper.attachNavEvents();
+        NavHelper.setActiveNavItem('about');
     },
     data: function(){
         return {

@@ -1,7 +1,7 @@
 @import "./account.variable.scss";
 @import "../sass/checkbox.scss";
 
-.dashboard-vue {
+.account-summary-vue {
     // margin: auto;
     // display: block;
     color: $default-font-color;
@@ -127,7 +127,7 @@
     // }
 }
 
-.dashboard-background {
+.account-summary-background {
 
     margin: auto;
     display: block;
@@ -140,7 +140,7 @@
 @import "./account.helper.scss";
 
 
-.dashboard-header {
+.account-summary-header {
     margin: auto;
     display: block;
     position: relative;
@@ -184,7 +184,7 @@
     }
 }
 
-.dashboard-body {
+.account-summary-body {
     margin: auto;
     display: block;
     position: relative;
@@ -244,7 +244,7 @@
 
 }
 
-.dashboard-footer {
+.account-summary-footer {
     margin: auto;
     position: relative;
     max-width: 85vw;

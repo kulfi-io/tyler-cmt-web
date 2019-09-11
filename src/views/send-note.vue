@@ -3,7 +3,7 @@
         HeaderVue
         div.note-vue
             FullPage.fullpage( :options="options")
-              div.section(class="page send-note-view")
+              div.section(class="page send-email")
                 NoteVue
         FooterVue
 </template>
@@ -17,7 +17,7 @@ import NoteVue from '../components/send-note.vue';
 import Option from '../library/fpOption';
 import '../assets/sass/note.scss';
 
-const _note = new Option(['send-note-view']
+const _note = new Option(['send-email']
   , ['#C8C8C8']);
 
 export default Vue.extend({
@@ -27,6 +27,9 @@ export default Vue.extend({
       FooterVue,
       FullPage,
       NoteVue,
+  },
+  mounted: function() {
+    // _note.start();
   },
   data: () => {
     return {

@@ -35,7 +35,7 @@
 					div.text-area(class="form-control" contenteditable="true"
 						id="comment" data-text="comment")
 					div.form-group(class="submit")
-						button.form-control(class="submitter bg-muted" type="submit" id="create-meeting" data-label-reserved="Reserved" data-label-create="Schedule Appointment") 
+						button.form-control(class="submitter bg-muted" type="submit" id="create-meeting" data-label-reserved="Reserved" data-label-cancel="Cancel Appointment" data-label-create="Schedule Appointment") 
 					div.appt-popup(id="appt-popup" ref="appt-popup")
 						div.popup
 							div.title Appointment Confirmation
@@ -57,20 +57,12 @@
 <script lang="ts">
 import Vue from "vue";
 import Slider from "./slider.vue";
-// import { Appointment } from "../library/appointment";
 
 export default Vue.extend({
   name: "appointment",
   components: {
     Slider
   },
-//   data: function() {
-//     return {
-//       library: typeof Appointment
-//     };
-//   },
-//   mounted: function() {
-//     this.$data.library = new Appointment();
-//   }
+
 });
 </script>

@@ -31,6 +31,9 @@ export default Vue.extend({
     ScheduleAppointmenVue,
     Appointment
   },
+  mounted: function(){
+      // this.$data.schedule.setLoggedItems();
+  },
   data: () => {
     return {
       schedule: _schedule

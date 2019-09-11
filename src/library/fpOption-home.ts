@@ -20,7 +20,11 @@ export default class FPOptionHome extends FPOptions {
 
     }
 
-    public playFirst = () => {
+    public start = () => {
+        this.playFirst();
+    }
+
+    private playFirst = () => {
         if(this.animations[0].animationItem 
             && this.animations[1].animationItem) {
             this.animations[0].animationItem.goToAndPlay(4, true);
@@ -49,13 +53,13 @@ export default class FPOptionHome extends FPOptions {
                 , JSON.stringify(destination));
             },
         }
-
         return options;
     }
 
     private afterLoad = (origin: string, destination: string) => {
 
         if(destination) {
+
             const _destination = JSON.parse(destination);
             const _destTargets = this.containsAnimation(_destination.anchor);
             _destTargets.forEach((anime: AfterAnime) => {
@@ -63,6 +67,8 @@ export default class FPOptionHome extends FPOptions {
                     anime.animationItem.goToAndPlay(4, true);
                 }
             });
+
+            this.setActiveNavItem(_destination.anchor);
         }
 
         if(origin) {

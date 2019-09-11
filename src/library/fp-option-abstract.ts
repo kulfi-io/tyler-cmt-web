@@ -1,8 +1,9 @@
 import Config from '../config/config.json';
 import '../assets/sass/fullpage-override.scss';
 import 'fullpage.js/vendors/scrolloverflow';
+import { NavHelper } from './nav-helper';
 
-export abstract class FPOptions {
+export abstract class FPOptions extends NavHelper{
     protected fullpageLicenseKey: string;
     protected fullpageScrollOverflow: boolean;
     protected fullpageScrollBar: boolean;
@@ -15,7 +16,8 @@ export abstract class FPOptions {
         protected anchors: string[], protected sectionsColor:string[]
         , protected overflow: boolean=false, protected scrollBar: boolean=false
         , protected menu: string='#menu') {
-
+        
+        super();
         this.fullpageAnchors = anchors;
         this.fullpageMenu = menu;
         this.fullpageLicenseKey = Config.fullpage.key;
@@ -24,7 +26,9 @@ export abstract class FPOptions {
         this.fullpageSectionsColor = sectionsColor;
     }
 
-   
+    // protected AttachNavEventListener = () => {
+    //     this.attachNavEvents();
+    // }
 
     abstract initOptions(): Object;
 }

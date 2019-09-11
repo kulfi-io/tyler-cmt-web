@@ -12,6 +12,11 @@ export default class FPOption extends FPOptions {
         
     }
 
+    // public start = () => {
+    //     this.attachNavEvents();
+    //     this.displayloggedItems();
+    // }
+
     public get Option() : Object {
         return <Object>this.options;
     }
@@ -24,6 +29,19 @@ export default class FPOption extends FPOptions {
             anchors: this.fullpageAnchors,
             sectionsColor: this.fullpageSectionsColor,
             licenseKey: this.fullpageLicenseKey,
+            afterLoad: (origin: Object, destination: Object) => {
+                const _stringified = JSON.stringify(destination);
+                const _parsed = JSON.parse(_stringified);
+
+                if(!_parsed.anchor) {
+                    this.setActiveNavItem('schedule');
+                } else {
+                    
+                    this.setActiveNavItem(_parsed.anchor);
+                    
+                }
+                
+            },
         }
 
         return options;

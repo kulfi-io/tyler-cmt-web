@@ -15,6 +15,7 @@ import {
     IAppointmentMessage,
     ICalEventResponse,
     IDayClickArgs,
+    IDayEventArgs,
     IEventArgs,
 } from '../models/interfaces';
 
@@ -51,7 +52,10 @@ export class Schedule extends Helper {
 
         super();
         this.userAccessRedirect();
+        this.attachNavEvents();
         this.displayloggedItems();
+        this.logOut();
+
 
         this.appointment = new Appointment();
         this.apptDefaultText = defaultApptMessage;
@@ -83,7 +87,8 @@ export class Schedule extends Helper {
 
     }
 
-  
+
+
     public refresh = (): void => {
         if (this.calendar) {
 
@@ -122,7 +127,6 @@ export class Schedule extends Helper {
         this.appointment.findFirstAppointment(_reserved, this.fpData);
     }
 
-
     private dayClickListener = (args: IDayClickArgs) => {
         const _selectDay = moment(args.date).format('ll').valueOf();
         const _today = moment(new Date()).format('ll').valueOf();
@@ -151,11 +155,10 @@ export class Schedule extends Helper {
 
     }
 
-    private addEventDateAttribute = (args: IEventArgs) => {
+    private addEventDateAttribute = (args: IDayEventArgs) => {
         const _el = <HTMLAnchorElement>args.el;
         const _elTime = <HTMLDivElement>_el.querySelector('.fc-time');
 
-        
         if (_elTime) {
             if (this.eventInputs) {
                 const _input = this.eventInputs.find(x => x.id === args.event.id);
@@ -173,6 +176,7 @@ export class Schedule extends Helper {
                     _elTime.setAttribute('event-hour-val', _start24);
                     _elTime.setAttribute('start', _start);
                     _elTime.setAttribute('end', _end);
+                    
 
                     if( _input && _input.start ) {
                         const _comparer = new Date(_input.start.toString()).toDateString();
@@ -182,14 +186,21 @@ export class Schedule extends Helper {
                         if(_reserved)
                             this.insertTotal(_reserved, _comparer);
                     }
-
                 }
+            }
+        }
 
+    }
 
+    private openEvent = (args: IEventArgs) => {
+        if(this.eventInputs) {
+            const _target = this.eventInputs.find(x => x.id === args.event.id);
+
+            if(_target) {
+                
             }
 
         }
-
     }
 
     private setCalendarConfig() {
@@ -203,9 +214,7 @@ export class Schedule extends Helper {
             selectable: true,
             events: this.eventInputs,
             eventRender: this.addEventDateAttribute,
-            eventClick: function (args) {
-                console.debug('event-click', args);
-            },
+            eventClick: this.openEvent,
             dateClick: this.dayClickListener
 
         });
@@ -265,8 +274,6 @@ export class Schedule extends Helper {
         }
         
     }
-
-   
 
     private targetEvents = () => {
 

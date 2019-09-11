@@ -57,63 +57,59 @@
             </svg>
           </a>
           <ul class="pages default active-nav">
-            <li class="active">
+            <li class="nav-home active">
               <a href="/">Home</a>
             </li>
-            <li class>
+            <li class="nav-login">
               <a href="/#login">Login</a>
             </li>
-            <li class>
+            <li class="nav-register">
               <a href="/#register">Register</a>
             </li>
-            <li class>
+            <li class="nav-contact">
               <a href="/#contact">Contact</a>
             </li>
-            <li class>
+            <li class="nav-about">
               <a href="/about">About</a>
             </li>
-            <li class>
+            <li class="nav-privacy">
               <a href="/privacy">Privacy</a>
             </li>
           </ul>
 
-           <ul class="pages logged-in">
-            <li class="active">
+          <ul class="pages logged-in">
+            <li class="nav-home active">
               <a href="/">Home</a>
             </li>
-            <li class>
-              <a class='logout' href="#">Logout</a>
+            <li class="nav-logout">
+              <a class="logout" href="/">Logout</a>
             </li>
-            <li>
+            <li class="nav-register">
               <a href="/#register">Register</a>
             </li>
-            <li class>
+            <li class="nav-contact">
               <a href="/#contact">Contact</a>
             </li>
-            <li class>
+            <li class="nav-schedule">
               <a href="/schedule">Schedule</a>
             </li>
-            <li class>
-              <a href="/dash">Account</a>
+            <li class="nav-account-summary">
+              <a href="/summary">Account</a>
             </li>
-             <li class>
+            <li class="nav-send-email">
               <a href="/note">Note</a>
             </li>
-            <li class>
+            <li class="nav-about">
               <a href="/about">About</a>
             </li>
-            <li class>
+            <li class="nav-privacy">
               <a href="/privacy">Privacy</a>
             </li>
-            
-
           </ul>
         </div>
       </nav>
     </header>
-    <div class="book"> 
-    </div>
-
+    <div class="book"></div>
   </div>
 </template>
 
@@ -129,6 +125,7 @@ export default Vue.extend({
         _menu.classList.toggle("active");
         const _active = _menu.classList.contains("active");
         this.displayLogo(_active);
+        
       }
     },
     displayLogo: function(activeNav: boolean) {

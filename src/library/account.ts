@@ -77,24 +77,14 @@ export default class Account extends Helper{
     public readyToSubmit: ReadyToSubmit;
 
     constructor(submitter?: Element, max: number = 1) {
-        super()
+        super();
         this.pwdCriteriaMatched = [];
         this.readyToSubmit = new ReadyToSubmit(submitter, max);
     }
 
-    private logOut = () => {
-        const _loggedOut = <HTMLAnchorElement>document.querySelector('.logout');
-
-        if(_loggedOut) {
-            _loggedOut.addEventListener('click', (e: Event) => {
-                this.LoggedOut();
-    
-            });
-        }
-    }
-
-    public renderLoggedInNav = () => {
-        this.displayloggedItems();
+    public start = () => {
+        this.attachNavEvents();
+        this.displayBookedItems();
         this.logOut();
     }
 
@@ -146,7 +136,7 @@ export default class Account extends Helper{
                     }
                     this._cookieManager.setCookie(_cookieUser);
 
-                    this.displayloggedItems();
+                    this.displayBookedItems();
                 })
                 .catch((err) => {
                     _submitter.textContent = err.response.data.message;

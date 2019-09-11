@@ -1,7 +1,7 @@
 import AccountService from '@/microservices/account';
 import { Helper } from './helper';
 
-export default class Dash extends Helper {
+export default class Summary extends Helper {
 
     constructor() {
         super();
@@ -9,10 +9,14 @@ export default class Dash extends Helper {
         this.findUser();
     }
 
-    public renderLoggedInNav = () => {
+    public start = () => {
+        this.attachNavEvents();
         this.displayloggedItems();
+        this.logOut();
     }
 
+
+    
     private setValues = () => {
         if (this.user) {
             const _greet = <HTMLElement>document.querySelector('.greet');
@@ -29,6 +33,7 @@ export default class Dash extends Helper {
             _email.innerText = this.user.email;
             _username.innerText = this.user.username;
         }
+
     }
     
     public get today(): string {
@@ -65,10 +70,13 @@ export default class Dash extends Helper {
                         this.userAccessRedirect();
                     }
 
-                    if (this._value)
+                    if (this._value) {
                         this._cookieManager.setCookie(this._value);
+                        // this.displayloggedItems();
+                    }
 
                     this.setValues();
+                    
 
                 })
                 .catch((err) => {

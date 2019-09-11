@@ -1,9 +1,9 @@
 <template lang="pug">
-    div.dash
+    div.account-summary
         HeaderVue
         FullPage.fullpage( :options="options")
-            div(class="section page dashboard")
-                Dashboard(:library="library")
+            div(class="section page account-summary")
+                AccountSummary()
         FooterVue
 </template>
 
@@ -12,29 +12,23 @@ import Vue from 'vue';
 import HeaderVue from '../components/header.vue';
 import FooterVue from '../components/footer.vue';
 import FullPage from "vue-fullpage.js/src/FullPage.vue";
-import Dashboard from '../components/dashboard.vue';
+import AccountSummary from '../components/account-summary.vue';
 import Options from '../library/fpOption';
-import Library from '../library/dashboard';
-import '../assets/sass/dashboard.scss';
+import '../assets/sass/account-summary.scss';
 
-const _options = new Options(['dashboard'], ['#C8C8C8']);
+const _options = new Options(['account-summary'], ['#C8C8C8']);
 
 export default Vue.extend({
-    name: 'dashboard-view',
+    name: 'summary-view',
     components: {
         HeaderVue,
         FooterVue,
         FullPage,
-        Dashboard
-    },
-    mounted: function(){
-        this.$data.library.renderLoggedInNav();
-
+        AccountSummary
     },
     data: () => {
         return {
             options: _options.Option,
-            library: new Library(),
         }
     }
 });
