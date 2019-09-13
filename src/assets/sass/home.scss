@@ -11,15 +11,16 @@
     display: block;
     background: url(../img/book-now.svg);
     background-repeat: no-repeat;
-    width: 10vw;
-    height: 10vh;
     visibility: hidden;
     cursor: default;
+    overflow: hidden;
   }
 
 
   .show {
     visibility: visible;
+    width: 10vw;
+    height: 10vh;
     cursor: pointer;
     animation-duration: 1.5s;
     animation-name: fadeIn;

@@ -1,7 +1,7 @@
 <template>
   <div class="header-vue">
     <header class="initial" data-mode="sticky">
-      <nav class="primary-navigation" data-theme="red" aria-label="Primary">
+      <nav class="primary-navigation"  aria-label="Primary">
         <a
           href="/"
           class="logo"
