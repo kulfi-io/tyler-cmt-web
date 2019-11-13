@@ -35,11 +35,13 @@ export class Helper extends cryptor {
         this._cookieManager.deleteCookie();
         this.displayBookedItems();
 
-        window.location.href = '/';
+        if(window) {
+            window.location.href = '/';
+        }
     }
 
     protected userAccessRedirect = () => {
-        if (!this._cookieManager.value ) {
+        if (!this._cookieManager.value && window) {
             window.location.href = `${window.location.protocol}//${window.location.host}/#login`;
         } else {
             this._value = this._cookieManager.decryptedValue;
@@ -112,7 +114,9 @@ export class Helper extends cryptor {
         if(!this._book) {
             this._book = <HTMLDivElement>document.querySelector('.book');
             this._book.addEventListener('click', (e: Event) => {
-                window.location.href = '/schedule';
+                if(window) {
+                    window.location.href = '/schedule';
+                }
             });
 
 

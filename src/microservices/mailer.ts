@@ -1,6 +1,6 @@
 import Axios, { AxiosPromise } from 'axios';
 import BaseService from './base-service';
-import {IMailerUser,INote, IResetRequest, IEndpoint} from '../models/interfaces';
+import {IMailerUser,INote, IResetRequest, IEndpoint, ICryptorNote} from '../models/interfaces';
 
 export class MailerService extends BaseService{
 
@@ -43,17 +43,21 @@ export class MailerService extends BaseService{
 
     sendNote(data: INote): AxiosPromise {
         
-        if(data.email && data.firstname && data.lastname
-            && data.content) {
-            
-            data.email = this.encrypt(data.email);
-            data.firstname = this.encrypt(data.firstname);
-            data.lastname = this.encrypt(data.lastname);
-            data.content = this.encrypt(data.content);
-
+        let _data: ICryptorNote | INote;
+        
+        if(this.isProd) { 
+            _data = {
+                email: this.encryptIv(data.email),
+                firstname: this.encryptIv(data.firstname),
+                lastname: this.encryptIv(data.lastname),
+                content: this.encryptIv(data.content)
+            }  
+        } else {
+            _data = data;
         }
 
-        return Axios.post(this.noteEndpoint, data, {headers: this.header});
+        console.debug('_data', _data); 
+        return Axios.post(this.noteEndpoint, _data, {headers: this.header});
     }
 
 }

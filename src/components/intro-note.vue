@@ -124,10 +124,14 @@ export default Vue.extend({
         this.initAccount;
 
         this.displayBasedOnOrientation();
+
         
-        window.addEventListener("resize", () => {
-            this.displayBasedOnOrientation();
-        })
+        if(window) {
+            window.addEventListener("resize", () => {
+                this.displayBasedOnOrientation();
+            });
+        }
+
 
     }, 
     methods: {
@@ -204,7 +208,7 @@ export default Vue.extend({
             const _portraitClassList = _portrait.classList;
             const _landscapeClassList = _landscape.classList;
 
-            if(window.screen.height <= 414) {
+            if(window && window.screen.height <= 414) {
                 
                 if(!_portraitClassList.contains('hide-element')) {
                     

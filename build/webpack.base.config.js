@@ -12,15 +12,16 @@ function resolve(dir) {
 module.exports = {
     context: path.resolve(__dirname, '../'),
     entry: {
-        app: './src/index.js'
+        app: './src/server.js',
+        client: './src/index.js'
     },
-    output: {
-        path: config.build.assetsRoot,
-        filename: '[name].js',
-        publicPath: process.env.NODE_ENV === 'production'
-            ? config.build.assetsPublicPath
-            : config.dev.assetsPublicPath
-    },
+    // output: {
+    //     path: config.build.assetsRoot,
+    //     filename: '[name].js',
+    //     publicPath: process.env.NODE_ENV === 'production'
+    //         ? config.build.assetsPublicPath
+    //         : config.dev.assetsPublicPath
+    // },
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.vue', '.json'],
         alias: {

@@ -10,7 +10,7 @@ module.exports = {
 
         // Dev Server Settings
         host: '127.0.0.1',
-        port: 3004,
+        port: 3000,
         autoOpenBrowser: true,
         errorOverlay: true,
         noptifyOnErrors: false,
@@ -22,8 +22,8 @@ module.exports = {
         cssSourceMap: true,
     },
     build: {
-        index: path.resolve(__dirname, '../dist/index.html'),
-        assetsRoot: path.resolve(__dirname, '../dist'),
+        index: path.resolve(__dirname, '../app/index.html'),
+        assetsRoot: path.resolve(__dirname, '../app'),
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
 

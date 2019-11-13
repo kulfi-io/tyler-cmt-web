@@ -27,10 +27,17 @@ export interface IMailerUser {
 }
 
 export interface INote {
-    email?: string;
-    firstname?: string;
-    lastname?: string;
-    content?: string;
+    email: string;
+    firstname: string;
+    lastname: string;
+    content: string;
+}
+
+export interface ICryptorNote {
+    email: ICryptoData;
+    firstname: ICryptoData;
+    lastname: ICryptoData;
+    content: ICryptoData;
 }
 
 export interface ICookie {
@@ -49,9 +56,12 @@ export interface IDuration {
     value: string;
 }
 
-
 export interface IResetAccount {
     email: string;
+}
+
+export interface ICryptorResetAccount {
+    email: ICryptoData;
 }
 
 export interface IResetRequest extends IResetAccount {
@@ -67,15 +77,32 @@ export interface IReset extends IResetAccount {
     password: string;
 }
 
+export interface ICryptorReset extends ICryptorResetAccount {
+    username: ICryptoData;
+    token: string;
+    password: ICryptoData;
+}
+
 export interface IVerifyLogin {
     username: string,
     password: string,
     token: string
 }
 
+export interface ICryptorVerifyLogin {
+    username: ICryptoData,
+    password: ICryptoData,
+    token: string
+}
+
 export interface ILogin {
     username: string;
     password: string;
+}
+
+export interface ICrytorLogin {
+    username: ICryptoData;
+    password: ICryptoData;
 }
 
 export interface IRegisterUser {
@@ -87,6 +114,17 @@ export interface IRegisterUser {
     username: string;
     type: string;
     active?: boolean
+}
+
+export interface ICryptorRegisterUser {
+    id?: ICryptoData;
+    email: ICryptoData;
+    firstname: ICryptoData;
+    lastname: ICryptoData;
+    password: ICryptoData;
+    username: ICryptoData;
+    type: ICryptoData;
+    active?: ICryptoData;
 }
 
 export interface IUserType {
@@ -159,8 +197,7 @@ export interface IAttendee {
     responseStatus?: string;
 }
 
-
-export interface ICalEventResponse  {
+export interface ICalEventResponse {
     id?: string;
     summary?: string;
     location?: string;
@@ -169,7 +206,6 @@ export interface ICalEventResponse  {
     end?: ICalTime;
     attendees?: IAttendee[]
 }
-
 
 export interface IDayRenderArg {
     view: View;
@@ -197,7 +233,16 @@ export interface ICalEvent {
     comment?: string;
 }
 
-export interface  IDayEventArgs {
+export interface ICryptorCalEvent {
+    start: ICryptoData;
+    end: ICryptoData;
+    title: ICryptoData;
+    location: ICryptoData;
+    email: ICryptoData;
+    comment?: ICryptoData;
+}
+
+export interface IDayEventArgs {
     isMirror: boolean;
     isStart: boolean;
     isEnd: boolean;
@@ -215,5 +260,10 @@ export interface IEventArgs {
     event: EventApi;
     jsEvent: MouseEvent;
     view: View;
+}
+
+export interface ICryptoData {
+    iv: string,
+    encryptedData: string
 }
 

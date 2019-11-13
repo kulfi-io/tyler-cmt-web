@@ -283,7 +283,9 @@ export default class Account extends Helper{
                     }
 
                     this._cookieManager.setCookie(_cookieUser);
-                    window.location.href = `${window.location.protocol}//${window.location.host}/dash`;
+                    if(window) {
+                        window.location.href = `${window.location.protocol}//${window.location.host}/dash`;
+                    }
 
                 })
                 .catch((err) => {
@@ -382,44 +384,43 @@ export default class Account extends Helper{
                 type: 'basic'
             }
 
-
             AccountService.register(_user)
-                .then((result) => {
+            .then((result) => {
 
-                    _submitter.textContent = result.status
-                        ? `${result.statusText} ${result.data.message.username}.`
-                        : _submitterTextContent;
+                _submitter.textContent = result.status
+                    ? `${result.statusText} ${result.data.message.username}.`
+                    : _submitterTextContent;
 
-                    MailerService.register(<IMailerUser>result.data.message)
-                        .then((result) => {
+                MailerService.register(<IMailerUser>result.data.message)
+                    .then((result) => {
 
-                            this.readyToSubmit.validated = [];
-                            _username.value = '';
-                            _email.value = '';
-                            _first.value = '';
-                            _last.value = '';
-                            _pwd.value = '';
-                            _verify.value = '';
+                        this.readyToSubmit.validated = [];
+                        _username.value = '';
+                        _email.value = '';
+                        _first.value = '';
+                        _last.value = '';
+                        _pwd.value = '';
+                        _verify.value = '';
 
-                            _submitter.textContent += `Please check your email.`;
+                        _submitter.textContent += `Please check your email.`;
 
-                            this.succeded(_icons, _submitter
-                                , result, _submitterTextContent);
+                        this.succeded(_icons, _submitter
+                            , result, _submitterTextContent);
 
-                            _criteriaPassed.forEach((item: Element) => {
-                                this.muted(item);
-                            });
-
-                        })
-                        .catch((err) => {
-                            _submitter.textContent = err.response.data.message;
-                            this.notifySubmitter(_submitter, _submitterTextContent);
+                        _criteriaPassed.forEach((item: Element) => {
+                            this.muted(item);
                         });
-                })
-                .catch((err) => {
-                    _submitter.textContent = err.response.data.message;
-                    this.notifySubmitter(_submitter, _submitterTextContent);
-                });
+
+                    })
+                    .catch((err) => {
+                        _submitter.textContent = err.response.data.message;
+                        this.notifySubmitter(_submitter, _submitterTextContent);
+                    });
+            })
+            .catch((err) => {
+                _submitter.textContent = err.response.data.message;
+                this.notifySubmitter(_submitter, _submitterTextContent);
+            });
         }
     }
 

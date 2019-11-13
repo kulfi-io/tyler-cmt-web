@@ -33,7 +33,7 @@ export class Schedule extends Helper {
     private month: HTMLButtonElement;
     private week: HTMLButtonElement;
     private overlay: HTMLDivElement;
-    private cancel: HTMLAnchorElement;
+    private closeSchedulePopup: HTMLAnchorElement;
     private selectTime: HTMLAnchorElement;
     private calDate: HTMLDivElement;
     private calTitle: HTMLDivElement;
@@ -44,8 +44,19 @@ export class Schedule extends Helper {
     // Appointment
     private apptDefaultText: IAppointmentMessage;
     private appointment: Appointment;
+    private cancelOverlay: HTMLDivElement;
+    private cancelTime: HTMLAnchorElement;
+    private cancelSubject: HTMLDivElement;
+    private closeCancelPopup: HTMLAnchorElement;
+    private cancelDate: HTMLDivElement;
+    private cancelAppointment: HTMLAnchorElement;
+    private cancelTitle: HTMLDivElement;
     // TODO
     // add meeting notes;
+
+    // Cancel apt
+
+
 
 
     constructor(target: HTMLDivElement, fpData: Record<string, any>) {
@@ -67,7 +78,7 @@ export class Schedule extends Helper {
         this.month = <HTMLButtonElement>document.querySelector('.month');
         this.week = <HTMLButtonElement>document.querySelector('.week');
         this.overlay = <HTMLDivElement>document.querySelector('.schedule-popup');
-        this.cancel = <HTMLAnchorElement>document.querySelector('.cancel');
+        this.closeSchedulePopup = <HTMLAnchorElement>document.querySelector('.cancel');
         this.selectTime = <HTMLAnchorElement>document.querySelector('.select-time');
         this.calDate = <HTMLDivElement>document.querySelector('.cal-date');
         this.calTitle = <HTMLDivElement>document.querySelector('.cal-name');
@@ -75,19 +86,28 @@ export class Schedule extends Helper {
 
         this.title.innerHTML = this.calHeading();
 
+        // Cancel Apt pop-up
+        this.cancelOverlay = <HTMLDivElement>document.querySelector('.schedule-cancel');
+        this.cancelTime = <HTMLAnchorElement>document.querySelector('.cancel-time');
+        this.cancelDate = <HTMLDivElement>document.querySelector('.cancel-date');
+        this.cancelSubject = <HTMLDivElement>document.querySelector('.cancel-subject');
+        this.cancelAppointment = <HTMLAnchorElement>document.querySelector('.cancel-apt');
+        this.closeCancelPopup = <HTMLAnchorElement>document.querySelector('.close');
+        this.cancelTitle = <HTMLDivElement>document.querySelector('.schedule-cancel-popup .title');
+
         this.previous.addEventListener('click', this.moveToPrevious);
         this.next.addEventListener('click', this.moveToNext);
         this.month.addEventListener('click', this.monthView);
         this.week.addEventListener('click', this.weekView);
 
-        this.cancel.addEventListener('click', this.cancelAppointment);
+        this.closeSchedulePopup.addEventListener('click', this.closePopup);
         this.selectTime.addEventListener('click', this.selectAppointmentTime);
+        this.closeCancelPopup.addEventListener('click', this.closePopup);
+
+        this.cancelAppointment.addEventListener('click', this.removeAppointment);
         this.reserved = [];
 
-
     }
-
-
 
     public refresh = (): void => {
         if (this.calendar) {
@@ -105,8 +125,31 @@ export class Schedule extends Helper {
         }
     }
 
-    private cancelAppointment = (e: Event) => {
+    private removeAppointment = (e: Event) => {
+        e.preventDefault();
+        const _target = <HTMLAnchorElement>e.currentTarget;
+
+        if (_target) {
+            const _sent = _target.getAttribute('data-sent')
+            const _id = _target.getAttribute('data-cal-id');
+
+            if (_id && _sent === 'false') {
+                _target.setAttribute('data-sent', '');
+                CalendarEventService.delete(_id)
+                    .then((result) => {
+                        this.cancelTitle.innerText = 'Appointment canceled';
+
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+            }
+        }
+    }
+
+    private closePopup = (e: Event) => {
         this.overlay.classList.remove('schedule-popup-display');
+        this.cancelOverlay.classList.remove('schedule-popup-display');
     }
 
     private selectAppointmentTime = (e: Event) => {
@@ -121,7 +164,7 @@ export class Schedule extends Helper {
         this.appointment.selectDate.value = this.calDate.innerText;
         this.appointment.location.value = this.calLocation.innerText;
         let _targetdate = new Date(this.appointment.selectDate.value);
-    
+
         const _reserved = this.reserved.filter(x => new Date(x).toDateString() === _targetdate.toDateString())
 
         this.appointment.findFirstAppointment(_reserved, this.fpData);
@@ -176,28 +219,48 @@ export class Schedule extends Helper {
                     _elTime.setAttribute('event-hour-val', _start24);
                     _elTime.setAttribute('start', _start);
                     _elTime.setAttribute('end', _end);
-                    
 
-                    if( _input && _input.start ) {
+
+                    if (_input && _input.start) {
                         const _comparer = new Date(_input.start.toString()).toDateString();
-                       
                         const _reserved = this.eventInputs.filter(x => x.start ? new Date(x.start.toString()).toDateString() === _comparer : false)
 
-                        if(_reserved)
+                        if (_reserved)
                             this.insertTotal(_reserved, _comparer);
                     }
                 }
             }
-        }
 
+        }
     }
 
     private openEvent = (args: IEventArgs) => {
-        if(this.eventInputs) {
+
+        if (this.eventInputs) {
             const _target = this.eventInputs.find(x => x.id === args.event.id);
 
-            if(_target) {
-                
+            if (_target && _target.date && _target.start && _target.end) {
+
+                const _targetDate = new Date(_target.date.toString()).getDate();
+                const _todate = new Date().getDate()
+                const _start = moment(_target.start).format('hh:mm a');
+                const _end = moment(_target.end).format('hh:mm a')
+                const _time = `${_start} - ${_end}`;
+
+
+                if (_targetDate > _todate) {
+
+                    this.cancelSubject.innerText = _target.title ? _target.title : '';
+                    this.cancelDate.innerText = _target.date ? new Date(_target.date.toString()).toDateString() : '';
+
+                    this.cancelTime.innerText = _time;
+                    this.cancelAppointment.setAttribute('data-cal-id', args.event.id);
+                    this.cancelAppointment.setAttribute('data-sent', 'false'),
+                        this.cancelOverlay.classList.add('schedule-popup-display');
+
+                }
+
+
             }
 
         }
@@ -216,7 +279,6 @@ export class Schedule extends Helper {
             eventRender: this.addEventDateAttribute,
             eventClick: this.openEvent,
             dateClick: this.dayClickListener
-
         });
     }
 
@@ -256,23 +318,23 @@ export class Schedule extends Helper {
     }
 
     private insertTotal = (inputs: EventInput[], date: string) => {
-        
-        if(inputs && inputs.length) {
+
+        if (inputs && inputs.length) {
             const _date = moment(inputs[0].start).format('YYYY-MM-DD')
             const _target = <HTMLElement>document.querySelector(`.fc-bg table tbody tr td[data-date="${_date}"]`);
-            
+
             if (_target) {
-                const _created = _target.querySelector('.total') 
-                if(!_created) {
+                const _created = _target.querySelector('.total')
+                if (!_created) {
                     const _total = document.createElement('div')
                     _total.setAttribute('class', 'total')
                     _total.innerText = inputs.length.toString();
-                    
+
                     _target.appendChild(_total);
                 }
             }
         }
-        
+
     }
 
     private targetEvents = () => {
@@ -282,12 +344,12 @@ export class Schedule extends Helper {
                 .then((result) => {
                     const _items = <ICalEventResponse[]>result.data.events;
                     const _eventInputs: EventInput[] = [];
-                    
+
                     _items.forEach((item: ICalEventResponse) => {
                         const _item = this.decryptResponse(item);
-                        if(_item.start)
+                        if (_item.start)
                             this.reserved.push(Date.parse(_item.start.toString()))
-                        
+
                         _eventInputs.push(_item);
                     });
 
@@ -384,11 +446,9 @@ export class Schedule extends Helper {
         const _eventElements = document.querySelectorAll('.fc-content-skeleton table tbody .fc-content-col .fc-time-grid-event');
         const _baseDistance = 41;
 
-        console.debug(_eventElements.length);
-
         if (_eventElements) {
             let _startPosition: number = 0;
-            let _activeDate: string ; 
+            let _activeDate: string;
             let _lastPosition: number = 0;
             let _lastTime: HTMLDivElement | undefined;
 
@@ -401,17 +461,16 @@ export class Schedule extends Helper {
                 const _eventDuration = _time.getAttribute('event-duration');
                 let _position: number = 0;
 
-                if(_currentDate) {
-                  _currentDate = new Date(_currentDate).toString();
+                if (_currentDate) {
+                    _currentDate = new Date(_currentDate).toString();
                 }
 
                 if (_startPosition == 0 && _eventHour) {
                     _startPosition = this.getPosition(parseInt(_eventHour));
                 }
 
-
-                if (_eventHour && _currentDate 
-                    && new Date(_currentDate).toDateString() !==  new Date(_activeDate).toDateString()) {
+                if (_eventHour && _currentDate
+                    && new Date(_currentDate).toDateString() !== new Date(_activeDate).toDateString()) {
                     _activeDate = _currentDate;
                     _startPosition = this.getPosition(parseInt(_eventHour));
                     _lastPosition = 0;

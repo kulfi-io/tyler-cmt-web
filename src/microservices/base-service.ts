@@ -1,5 +1,5 @@
 import Config from '../config/config.json';
-import { cryptor } from '@/library/cryptor';
+import { cryptor } from '../library/cryptor';
 import { IMicroService } from '../models/interfaces';
 
 export default class BaseService extends cryptor {
@@ -21,7 +21,7 @@ export default class BaseService extends cryptor {
         // API
         this.account = <IMicroService>Config.microservices.find(x => x.name === 'account');
         this.mailer = <IMicroService>Config.microservices.find(x => x.name === 'mailer');
-        this.event = <IMicroService>Config.microservices.find(x => x.name === 'event');
+        this.event = <IMicroService>Config.microservices.find(x => x.name === 'calendar');
 
         // ACCOUNT
         this.accountBaseUrl = `${this.account.scheme}://${this.account.baseEndpoint}:${this.account.port}`;
@@ -29,7 +29,7 @@ export default class BaseService extends cryptor {
         // MAILER
         this.mailerBaseUrl = `${this.mailer.scheme}://${this.mailer.baseEndpoint}:${this.mailer.port}`;
         
-        // EVENT
+        // CALENDAR
         this.eventBaseUrl = `${this.event.scheme}://${this.event.baseEndpoint}:${this.event.port}`;
 
     }

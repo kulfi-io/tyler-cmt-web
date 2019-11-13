@@ -1,6 +1,6 @@
 import Slider from './slider';
-import { ICalEvent } from '@/models/interfaces';
-import CalendarEventService from '@/microservices/calendar-event';
+import { ICalEvent } from '../models/interfaces';
+import CalendarEventService from '../microservices/calendar-event';
 import { EventInput } from '@fullcalendar/core';
 
 
@@ -21,7 +21,6 @@ export class Appointment extends Slider {
 	private duration: HTMLInputElement;
 	private popStatus: HTMLDivElement;
 	private fpData?: Record<string, any>;
-
 
 	constructor() {
 		super();

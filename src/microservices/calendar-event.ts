@@ -1,6 +1,6 @@
 import Axios, { AxiosPromise } from 'axios';
 import BaseService from './base-service';
-import { IEndpoint, ICalEvent} from '../models/interfaces';
+import { IEndpoint, ICalEvent, ICryptorCalEvent} from '../models/interfaces';
 
 export class CalendarEventService extends BaseService{
 
@@ -26,14 +26,28 @@ export class CalendarEventService extends BaseService{
 
     create(data: ICalEvent): AxiosPromise {
 
-        data.end = this.encrypt(data.end);
-        data.location = this.encrypt(data.location);
-        data.start = this.encrypt(data.start);
-        data.title = this.encrypt(data.title);
-        data.email = this.encrypt(data.email);
-        data.comment = data.comment ? this.encrypt(data.comment) : undefined;
+        let _data: ICryptorCalEvent | ICalEvent;
 
-        return Axios.post(this.eventEndpoint, data, { headers: this.header});
+        if(this.isProd) {
+            _data = {
+                end: this.encryptIv(data.end),
+                location: this.encryptIv(data.location),
+                start: this.encryptIv(data.start),
+                title: this.encryptIv(data.title),
+                email: this.encryptIv(data.email),
+                comment: data.comment ? this.encryptIv(data.comment) : undefined
+            }
+        } else {
+            _data = data;
+        }
+
+        return Axios.post(this.eventEndpoint, _data, { headers: this.header});
+    }
+
+    delete(id: string): AxiosPromise {
+        const _endpoint = `${this.eventEndpoint}/${id}`;
+
+        return Axios.delete(_endpoint, { headers: this.header});
     }
 }
 

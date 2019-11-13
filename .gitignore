@@ -42,6 +42,7 @@ yarn-error.log*ß
 node_modules/
 jspm_packages/
 src/config
+app
 
 # TypeScript v1 declaration files
 typings/

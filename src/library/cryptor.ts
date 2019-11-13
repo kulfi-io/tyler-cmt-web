@@ -1,21 +1,31 @@
-import Config from '../config/config.json';
-import crypto from 'crypto';
-import { ENV } from '@/models/model-enums';
-import { ICookieUser } from '@/models/interfaces.js';
+import config from '../config/config.json';
+import crypto from  'crypto';
+import { ENV } from '../models/model-enums';
+import { ICookieUser, ICryptoData } from '../models/interfaces';
 
 export class cryptor {
     private algorithm: string;
-    private isProd: boolean;
+    public isProd: boolean;
+    private algorithmIv: string;
+    private key: Buffer;
+    private iv: Buffer | undefined;
    
     constructor() {
         this.algorithm = 'aes192';
         this.isProd = process.env.NODE_ENV === ENV.PROD;
+        // this.isProd = true;
+        
+        this.algorithmIv = 'aes-256-cbc';
+        const _key = Buffer.alloc(32);
+        this.key = Buffer.concat([Buffer.from(config.secret)], _key.length)
     }
+
+    
 
     protected encrypt = (data: Object): string => {
 
         let encrypted = '';
-        const cipher = crypto.createCipher(this.algorithm, Config.secret);
+        const cipher = crypto.createCipher(this.algorithm, config.secret);
         encrypted = cipher.update(data.toString(), 'utf8', 'hex');
         encrypted += cipher.final('hex');
 
@@ -23,16 +33,49 @@ export class cryptor {
         //return this.isProd ? encrypted : data.toString();
     }
 
+    protected encryptIv = (data: string): ICryptoData  => {
+        this.iv = crypto.randomBytes(16);
+
+        let cipher = crypto.createCipheriv(this.algorithmIv.toString(), this.key, this.iv);
+        let encrypted = cipher.update(data, 'utf8', 'hex');
+        encrypted += cipher.final('hex');
+        return {
+            iv: this.iv.toString('hex'), 
+            encryptedData: encrypted
+        };
+    
+       
+    }
+
+    
+
     protected decrypt(data: Object): string  {
 
         let decrypted = '';
-        const decipher = crypto.createDecipher(this.algorithm, Config.secret);
+        const decipher = crypto.createDecipher(this.algorithm, config.secret);
         decrypted = decipher.update(data.toString(), 'hex', 'utf8');
         decrypted += decipher.final().toString();
         
         return decrypted;
 
         // return this.isProd ? decrypted : data.toString();
+    }
+
+    protected decryptIv = (data: string): string => {
+        if(this.isProd) {
+            const _stringifiedData = JSON.stringify(data);
+            const _data = JSON.parse(_stringifiedData);
+
+            let iv = Buffer.from(_data.iv, 'hex');
+            let decipher = crypto.createDecipheriv(this.algorithmIv, this.key, iv);
+    
+            let decrypted = decipher.update(_data.encryptedData, 'hex', 'utf8');
+            decrypted += decipher.final('utf-8'); 
+            return decrypted;
+    
+        } 
+
+        return data;
     }
 
     protected encryptUserCookie(data: Object): string {

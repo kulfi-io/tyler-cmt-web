@@ -3,8 +3,8 @@
       "target": "esnext",
       "module": "esnext",
       "outDir": "./ts-dist",
-      "noImplicitAny": true,
       "strict": true,
+      "noImplicitAny": true,
       "jsx": "preserve",
       "importHelpers": true,
       "moduleResolution": "node",
@@ -13,12 +13,13 @@
       "allowSyntheticDefaultImports": true,
       "emitDecoratorMetadata": true,
       "resolveJsonModule": true,
-      "sourceMap": true,
+      "sourceMap": false,
       "baseUrl": ".",
       "allowJs": true,
       "paths": {
         "@/*": [
           "src/*"
+          
         ]
       },
       "lib": [

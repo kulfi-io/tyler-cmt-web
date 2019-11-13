@@ -7,7 +7,12 @@ import {
     IReset,
     IResetAccount,
     IVerifyLogin,
-    IEndpoint
+    IEndpoint,
+    ICryptorRegisterUser,
+    ICrytorLogin,
+    ICryptorVerifyLogin,
+    ICryptorReset,
+    ICryptorResetAccount
     } from '../models/interfaces';
 
 export class AccountService extends BaseService{
@@ -39,61 +44,96 @@ export class AccountService extends BaseService{
         this.loginEndpoint = `${this.accountBaseUrl}/${_login.endpoint}`;
         this.resetRequestEndpoint = `${this.accountBaseUrl}/${_resetRequest.endpoint}`;
         this.resetEndpoint = `${this.accountBaseUrl}/${_reset.endpoint}`;
+        this.isProd = true;
     }
 
     register(data: IRegisterUser): AxiosPromise {
         
-        if(data.email && data.firstname && data.lastname
-            && data.password && data.type && data.username) {
-                data.email = this.encrypt(data.email);
-                data.firstname = this.encrypt(data.firstname);
-                data.lastname = this.encrypt(data.lastname);
-                data.password = this.encrypt(data.password);
-                data.type = this.encrypt(data.type);
-                data.username = this.encrypt(data.username);
+        let _data: ICryptorRegisterUser | IRegisterUser;
+
+        if(this.isProd) {
+            _data = {
+                email : this.encryptIv(data.email),
+                firstname: this.encryptIv(data.firstname),
+                lastname: this.encryptIv(data.lastname),
+                password: this.encryptIv(data.password),
+                type: this.encryptIv(data.type),
+                username: this.encryptIv(data.username)
+            }
+        } else {
+            _data = data;
         }
 
-        return Axios.post(this.registerEndpoint, data, {headers: this.header});
+        return Axios.post(this.registerEndpoint, _data, {headers: this.header});
+
     }
 
     login(data: ILogin): AxiosPromise {
 
-        if(data.username && data.password) {
-            data.password = this.encrypt(data.password);
-            data.username = this.encrypt(data.username);
+        let _data: ICrytorLogin | ILogin;
+
+        if(this.isProd) {
+            _data = {
+                username: this.encryptIv(data.username),
+                password: this.encryptIv(data.password)
+            }
+        } else {
+            _data = data;
         }
+
+        return Axios.post(this.loginEndpoint, _data, {headers: this.header});
     
-        return Axios.post(this.loginEndpoint, data, {headers: this.header});
     }
 
     verify(data: IVerifyLogin): AxiosPromise {
 
-        if(data.username && data.password && data.token) {
-            data.username = this.encrypt(data.username);
-            data.password = this.encrypt(data.password);
+        let _data: ICryptorVerifyLogin | IVerifyLogin;
+
+        if(this.isProd) {
+            _data = {
+                username: this.encryptIv(data.username),
+                password: this.encryptIv(data.password),
+                token: data.token
+            }
+        }
+        else {
+            _data = data;
         }
 
-        return Axios.post(this.verifyEndpoint, data, {headers: this.header});
+        return Axios.post(this.verifyEndpoint, _data, {headers: this.header});
     }
 
     resetUser(data: IReset): AxiosPromise {
+
+        let _data: ICryptorReset | IReset;
         
-        if(data.username && data.password && data.email && data.token) {
-            data.username = this.encrypt(data.username);
-            data.password = this.encrypt(data.password);
-            data.email = this.encrypt(data.email);
-        } 
+        if(this.isProd) {
+            _data = {
+                username: this.encryptIv(data.username),
+                password: this.encryptIv(data.password),
+                email: this.encryptIv(data.email),
+                token: data.token
+            }
+        } else {
+            _data = data;
+        }
 
         return Axios.post(this.resetEndpoint, data, {headers: this.header});
     }
 
     resetRequest(data: IResetAccount): AxiosPromise {
         
-        if(data) {
-            data.email = this.encrypt(data.email);
+        let _data: ICryptorResetAccount | IResetAccount; 
+
+        if(this.isProd) {
+            _data =  {
+                email: this.encryptIv(data.email)
+            }
+        } else {
+            _data = data;
         }
 
-        return Axios.post(this.resetRequestEndpoint, data, {headers: this.header});
+        return Axios.post(this.resetRequestEndpoint, _data, {headers: this.header});
     }
 
     findUser(data: ICookieUser): AxiosPromise {

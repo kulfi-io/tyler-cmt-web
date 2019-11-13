@@ -29,8 +29,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         : false,
     output: {
         path: config.build.assetsRoot,
-        filename: utils.assetsPath('js/[name].[chunkhash].js'),
-        chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+        filename: '[name].js',
+        chunkFilename: '[name].js'
     },
     optimization: {
         minimizer: [new uglifyJsPlugin({
@@ -89,12 +89,8 @@ const webpackConfig = merge(baseWebpackConfig, {
                 from: path.resolve(__dirname, '../static'),
                 to: config.build.assetsSubDirectory,
                 ignore: ['.*']
-            },
-            {
-                from: path.resolve(__dirname, '../src/assets/img/anime-img'),
-                to: 'static/img/anime-img',
-                ignore: ['.*']
             }
+
 
         ])
     ]

@@ -1,4 +1,4 @@
-import AccountService from '@/microservices/account';
+import AccountService from '../microservices/account';
 import { Helper } from './helper';
 
 export default class Summary extends Helper {

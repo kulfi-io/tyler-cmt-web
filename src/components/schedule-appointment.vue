@@ -31,6 +31,19 @@
                                         a.heading(class="link select-time" href="#") select time 
                                     div.split-half-right(class="link-last")
                                         a.heading(class="link cancel" href="#") Cancel 
+                    div.schedule-cancel-popup(class="schedule-cancel" ref="schedule-cancel")
+                        div.popup
+                            div.title Cancel / Re-schedule 
+                            div.body
+                                div.cancel-name(class="info") To re-schedule please cancel then select new date for available times.
+                                div.cancel-subject(class="info")
+                                div.cancel-date(class="info") 
+                                div.cancel-time(class="info") 
+                                div.split
+                                    div.split-half-left
+                                        a.heading(class="link cancel-apt" href="#") Canel Massage
+                                    div.split-half-right(class="link-last")
+                                        a.heading(class="link close" href="#") Close 
         div.schedule-footer
             div.split
                 div.split-half-left
@@ -40,24 +53,23 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {Schedule} from '../library/calendar' ;
+import Vue from "vue";
+import { Schedule } from "../library/calendar";
 
 export default Vue.extend({
-    name: 'schedule-appointment',
-    data: function() {
-        return {
-            schedule: typeof Schedule,
-        }
-    },
-    mounted: function() {
-        const calendar = <HTMLDivElement>this.$refs.calendar;
-        const _data = this.$parent.$data;
-        const _schedule = new Schedule(calendar, this.$parent.$data);
-        _schedule.init();
+  name: "schedule-appointment",
+  data: function() {
+    return {
+      schedule: typeof Schedule
+    };
+  },
+  mounted: function() {
+    const calendar = <HTMLDivElement>this.$refs.calendar;
+    const _data = this.$parent.$data;
+    const _schedule = new Schedule(calendar, this.$parent.$data);
+    _schedule.init();
 
-         this.$data.schedule = _schedule;
-        
-    }
-})
+    this.$data.schedule = _schedule;
+  }
+});
 </script>

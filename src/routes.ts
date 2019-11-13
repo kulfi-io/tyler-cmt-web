@@ -30,7 +30,7 @@ let routes = [
 ]
 
 export default new Router({
-    routes: routes,
     mode: 'history',
+    routes: routes,
     fallback: true
 });

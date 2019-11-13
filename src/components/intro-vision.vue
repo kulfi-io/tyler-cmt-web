@@ -12,7 +12,7 @@ import Vue from "vue";
 import AfterAnime from './after-anime.vue';
 
 export default Vue.extend({
-  name: "intro-about",
+  name: "intro-vision",
   components: {
     AfterAnime,
   },
